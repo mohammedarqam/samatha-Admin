@@ -20,7 +20,7 @@
         <ion-item>
           <ion-label floating>Select District</ion-label>
           <ion-select [(ngModel)]="districtSel">
-            <ion-option *ngFor="let d of districts" [value]="d.Name">{{d.Name}} </ion-option>
+            <ion-option *ngFor="let d of districts" [value]="d.key">{{d.Name}} </ion-option>
           </ion-select>
         </ion-item>
 

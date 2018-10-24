@@ -58,6 +58,7 @@ export class AddMandalsPage {
   addCat(){
     this.areaRef.push({
       Name : this.name,
+      District : this.districtSel,
       TimeStamp : moment().format()
     }).then(()=>{
       this.close();

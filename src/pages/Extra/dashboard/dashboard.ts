@@ -10,22 +10,56 @@ import { AngularFireDatabase } from '@angular/fire/database';
 })
 export class DashboardPage {
 
-  users : number = 0;
+districts  : number = 0;
+mandals  : number = 0;
+villages  : number = 0;
+schools  : number = 0;
+students  : number = 0;
 
-  usersRef = this.db.list("User Data/Users");
+districtsRef = this.db.list("Subs/Districts");
+mandalsRef = this.db.list("Subs/Mandals");
+villagesRef = this.db.list("Subs/Villages");
+schoolsRef = this.db.list("Subs/Schools");
+// studentsRef = this.db.list("Subs/");
+
+
+
   constructor(
   public navCtrl: NavController,
   private db: AngularFireDatabase,
   private menuCtrl : MenuController,
   ) {
       this.menuCtrl.enable(true);
-      this.getUsers();
+      this.getDistricts();
+      this.getMandals();
+      this.getVillages();
+      this.getSchools();
     }
     
-    getUsers(){
-      this.usersRef.snapshotChanges().subscribe(snap=>{
-        this.users = snap.length;
+    getDistricts(){
+      this.districtsRef.snapshotChanges().subscribe(snap=>{
+        this.districts = snap.length;
       })
     }
+    getMandals(){
+      this.mandalsRef.snapshotChanges().subscribe(snap=>{
+        this.mandals= snap.length;
+      })
+    }
+    getVillages(){
+      this.villagesRef.snapshotChanges().subscribe(snap=>{
+        this.villages = snap.length;
+      })
+    }
+    getSchools(){
+      this.schoolsRef.snapshotChanges().subscribe(snap=>{
+        this.schools = snap.length;
+      })
+    }
+    // get(){
+    //   this..snapshotChanges().subscribe(snap=>{
+    //     this. = snap.length;
+    //   })
+    // }
 
 }

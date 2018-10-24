@@ -36,7 +36,14 @@ export class ViewMandalsPage {
       snap.forEach(snp=>{
         let temp : any = snp.payload.val();
         temp.key = snp.key;
+        firebase.database().ref("Subs/Districts").child(temp.District).once("value",snap=>{
+          temp.DistrictName = snap.val().Name;
+        })
+        firebase.database().ref("Subs/Mandals").child(temp.key).child("Villages").once("value",snap=>{
+          temp.VillagesCount = snap.val().length;
+        })
         tempArray.push(temp);
+        console.log(temp);
       })
       this.area = tempArray;
       this.areasLoaded = tempArray;
