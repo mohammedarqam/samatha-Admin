@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-navbar color="primary" >
+      <ion-title>Add Mandal</ion-title>
+      <ion-buttons end>
+        <button ion-button clear icon-only (click)="close()">
+          <ion-icon name="md-close"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+    <ion-card>
+      <ion-card-content>
+
+
+        <ion-item>
+          <ion-label floating>Select District</ion-label>
+          <ion-select [(ngModel)]="districtSel">
+            <ion-option *ngFor="let d of districts" [value]="d.Name">{{d.Name}} </ion-option>
+          </ion-select>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label  floating>Mandal Name</ion-label>
+          <ion-input type="text" [(ngModel)]="name" (keyup.enter)="checkData()" (ionChange)="capsName(name)" autofocus ></ion-input>
+        </ion-item>
+        
+  
+      </ion-card-content>
+    </ion-card>
+  
+    <button ion-button block (click)="checkData()">Add</button>
+  
+  
+  </ion-content>
+  

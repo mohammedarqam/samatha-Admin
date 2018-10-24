@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4 >
+  <ion-item no-lines class="content">
+  <h1 class="title" item-start>Districts</h1>
+  </ion-item>
+  </ion-col>
+  <ion-col col-6 push-2 >
+  <ion-searchbar item-end animated="true" placeholder="Search a District" 
+  [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>
+  </ion-col>
+  </ion-row>
+  </ion-grid>
+
+
+<ion-grid>
+  <ion-row>
+    <ion-col *ngFor="let a of area" col-3  class="main" >
+      <ion-card>
+          <ion-toolbar color="primary">
+          <ion-title>
+            {{a.Name}}
+          </ion-title>
+          <ion-buttons class="editBtns" end>
+              <button ion-button color="danger" large (click)="deleteArea(a)">
+                <ion-icon name="trash"></ion-icon>
+              </button>
+          </ion-buttons>
+          </ion-toolbar>
+          <ion-card-content>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="gtAddArea()" >
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  </ion-content>
