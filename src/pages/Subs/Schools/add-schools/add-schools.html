@@ -1,18 +1,50 @@
-<!--
-  Generated template for the AddSchoolsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
+    <ion-navbar color="primary" >
+      <ion-title>Add Village</ion-title>
+      <ion-buttons end>
+        <button ion-button clear icon-only (click)="close()">
+          <ion-icon name="md-close"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content padding>
+  
+    <ion-card>
+      <ion-card-content>
 
-  <ion-navbar>
-    <ion-title>addSchools</ion-title>
-  </ion-navbar>
-
-</ion-header>
 
 
-<ion-content padding>
+        <ion-item>
+          <ion-label floating>Select Mandal</ion-label>
+          <ion-select [(ngModel)]="mandalSel" (ionChange)="getVillages()" >
+            <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}} </ion-option>
+          </ion-select>
+        </ion-item>
 
-</ion-content>
+        <ion-item *ngIf="villages.length" >
+          <ion-label floating>Select Village</ion-label>
+          <ion-select [(ngModel)]="villageSel">
+            <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}} </ion-option>
+          </ion-select>
+        </ion-item>
+
+
+
+        <ion-item *ngIf="villageSel" >
+          <ion-label  floating>School Name</ion-label>
+          <ion-input type="text" [(ngModel)]="name" (keyup.enter)="checkData()" (ionChange)="capsName(name)" autofocus ></ion-input>
+        </ion-item>
+        
+  
+      </ion-card-content>
+    </ion-card>
+  
+    <button ion-button *ngIf="name" block (click)="checkData()">Add</button>
+  
+  
+  </ion-content>
+  

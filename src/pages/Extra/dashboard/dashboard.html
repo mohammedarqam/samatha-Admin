@@ -1,8 +1,11 @@
 <ion-header>
   <ion-navbar color="primary">
+  <ion-buttons end>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+    <p ion-text color="whiter">{{adminName}} </p>
+  </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -13,16 +16,6 @@
 
 <ion-grid>
 <ion-row>
-
-
-<ion-col col-2>
-  <ion-card>
-    <ion-card-content>
-      <p class="mNum">{{districts}}</p>
-      <p  class="mText">Districts</p>
-    </ion-card-content>
-  </ion-card>
-</ion-col>
 
 <ion-col col-2>
   <ion-card>

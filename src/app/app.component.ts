@@ -5,7 +5,6 @@ import * as firebase from 'firebase';
 import { LoginPage } from '../pages/Extra/login/login';
 import { UsersPage } from '../pages/Users/users/users';
 import { DashboardPage } from '../pages/Extra/dashboard/dashboard';
-import { ViewDistrictsPage } from '../pages/Subs/Districts/view-districts/view-districts';
 import { ViewMandalsPage } from '../pages/Subs/Mandals/view-mandals/view-mandals';
 import { ViewVillagesPage } from '../pages/Subs/Villages/view-villages/view-villages';
 import { ViewSchoolsPage } from '../pages/Subs/Schools/view-schools/view-schools';
@@ -16,7 +15,7 @@ import { AssignJobPage } from '../pages/assign-job/assign-job';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ViewDistrictsPage;
+  rootPage: any = ViewMandalsPage;
   activePage: any;
 
   full : boolean = true;
@@ -31,7 +30,6 @@ export class MyApp {
 
     this.pages = [
       { title: 'DashBoard', component: DashboardPage, icon: "flash",color: "yellowi" },
-      { title: "Districts", component: ViewDistrictsPage, icon: "ios-people",color: "whiter" },
       { title: "Mandals", component: ViewMandalsPage, icon: "ios-people",color: "whiter" },
       { title: "Villages", component: ViewVillagesPage, icon: "ios-people",color: "whiter" },
       { title: "Schools", component: ViewSchoolsPage, icon: "ios-people",color: "whiter" },
@@ -44,25 +42,25 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-        firebase.database().ref("Admin Data").child("Admins").child(user.uid).once('value',itemSnap=>{
-            if(itemSnap.exists()){
-              var welMsg = "Welcome"+" "+itemSnap.val().Name;
-              this.rootPage = ViewDistrictsPage;
-              this.presentToast(welMsg);
-            }else{
-              firebase.auth().signOut().then(()=>{
-                this.rootPage = LoginPage;
-                this.presentToast("You are not registered a Admin")
-              })
-            }
-    });
-      }
-      else{
-        this.rootPage = LoginPage;
-      }
-    });  
+    //   firebase.auth().onAuthStateChanged((user) => {
+    //     if (user) {
+    //     firebase.database().ref("Admin Data").child("Admins").child(user.uid).once('value',itemSnap=>{
+    //         if(itemSnap.exists()){
+    //           var welMsg = "Welcome"+" "+itemSnap.val().Name;
+    //           this.rootPage = DashboardPage;
+    //           this.presentToast(welMsg);
+    //         }else{
+    //           firebase.auth().signOut().then(()=>{
+    //             this.rootPage = LoginPage;
+    //             this.presentToast("You are not registered a Admin")
+    //           })
+    //         }
+    // });
+    //   }
+    //   else{
+    //     this.rootPage = LoginPage;
+    //   }
+    // });  
     });
   }
 

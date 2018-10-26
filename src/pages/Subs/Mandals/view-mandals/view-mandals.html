@@ -21,8 +21,64 @@
     </ion-row>
     </ion-grid>
   
-  
-  <ion-grid>
+    <ion-grid>
+      <ion-navbar color="primary">
+        <ion-row>
+          <ion-col col-1>
+            <ion-checkbox ></ion-checkbox>  
+          </ion-col>
+          <ion-col col-3>
+            <p class="headBar">Mandal</p>
+          </ion-col>
+          <ion-col col-2>
+            <p class="headBar">Villages</p>
+          </ion-col>
+          <ion-col col-2>
+            <p class="headBar">Schools</p>
+          </ion-col>
+          <ion-col col-2>
+            <p class="headBar">Students</p>
+          </ion-col>
+          <ion-col col-2>
+            <p class="headBar">Analytics</p>
+          </ion-col>
+        </ion-row>
+      </ion-navbar>
+    </ion-grid>
+    {{selArray | json}}
+    <ion-grid>
+        <ion-card *ngFor="let a of area;let i = index">
+        <ion-card-content>
+          <ion-row>
+            <ion-col col-1  >
+              {{i}}
+              <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)" ></ion-checkbox>  
+            </ion-col>
+            <ion-col col-3>
+              {{a.Name}}
+            </ion-col>
+            <ion-col col-2 text-center >
+              <ion-badge>{{a.Villages}}</ion-badge><br/>
+            </ion-col>
+            <ion-col col-2 text-center >
+              <ion-badge>{{a.Schools}}</ion-badge><br/>
+            </ion-col>
+            <ion-col col-2 text-center >
+              <ion-badge>{{a.Students}}0</ion-badge><br/>
+            </ion-col>
+            <ion-col col-2 text-center >
+              <button ion-button clear (click)="details()">Details
+                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-grid>
+
+
+
+  <!-- <ion-grid>
     <ion-row>
       <ion-col *ngFor="let a of area" col-3  class="main" >
         <ion-card>
@@ -45,7 +101,7 @@
         </ion-card>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
   
   
   

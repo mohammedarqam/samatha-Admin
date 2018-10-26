@@ -37,12 +37,8 @@ export class ViewVillagesPage {
       snap.forEach(snp=>{
         let temp : any = snp.payload.val();
         temp.key = snp.key;
-        firebase.database().ref("Subs/Districts").child(temp.District).once("value",snap=>{
-          temp.DistrictName = snap.val().Name;
-        }).then(()=>{
           firebase.database().ref("Subs/Mandals").child(temp.Mandal).once("value",snap=>{
             temp.MandalName = snap.val().Name;
-          })
         })
         tempArray.push(temp);
       })

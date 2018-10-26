@@ -14,10 +14,6 @@ export class AddVillagesPage {
   name : string;
   areaRef = firebase.database().ref("Subs/Villages");
 
-  districts : Array<any> = [];
-  districtRef  =this.db.list('Subs/Districts');
-  districtSel : string;
-
   mandals : Array<any> = [];
   mandalRef  =this.db.list('Subs/Mandals');
   mandalSel : string;
@@ -29,19 +25,9 @@ export class AddVillagesPage {
   public db : AngularFireDatabase,
   public navParams: NavParams
   ) {
-    this.getDistricts();
     this.getMandals();
   }
 
-  getDistricts(){
-    this.districtRef.snapshotChanges().subscribe(snap=>{
-      snap.forEach(snp=>{
-        let temp : any = snp.payload.val();
-        temp.key = snp.key;
-        this.districts.push(temp);
-      })
-    });
-  }
     getMandals(){
     this.mandalRef.snapshotChanges().subscribe(snap=>{
       snap.forEach(snp=>{
@@ -55,15 +41,11 @@ export class AddVillagesPage {
 
   checkData(){
     if(this.name){
-      if(this.districtSel){
         if(this.mandalSel){
           this.addCat();
         }else{
           this.presentToast("Mandal not Selected");
         }
-      }else{
-        this.presentToast("District Not Selected")
-      }
     }else{  
       this.presentToast("Mandal Name Empty")
     }
@@ -77,14 +59,11 @@ export class AddVillagesPage {
     this.areaRef.push({
       Name : this.name,
       Mandal : this.mandalSel,
-      District : this.districtSel,
       TimeStamp : moment().format()
     }).then((res)=>{
-      firebase.database().ref("Subs/Districts").child(this.districtSel).child("Villages").child(res.key).set(true).then(()=>{
-        firebase.database().ref("Subs/Mandals").child(this.mandalSel).child("Villages").child(res.key).set(true).then(()=>{
+        firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Villages").child(res.key).set(true).then(()=>{
           this.close();
         })
-      });
     })
   }
 

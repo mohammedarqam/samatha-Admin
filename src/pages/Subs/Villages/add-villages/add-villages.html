@@ -17,12 +17,6 @@
       <ion-card-content>
 
 
-        <ion-item>
-          <ion-label floating>Select District</ion-label>
-          <ion-select [(ngModel)]="districtSel">
-            <ion-option *ngFor="let d of districts" [value]="d.key">{{d.Name}} </ion-option>
-          </ion-select>
-        </ion-item>
 
         <ion-item>
           <ion-label floating>Select Mandal</ion-label>
@@ -32,7 +26,7 @@
         </ion-item>
 
 
-        <ion-item>
+        <ion-item *ngIf="mandalSel">
           <ion-label  floating>Village Name</ion-label>
           <ion-input type="text" [(ngModel)]="name" (keyup.enter)="checkData()" (ionChange)="capsName(name)" autofocus ></ion-input>
         </ion-item>
@@ -41,7 +35,7 @@
       </ion-card-content>
     </ion-card>
   
-    <button ion-button block (click)="checkData()">Add</button>
+    <button ion-button *ngIf="name" block (click)="checkData()">Add</button>
   
   
   </ion-content>

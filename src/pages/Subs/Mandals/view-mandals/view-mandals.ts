@@ -11,15 +11,14 @@ import { AddMandalsPage } from '../add-mandals/add-mandals';
 })
 export class ViewMandalsPage {
 
-  areaRef =this.db.list('Subs/Mandals');
+  areaRef =this.db.list('Subs/Mandals', ref=>ref.orderByChild("Name"));
   area: Array<any> = [];
   areasLoaded: Array<any> = [];
-
-
-
   areaFRef = firebase.database().ref("Subs/Mandals");
 
-  constructor(
+  selArray : Array<any> = [];
+
+constructor(
   public navCtrl: NavController, 
   public db : AngularFireDatabase,
   public toastCtrl : ToastController,
@@ -28,22 +27,31 @@ export class ViewMandalsPage {
   public navParams: NavParams
   ) {
     this.getAreas();
+}
+
+addToArr(a){
+  switch (a.Checked) {
+    case true:  this.selArray.push(a.key);
+      break;
+    case false:  console.log("rm");
+      break;
   }
 
-  getAreas(){
+}
+
+getAreas(){
     this.areaRef.snapshotChanges().subscribe(snap=>{
       let tempArray = [];
       snap.forEach(snp=>{
         let temp : any = snp.payload.val();
         temp.key = snp.key;
-        firebase.database().ref("Subs/Districts").child(temp.District).once("value",snap=>{
-          temp.DistrictName = snap.val().Name;
+        firebase.database().ref("SubsIndex/Mandals").child(snp.key).child("Schools").once("value",schoolsSnap=>{
+          temp.Schools = schoolsSnap.numChildren();
         })
-        firebase.database().ref("Subs/Mandals").child(temp.key).child("Villages").once("value",snap=>{
-          temp.VillagesCount = snap.val().length;
+        firebase.database().ref("SubsIndex/Mandals").child(snp.key).child("Villages").once("value",villageSnap=>{
+          temp.Villages = villageSnap.numChildren();
         })
         tempArray.push(temp);
-        console.log(temp);
       })
       this.area = tempArray;
       this.areasLoaded = tempArray;
@@ -116,5 +124,8 @@ export class ViewMandalsPage {
     
   });
   toast.present();
+}
+addAll(){
+  console.log("func working")
 }
 }

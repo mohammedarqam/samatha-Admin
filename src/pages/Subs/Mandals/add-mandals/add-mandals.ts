@@ -14,11 +14,6 @@ export class AddMandalsPage {
   name : string;
   areaRef = firebase.database().ref("Subs/Mandals");
 
-  districts : Array<any> = [];
-  districtRef  =this.db.list('Subs/Districts');
-  districtSel : string;
-
-
   constructor(
   public navCtrl: NavController, 
   public viewCtrl : ViewController,
@@ -26,26 +21,11 @@ export class AddMandalsPage {
   public db : AngularFireDatabase,
   public navParams: NavParams
   ) {
-    this.getDistricts();
   }
 
-  getDistricts(){
-    this.districtRef.snapshotChanges().subscribe(snap=>{
-      snap.forEach(snp=>{
-        let temp : any = snp.payload.val();
-        temp.key = snp.key;
-        this.districts.push(temp);
-      })
-    })
-
-  }
   checkData(){
     if(this.name){
-      if(this.districtSel){
-        this.addCat();
-      }else{
-        this.presentToast("District Not Selected")
-      }
+      this.addCat();
     }else{  
       this.presentToast("Mandal Name Empty")
     }
@@ -58,7 +38,6 @@ export class AddMandalsPage {
   addCat(){
     this.areaRef.push({
       Name : this.name,
-      District : this.districtSel,
       TimeStamp : moment().format()
     }).then(()=>{
       this.close();
