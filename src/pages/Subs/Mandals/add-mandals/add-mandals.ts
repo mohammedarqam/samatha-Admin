@@ -14,27 +14,34 @@ export class AddMandalsPage {
   name : string;
   areaRef = firebase.database().ref("Subs/Mandals");
 
+  mandals : Array<any> = []
+
+
   constructor(
   public navCtrl: NavController, 
   public viewCtrl : ViewController,
-  public toastCtrl : ToastController,
   public db : AngularFireDatabase,
+  public toastCtrl : ToastController,
   public navParams: NavParams
   ) {
+    this.getAreas();
   }
 
   checkData(){
     if(this.name){
-      this.addCat();
+      this.checkDataInDB();
     }else{  
       this.presentToast("Mandal Name Empty")
     }
   }
 
-  close(){
-    this.viewCtrl.dismiss();
+  checkDataInDB(){
+    if(this.mandals.indexOf(this.name)>-1){
+      this.presentToast("Mandal Already Exists")
+    }else{
+      this.addCat();
+    }
   }
-
   addCat(){
     this.areaRef.push({
       Name : this.name,
@@ -44,6 +51,25 @@ export class AddMandalsPage {
     })
   }
 
+
+
+getAreas(){
+    this.areaRef.once("value",snap=>{
+      this.mandals = []
+      snap.forEach(snp=>{
+        this.mandals.push(snp.val().Name);
+      })
+      console.log(this.mandals);
+    })
+  }
+
+
+
+//Support Functions
+
+  close(){
+    this.viewCtrl.dismiss();
+  }
  presentToast(msg) {
   let toast = this.toastCtrl.create({
     message: msg,

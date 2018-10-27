@@ -1,24 +1,22 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AddAmnsPage } from '../add-amns/add-amns';
-
-
 
 @IonicPage()
 @Component({
-  selector: 'page-view-amns',
-  templateUrl: 'view-amns.html',
+  selector: 'page-village-details',
+  templateUrl: 'village-details.html',
 })
-export class ViewAmnsPage {
+export class VillageDetailsPage {
+
+  village = this.navParams.get("village");
 
   constructor(
   public navCtrl: NavController, 
   public navParams: NavParams
   ) {
-
+    console.log(this.village);
+    
   }
 
-  gtAddANM(){
-    this.navCtrl.push(AddAmnsPage);
-  }
+
 }

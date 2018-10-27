@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-navbar color="primary" >
+    <ion-title>{{mandal.Name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-grid>
+
+
+  <ion-row>
+  <ion-col col-6>
+  <ion-card>
+    <ion-navbar color="primary" (click)="toggleVillages()" class="curs" >
+      <ion-title>Villages</ion-title>
+      <ion-buttons end>
+      <button ion-button large clear>{{mandal.Villages}}</button>
+      <button ion-button clear icon-only  *ngIf="!showVillage" (click)="toggleVillages()">
+        <ion-icon name="ios-arrow-down"></ion-icon>
+      </button>
+      <button ion-button clear icon-only  *ngIf="showVillage" (click)="toggleVillages()">
+        <ion-icon name="ios-arrow-up"></ion-icon>
+      </button>
+      </ion-buttons>
+    </ion-navbar>
+
+    <ion-card-content *ngIf="showVillage" >
+      <ion-item *ngFor="let v of villages" >
+        <button item-start clear ion-button color="dark" large>{{v.Name}}</button>
+        <button ion-button item-end clear (click)="gtVillageDetails(v)" >Details</button>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+  </ion-col>
+</ion-row>
+
+
+
+
+
+
+<ion-row>
+<ion-col col-6>
+  <ion-card>
+    <ion-navbar color="primary" (click)="toggleSchools()" class="curs" >
+      <ion-title>Schools</ion-title>
+      <ion-buttons end>
+      <button ion-button large clear>{{mandal.Schools}}</button>
+      <button ion-button clear icon-only  *ngIf="!showSchool" (click)="toggleSchools()">
+        <ion-icon name="ios-arrow-down"></ion-icon>
+      </button>
+      <button ion-button clear icon-only  *ngIf="showSchool" (click)="toggleSchools()">
+        <ion-icon name="ios-arrow-up"></ion-icon>
+      </button>
+      </ion-buttons>
+    </ion-navbar>
+
+    <ion-card-content *ngIf="showSchool" >
+      <ion-item *ngFor="let s of schools" >
+        <button item-start clear ion-button color="dark" large>{{s.Name}}</button>
+        <button ion-button item-end clear (click)="gtSchoolsDetails(s)" >Details</button>
+      </ion-item>
+    </ion-card-content>
+
+
+  </ion-card>
+</ion-col>
+</ion-row>
+
+
+
+
+
+
+  </ion-grid>
+
+</ion-content>

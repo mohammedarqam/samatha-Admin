@@ -9,6 +9,7 @@ import { ViewMandalsPage } from '../pages/Subs/Mandals/view-mandals/view-mandals
 import { ViewVillagesPage } from '../pages/Subs/Villages/view-villages/view-villages';
 import { ViewSchoolsPage } from '../pages/Subs/Schools/view-schools/view-schools';
 import { AssignJobPage } from '../pages/assign-job/assign-job';
+import { ViewAmnsPage } from '../pages/Subs/Anms/view-amns/view-amns';
 @Component({
   templateUrl: 'app.html'
 })
@@ -36,7 +37,7 @@ export class MyApp {
       { title: "Anm's", component: UsersPage, icon: "ios-people",color: "whiter" },
       { title: "Assign Job", component: AssignJobPage, icon: "ios-people",color: "whiter" },
     ];
-    this.activePage = this.pages[0];
+    this.activePage = this.pages[1];
 
   }
 

@@ -76,6 +76,11 @@ export class AddSchoolsPage {
   }
 
   addCat(){
+    let loading = this.loadingCtrl.create({
+      content: 'Adding Village ...'
+    });
+    loading.present();
+
     this.areaRef.push({
       Name : this.name,
       Mandal : this.mandalSel,
@@ -85,6 +90,7 @@ export class AddSchoolsPage {
         firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Schools").child(res.key).set(true).then(()=>{
           firebase.database().ref("SubsIndex/Villages").child(this.villageSel).child("Schools").child(res.key).set(true).then(()=>{
             this.close();
+            loading.dismiss();
           })
         })
     })

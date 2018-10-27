@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController, ModalController, 
 import * as firebase from 'firebase';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AddMandalsPage } from '../add-mandals/add-mandals';
+import { MandalDetailsPage } from '../mandal-details/mandal-details';
 
 @IonicPage()
 @Component({
@@ -14,9 +15,8 @@ export class ViewMandalsPage {
   areaRef =this.db.list('Subs/Mandals', ref=>ref.orderByChild("Name"));
   area: Array<any> = [];
   areasLoaded: Array<any> = [];
-  areaFRef = firebase.database().ref("Subs/Mandals");
 
-  selArray : Array<any> = [];
+  // selArray : Array<any> = [];
 
 constructor(
   public navCtrl: NavController, 
@@ -29,15 +29,21 @@ constructor(
     this.getAreas();
 }
 
-addToArr(a){
-  switch (a.Checked) {
-    case true:  this.selArray.push(a.key);
-      break;
-    case false:  console.log("rm");
-      break;
-  }
+// addToArr(a){
+//   switch (a.Checked) {
+//     case true:  this.selArray.push(a.key);
+//       break;
+//     case false:  this.rmFrmArray(a.key);
+//       break;
+//   }
 
-}
+// }
+
+// rmFrmArray(key){
+//   var ind = this.selArray.indexOf(key);
+//   this.selArray.splice(ind,1)
+// }
+
 
 getAreas(){
     this.areaRef.snapshotChanges().subscribe(snap=>{
@@ -85,47 +91,13 @@ getAreas(){
     areaAdd.present();
   }
 
-
-  deleteArea(a) {
-    let confirm = this.alertCtrl.create({
-      title: 'Are you sure you want to Delete this Mandal ?',
-      message: 'This area cannot be recovered again',
-      buttons: [
-        {
-          text: 'No, Its a mistake',
-          handler: () => {
-
-          }
-        },
-        {
-          text: 'Yes, I understand',
-          handler: () => {
-            this.delete(a);
-          }
-        }
-      ]
-    });
-    confirm.present();
+  gtMandalDetails(a){
+    this.navCtrl.push(MandalDetailsPage,{mandal : a});
   }
 
 
-  delete(area) {
 
-      this.areaFRef.child(area.key).remove().then(() => {
-        this.presentToast('Mandal Deleted');
-      });
- }
 
- presentToast(msg) {
-  let toast = this.toastCtrl.create({
-    message: msg,
-    duration: 4000,
-    position :"bottom"
-    
-  });
-  toast.present();
-}
-addAll(){
-  console.log("func working")
-}
+
+
 }

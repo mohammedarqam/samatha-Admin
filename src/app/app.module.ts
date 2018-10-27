@@ -20,6 +20,9 @@ import { AddSchoolsPage } from '../pages/Subs/Schools/add-schools/add-schools';
 import { ViewAmnsPage } from '../pages/Subs/Anms/view-amns/view-amns';
 import { AddAmnsPage } from '../pages/Subs/Anms/add-amns/add-amns';
 import { AssignJobPage } from '../pages/assign-job/assign-job';
+import { MandalDetailsPage } from '../pages/Subs/Mandals/mandal-details/mandal-details';
+import { SchoolDetailsPage } from '../pages/Subs/Schools/school-details/school-details';
+import { VillageDetailsPage } from '../pages/Subs/Villages/village-details/village-details';
 
 
 
@@ -53,6 +56,9 @@ firebase.initializeApp(firebaseCred);
     ViewAmnsPage,
     AddAmnsPage,
     AssignJobPage,
+    MandalDetailsPage,
+    SchoolDetailsPage,
+    VillageDetailsPage,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +84,9 @@ firebase.initializeApp(firebaseCred);
     ViewAmnsPage,
     AddAmnsPage,
     AssignJobPage,
+    MandalDetailsPage,
+    SchoolDetailsPage,
+    VillageDetailsPage,
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler}
