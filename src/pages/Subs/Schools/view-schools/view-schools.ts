@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController, ModalController, 
 import * as firebase from 'firebase';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AddSchoolsPage } from '../add-schools/add-schools';
+import { SchoolDetailsPage } from '../school-details/school-details';
 
 
 @IonicPage()
@@ -72,43 +73,8 @@ export class ViewSchoolsPage {
   }
 
 
-  deleteArea(a) {
-    let confirm = this.alertCtrl.create({
-      title: 'Are you sure you want to Delete this School ?',
-      message: 'This area cannot be recovered again',
-      buttons: [
-        {
-          text: 'No, Its a mistake',
-          handler: () => {
-
-          }
-        },
-        {
-          text: 'Yes, I understand',
-          handler: () => {
-            this.delete(a);
-          }
-        }
-      ]
-    });
-    confirm.present();
-  }
-
-
-  delete(area) {
-
-      this.areaFRef.child(area.key).remove().then(() => {
-        this.presentToast('School Deleted');
-      });
- }
-
- presentToast(msg) {
-  let toast = this.toastCtrl.create({
-    message: msg,
-    duration: 4000,
-    position :"bottom"
-    
-  });
-  toast.present();
+gtSchoolDetails(s){
+  this.navCtrl.push(SchoolDetailsPage,{school : s})
 }
+
 }

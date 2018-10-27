@@ -4,9 +4,6 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { DashboardPage } from '../pages/Extra/dashboard/dashboard';
 import { LoginPage } from '../pages/Extra/login/login';
-import { UsersPage } from '../pages/Users/users/users';
-import { UserDetailsPage } from '../pages/Users/user-details/user-details';
-import { UserOptionsPage } from '../pages/Users/user-options/user-options';
 import * as firebase from 'firebase';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -19,10 +16,12 @@ import { ViewSchoolsPage } from '../pages/Subs/Schools/view-schools/view-schools
 import { AddSchoolsPage } from '../pages/Subs/Schools/add-schools/add-schools';
 import { ViewAmnsPage } from '../pages/Subs/Anms/view-amns/view-amns';
 import { AddAmnsPage } from '../pages/Subs/Anms/add-amns/add-amns';
-import { AssignJobPage } from '../pages/assign-job/assign-job';
 import { MandalDetailsPage } from '../pages/Subs/Mandals/mandal-details/mandal-details';
 import { SchoolDetailsPage } from '../pages/Subs/Schools/school-details/school-details';
 import { VillageDetailsPage } from '../pages/Subs/Villages/village-details/village-details';
+import { StudentsPage } from '../pages/Students/students/students';
+import { StudentDetailsPage } from '../pages/Students/student-details/student-details';
+import { AnmDetailsPage } from '../pages/Subs/Anms/anm-details/anm-details';
 
 
 
@@ -44,9 +43,6 @@ firebase.initializeApp(firebaseCred);
     MyApp,
     DashboardPage,
     LoginPage,
-    UsersPage,
-    UserDetailsPage,
-    UserOptionsPage,
     ViewMandalsPage,
     AddMandalsPage,
     ViewVillagesPage,
@@ -55,10 +51,13 @@ firebase.initializeApp(firebaseCred);
     AddSchoolsPage,
     ViewAmnsPage,
     AddAmnsPage,
-    AssignJobPage,
+    AnmDetailsPage,
     MandalDetailsPage,
     SchoolDetailsPage,
     VillageDetailsPage,
+    StudentsPage,
+    StudentDetailsPage,
+
   ],
   imports: [
     BrowserModule,
@@ -72,9 +71,6 @@ firebase.initializeApp(firebaseCred);
     MyApp,
     DashboardPage,
     LoginPage,
-    UsersPage,
-    UserDetailsPage,
-    UserOptionsPage,
     ViewMandalsPage,
     AddMandalsPage,
     ViewVillagesPage,
@@ -83,10 +79,12 @@ firebase.initializeApp(firebaseCred);
     AddSchoolsPage,
     ViewAmnsPage,
     AddAmnsPage,
-    AssignJobPage,
+    AnmDetailsPage,
     MandalDetailsPage,
     SchoolDetailsPage,
     VillageDetailsPage,
+    StudentsPage,
+    StudentDetailsPage,
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler}

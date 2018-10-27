@@ -22,31 +22,53 @@
     </ion-grid>
   
   
-  <ion-grid>
-    <ion-row>
-      <ion-col *ngFor="let a of area" col-3  class="main" >
-        <ion-card>
-            <ion-toolbar color="primary">
-            <ion-title>
+    <ion-grid>
+      <ion-navbar color="primary">
+        <ion-row>
+          <ion-col col-1>
+          </ion-col>
+          <ion-col col-3>
+            <p class="headBar">Villages</p>
+          </ion-col>
+          <ion-col col-2>
+            <p class="headBar">Schools</p>
+          </ion-col>
+          <ion-col col-2>
+            <p class="headBar">Students</p>
+          </ion-col>
+          <ion-col col-2>
+            <p class="headBar"></p>
+          </ion-col>
+        </ion-row>
+      </ion-navbar>
+    </ion-grid>
+
+
+    <ion-grid>
+        <ion-card *ngFor="let a of area;let i = index">
+        <ion-card-content>
+          <ion-row>
+            <ion-col col-1  >
+              <p ion-text><strong>{{i+1}}</strong></p>
+            </ion-col>
+            <ion-col col-3>
               {{a.Name}}
-            </ion-title>
-            </ion-toolbar>
-            <ion-card-content>
-              <ion-list>
-                <ion-item>{{a.DistrictName}}</ion-item>
-                <ion-item>{{a.MandalName}}</ion-item>
-              </ion-list>
-              <button ion-button color="secondary" (click)="getStudents()" block >View Students</button>
-              <div class="editBtns">
-                <button ion-button color="danger" (click)="deleteArea(a)">
-                  <ion-icon name="trash"></ion-icon>
-                </button>
-              </div>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+            </ion-col>
+            <ion-col col-2 text-center >
+              <h1 ion-text color="primary">{{a.Schools}}</h1><br/>
+            </ion-col>
+            <ion-col col-2 text-center >
+              <h1 ion-text color="primary">{{a.Students}}0</h1><br/>
+            </ion-col>
+            <ion-col col-2 text-center >
+              <button ion-button clear (click)="gtVillageDetails(a)">Details
+                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </ion-grid>
   
   
   

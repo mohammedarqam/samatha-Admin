@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
- * Generated class for the AssignJobPage page.
+ * Generated class for the StudentDetailsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -10,16 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-assign-job',
-  templateUrl: 'assign-job.html',
+  selector: 'page-student-details',
+  templateUrl: 'student-details.html',
 })
-export class AssignJobPage {
+export class StudentDetailsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad AssignJobPage');
+    console.log('ionViewDidLoad StudentDetailsPage');
   }
 
 }

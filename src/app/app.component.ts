@@ -3,12 +3,11 @@ import { Nav, Platform, ToastController } from 'ionic-angular';
 
 import * as firebase from 'firebase';
 import { LoginPage } from '../pages/Extra/login/login';
-import { UsersPage } from '../pages/Users/users/users';
 import { DashboardPage } from '../pages/Extra/dashboard/dashboard';
 import { ViewMandalsPage } from '../pages/Subs/Mandals/view-mandals/view-mandals';
 import { ViewVillagesPage } from '../pages/Subs/Villages/view-villages/view-villages';
 import { ViewSchoolsPage } from '../pages/Subs/Schools/view-schools/view-schools';
-import { AssignJobPage } from '../pages/assign-job/assign-job';
+import { StudentsPage } from '../pages/Students/students/students';
 import { ViewAmnsPage } from '../pages/Subs/Anms/view-amns/view-amns';
 @Component({
   templateUrl: 'app.html'
@@ -16,7 +15,7 @@ import { ViewAmnsPage } from '../pages/Subs/Anms/view-amns/view-amns';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ViewMandalsPage;
+  rootPage: any = ViewVillagesPage;
   activePage: any;
 
   full : boolean = true;
@@ -31,13 +30,14 @@ export class MyApp {
 
     this.pages = [
       { title: 'DashBoard', component: DashboardPage, icon: "flash",color: "yellowi" },
-      { title: "Mandals", component: ViewMandalsPage, icon: "ios-people",color: "whiter" },
-      { title: "Villages", component: ViewVillagesPage, icon: "ios-people",color: "whiter" },
-      { title: "Schools", component: ViewSchoolsPage, icon: "ios-people",color: "whiter" },
-      { title: "Anm's", component: UsersPage, icon: "ios-people",color: "whiter" },
-      { title: "Assign Job", component: AssignJobPage, icon: "ios-people",color: "whiter" },
+      { title: "Mandals", component: ViewMandalsPage, icon: "md-pin",color: "whiter" },
+      { title: "Villages", component: ViewVillagesPage, icon: "md-pin",color: "whiter" },
+      { title: "Schools", component: ViewSchoolsPage, icon: "md-pin",color: "whiter" },
+      { title: "ANM's", component: ViewAmnsPage, icon: "ios-people",color: "whiter" },
+      { title: "Students", component: StudentsPage, icon: "ios-person",color: "whiter" },
+      
     ];
-    this.activePage = this.pages[1];
+    this.activePage = this.pages[0];
 
   }
 

@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, ToastController, ModalController, 
 import * as firebase from 'firebase';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AddVillagesPage } from '../add-villages/add-villages';
+import { VillageDetailsPage } from '../village-details/village-details';
 
 
 @IonicPage()
@@ -37,8 +38,8 @@ export class ViewVillagesPage {
       snap.forEach(snp=>{
         let temp : any = snp.payload.val();
         temp.key = snp.key;
-          firebase.database().ref("Subs/Mandals").child(temp.Mandal).once("value",snap=>{
-            temp.MandalName = snap.val().Name;
+        firebase.database().ref("SubsIndex/Villages").child(snp.key).child("Schools").once("value",schoolsSnap=>{
+          temp.Schools = schoolsSnap.numChildren();
         })
         tempArray.push(temp);
       })
@@ -73,45 +74,9 @@ export class ViewVillagesPage {
     let areaAdd = this.modalCtrl.create(AddVillagesPage,null,{enableBackdropDismiss : false});
     areaAdd.present();
   }
-
-
-  deleteArea(a) {
-    let confirm = this.alertCtrl.create({
-      title: 'Are you sure you want to Delete this Village ?',
-      message: 'This area cannot be recovered again',
-      buttons: [
-        {
-          text: 'No, Its a mistake',
-          handler: () => {
-
-          }
-        },
-        {
-          text: 'Yes, I understand',
-          handler: () => {
-            this.delete(a);
-          }
-        }
-      ]
-    });
-    confirm.present();
+  gtVillageDetails(v){
+    // console.log(v);
+    this.navCtrl.push(VillageDetailsPage,{village : v});
   }
 
-
-  delete(area) {
-
-      this.areaFRef.child(area.key).remove().then(() => {
-        this.presentToast('Village Deleted');
-      });
- }
-
- presentToast(msg) {
-  let toast = this.toastCtrl.create({
-    message: msg,
-    duration: 4000,
-    position :"bottom"
-    
-  });
-  toast.present();
-}
 }
