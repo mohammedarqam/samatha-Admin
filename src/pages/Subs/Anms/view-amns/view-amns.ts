@@ -14,6 +14,8 @@ export class ViewAmnsPage {
 
   anmRef = this.db.list("Anms");
   anms : Array<any> = [];
+  anmsLoaded : Array<any> = [];
+
   constructor(
   public navCtrl: NavController, 
   public db : AngularFireDatabase,
@@ -33,6 +35,50 @@ export class ViewAmnsPage {
       })
     })
   }
+
+  initializeItems(): void {
+    this.anms = this.anmsLoaded;
+  }
+  getItems(searchbar) {
+    this.initializeItems();
+    let q = searchbar;
+    if (!q) {
+      return;
+    }
+    this.anms = this.anms.filter((v) => {
+      if(v.FirstName && q) {
+        if (v.Name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+          return true;
+        }
+        return false;
+      }
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   gtAddANM(){
     this.navCtrl.push(AddAmnsPage);
