@@ -22,6 +22,7 @@ import { VillageDetailsPage } from '../pages/Subs/Villages/village-details/villa
 import { StudentsPage } from '../pages/Students/students/students';
 import { StudentDetailsPage } from '../pages/Students/student-details/student-details';
 import { AnmDetailsPage } from '../pages/Subs/Anms/anm-details/anm-details';
+import { AssignSchoolPage } from '../pages/Subs/Anms/assign-school/assign-school';
 
 
 
@@ -57,7 +58,7 @@ firebase.initializeApp(firebaseCred);
     VillageDetailsPage,
     StudentsPage,
     StudentDetailsPage,
-
+    AssignSchoolPage,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +86,7 @@ firebase.initializeApp(firebaseCred);
     VillageDetailsPage,
     StudentsPage,
     StudentDetailsPage,
+    AssignSchoolPage,
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler}

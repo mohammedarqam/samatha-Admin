@@ -21,8 +21,62 @@
     </ion-row>
     </ion-grid>
 
+    <ion-grid>
+      <ion-navbar color="primary">
+        <ion-row>
+          <ion-col col-1>
+            <ion-checkbox ></ion-checkbox>
+          </ion-col>
+          <ion-col col-3>
+            <p class="headBar">Name</p>
+          </ion-col>
+          <ion-col col-2>
+            <p class="headBar">Progress </p>
+          </ion-col>
+          <ion-col col-2>
+            <p class="headBar">Phone No.</p>
+          </ion-col>
+          <ion-col col-2>
+            <p class="headBar">Schools</p>
+          </ion-col>
+          <ion-col col-2>
+            <p class="headBar"></p>
+          </ion-col>
+        </ion-row>
+      </ion-navbar>
+    </ion-grid>
 
-    <ion-item *ngFor= "let a of anms">{{a.FirstName}}</ion-item>
+    <ion-grid>
+        <ion-card *ngFor="let a of anms;let i = index">
+        <ion-card-content>
+          <ion-row>
+            <ion-col col-1  >
+              <ion-checkbox></ion-checkbox>
+            </ion-col>
+            <ion-col col-3>
+              {{a.FirstName}}&nbsp;{{a.LastName}}
+            </ion-col>
+            <ion-col col-2 text-center >
+              <h1 ion-text color="primary">null </h1><br/>
+            </ion-col>
+            <ion-col col-2 text-center >
+              <h1 ion-text color="primary">{{a.Phone}} </h1><br/>
+            </ion-col>
+            <ion-col col-2 text-center >
+              <h1 ion-text color="primary">null</h1>
+              <button ion-button  clear>View</button>
+            </ion-col>
+            <button ion-button clear (click)="gtAnmDetails(a)">Details
+              <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>
+            </button>
+
+
+
+          </ion-row>
+        </ion-card-content>
+        </ion-card>
+    </ion-grid>    
+    <!-- <ion-item *ngFor= "let a of anms">{{a.FirstName}}</ion-item> -->
 
 
 

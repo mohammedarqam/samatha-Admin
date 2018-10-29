@@ -18,6 +18,9 @@ export class AddVillagesPage {
   mandalRef  =this.db.list('Subs/Mandals');
   mandalSel : string;
 
+  villRef = this.db.list('Subs/Villages');
+  villages : Array<any> = [];
+
   constructor(
   public navCtrl: NavController, 
   public viewCtrl : ViewController,
@@ -26,28 +29,49 @@ export class AddVillagesPage {
   public navParams: NavParams
   ) {
     this.getMandals();
+    this.getVillages();
   }
 
     getMandals(){
     this.mandalRef.snapshotChanges().subscribe(snap=>{
+      this.mandals = [];
       snap.forEach(snp=>{
         let temp : any = snp.payload.val();
         temp.key = snp.key;
         this.mandals.push(temp);
       })
     })
-
   }
+
+  getVillages(){
+    this.villRef.snapshotChanges().subscribe(snap=>{
+      this.villages = [];
+      snap.forEach(snp=>{
+        let temp : any = snp.payload.val();
+        temp.key = snp.key;
+        this.villages.push(temp.Name);
+      })
+    })
+  }
+
 
   checkData(){
     if(this.name){
         if(this.mandalSel){
-          this.addCat();
+          this.checkDataInDb();
         }else{
           this.presentToast("Mandal not Selected");
         }
     }else{  
       this.presentToast("Mandal Name Empty")
+    }
+  }
+
+  checkDataInDb(){
+    if(this.villages.indexOf(this.name)>-1){
+      this.presentToast("Village Already Exists")
+    }else{
+      this.addCat();
     }
   }
 

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { AddAmnsPage } from '../add-amns/add-amns';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { AnmDetailsPage } from '../anm-details/anm-details';
 
 
 
@@ -19,8 +20,10 @@ export class ViewAmnsPage {
   constructor(
   public navCtrl: NavController, 
   public db : AngularFireDatabase,
+  public menuCtrl : MenuController,
   public navParams: NavParams
   ) {
+    this.menuCtrl.enable(true);
     this.getAnms();
   }
 
@@ -30,7 +33,6 @@ export class ViewAmnsPage {
       snap.forEach(snp=>{
         var temp : any  =snp.payload.val();
         temp.key = snp.key;
-        console.log(temp)
         this.anms.push(temp);
       })
     })
@@ -76,7 +78,9 @@ export class ViewAmnsPage {
 
 
 
-
+  gtAnmDetails(a){
+    this.navCtrl.push(AnmDetailsPage,{anm  :a});
+  }
 
 
 

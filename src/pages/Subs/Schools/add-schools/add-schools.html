@@ -36,9 +36,13 @@
 
         <ion-item *ngIf="villageSel" >
           <ion-label  floating>School Name</ion-label>
-          <ion-input type="text" [(ngModel)]="name" (keyup.enter)="checkData()" (ionChange)="capsName(name)" autofocus ></ion-input>
+          <ion-input type="text" [(ngModel)]="name"  (ionChange)="capsName(name)" autofocus ></ion-input>
         </ion-item>
         
+        <ion-item *ngIf="name.length" >
+          <ion-label  floating>School Total Strength</ion-label>
+          <ion-input type="number" [(ngModel)]="str" (keyup.enter)="checkData()"  ></ion-input>
+        </ion-item>
   
       </ion-card-content>
     </ion-card>

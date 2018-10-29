@@ -18,7 +18,6 @@ export class ViewSchoolsPage {
   areasLoaded: Array<any> = [];
 
 
-
   areaFRef = firebase.database().ref("Subs/Schools");
 
   constructor(
@@ -76,5 +75,7 @@ export class ViewSchoolsPage {
 gtSchoolDetails(s){
   this.navCtrl.push(SchoolDetailsPage,{school : s})
 }
-
+gtAnmDetails(){
+  
+}
 }

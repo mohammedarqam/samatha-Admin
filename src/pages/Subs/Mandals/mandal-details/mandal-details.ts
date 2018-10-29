@@ -26,6 +26,7 @@ export class MandalDetailsPage {
   public db : AngularFireDatabase,
   public navParams: NavParams
   ) {
+    console.log(this.mandal)
     this.getVillages();
     this.getSchools();
   }
@@ -45,10 +46,10 @@ export class MandalDetailsPage {
   getSchools(){
     this.schoolRef.snapshotChanges().subscribe(snap=>{
       snap.forEach(snp=>{
-        this.db.object(`Subs/Schools/${snp.key}`).snapshotChanges().subscribe(snap=>{
-          var temp : any = snap.payload.val();
-          temp.key = snap.key;
-          this.schools.push(temp);
+        this.db.object(`Subs/Schools/${snp.key}`).snapshotChanges().subscribe(snip=>{
+          var tempo : any = snip.payload.val();
+          tempo.key = snip.key;
+          this.schools.push(tempo);
         })
         
       })

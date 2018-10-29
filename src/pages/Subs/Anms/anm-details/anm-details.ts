@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the AnmDetailsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import * as firebase from 'firebase';
+import { AssignSchoolPage } from '../assign-school/assign-school';
 
 @IonicPage()
 @Component({
@@ -15,11 +10,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class AnmDetailsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  anmP = this.navParams.get("anm");
+  constructor(
+  public navCtrl: NavController, 
+  public navParams: NavParams
+  ) {
+    console.log(this.anmP);
+    
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AnmDetailsPage');
+  assignSchools(){
+    this.navCtrl.push(AssignSchoolPage,{anm : this.anmP}); 
   }
-
 }

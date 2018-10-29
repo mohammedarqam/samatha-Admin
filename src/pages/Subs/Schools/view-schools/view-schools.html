@@ -31,7 +31,13 @@
             <p class="headBar">Schools</p>
           </ion-col>
           <ion-col col-2>
-            <p class="headBar">Students</p>
+            <p class="headBar">Progress %</p>
+          </ion-col>
+          <ion-col col-2>
+            <p class="headBar">Total Students</p>
+          </ion-col>
+          <ion-col col-2>
+            <p class="headBar">ANM</p>
           </ion-col>
           <ion-col col-2>
             <p class="headBar"></p>
@@ -52,7 +58,13 @@
               {{a.Name}}
             </ion-col>
             <ion-col col-2 text-center >
-              <h1 ion-text color="primary">{{a.Students}}0</h1><br/>
+              <h1 ion-text color="primary">0%</h1><br/>
+            </ion-col>
+            <ion-col col-2 text-center >
+              <h1 ion-text color="primary">0</h1><br/>
+            </ion-col>
+            <ion-col col-2 text-center >
+              <button ion-button (click)="gtAnmDetails()"> {{a.Anms}}Anm name </button>
             </ion-col>
             <ion-col col-2 text-center >
               <button ion-button clear (click)="gtSchoolDetails(a)">Details

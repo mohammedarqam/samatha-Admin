@@ -75,7 +75,6 @@ export class ViewVillagesPage {
     areaAdd.present();
   }
   gtVillageDetails(v){
-    // console.log(v);
     this.navCtrl.push(VillageDetailsPage,{village : v});
   }
 

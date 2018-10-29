@@ -11,7 +11,9 @@ import { AngularFireDatabase } from 'angularfire2/database';
   templateUrl: 'add-schools.html',
 })
 export class AddSchoolsPage {
-  name : string;
+  name : string="";
+  str : string="";
+
   areaRef = firebase.database().ref("Subs/Schools");
 
   mandals : Array<any> = [];
@@ -20,6 +22,9 @@ export class AddSchoolsPage {
 
   villages : Array<any> = [];
   villageSel : string;
+
+  schoolRef =this.db.list('Subs/Schools');
+  schools : Array<any> = [];
 
   constructor(
   public navCtrl: NavController, 
@@ -30,6 +35,7 @@ export class AddSchoolsPage {
   public navParams: NavParams
   ) {
     this.getMandals();
+    this.getSchools();
   }
 
     getMandals(){
@@ -40,8 +46,9 @@ export class AddSchoolsPage {
         this.mandals.push(temp);
       })
     })
-
   }
+
+
   getVillages(){
     let loading = this.loadingCtrl.create({
       content: 'Loading Villages ...'
@@ -60,17 +67,33 @@ export class AddSchoolsPage {
         })
       })
     })
+  }
 
+  getSchools(){
+    this.schoolRef.snapshotChanges().subscribe(snap=>{
+      this.schools = [];
+      snap.forEach(snip=>{
+        var temp : any =  snip.payload.val();
+        temp.key  = snip.key;
+        this.schools.push(temp.Name);
+      })
+    })
   }
 
   checkData(){
     if(this.name){
-      this.addCat();
+      this.checkDataInDb();
     }else{  
       this.presentToast("School Name Empty")
     }
   }
-
+  checkDataInDb(){
+    if(this.schools.indexOf(this.name)>-1){
+      this.presentToast("School Already Exists")
+    }else{
+      this.addCat();
+    }
+  }
   close(){
     this.viewCtrl.dismiss();
   }
@@ -85,6 +108,7 @@ export class AddSchoolsPage {
       Name : this.name,
       Mandal : this.mandalSel,
       Village  :this.villageSel,
+      Strength  : this.str,
       TimeStamp : moment().format()
     }).then((res)=>{
         firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Schools").child(res.key).set(true).then(()=>{
