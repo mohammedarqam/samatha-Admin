@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the AddAmnsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import * as firebase from 'firebase';
+import { ViewAmnsPage } from '../view-amns/view-amns';
 
 @IonicPage()
 @Component({
@@ -14,12 +9,97 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'add-amns.html',
 })
 export class AddAmnsPage {
+  
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  adminEmail : string;
+  adminPass : string;
+
+  fName : string;
+  lName :  string;
+  gender : string;
+  email : string;
+  phone : string;
+  pass : string;
+  cPass : string;
+
+
+  samePasses : boolean = false;
+
+
+
+  constructor(
+  public navCtrl: NavController, 
+  public loadingCtrl : LoadingController,
+  public toastCtrl : ToastController,
+  public navParams: NavParams
+  ) {
+    this.getAdmin();
   }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AddAmnsPage');
+  getAdmin(){
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+  
+    loading.present();
+    
+    var adminId = firebase.auth().currentUser.uid;
+    firebase.database().ref("Admin Data/Admins").child(adminId).once("value",snap=>{
+      this.adminEmail = snap.val().Email;
+      this.adminPass = snap.val().Password;
+    }).then(()=>{
+      loading.dismiss();
+    })
   }
+    checkData(){
 
-}
+    }
+
+
+
+
+    checkPasses(){
+      if(this.pass.length){
+        if(this.cPass){
+          if(this.pass===this.cPass){
+            this.samePasses = true;
+         }else{this.samePasses = false;}
+        }else{this.samePasses = false;}
+      }else{this.samePasses = false;}
+    }
+
+    addAnm(){
+      let loading = this.loadingCtrl.create({
+        content: 'Please wait...'
+      });
+    
+      loading.present();
+      var genEmail = this.phone + "@samatha.anm";
+      firebase.auth().createUserWithEmailAndPassword(genEmail,this.pass).then(()=>{
+        firebase.database().ref("Anms").child(firebase.auth().currentUser.uid).set({
+          FirstName : this.fName,
+          LastName : this.lName,
+          Gender : this.gender,
+          Email : this.email,
+          Phone : this.phone,
+          Password : this.pass,
+        }).then(()=>{
+          firebase.auth().signInWithEmailAndPassword(this.adminEmail,this.adminPass).then(()=>{
+            this.presentToast("ANM Added Successfully !");
+          }).then(()=>{
+            this.navCtrl.setRoot(ViewAmnsPage);
+            loading.dismiss()
+          })
+        })
+      })
+    }
+
+
+    presentToast(msg){
+      let toast = this.toastCtrl.create({
+        message: msg,
+        duration: 3000,
+        position: 'top'
+      });
+    }
+
+  }

@@ -1,3 +1,11 @@
 page-add-amns {
-
+ion-select,ion-input{
+    border-bottom: 1px solid map-get($colors,primary);
+}
+.mainCard{
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0);
+    width: 70% !important;
+}
 }

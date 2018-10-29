@@ -21,6 +21,11 @@
     </ion-row>
     </ion-grid>
 
+
+    <ion-item *ngFor= "let a of anms">{{a.FirstName}}</ion-item>
+
+
+
   
     <ion-fab right bottom>
       <button ion-fab color="danger" (click)="gtAddANM()" >

@@ -9,6 +9,7 @@ import { ViewVillagesPage } from '../pages/Subs/Villages/view-villages/view-vill
 import { ViewSchoolsPage } from '../pages/Subs/Schools/view-schools/view-schools';
 import { StudentsPage } from '../pages/Students/students/students';
 import { ViewAmnsPage } from '../pages/Subs/Anms/view-amns/view-amns';
+import { AddAmnsPage } from '../pages/Subs/Anms/add-amns/add-amns';
 @Component({
   templateUrl: 'app.html'
 })
@@ -48,7 +49,7 @@ export class MyApp {
         firebase.database().ref("Admin Data").child("Admins").child(user.uid).once('value',itemSnap=>{
             if(itemSnap.exists()){
               var welMsg = "Welcome"+" "+itemSnap.val().Name;
-              this.rootPage = DashboardPage;
+              this.rootPage = ViewAmnsPage;
               this.presentToast(welMsg);
             }else{
               firebase.auth().signOut().then(()=>{
@@ -62,7 +63,7 @@ export class MyApp {
         this.rootPage = LoginPage;
       }
     });  
-    });
+     });
   }
 
   openPage(page) {
