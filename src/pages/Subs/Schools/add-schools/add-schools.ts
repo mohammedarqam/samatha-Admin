@@ -82,7 +82,11 @@ export class AddSchoolsPage {
 
   checkData(){
     if(this.name){
-      this.checkDataInDb();
+      if(this.str){
+        this.checkDataInDb();
+      }else{
+        this.presentToast("Enter School Strength")
+      }
     }else{  
       this.presentToast("School Name Empty")
     }
@@ -109,6 +113,7 @@ export class AddSchoolsPage {
       Mandal : this.mandalSel,
       Village  :this.villageSel,
       Strength  : this.str,
+      ANM : "Unassigned",
       TimeStamp : moment().format()
     }).then((res)=>{
         firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Schools").child(res.key).set(true).then(()=>{

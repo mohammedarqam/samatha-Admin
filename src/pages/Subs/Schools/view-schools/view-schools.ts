@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ModalController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ModalController, AlertController, MenuController } from 'ionic-angular';
 import * as firebase from 'firebase';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AddSchoolsPage } from '../add-schools/add-schools';
@@ -26,8 +26,10 @@ export class ViewSchoolsPage {
   public toastCtrl : ToastController,
   public alertCtrl: AlertController,
   public modalCtrl : ModalController,
+  public menuCtrl : MenuController,
   public navParams: NavParams
   ) {
+    this.menuCtrl.enable(true);
     this.getAreas();
   }
 
@@ -35,6 +37,7 @@ export class ViewSchoolsPage {
     this.areaRef.snapshotChanges().subscribe(snap=>{
       let tempArray = [];
       snap.forEach(snp=>{
+        
         let temp : any = snp.payload.val();
         temp.key = snp.key;
         tempArray.push(temp);

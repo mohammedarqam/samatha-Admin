@@ -15,10 +15,12 @@ mandals  : number = 0;
 villages  : number = 0;
 schools  : number = 0;
 students  : number = 0;
+anms  : number = 0;
 
 mandalsRef = this.db.list("Subs/Mandals");
 villagesRef = this.db.list("Subs/Villages");
 schoolsRef = this.db.list("Subs/Schools");
+anmsRef = this.db.list("Anms");
 
 
 
@@ -31,6 +33,7 @@ schoolsRef = this.db.list("Subs/Schools");
       this.getMandals();
       this.getVillages();
       this.getSchools();
+      this.getAnms();
     }
     
     getMandals(){
@@ -46,6 +49,11 @@ schoolsRef = this.db.list("Subs/Schools");
     getSchools(){
       this.schoolsRef.snapshotChanges().subscribe(snap=>{
         this.schools = snap.length;
+      })
+    }
+    getAnms(){
+      this.anmsRef.snapshotChanges().subscribe(snap=>{
+        this.anms= snap.length;
       })
     }
 }

@@ -105,7 +105,9 @@ export class AssignSchoolPage {
         firebase.database().ref("Subs/Schools").child(snp.key).once("value",vil=>{
           var temp : any = vil.val();
           temp.key = vil.key;
-          this.schools.push(temp);
+          if(!temp.ANM){
+            this.schools.push(temp);
+          }
         }).then(()=>{
           loading.dismiss();
         })
