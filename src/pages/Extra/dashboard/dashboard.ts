@@ -22,7 +22,13 @@ villagesRef = this.db.list("Subs/Villages");
 schoolsRef = this.db.list("Subs/Schools");
 anmsRef = this.db.list("Anms");
 
+uSchuls : number = 0;
+aSchuls : number = 0;
 
+public doughnutChartLabels:string[] = ['Assigned Schools', 'Unassigned Schools'];
+public doughnutChartData:number[] = [0,0];
+public doughnutChartType:string = 'doughnut';
+public doughnutLegend : boolean = true;
 
   constructor(
   public navCtrl: NavController,
@@ -48,12 +54,28 @@ anmsRef = this.db.list("Anms");
     }
     getSchools(){
       this.schoolsRef.snapshotChanges().subscribe(snap=>{
+        this.uSchuls = 0; this.aSchuls = 0;
         this.schools = snap.length;
+        snap.forEach(snip=>{
+          var temp : any = snip.payload.val();
+          if(temp.ANM){
+            this.aSchuls++;
+          }
+        })
+        this.uSchuls = this.schools - this.aSchuls;
+        this.doughnutChartData = [this.aSchuls,this.uSchuls];
       })
     }
     getAnms(){
       this.anmsRef.snapshotChanges().subscribe(snap=>{
         this.anms= snap.length;
       })
+    }
+    public chartClicked(e:any):void {
+      console.log(e);
+    }
+    
+    public chartHovered(e:any):void {
+      console.log(e);
     }
 }

@@ -113,7 +113,6 @@ export class AddSchoolsPage {
       Mandal : this.mandalSel,
       Village  :this.villageSel,
       Strength  : this.str,
-      ANM : "Unassigned",
       TimeStamp : moment().format()
     }).then((res)=>{
         firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Schools").child(res.key).set(true).then(()=>{

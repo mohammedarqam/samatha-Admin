@@ -23,7 +23,7 @@ import { StudentsPage } from '../pages/Students/students/students';
 import { StudentDetailsPage } from '../pages/Students/student-details/student-details';
 import { AnmDetailsPage } from '../pages/Subs/Anms/anm-details/anm-details';
 import { AssignSchoolPage } from '../pages/Subs/Anms/assign-school/assign-school';
-
+import { ChartsModule } from 'ng2-charts';
 
 
 export const firebaseCred = {
@@ -66,6 +66,7 @@ firebase.initializeApp(firebaseCred);
     AngularFireModule.initializeApp(firebaseCred),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    ChartsModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [

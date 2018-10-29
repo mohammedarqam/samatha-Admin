@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angul
 import { AddAmnsPage } from '../add-amns/add-amns';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AnmDetailsPage } from '../anm-details/anm-details';
-
+import * as firebase from 'firebase';
 
 
 @IonicPage()
@@ -33,6 +33,9 @@ export class ViewAmnsPage {
       snap.forEach(snp=>{
         var temp : any  =snp.payload.val();
         temp.key = snp.key;
+        firebase.database().ref("Anm Assigns").child(temp.key).once("value",itemSnap=>{
+          temp.Schools = itemSnap.numChildren();
+        })
         this.anms.push(temp);
       })
     })
@@ -56,8 +59,6 @@ export class ViewAmnsPage {
       }
     });
   }
-
-
 
 
 
