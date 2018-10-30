@@ -45,7 +45,13 @@ export class AssignSchoolPage {
       School  :this.schoolSel.key,
       SchoolName : this.schoolSel.Name,
     }).then(()=>{
-      this.presentToast(this.schoolSel.Name + "is assigned to "+ this.anmJ.FirstName + " "+this.anmJ.LastName);
+        firebase.database().ref("Subs/Schools").child(this.schoolSel.key).child("ANM").set(this.anmJ.key).then(()=>{
+          firebase.database().ref("SubsIndex/Villages").child(this.villageSel).child("Anms").child(this.anmJ.key).set(true).then(()=>{
+            firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Anms").child(this.anmJ.key).set(true).then(()=>{
+              this.presentToast(this.schoolSel.Name + " is assigned to "+ this.anmJ.FirstName + " "+this.anmJ.LastName);
+            })
+          })
+        });
     })
   }
 
@@ -109,6 +115,7 @@ export class AssignSchoolPage {
             this.schools.push(temp);
           }
         }).then(()=>{
+          this.schoolSel = null;
           loading.dismiss();
         })
       })
@@ -117,10 +124,7 @@ export class AssignSchoolPage {
   }
 
   clear(){
-    this.mandalSel = null;
-    this.villageSel = null;
     this.schoolSel = null;
-    
   }
 
 

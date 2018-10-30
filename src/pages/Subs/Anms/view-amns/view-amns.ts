@@ -98,9 +98,14 @@ delMulC(){
 
 
 
-clearSel(){
-  this.selArray = [];
-}
+// clearSel(){
+//   console.log(this.anms)
+//   this.selArray.forEach(snip=>{
+//     var i = this.anms.indexOf(x=> x.key == snip)
+//     console.log(i)
+//   })
+//   console.log(this.selArray)
+// }
 
   gtAnmDetails(a){
     this.navCtrl.push(AnmDetailsPage,{anm  :a});

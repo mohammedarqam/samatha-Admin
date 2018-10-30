@@ -65,7 +65,7 @@
             </ion-col>
 
             <ion-col col-2 text-center *ngIf="a.ANM" >
-              <button ion-button (click)="gtAnmDetails()"> {{a.ANM}} </button>
+              <button ion-button (click)="gtAnmDetails(a.AnmO)"> {{a.AnmName}} </button>
             </ion-col>
             
             <ion-col col-2 text-center *ngIf="!a.ANM" >

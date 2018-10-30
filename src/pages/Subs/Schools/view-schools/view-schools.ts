@@ -4,6 +4,7 @@ import * as firebase from 'firebase';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AddSchoolsPage } from '../add-schools/add-schools';
 import { SchoolDetailsPage } from '../school-details/school-details';
+import { AnmDetailsPage } from '../../Anms/anm-details/anm-details';
 
 
 @IonicPage()
@@ -40,6 +41,12 @@ export class ViewSchoolsPage {
         
         let temp : any = snp.payload.val();
         temp.key = snp.key;
+        if(temp.ANM){
+        firebase.database().ref("Anms").child(temp.ANM).once("value",iemSnap=>{
+          temp.AnmO = iemSnap.val();
+          temp.AnmName = temp.AnmO.FirstName;
+        })
+      }
         tempArray.push(temp);
       })
       this.area = tempArray;
@@ -78,7 +85,7 @@ export class ViewSchoolsPage {
 gtSchoolDetails(s){
   this.navCtrl.push(SchoolDetailsPage,{school : s})
 }
-gtAnmDetails(){
-  
+gtAnmDetails(a){
+  this.navCtrl.push(AnmDetailsPage,{anm : a})
 }
 }
