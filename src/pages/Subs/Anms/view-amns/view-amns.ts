@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, AlertController, ModalController } from 'ionic-angular';
 import { AddAmnsPage } from '../add-amns/add-amns';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AnmDetailsPage } from '../anm-details/anm-details';
 import * as firebase from 'firebase';
+import { DelAnmPage } from '../del-anm/del-anm';
 
 
 @IonicPage()
@@ -24,6 +25,7 @@ export class ViewAmnsPage {
   public db : AngularFireDatabase,
   public alertCtrl : AlertController,
   public menuCtrl : MenuController,
+  public modalCtrl : ModalController,
   public navParams: NavParams
   ) {
     this.menuCtrl.enable(true);
@@ -82,31 +84,8 @@ rmFrmArray(key){
 
 
 delMulC(){
-  let alert = this.alertCtrl.create({
-    title: 'Delete '+this.selArray.length+' ANMs?',
-    message: this.selArray[0].Name,
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        handler: () => {
-          console.log('Cancel clicked');
-        }
-      },
-      {
-        text: 'Delete',
-        handler: () => {
-          this.delMul();
-        }
-      }
-    ]
-  });
-  alert.present();
-}
-
-
-delMul(){
-
+  let partnerView = this.modalCtrl.create(DelAnmPage,{delAnms : this.selArray},{enableBackdropDismiss : false});
+  partnerView.present();
 }
 
 
@@ -118,6 +97,10 @@ delMul(){
 
 
 
+
+clearSel(){
+  this.selArray = [];
+}
 
   gtAnmDetails(a){
     this.navCtrl.push(AnmDetailsPage,{anm  :a});

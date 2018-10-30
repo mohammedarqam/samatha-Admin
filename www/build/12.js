@@ -1,14 +1,14 @@
 webpackJsonp([12],{
 
-/***/ 695:
+/***/ 698:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AddAmnsPageModule", function() { return AddAmnsPageModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnmDetailsPageModule", function() { return AnmDetailsPageModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_amns__ = __webpack_require__(172);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__anm_details__ = __webpack_require__(173);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,23 +18,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var AddAmnsPageModule = /** @class */ (function () {
-    function AddAmnsPageModule() {
+var AnmDetailsPageModule = /** @class */ (function () {
+    function AnmDetailsPageModule() {
     }
-    AddAmnsPageModule = __decorate([
+    AnmDetailsPageModule = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_2__add_amns__["a" /* AddAmnsPage */],
+                __WEBPACK_IMPORTED_MODULE_2__anm_details__["a" /* AnmDetailsPage */],
             ],
             imports: [
-                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__add_amns__["a" /* AddAmnsPage */]),
+                __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__anm_details__["a" /* AnmDetailsPage */]),
             ],
         })
-    ], AddAmnsPageModule);
-    return AddAmnsPageModule;
+    ], AnmDetailsPageModule);
+    return AnmDetailsPageModule;
 }());
 
-//# sourceMappingURL=add-amns.module.js.map
+//# sourceMappingURL=anm-details.module.js.map
 
 /***/ })
 

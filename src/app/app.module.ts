@@ -24,6 +24,7 @@ import { StudentDetailsPage } from '../pages/Students/student-details/student-de
 import { AnmDetailsPage } from '../pages/Subs/Anms/anm-details/anm-details';
 import { AssignSchoolPage } from '../pages/Subs/Anms/assign-school/assign-school';
 import { ChartsModule } from 'ng2-charts';
+import { DelAnmPage } from '../pages/Subs/Anms/del-anm/del-anm';
 
 
 export const firebaseCred = {
@@ -59,6 +60,7 @@ firebase.initializeApp(firebaseCred);
     StudentsPage,
     StudentDetailsPage,
     AssignSchoolPage,
+    DelAnmPage,
   ],
   imports: [
     BrowserModule,
@@ -88,6 +90,7 @@ firebase.initializeApp(firebaseCred);
     StudentsPage,
     StudentDetailsPage,
     AssignSchoolPage,
+    DelAnmPage,
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler}

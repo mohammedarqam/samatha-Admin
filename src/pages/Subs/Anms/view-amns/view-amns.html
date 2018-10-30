@@ -47,7 +47,9 @@
         </ion-row>
       </ion-navbar>
     </ion-grid>
-<!-- {{selArray | json}} -->
+
+    <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button>
+
     <ion-grid>
         <ion-card *ngFor="let a of anms;let i = index">
         <ion-card-content>

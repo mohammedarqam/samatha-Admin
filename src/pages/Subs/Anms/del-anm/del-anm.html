@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Delete ANMs</ion-title>
+    <ion-buttons end>
+      <button ion-button clear (click)="close()">Cancel</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-slides>
+    <ion-slide>
+
+
+  <ion-card >
+    <ion-card-content>
+
+      <ion-item *ngFor="let a of anms">
+          {{a.FirstName}}&nbsp;{{a.LastName}}
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+  <button ion-button color="danger"  (click)="deleteAnms()">Delete</button>
+
+</ion-slide>
+</ion-slides>
+
+</ion-content>
