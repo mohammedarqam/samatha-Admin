@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ModalController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ModalController, AlertController, MenuController } from 'ionic-angular';
 import * as firebase from 'firebase';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AddMandalsPage } from '../add-mandals/add-mandals';
@@ -16,34 +16,17 @@ export class ViewMandalsPage {
   area: Array<any> = [];
   areasLoaded: Array<any> = [];
 
-  // selArray : Array<any> = [];
-
 constructor(
   public navCtrl: NavController, 
   public db : AngularFireDatabase,
   public toastCtrl : ToastController,
   public alertCtrl: AlertController,
   public modalCtrl : ModalController,
+  public menuCtrl : MenuController,
   public navParams: NavParams
   ) {
     this.getAreas();
 }
-
-// addToArr(a){
-//   switch (a.Checked) {
-//     case true:  this.selArray.push(a.key);
-//       break;
-//     case false:  this.rmFrmArray(a.key);
-//       break;
-//   }
-
-// }
-
-// rmFrmArray(key){
-//   var ind = this.selArray.indexOf(key);
-//   this.selArray.splice(ind,1)
-// }
-
 
 getAreas(){
     this.areaRef.snapshotChanges().subscribe(snap=>{
@@ -56,6 +39,9 @@ getAreas(){
         })
         firebase.database().ref("SubsIndex/Mandals").child(snp.key).child("Villages").once("value",villageSnap=>{
           temp.Villages = villageSnap.numChildren();
+        })
+        firebase.database().ref("SubsIndex/Mandals").child(snp.key).child("Anms").once("value",anmSnap=>{
+          temp.Anms = anmSnap.numChildren();
         })
         tempArray.push(temp);
       })

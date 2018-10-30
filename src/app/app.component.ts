@@ -49,7 +49,7 @@ export class MyApp {
         firebase.database().ref("Admin Data").child("Admins").child(user.uid).once('value',itemSnap=>{
             if(itemSnap.exists()){
               var welMsg = "Welcome"+" "+itemSnap.val().Name;
-              this.rootPage = ViewAmnsPage;
+              this.rootPage = DashboardPage ;
               this.presentToast(welMsg);
             }else{
               firebase.auth().signOut().then(()=>{

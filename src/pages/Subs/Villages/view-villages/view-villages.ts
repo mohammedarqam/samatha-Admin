@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ModalController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ModalController, AlertController, MenuController } from 'ionic-angular';
 import * as firebase from 'firebase';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AddVillagesPage } from '../add-villages/add-villages';
@@ -27,7 +27,8 @@ export class ViewVillagesPage {
   public toastCtrl : ToastController,
   public alertCtrl: AlertController,
   public modalCtrl : ModalController,
-  public navParams: NavParams
+  public navParams: NavParams,
+  public menuCtrl : MenuController,
   ) {
     this.getAreas();
   }
@@ -40,6 +41,9 @@ export class ViewVillagesPage {
         temp.key = snp.key;
         firebase.database().ref("SubsIndex/Villages").child(snp.key).child("Schools").once("value",schoolsSnap=>{
           temp.Schools = schoolsSnap.numChildren();
+        })
+        firebase.database().ref("SubsIndex/Villages").child(snp.key).child("Anms").once("value",anmSnap=>{
+          temp.Anms = anmSnap.numChildren();
         })
         tempArray.push(temp);
       })
