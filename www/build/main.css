@@ -30665,6 +30665,10 @@ page-assign-school ion-select, page-assign-school ion-input {
   border-bottom: 1px solid #209E91;
 }
 
+page-edit-anm ion-select, page-edit-anm ion-input {
+  border-bottom: 1px solid #209E91;
+}
+
 page-view-amns .headBar {
   color: #fff;
   padding: 0 12px 0 12px;

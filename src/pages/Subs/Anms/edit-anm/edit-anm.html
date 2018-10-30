@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Edit ANM</ion-title>
+    <ion-buttons end>
+      <button ion-button clear icon-only (click)="close()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-slides>
+    <ion-slide>
+      <ion-card>
+        <ion-card-content>
+          <button ion-button (click)="oldANM()">Old Get</button>
+          <ion-item>
+            <ion-label floating>First Name</ion-label>
+            <ion-input type="text" [(ngModel)]="fName"  autofocus></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Last Name</ion-label>
+            <ion-input type="text" [(ngModel)]="lName"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Gender</ion-label>
+            <ion-select [(ngModel)]="gender">
+              <ion-option value="Male">Male</ion-option>
+              <ion-option value="Female">Female</ion-option>
+              <ion-option value="Other">Other</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Phone</ion-label>
+            <ion-input type="number" [(ngModel)]="phone"></ion-input>
+          </ion-item>
+          <button ion-button (click)="checkData()">Update</button>
+
+        </ion-card-content>
+      </ion-card>
+
+    </ion-slide>
+  </ion-slides>
+
+
+</ion-content>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import * as firebase from 'firebase';
 import { AssignSchoolPage } from '../assign-school/assign-school';
+import { EditAnmPage } from '../edit-anm/edit-anm';
 
 @IonicPage()
 @Component({
@@ -13,10 +14,16 @@ export class AnmDetailsPage {
   anmP = this.navParams.get("anm");
   constructor(
   public navCtrl: NavController, 
+  public modalCtrl : ModalController,
   public navParams: NavParams
   ) {
     console.log(this.anmP);
     
+  }
+
+  editAnmDetails(){
+    let editAnm = this.modalCtrl.create(EditAnmPage,{anm : this.anmP},{enableBackdropDismiss : false});
+    editAnm.present();
   }
 
   assignSchools(){

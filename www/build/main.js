@@ -1,4 +1,4 @@
-webpackJsonp([18],{
+webpackJsonp([19],{
 
 /***/ 103:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -13,7 +13,7 @@ webpackJsonp([18],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__anm_details_anm_details__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__del_anm_del_anm__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__del_anm_del_anm__ = __webpack_require__(176);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -111,7 +111,7 @@ var ViewAmnsPage = /** @class */ (function () {
     };
     ViewAmnsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-view-amns',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Anms\view-amns\view-amns.html"*/'<ion-header>\n    <ion-navbar color="primary">\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n    </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n    <ion-grid>\n      <ion-row>\n        <ion-col col-4 >\n    <ion-item no-lines class="content">\n    <h1 class="title" item-start>ANM</h1>\n    </ion-item>\n    </ion-col>\n    <ion-col col-6 push-2 >\n    <ion-searchbar item-end animated="true" placeholder="Search an ANM.." \n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n    </ion-col>\n    </ion-row>\n    </ion-grid>\n\n    <ion-grid>\n      <ion-navbar color="primary">\n        <ion-row>\n          <ion-col col-1>\n            <ion-checkbox ></ion-checkbox>\n          </ion-col>\n          <ion-col col-1>\n          </ion-col>\n          <ion-col col-2>\n            <p class="headBar">Name</p>\n          </ion-col>\n          <ion-col col-2>\n            <p class="headBar">Progress </p>\n          </ion-col>\n          <ion-col col-2>\n            <p class="headBar">Phone No.</p>\n          </ion-col>\n          <ion-col col-2>\n            <p class="headBar">Schools</p>\n          </ion-col>\n          <ion-col col-2>\n            <p class="headBar"></p>\n          </ion-col>\n        </ion-row>\n      </ion-navbar>\n    </ion-grid>\n\n    <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button>\n\n    <ion-grid>\n        <ion-card *ngFor="let a of anms;let i = index">\n        <ion-card-content>\n          <ion-row>\n            <ion-col col-1  >\n              <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)" ></ion-checkbox>  \n            </ion-col>\n            <ion-col col-1  >\n              <p ion-text><strong>{{i+1}}</strong></p>\n            </ion-col>\n            <ion-col col-2>\n              {{a.FirstName}}&nbsp;{{a.LastName}}\n            </ion-col>\n            <ion-col col-2 text-center >\n              <h1 ion-text color="primary">null </h1><br/>\n            </ion-col>\n            <ion-col col-2 text-center >\n              <h1 ion-text color="primary">{{a.Phone}} </h1><br/>\n            </ion-col>\n            <ion-col col-2 text-center >\n              <h1 ion-text color="primary">{{a.Schools}}</h1>\n              <button ion-button  clear>View</button>\n            </ion-col>\n            <ion-col col-2>\n            <button ion-button clear (click)="gtAnmDetails(a)">Details\n              <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n            </button>\n            </ion-col>\n\n\n\n          </ion-row>\n        </ion-card-content>\n        </ion-card>\n    </ion-grid>    \n\n\n    <ion-fab right bottom *ngIf="!selArray.length">\n      <button ion-fab color="primary" (click)="gtAddANM()" >\n        <ion-icon name="add"></ion-icon>\n      </button>\n    </ion-fab>\n\n    <ion-fab right bottom *ngIf="selArray.length">\n      <button ion-fab color="danger" (click)="delMulC()" >\n        <ion-icon name="md-trash"></ion-icon>\n      </button>\n    </ion-fab>\n    </ion-content>'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Anms\view-amns\view-amns.html"*/,
+            selector: 'page-view-amns',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\view-amns\view-amns.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-4 >\n\n    <ion-item no-lines class="content">\n\n    <h1 class="title" item-start>ANM</h1>\n\n    </ion-item>\n\n    </ion-col>\n\n    <ion-col col-6 push-2 >\n\n    <ion-searchbar item-end animated="true" placeholder="Search an ANM.." \n\n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n    </ion-col>\n\n    </ion-row>\n\n    </ion-grid>\n\n\n\n    <ion-grid>\n\n      <ion-navbar color="primary">\n\n        <ion-row>\n\n          <ion-col col-1>\n\n            <ion-checkbox ></ion-checkbox>\n\n          </ion-col>\n\n          <ion-col col-1>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Name</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Progress </p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Phone No.</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Schools</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar"></p>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-navbar>\n\n    </ion-grid>\n\n\n\n    <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button>\n\n\n\n    <ion-grid>\n\n        <ion-card *ngFor="let a of anms;let i = index">\n\n        <ion-card-content>\n\n          <ion-row>\n\n            <ion-col col-1  >\n\n              <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)" ></ion-checkbox>  \n\n            </ion-col>\n\n            <ion-col col-1  >\n\n              <p ion-text><strong>{{i+1}}</strong></p>\n\n            </ion-col>\n\n            <ion-col col-2>\n\n              {{a.FirstName}}&nbsp;{{a.LastName}}\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">null </h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Phone}} </h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Schools}}</h1>\n\n              <button ion-button  clear>View</button>\n\n            </ion-col>\n\n            <ion-col col-2>\n\n            <button ion-button clear (click)="gtAnmDetails(a)">Details\n\n              <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n\n            </button>\n\n            </ion-col>\n\n\n\n\n\n\n\n          </ion-row>\n\n        </ion-card-content>\n\n        </ion-card>\n\n    </ion-grid>    \n\n\n\n\n\n    <ion-fab right bottom *ngIf="!selArray.length">\n\n      <button ion-fab color="primary" (click)="gtAddANM()" >\n\n        <ion-icon name="add"></ion-icon>\n\n      </button>\n\n    </ion-fab>\n\n\n\n    <ion-fab right bottom *ngIf="selArray.length">\n\n      <button ion-fab color="danger" (click)="delMulC()" >\n\n        <ion-icon name="md-trash"></ion-icon>\n\n      </button>\n\n    </ion-fab>\n\n    </ion-content>'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\view-amns\view-amns.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
@@ -205,7 +205,7 @@ var VillageDetailsPage = /** @class */ (function () {
     };
     VillageDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-village-details',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Villages\village-details\village-details.html"*/'<ion-header>\n  <ion-navbar color="primary" >\n    <ion-title>{{village.Name}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-grid>\n    <ion-row>\n<ion-col col-6>\n  <ion-card>\n    <ion-navbar color="primary" (click)="toggleSchools()" class="curs" >\n      <ion-title>Schools</ion-title>\n      <ion-buttons end>\n      <button ion-button large clear>{{village.Schools}}</button>\n      <button ion-button clear icon-only  *ngIf="!showSchool" (click)="toggleSchools()">\n        <ion-icon name="ios-arrow-down"></ion-icon>\n      </button>\n      <button ion-button clear icon-only  *ngIf="showSchool" (click)="toggleSchools()">\n        <ion-icon name="ios-arrow-up"></ion-icon>\n      </button>\n      </ion-buttons>\n    </ion-navbar>\n\n    <ion-card-content *ngIf="showSchool" >\n      <ion-item *ngFor="let s of schools" >\n        <button item-start clear ion-button color="dark" large>{{s.Name}}</button>\n        <button ion-button item-end clear (click)="gtSchoolsDetails(s)" >Details</button>\n      </ion-item>\n    </ion-card-content>\n\n\n  </ion-card>\n</ion-col>\n</ion-row>\n\n\n\n<ion-row>\n<ion-col col-6>\n  <ion-card>\n    <ion-navbar color="primary" (click)="toggleAnms()" class="curs" >\n      <ion-title>Anms</ion-title>\n      <ion-buttons end>\n      <button ion-button large clear>{{village.Anms}}</button>\n      <button ion-button clear icon-only  *ngIf="!showAnms" (click)="toggleAnms()">\n        <ion-icon name="ios-arrow-down"></ion-icon>\n      </button>\n      <button ion-button clear icon-only  *ngIf="showAnms" (click)="toggleAnms()">\n        <ion-icon name="ios-arrow-up"></ion-icon>\n      </button>\n      </ion-buttons>\n    </ion-navbar>\n\n    <ion-card-content *ngIf="showAnms" >\n      <ion-item *ngFor="let a of anms" >\n        <button item-start clear ion-button color="dark" large>{{a.FirstName}}</button>\n        <button ion-button item-end clear (click)="gtAnmsDetails(a)" >Details</button>\n      </ion-item>\n    </ion-card-content>\n\n\n  </ion-card>\n</ion-col>\n</ion-row>\n\n\n\n\n\n\n\n  </ion-grid>\n</ion-content>\n'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Villages\village-details\village-details.html"*/,
+            selector: 'page-village-details',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Villages\village-details\village-details.html"*/'<ion-header>\n\n  <ion-navbar color="primary" >\n\n    <ion-title>{{village.Name}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid>\n\n    <ion-row>\n\n<ion-col col-6>\n\n  <ion-card>\n\n    <ion-navbar color="primary" (click)="toggleSchools()" class="curs" >\n\n      <ion-title>Schools</ion-title>\n\n      <ion-buttons end>\n\n      <button ion-button large clear>{{village.Schools}}</button>\n\n      <button ion-button clear icon-only  *ngIf="!showSchool" (click)="toggleSchools()">\n\n        <ion-icon name="ios-arrow-down"></ion-icon>\n\n      </button>\n\n      <button ion-button clear icon-only  *ngIf="showSchool" (click)="toggleSchools()">\n\n        <ion-icon name="ios-arrow-up"></ion-icon>\n\n      </button>\n\n      </ion-buttons>\n\n    </ion-navbar>\n\n\n\n    <ion-card-content *ngIf="showSchool" >\n\n      <ion-item *ngFor="let s of schools" >\n\n        <button item-start clear ion-button color="dark" large>{{s.Name}}</button>\n\n        <button ion-button item-end clear (click)="gtSchoolsDetails(s)" >Details</button>\n\n      </ion-item>\n\n    </ion-card-content>\n\n\n\n\n\n  </ion-card>\n\n</ion-col>\n\n</ion-row>\n\n\n\n\n\n\n\n<ion-row>\n\n<ion-col col-6>\n\n  <ion-card>\n\n    <ion-navbar color="primary" (click)="toggleAnms()" class="curs" >\n\n      <ion-title>Anms</ion-title>\n\n      <ion-buttons end>\n\n      <button ion-button large clear>{{village.Anms}}</button>\n\n      <button ion-button clear icon-only  *ngIf="!showAnms" (click)="toggleAnms()">\n\n        <ion-icon name="ios-arrow-down"></ion-icon>\n\n      </button>\n\n      <button ion-button clear icon-only  *ngIf="showAnms" (click)="toggleAnms()">\n\n        <ion-icon name="ios-arrow-up"></ion-icon>\n\n      </button>\n\n      </ion-buttons>\n\n    </ion-navbar>\n\n\n\n    <ion-card-content *ngIf="showAnms" >\n\n      <ion-item *ngFor="let a of anms" >\n\n        <button item-start clear ion-button color="dark" large>{{a.FirstName}}</button>\n\n        <button ion-button item-end clear (click)="gtAnmsDetails(a)" >Details</button>\n\n      </ion-item>\n\n    </ion-card-content>\n\n\n\n\n\n  </ion-card>\n\n</ion-col>\n\n</ion-row>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  </ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Villages\village-details\village-details.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
@@ -306,7 +306,7 @@ var DashboardPage = /** @class */ (function () {
     };
     DashboardPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Extra\dashboard\dashboard.html"*/'<ion-header>\n  <ion-navbar color="primary">\n  <ion-buttons end>\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <p ion-text color="whiter">{{adminName}} </p>\n  </ion-buttons>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n<ion-item no-lines class="content">\n<h1 class="title">DASHBOARD</h1>\n</ion-item>\n\n<ion-grid>\n<ion-row>\n\n<ion-col col-2>\n  <ion-card>\n    <ion-card-content>\n      <p class="mNum">{{mandals}}</p>\n      <p  class="mText">Mandals</p>\n    </ion-card-content>\n  </ion-card>\n</ion-col>\n\n<ion-col col-2>\n  <ion-card>\n    <ion-card-content>\n      <p class="mNum">{{villages}}</p>\n      <p  class="mText">Villages</p>\n    </ion-card-content>\n  </ion-card>\n</ion-col>\n\n<ion-col col-2>\n  <ion-card>\n    <ion-card-content>\n      <p class="mNum">{{schools}}</p>\n      <p  class="mText">Schools</p>\n    </ion-card-content>\n  </ion-card>\n</ion-col>\n\n<ion-col col-2>\n  <ion-card>\n    <ion-card-content>\n      <p class="mNum">{{anms}}</p>\n      <p  class="mText">ANMs</p>\n    </ion-card-content>\n  </ion-card>\n</ion-col>\n\n<ion-col col-2>\n  <ion-card>\n    <ion-card-content>\n      <p class="mNum">{{students}}</p>\n      <p  class="mText">Students</p>\n    </ion-card-content>\n  </ion-card>\n</ion-col>\n\n\n</ion-row>\n<ion-row>\n  <ion-col col-6>\n    <ion-card>\n      <ion-card-content>\n        <ion-card-title color="primary">Schools Status</ion-card-title>\n        <div style="display: block">\n          <canvas baseChart\n                      [data]="doughnutChartData"\n                      [labels]="doughnutChartLabels"\n                      [legend]="doughnutLegend"\n                      [chartType]="doughnutChartType"\n                      (chartHover)="chartHovered($event)"\n                      (chartClick)="chartClicked($event)"></canvas>\n        </div>\n      </ion-card-content>\n    </ion-card>\n  </ion-col>\n</ion-row>\n</ion-grid>\n</ion-content>\n'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Extra\dashboard\dashboard.html"*/,
+            selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Extra\dashboard\dashboard.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n  <ion-buttons end>\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <p ion-text color="whiter">{{adminName}} </p>\n\n  </ion-buttons>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n<ion-item no-lines class="content">\n\n<h1 class="title">DASHBOARD</h1>\n\n</ion-item>\n\n\n\n<ion-grid>\n\n<ion-row>\n\n\n\n<ion-col col-2>\n\n  <ion-card>\n\n    <ion-card-content>\n\n      <p class="mNum">{{mandals}}</p>\n\n      <p  class="mText">Mandals</p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n</ion-col>\n\n\n\n<ion-col col-2>\n\n  <ion-card>\n\n    <ion-card-content>\n\n      <p class="mNum">{{villages}}</p>\n\n      <p  class="mText">Villages</p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n</ion-col>\n\n\n\n<ion-col col-2>\n\n  <ion-card>\n\n    <ion-card-content>\n\n      <p class="mNum">{{schools}}</p>\n\n      <p  class="mText">Schools</p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n</ion-col>\n\n\n\n<ion-col col-2>\n\n  <ion-card>\n\n    <ion-card-content>\n\n      <p class="mNum">{{anms}}</p>\n\n      <p  class="mText">ANMs</p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n</ion-col>\n\n\n\n<ion-col col-2>\n\n  <ion-card>\n\n    <ion-card-content>\n\n      <p class="mNum">{{students}}</p>\n\n      <p  class="mText">Students</p>\n\n    </ion-card-content>\n\n  </ion-card>\n\n</ion-col>\n\n\n\n\n\n</ion-row>\n\n<ion-row>\n\n  <ion-col col-6>\n\n    <ion-card>\n\n      <ion-card-content>\n\n        <ion-card-title color="primary">Schools Status</ion-card-title>\n\n        <div style="display: block">\n\n          <canvas baseChart\n\n                      [data]="doughnutChartData"\n\n                      [labels]="doughnutChartLabels"\n\n                      [legend]="doughnutLegend"\n\n                      [chartType]="doughnutChartType"\n\n                      (chartHover)="chartHovered($event)"\n\n                      (chartClick)="chartClicked($event)"></canvas>\n\n        </div>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-col>\n\n</ion-row>\n\n</ion-grid>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Extra\dashboard\dashboard.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["AngularFireDatabase"],
@@ -395,7 +395,7 @@ var LoginPage = /** @class */ (function () {
     };
     LoginPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-login',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Extra\login\login.html"*/'<ion-content padding>\n  <div class="bg-main">\n  </div>\n\n  <ion-slides>\n    <ion-slide>\n      <ion-card>\n        <ion-card-content>\n          <h1 class="signinTitle">Sign In to Samatha Admin</h1>\n\n          <ion-item>\n            <ion-label color="whiter" fixed>Email</ion-label>\n            <ion-input type="email" (keyup.enter)="checkData()"  [(ngModel)]="email" autofocus ></ion-input>\n          </ion-item>\n          <ion-item>\n            <ion-label color="whiter" fixed>Password</ion-label>\n            <ion-input type="password" (keyup.enter)="checkData()"  [(ngModel)]="pass"></ion-input>\n          </ion-item>\n\n          <button ion-button color="primary"  (click)="checkData()">Login</button>\n        </ion-card-content>\n\n\n</ion-card>\n  </ion-slide>\n</ion-slides>\n</ion-content>\n\n\n'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Extra\login\login.html"*/,
+            selector: 'page-login',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Extra\login\login.html"*/'<ion-content padding>\n\n  <div class="bg-main">\n\n  </div>\n\n\n\n  <ion-slides>\n\n    <ion-slide>\n\n      <ion-card>\n\n        <ion-card-content>\n\n          <h1 class="signinTitle">Sign In to Samatha Admin</h1>\n\n\n\n          <ion-item>\n\n            <ion-label color="whiter" fixed>Email</ion-label>\n\n            <ion-input type="email" (keyup.enter)="checkData()"  [(ngModel)]="email" autofocus ></ion-input>\n\n          </ion-item>\n\n          <ion-item>\n\n            <ion-label color="whiter" fixed>Password</ion-label>\n\n            <ion-input type="password" (keyup.enter)="checkData()"  [(ngModel)]="pass"></ion-input>\n\n          </ion-item>\n\n\n\n          <button ion-button color="primary"  (click)="checkData()">Login</button>\n\n        </ion-card-content>\n\n\n\n\n\n</ion-card>\n\n  </ion-slide>\n\n</ion-slides>\n\n</ion-content>\n\n\n\n\n\n'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Extra\login\login.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */],
@@ -443,7 +443,7 @@ var StudentsPage = /** @class */ (function () {
     };
     StudentsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-students',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Students\students\students.html"*/'<!--\n  Generated template for the StudentsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>students</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Students\students\students.html"*/,
+            selector: 'page-students',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Students\students\students.html"*/'<!--\n\n  Generated template for the StudentsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>students</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Students\students\students.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
     ], StudentsPage);
@@ -554,7 +554,7 @@ var AddAmnsPage = /** @class */ (function () {
     };
     AddAmnsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-add-amns',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Anms\add-amns\add-amns.html"*/'<ion-header>\n  <ion-navbar color="primary" >\n    <ion-title>Add Amns</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n  {{samePasses}}\n  <ion-card class="mainCard" >\n  <ion-card-content>\n\n  <ion-item>\n    <ion-label floating>First Name</ion-label>\n    <ion-input type="text" autofocus [(ngModel)]="fName" ></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Last Name</ion-label>\n    <ion-input type="text" [(ngModel)]="lName" ></ion-input>\n  </ion-item>\n\n  <ion-item>\n  <ion-label floating>Gender</ion-label>\n  <ion-select [(ngModel)]="gender">\n    <ion-option value="Male">Male</ion-option>\n    <ion-option value="Female">Female</ion-option>\n    <ion-option value="Other">Other</ion-option>\n  </ion-select>\n</ion-item>\n\n  <ion-item>\n    <ion-label floating>Email</ion-label>\n    <ion-input type="text" [(ngModel)]="email"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Phone Number</ion-label>\n    <ion-input type="number" [(ngModel)]="phone"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Password</ion-label>\n    <ion-input type="text" (ionChange)="checkPasses()" [(ngModel)]="pass"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label floating>Confirm Password</ion-label>\n    <ion-input type="text" (ionChange)="checkPasses()" [(ngModel)]="cPass"></ion-input>\n  </ion-item>\n\n\n  <button ion-button round (click)="addAnm()">Add Anm</button>\n\n  \n  </ion-card-content>\n  </ion-card>\n</ion-content>\n'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Anms\add-amns\add-amns.html"*/,
+            selector: 'page-add-amns',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\add-amns\add-amns.html"*/'<ion-header>\n\n  <ion-navbar color="primary" >\n\n    <ion-title>Add Amns</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  {{samePasses}}\n\n  <ion-card class="mainCard" >\n\n  <ion-card-content>\n\n\n\n  <ion-item>\n\n    <ion-label floating>First Name</ion-label>\n\n    <ion-input type="text" autofocus [(ngModel)]="fName" ></ion-input>\n\n  </ion-item>\n\n\n\n  <ion-item>\n\n    <ion-label floating>Last Name</ion-label>\n\n    <ion-input type="text" [(ngModel)]="lName" ></ion-input>\n\n  </ion-item>\n\n\n\n  <ion-item>\n\n  <ion-label floating>Gender</ion-label>\n\n  <ion-select [(ngModel)]="gender">\n\n    <ion-option value="Male">Male</ion-option>\n\n    <ion-option value="Female">Female</ion-option>\n\n    <ion-option value="Other">Other</ion-option>\n\n  </ion-select>\n\n</ion-item>\n\n\n\n  <ion-item>\n\n    <ion-label floating>Email</ion-label>\n\n    <ion-input type="text" [(ngModel)]="email"></ion-input>\n\n  </ion-item>\n\n\n\n  <ion-item>\n\n    <ion-label floating>Phone Number</ion-label>\n\n    <ion-input type="number" [(ngModel)]="phone"></ion-input>\n\n  </ion-item>\n\n\n\n  <ion-item>\n\n    <ion-label floating>Password</ion-label>\n\n    <ion-input type="text" (ionChange)="checkPasses()" [(ngModel)]="pass"></ion-input>\n\n  </ion-item>\n\n\n\n  <ion-item>\n\n    <ion-label floating>Confirm Password</ion-label>\n\n    <ion-input type="text" (ionChange)="checkPasses()" [(ngModel)]="cPass"></ion-input>\n\n  </ion-item>\n\n\n\n\n\n  <button ion-button round (click)="addAnm()">Add Anm</button>\n\n\n\n  \n\n  </ion-card-content>\n\n  </ion-card>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\add-amns\add-amns.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
@@ -606,6 +606,9 @@ var AssignSchoolPage = /** @class */ (function () {
         this.schools = [];
         this.anmJobRef = this.db.list("Anm Assigns/" + this.anmJ.key);
         this.assignedJobs = [];
+        this.nVillD = false;
+        this.nSchlD = false;
+        console.log(this.nVillD);
         this.getAssignedSchools();
         this.getMandals();
     }
@@ -653,6 +656,7 @@ var AssignSchoolPage = /** @class */ (function () {
             content: 'Loading Villages ...'
         });
         loading.present();
+        this.nVillD = true;
         __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(this.mandalSel).child("Villages").once("value", function (snap) {
             _this.villages = [];
             snap.forEach(function (snp) {
@@ -661,9 +665,9 @@ var AssignSchoolPage = /** @class */ (function () {
                     temp.key = vil.key;
                     _this.villages.push(temp);
                 }).then(function () {
-                    loading.dismiss();
                 });
             });
+            loading.dismiss();
         });
     };
     AssignSchoolPage.prototype.getSchools = function () {
@@ -674,6 +678,12 @@ var AssignSchoolPage = /** @class */ (function () {
         loading.present();
         __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Villages").child(this.villageSel).child("Schools").once("value", function (snap) {
             _this.schools = [];
+            if (!snap.exists()) {
+                _this.nSchlD = true;
+            }
+            else {
+                _this.nSchlD = false;
+            }
             snap.forEach(function (snp) {
                 __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Schools").child(snp.key).once("value", function (vil) {
                     var temp = vil.val();
@@ -681,11 +691,12 @@ var AssignSchoolPage = /** @class */ (function () {
                     if (!temp.ANM) {
                         _this.schools.push(temp);
                     }
+                    else {
+                    }
                 }).then(function () {
-                    _this.schoolSel = null;
-                    loading.dismiss();
                 });
             });
+            loading.dismiss();
         });
     };
     AssignSchoolPage.prototype.clear = function () {
@@ -701,7 +712,7 @@ var AssignSchoolPage = /** @class */ (function () {
     };
     AssignSchoolPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-assign-school',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Anms\assign-school\assign-school.html"*/'<ion-header>\n  <ion-navbar color="primary" >\n    <ion-title>Schools Assignments</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n\n      <ion-grid>\n      <ion-row>\n        <ion-col col-4 >\n    <ion-item no-lines class="content">\n    <h1 class="title" item-start>{{anmJ.FirstName}}&nbsp;{{anmJ.LastName}}</h1>\n    </ion-item>\n    </ion-col>\n    </ion-row>\n    </ion-grid>\n\n\n      <ion-grid>\n        <ion-row>\n          <ion-col col-6>\n            <ion-card>\n              <ion-card-content>\n                <ion-card-title>Current Schools</ion-card-title>\n                <p *ngFor="let j of assignedJobs" >{{j.SchoolName}}</p>\n              </ion-card-content>\n            </ion-card>\n          </ion-col>\n          <ion-col col-6>\n      <ion-card>\n      <ion-card-content>\n\n        <ion-card-title>Assign School</ion-card-title>\n\n\n        <ion-item>\n          <ion-label floating>Select Mandal</ion-label>\n          <ion-select [(ngModel)]="mandalSel" (ionChange)="getVillages()" >\n            <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}} </ion-option>\n          </ion-select>\n        </ion-item>\n\n        <ion-item *ngIf="villages.length" >\n          <ion-label floating>Select Village</ion-label>\n          <ion-select [(ngModel)]="villageSel" (ionChange)="getSchools()" >\n            <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}} </ion-option>\n          </ion-select>\n        </ion-item>\n\n\n\n        <ion-item *ngIf="schools.length" >\n          <ion-label  floating>Select School</ion-label>\n          <ion-select [(ngModel)]="schoolSel">\n              <ion-option *ngFor="let s of schools" [value]="s">{{s.Name}} </ion-option>\n          </ion-select>\n        </ion-item>\n        \n        <button ion-button float-right (click)="assignSchool()">Assign</button>\n  \n      </ion-card-content>\n    </ion-card>\n  \n    </ion-col>\n  </ion-row>\n</ion-grid>\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Anms\assign-school\assign-school.html"*/,
+            selector: 'page-assign-school',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\assign-school\assign-school.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <ion-title>Schools Assignments</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-4>\n\n        <ion-item no-lines class="content">\n\n          <h1 class="title" item-start>{{anmJ.FirstName}}&nbsp;{{anmJ.LastName}}</h1>\n\n        </ion-item>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-card-title>Current Schools</ion-card-title>\n\n            <p *ngFor="let j of assignedJobs">{{j.SchoolName}}</p>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <ion-card>\n\n          <ion-card-content>\n\n\n\n            <ion-card-title>Assign School</ion-card-title>\n\n\n\n            <ion-item>\n\n              <ion-label floating>Select Mandal</ion-label>\n\n              <ion-select [(ngModel)]="mandalSel" (ionChange)="getVillages()">\n\n                <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}} </ion-option>\n\n              </ion-select>\n\n            </ion-item>\n\n            <ion-item *ngIf="nVillD">\n\n              <p ion-text color="danger"> No Villages Found</p>\n\n            </ion-item>\n\n            <ion-item *ngIf="villages.length">\n\n              <ion-label floating>Select Village</ion-label>\n\n              <ion-select [(ngModel)]="villageSel" (ionChange)="getSchools()">\n\n                <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}} </ion-option>\n\n              </ion-select>\n\n            </ion-item>\n\n\n\n\n\n            <ion-item *ngIf="nSchlD && !schools.length">\n\n              <p ion-text color="danger"> No Schools Found</p>\n\n            </ion-item>\n\n            <ion-item *ngIf="schools.length">\n\n              <ion-label floating>Select School</ion-label>\n\n              <ion-select [(ngModel)]="schoolSel">\n\n                <ion-option *ngFor="let s of schools" [value]="s">{{s.Name}} </ion-option>\n\n              </ion-select>\n\n            </ion-item>\n\n\n\n            <button ion-button *ngIf="schoolSel" float-right (click)="assignSchool()">Assign</button>\n\n\n\n          </ion-card-content>\n\n        </ion-card>\n\n\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\assign-school\assign-school.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */],
@@ -717,6 +728,100 @@ var AssignSchoolPage = /** @class */ (function () {
 /***/ }),
 
 /***/ 175:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditAnmPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var EditAnmPage = /** @class */ (function () {
+    function EditAnmPage(navCtrl, viewCtrl, toastCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.viewCtrl = viewCtrl;
+        this.toastCtrl = toastCtrl;
+        this.navParams = navParams;
+        this.anm = this.navParams.get("anm");
+        this.fName = this.anm.FirstName;
+        this.lName = this.anm.LastName;
+        this.gender = this.anm.Gender;
+        this.phone = this.anm.Phone;
+        console.log(this.anm);
+    }
+    EditAnmPage.prototype.checkData = function () {
+        if (this.fName) {
+            if (this.lName) {
+                if (this.gender) {
+                    if (this.phone.length != 10) {
+                        this.updateANM();
+                    }
+                    else
+                        (this.presentToast("Phone Empty not Valid"));
+                }
+                else
+                    (this.presentToast("Select Gender"));
+            }
+            else {
+                this.presentToast("Last Name Empty");
+            }
+        }
+        else {
+            this.presentToast("First Name Empty");
+        }
+    };
+    EditAnmPage.prototype.updateANM = function () {
+        if (this.fName != this.anm.FirstName) {
+            console.log("changeFName");
+        }
+        if (this.lName != this.anm.LastName) {
+            console.log("changeLName");
+        }
+        if (this.gender != this.anm.Gender) {
+            console.log("cahnge Gender");
+        }
+        if (this.phone != this.anm.Phone) {
+            console.log("ChangePhone");
+        }
+    };
+    EditAnmPage.prototype.oldANM = function () {
+        console.log(this.anm);
+    };
+    EditAnmPage.prototype.close = function () {
+        this.viewCtrl.dismiss();
+    };
+    EditAnmPage.prototype.presentToast = function (msg) {
+        var toast = this.toastCtrl.create({
+            message: msg,
+            duration: 4000,
+            position: "bottom"
+        });
+        toast.present();
+    };
+    EditAnmPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-edit-anm',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\edit-anm\edit-anm.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>Edit ANM</ion-title>\n    <ion-buttons end>\n      <button ion-button clear icon-only (click)="close()">\n        <ion-icon name="md-close"></ion-icon>\n      </button>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n<ion-content padding>\n  <ion-slides>\n    <ion-slide>\n      <ion-card>\n        <ion-card-content>\n          <button ion-button (click)="oldANM()">Old Get</button>\n          <ion-item>\n            <ion-label floating>First Name</ion-label>\n            <ion-input type="text" [(ngModel)]="fName"  autofocus></ion-input>\n          </ion-item>\n          <ion-item>\n            <ion-label floating>Last Name</ion-label>\n            <ion-input type="text" [(ngModel)]="lName"></ion-input>\n          </ion-item>\n          <ion-item>\n            <ion-label floating>Gender</ion-label>\n            <ion-select [(ngModel)]="gender">\n              <ion-option value="Male">Male</ion-option>\n              <ion-option value="Female">Female</ion-option>\n              <ion-option value="Other">Other</ion-option>\n            </ion-select>\n          </ion-item>\n          <ion-item>\n            <ion-label floating>Phone</ion-label>\n            <ion-input type="number" [(ngModel)]="phone"></ion-input>\n          </ion-item>\n          <button ion-button (click)="checkData()">Update</button>\n\n        </ion-card-content>\n      </ion-card>\n\n    </ion-slide>\n  </ion-slides>\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\edit-anm\edit-anm.html"*/,
+        }),
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]) === "function" && _d || Object])
+    ], EditAnmPage);
+    return EditAnmPage;
+    var _a, _b, _c, _d;
+}());
+
+//# sourceMappingURL=edit-anm.js.map
+
+/***/ }),
+
+/***/ 176:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -784,7 +889,7 @@ var DelAnmPage = /** @class */ (function () {
     };
     DelAnmPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-del-anm',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Anms\del-anm\del-anm.html"*/'<ion-header>\n  <ion-navbar color="primary">\n    <ion-title>Delete ANMs</ion-title>\n    <ion-buttons end>\n      <button ion-button clear (click)="close()">Cancel</button>\n    </ion-buttons>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n  <ion-slides>\n    <ion-slide>\n\n\n  <ion-card >\n    <ion-card-content>\n\n      <ion-item *ngFor="let a of anms">\n          {{a.FirstName}}&nbsp;{{a.LastName}}\n      </ion-item>\n\n    </ion-card-content>\n  </ion-card>\n  <button ion-button color="danger"  (click)="deleteAnms()">Delete</button>\n\n</ion-slide>\n</ion-slides>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Anms\del-anm\del-anm.html"*/,
+            selector: 'page-del-anm',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\del-anm\del-anm.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <ion-title>Delete ANMs</ion-title>\n\n    <ion-buttons end>\n\n      <button ion-button clear (click)="close()">Cancel</button>\n\n    </ion-buttons>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-slides>\n\n    <ion-slide>\n\n\n\n\n\n  <ion-card >\n\n    <ion-card-content>\n\n\n\n      <ion-item *ngFor="let a of anms">\n\n          {{a.FirstName}}&nbsp;{{a.LastName}}\n\n      </ion-item>\n\n\n\n    </ion-card-content>\n\n  </ion-card>\n\n  <button ion-button color="danger"  (click)="deleteAnms()">Delete</button>\n\n\n\n</ion-slide>\n\n</ion-slides>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\del-anm\del-anm.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */],
@@ -799,7 +904,7 @@ var DelAnmPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 176:
+/***/ 177:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -889,7 +994,7 @@ var AddMandalsPage = /** @class */ (function () {
     };
     AddMandalsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-add-mandals',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Mandals\add-mandals\add-mandals.html"*/'<ion-header>\n    <ion-navbar color="primary" >\n      <ion-title>Add Mandal</ion-title>\n      <ion-buttons end>\n        <button ion-button clear icon-only (click)="close()">\n          <ion-icon name="md-close"></ion-icon>\n        </button>\n      </ion-buttons>\n    </ion-navbar>\n  \n  </ion-header>\n  \n  \n  <ion-content padding>\n  \n    <ion-card>\n      <ion-card-content>\n\n        <ion-item>\n          <ion-label  floating>Mandal Name</ion-label>\n          <ion-input type="text" [(ngModel)]="name" (keyup.enter)="checkData()" (ionChange)="capsName(name)" autofocus ></ion-input>\n        </ion-item>\n        \n  \n      </ion-card-content>\n    </ion-card>\n  \n    <button ion-button block (click)="checkData()">Add</button>\n  \n  \n  </ion-content>\n  '/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Mandals\add-mandals\add-mandals.html"*/,
+            selector: 'page-add-mandals',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Mandals\add-mandals\add-mandals.html"*/'<ion-header>\n\n    <ion-navbar color="primary" >\n\n      <ion-title>Add Mandal</ion-title>\n\n      <ion-buttons end>\n\n        <button ion-button clear icon-only (click)="close()">\n\n          <ion-icon name="md-close"></ion-icon>\n\n        </button>\n\n      </ion-buttons>\n\n    </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content padding>\n\n  \n\n    <ion-card>\n\n      <ion-card-content>\n\n\n\n        <ion-item>\n\n          <ion-label  floating>Mandal Name</ion-label>\n\n          <ion-input type="text" [(ngModel)]="name" (keyup.enter)="checkData()" (ionChange)="capsName(name)" autofocus ></ion-input>\n\n        </ion-item>\n\n        \n\n  \n\n      </ion-card-content>\n\n    </ion-card>\n\n  \n\n    <button ion-button block (click)="checkData()">Add</button>\n\n  \n\n  \n\n  </ion-content>\n\n  '/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Mandals\add-mandals\add-mandals.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */],
@@ -904,7 +1009,7 @@ var AddMandalsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 177:
+/***/ 178:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1029,19 +1134,20 @@ var MandalDetailsPage = /** @class */ (function () {
     };
     MandalDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-mandal-details',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Mandals\mandal-details\mandal-details.html"*/'<ion-header>\n  <ion-navbar color="primary" >\n    <ion-title>{{mandal.Name}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n\n  <ion-grid>\n\n\n  <ion-row>\n  <ion-col col-6>\n  <ion-card>\n    <ion-navbar color="primary" (click)="toggleVillages()" class="curs" >\n      <ion-title>Villages</ion-title>\n      <ion-buttons end>\n      <button ion-button large clear>{{mandal.Villages}}</button>\n      <button ion-button clear icon-only  *ngIf="!showVillage" (click)="toggleVillages()">\n        <ion-icon name="ios-arrow-down"></ion-icon>\n      </button>\n      <button ion-button clear icon-only  *ngIf="showVillage" (click)="toggleVillages()">\n        <ion-icon name="ios-arrow-up"></ion-icon>\n      </button>\n      </ion-buttons>\n    </ion-navbar>\n\n    <ion-card-content *ngIf="showVillage" >\n      <ion-item *ngFor="let v of villages" >\n        <button item-start clear ion-button color="dark" large>{{v.Name}}</button>\n        <button ion-button item-end clear (click)="gtVillageDetails(v)" >Details</button>\n      </ion-item>\n    </ion-card-content>\n  </ion-card>\n  </ion-col>\n  <ion-col col-6>\n    <ion-card>\n      <ion-card-content>\n        <ion-card-title color="primary">Mandal Level Schools Status</ion-card-title>\n        <div style="display: block">\n          <canvas baseChart\n                      [data]="doughnutChartData"\n                      [labels]="doughnutChartLabels"\n                      [legend]="doughnutLegend"\n                      [chartType]="doughnutChartType"\n                      (chartHover)="chartHovered($event)"\n                      (chartClick)="chartClicked($event)"></canvas>\n        </div>\n      </ion-card-content>\n    </ion-card>\n  </ion-col>\n</ion-row>\n\n\n\n\n\n\n<ion-row>\n<ion-col col-6>\n  <ion-card>\n    <ion-navbar color="primary" (click)="toggleSchools()" class="curs" >\n      <ion-title>Schools</ion-title>\n      <ion-buttons end>\n      <button ion-button large clear>{{mandal.Schools}}</button>\n      <button ion-button clear icon-only  *ngIf="!showSchool" (click)="toggleSchools()">\n        <ion-icon name="ios-arrow-down"></ion-icon>\n      </button>\n      <button ion-button clear icon-only  *ngIf="showSchool" (click)="toggleSchools()">\n        <ion-icon name="ios-arrow-up"></ion-icon>\n      </button>\n      </ion-buttons>\n    </ion-navbar>\n\n    <ion-card-content *ngIf="showSchool" >\n      <ion-item *ngFor="let s of schools" >\n        <button item-start clear ion-button color="dark" large>{{s.Name}}</button>\n        <button ion-button item-end clear (click)="gtSchoolsDetails(s)" >Details</button>\n      </ion-item>\n    </ion-card-content>\n\n\n\n  </ion-card>\n</ion-col>\n</ion-row>\n\n\n<ion-row>\n  <ion-col col-6>\n    <ion-card>\n      <ion-navbar color="primary" (click)="toggleAnms()" class="curs" >\n        <ion-title>ANMs</ion-title>\n        <ion-buttons end>\n        <button ion-button large clear>{{mandal.Anms}}</button>\n        <button ion-button clear icon-only  *ngIf="!showanms" (click)="toggleAnms()">\n          <ion-icon name="ios-arrow-down"></ion-icon>\n        </button>\n        <button ion-button clear icon-only  *ngIf="showanms" (click)="toggleAnms()">\n          <ion-icon name="ios-arrow-up"></ion-icon>\n        </button>\n        </ion-buttons>\n      </ion-navbar>\n  \n      <ion-card-content *ngIf="showanms" >\n        <ion-item *ngFor="let a of anms" >\n          <button item-start clear ion-button color="dark" large>{{a.FirstName}}</button>\n          <button ion-button item-end clear (click)="gtAnmDetails(a)" >Details</button>\n        </ion-item>\n      </ion-card-content>\n  </ion-card>\n  </ion-col>\n  </ion-row>\n\n\n\n  </ion-grid>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Mandals\mandal-details\mandal-details.html"*/,
+            selector: 'page-mandal-details',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Mandals\mandal-details\mandal-details.html"*/'<ion-header>\n\n  <ion-navbar color="primary" >\n\n    <ion-title>{{mandal.Name}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid>\n\n\n\n\n\n  <ion-row>\n\n  <ion-col col-6>\n\n  <ion-card>\n\n    <ion-navbar color="primary" (click)="toggleVillages()" class="curs" >\n\n      <ion-title>Villages</ion-title>\n\n      <ion-buttons end>\n\n      <button ion-button large clear>{{mandal.Villages}}</button>\n\n      <button ion-button clear icon-only  *ngIf="!showVillage" (click)="toggleVillages()">\n\n        <ion-icon name="ios-arrow-down"></ion-icon>\n\n      </button>\n\n      <button ion-button clear icon-only  *ngIf="showVillage" (click)="toggleVillages()">\n\n        <ion-icon name="ios-arrow-up"></ion-icon>\n\n      </button>\n\n      </ion-buttons>\n\n    </ion-navbar>\n\n\n\n    <ion-card-content *ngIf="showVillage" >\n\n      <ion-item *ngFor="let v of villages" >\n\n        <button item-start clear ion-button color="dark" large>{{v.Name}}</button>\n\n        <button ion-button item-end clear (click)="gtVillageDetails(v)" >Details</button>\n\n      </ion-item>\n\n    </ion-card-content>\n\n  </ion-card>\n\n  </ion-col>\n\n  <ion-col col-6>\n\n    <ion-card>\n\n      <ion-card-content>\n\n        <ion-card-title color="primary">Mandal Level Schools Status</ion-card-title>\n\n        <div style="display: block">\n\n          <canvas baseChart\n\n                      [data]="doughnutChartData"\n\n                      [labels]="doughnutChartLabels"\n\n                      [legend]="doughnutLegend"\n\n                      [chartType]="doughnutChartType"\n\n                      (chartHover)="chartHovered($event)"\n\n                      (chartClick)="chartClicked($event)"></canvas>\n\n        </div>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-col>\n\n</ion-row>\n\n\n\n\n\n\n\n\n\n\n\n\n\n<ion-row>\n\n<ion-col col-6>\n\n  <ion-card>\n\n    <ion-navbar color="primary" (click)="toggleSchools()" class="curs" >\n\n      <ion-title>Schools</ion-title>\n\n      <ion-buttons end>\n\n      <button ion-button large clear>{{mandal.Schools}}</button>\n\n      <button ion-button clear icon-only  *ngIf="!showSchool" (click)="toggleSchools()">\n\n        <ion-icon name="ios-arrow-down"></ion-icon>\n\n      </button>\n\n      <button ion-button clear icon-only  *ngIf="showSchool" (click)="toggleSchools()">\n\n        <ion-icon name="ios-arrow-up"></ion-icon>\n\n      </button>\n\n      </ion-buttons>\n\n    </ion-navbar>\n\n\n\n    <ion-card-content *ngIf="showSchool" >\n\n      <ion-item *ngFor="let s of schools" >\n\n        <button item-start clear ion-button color="dark" large>{{s.Name}}</button>\n\n        <button ion-button item-end clear (click)="gtSchoolsDetails(s)" >Details</button>\n\n      </ion-item>\n\n    </ion-card-content>\n\n\n\n\n\n\n\n  </ion-card>\n\n</ion-col>\n\n</ion-row>\n\n\n\n\n\n<ion-row>\n\n  <ion-col col-6>\n\n    <ion-card>\n\n      <ion-navbar color="primary" (click)="toggleAnms()" class="curs" >\n\n        <ion-title>ANMs</ion-title>\n\n        <ion-buttons end>\n\n        <button ion-button large clear>{{mandal.Anms}}</button>\n\n        <button ion-button clear icon-only  *ngIf="!showanms" (click)="toggleAnms()">\n\n          <ion-icon name="ios-arrow-down"></ion-icon>\n\n        </button>\n\n        <button ion-button clear icon-only  *ngIf="showanms" (click)="toggleAnms()">\n\n          <ion-icon name="ios-arrow-up"></ion-icon>\n\n        </button>\n\n        </ion-buttons>\n\n      </ion-navbar>\n\n  \n\n      <ion-card-content *ngIf="showanms" >\n\n        <ion-item *ngFor="let a of anms" >\n\n          <button item-start clear ion-button color="dark" large>{{a.FirstName}}</button>\n\n          <button ion-button item-end clear (click)="gtAnmDetails(a)" >Details</button>\n\n        </ion-item>\n\n      </ion-card-content>\n\n  </ion-card>\n\n  </ion-col>\n\n  </ion-row>\n\n\n\n\n\n\n\n  </ion-grid>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Mandals\mandal-details\mandal-details.html"*/,
         }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]) === "function" && _c || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
     ], MandalDetailsPage);
     return MandalDetailsPage;
-    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=mandal-details.js.map
 
 /***/ }),
 
-/***/ 178:
+/***/ 179:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1051,8 +1157,8 @@ var MandalDetailsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_mandals_add_mandals__ = __webpack_require__(176);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mandal_details_mandal_details__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_mandals_add_mandals__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mandal_details_mandal_details__ = __webpack_require__(178);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1131,7 +1237,7 @@ var ViewMandalsPage = /** @class */ (function () {
     };
     ViewMandalsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-view-mandals',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Mandals\view-mandals\view-mandals.html"*/'<ion-header>\n    <ion-navbar color="primary">\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n    </ion-navbar>\n  </ion-header>\n  \n  <ion-content padding>\n    <ion-grid>\n      <ion-row>\n        <ion-col col-4 >\n    <ion-item no-lines class="content">\n    <h1 class="title" item-start>Mandals</h1>\n    </ion-item>\n    </ion-col>\n    <ion-col col-6 push-2 >\n    <ion-searchbar item-end animated="true" placeholder="Search a Mandal" \n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n    </ion-col>\n    </ion-row>\n    </ion-grid>\n  \n    <ion-grid>\n      <ion-navbar color="primary">\n        <ion-row>\n          <ion-col col-1>\n          </ion-col>\n          <ion-col col-3>\n            <p class="headBar">Mandal</p>\n          </ion-col>\n          <ion-col col-1>\n            <p class="headBar">Villages</p>\n          </ion-col>\n          <ion-col col-1>\n            <p class="headBar">Schools</p>\n          </ion-col>\n          <ion-col col-1>\n            <p class="headBar">ANMs</p>\n          </ion-col>\n          <ion-col col-1>\n            <p class="headBar">Students</p>\n          </ion-col>\n          <ion-col col-2>\n            <p class="headBar"></p>\n          </ion-col>\n        </ion-row>\n      </ion-navbar>\n    </ion-grid>\n\n\n    <ion-grid>\n        <ion-card *ngFor="let a of area;let i = index">\n        <ion-card-content>\n          <ion-row>\n            <ion-col col-1  >\n              <p ion-text><strong>{{i+1}}</strong></p>\n            </ion-col>\n            <ion-col col-3>\n              {{a.Name}}\n            </ion-col>\n            <ion-col col-1 text-center >\n              <h1 ion-text color="primary">{{a.Villages}}</h1><br/>\n            </ion-col>\n            <ion-col col-1 text-center >\n              <h1 ion-text color="primary">{{a.Schools}}</h1><br/>\n            </ion-col>\n            <ion-col col-1 text-center >\n              <h1 ion-text color="primary">{{a.Anms}}</h1><br/>\n            </ion-col>\n            <ion-col col-1 text-center >\n              <h1 ion-text color="primary">{{a.Students}}0</h1><br/>\n            </ion-col>\n            <ion-col col-2 text-center >\n              <button ion-button clear (click)="gtMandalDetails(a)">Details\n                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n              </button>\n            </ion-col>\n          </ion-row>\n        </ion-card-content>\n      </ion-card>\n    </ion-grid>\n\n\n\n  \n  \n  \n  \n    <ion-fab right bottom>\n      <button ion-fab color="danger" (click)="gtAddArea()" >\n        <ion-icon name="add"></ion-icon>\n      </button>\n    </ion-fab>\n    </ion-content>'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Mandals\view-mandals\view-mandals.html"*/,
+            selector: 'page-view-mandals',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Mandals\view-mandals\view-mandals.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  <ion-content padding>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-4 >\n\n    <ion-item no-lines class="content">\n\n    <h1 class="title" item-start>Mandals</h1>\n\n    </ion-item>\n\n    </ion-col>\n\n    <ion-col col-6 push-2 >\n\n    <ion-searchbar item-end animated="true" placeholder="Search a Mandal" \n\n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n    </ion-col>\n\n    </ion-row>\n\n    </ion-grid>\n\n  \n\n    <ion-grid>\n\n      <ion-navbar color="primary">\n\n        <ion-row>\n\n          <ion-col col-1>\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            <p class="headBar">Mandal</p>\n\n          </ion-col>\n\n          <ion-col col-1>\n\n            <p class="headBar">Villages</p>\n\n          </ion-col>\n\n          <ion-col col-1>\n\n            <p class="headBar">Schools</p>\n\n          </ion-col>\n\n          <ion-col col-1>\n\n            <p class="headBar">ANMs</p>\n\n          </ion-col>\n\n          <ion-col col-1>\n\n            <p class="headBar">Students</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar"></p>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-navbar>\n\n    </ion-grid>\n\n\n\n\n\n    <ion-grid>\n\n        <ion-card *ngFor="let a of area;let i = index">\n\n        <ion-card-content>\n\n          <ion-row>\n\n            <ion-col col-1  >\n\n              <p ion-text><strong>{{i+1}}</strong></p>\n\n            </ion-col>\n\n            <ion-col col-3>\n\n              {{a.Name}}\n\n            </ion-col>\n\n            <ion-col col-1 text-center >\n\n              <h1 ion-text color="primary">{{a.Villages}}</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-1 text-center >\n\n              <h1 ion-text color="primary">{{a.Schools}}</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-1 text-center >\n\n              <h1 ion-text color="primary">{{a.Anms}}</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-1 text-center >\n\n              <h1 ion-text color="primary">{{a.Students}}0</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <button ion-button clear (click)="gtMandalDetails(a)">Details\n\n                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n\n              </button>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-card-content>\n\n      </ion-card>\n\n    </ion-grid>\n\n\n\n\n\n\n\n  \n\n  \n\n  \n\n  \n\n    <ion-fab right bottom>\n\n      <button ion-fab color="danger" (click)="gtAddArea()" >\n\n        <ion-icon name="add"></ion-icon>\n\n      </button>\n\n    </ion-fab>\n\n    </ion-content>'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Mandals\view-mandals\view-mandals.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__["AngularFireDatabase"],
@@ -1148,7 +1254,7 @@ var ViewMandalsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 179:
+/***/ 180:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1292,7 +1398,7 @@ var AddSchoolsPage = /** @class */ (function () {
     };
     AddSchoolsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-add-schools',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Schools\add-schools\add-schools.html"*/'<ion-header>\n    <ion-navbar color="primary" >\n      <ion-title>Add Village</ion-title>\n      <ion-buttons end>\n        <button ion-button clear icon-only (click)="close()">\n          <ion-icon name="md-close"></ion-icon>\n        </button>\n      </ion-buttons>\n    </ion-navbar>\n  \n  </ion-header>\n  \n  \n  <ion-content padding>\n  \n    <ion-card>\n      <ion-card-content>\n\n\n\n        <ion-item>\n          <ion-label floating>Select Mandal</ion-label>\n          <ion-select [(ngModel)]="mandalSel" (ionChange)="getVillages()" >\n            <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}} </ion-option>\n          </ion-select>\n        </ion-item>\n\n        <ion-item *ngIf="villages.length" >\n          <ion-label floating>Select Village</ion-label>\n          <ion-select [(ngModel)]="villageSel">\n            <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}} </ion-option>\n          </ion-select>\n        </ion-item>\n\n\n\n        <ion-item *ngIf="villageSel" >\n          <ion-label  floating>School Name</ion-label>\n          <ion-input type="text" [(ngModel)]="name"  (ionChange)="capsName(name)" autofocus ></ion-input>\n        </ion-item>\n        \n        <ion-item *ngIf="name.length" >\n          <ion-label  floating>School Total Strength</ion-label>\n          <ion-input type="number" [(ngModel)]="str" (keyup.enter)="checkData()"  ></ion-input>\n        </ion-item>\n  \n      </ion-card-content>\n    </ion-card>\n  \n    <button ion-button *ngIf="name" block (click)="checkData()">Add</button>\n  \n  \n  </ion-content>\n  '/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Schools\add-schools\add-schools.html"*/,
+            selector: 'page-add-schools',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Schools\add-schools\add-schools.html"*/'<ion-header>\n\n    <ion-navbar color="primary" >\n\n      <ion-title>Add School</ion-title>\n\n      <ion-buttons end>\n\n        <button ion-button clear icon-only (click)="close()">\n\n          <ion-icon name="md-close"></ion-icon>\n\n        </button>\n\n      </ion-buttons>\n\n    </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content padding>\n\n  \n\n    <ion-card>\n\n      <ion-card-content>\n\n\n\n\n\n\n\n        <ion-item>\n\n          <ion-label floating>Select Mandal</ion-label>\n\n          <ion-select [(ngModel)]="mandalSel" (ionChange)="getVillages()" >\n\n            <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}} </ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n\n\n        <ion-item *ngIf="villages.length" >\n\n          <ion-label floating>Select Village</ion-label>\n\n          <ion-select [(ngModel)]="villageSel">\n\n            <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}} </ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n\n\n\n\n\n\n        <ion-item *ngIf="villageSel" >\n\n          <ion-label  floating>School Name</ion-label>\n\n          <ion-input type="text" [(ngModel)]="name"  (ionChange)="capsName(name)" autofocus ></ion-input>\n\n        </ion-item>\n\n        \n\n        <ion-item *ngIf="name.length" >\n\n          <ion-label  floating>School Total Strength</ion-label>\n\n          <ion-input type="number" [(ngModel)]="str" (keyup.enter)="checkData()"  ></ion-input>\n\n        </ion-item>\n\n  \n\n      </ion-card-content>\n\n    </ion-card>\n\n  \n\n    <button ion-button *ngIf="name" block (click)="checkData()">Add</button>\n\n  \n\n  \n\n  </ion-content>\n\n  '/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Schools\add-schools\add-schools.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */],
@@ -1308,7 +1414,7 @@ var AddSchoolsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 180:
+/***/ 181:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1318,7 +1424,7 @@ var AddSchoolsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_schools_add_schools__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_schools_add_schools__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__school_details_school_details__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Anms_anm_details_anm_details__ = __webpack_require__(60);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1402,7 +1508,7 @@ var ViewSchoolsPage = /** @class */ (function () {
     };
     ViewSchoolsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-view-schools',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Schools\view-schools\view-schools.html"*/'<ion-header>\n    <ion-navbar color="primary">\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n    </ion-navbar>\n  </ion-header>\n  \n  <ion-content padding>\n    <ion-grid>\n      <ion-row>\n        <ion-col col-4 >\n    <ion-item no-lines class="content">\n    <h1 class="title" item-start>Schools</h1>\n    </ion-item>\n    </ion-col>\n    <ion-col col-6 push-2 >\n    <ion-searchbar item-end animated="true" placeholder="Search a School ..." \n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n    </ion-col>\n    </ion-row>\n    </ion-grid>\n  \n      \n    <ion-grid>\n      <ion-navbar color="primary">\n        <ion-row>\n          <ion-col col-1>\n          </ion-col>\n          <ion-col col-3>\n            <p class="headBar">Schools</p>\n          </ion-col>\n          <ion-col col-2>\n            <p class="headBar">Progress %</p>\n          </ion-col>\n          <ion-col col-2>\n            <p class="headBar">Total Students</p>\n          </ion-col>\n          <ion-col col-2>\n            <p class="headBar">ANM</p>\n          </ion-col>\n          <ion-col col-2>\n            <p class="headBar"></p>\n          </ion-col>\n        </ion-row>\n      </ion-navbar>\n    </ion-grid>\n\n\n    <ion-grid>\n        <ion-card *ngFor="let a of area;let i = index">\n        <ion-card-content>\n          <ion-row>\n            <ion-col col-1  >\n              <p ion-text><strong>{{i+1}}</strong></p>\n            </ion-col>\n            <ion-col col-3>\n              {{a.Name}}\n            </ion-col>\n            <ion-col col-2 text-center >\n              <h1 ion-text color="primary">0%</h1><br/>\n            </ion-col>\n            <ion-col col-2 text-center >\n              <h1 ion-text color="primary">{{a.Strength}}</h1><br/>\n            </ion-col>\n\n            <ion-col col-2 text-center *ngIf="a.ANM" >\n              <button ion-button (click)="gtAnmDetails(a.AnmO)"> {{a.AnmName}} </button>\n            </ion-col>\n            \n            <ion-col col-2 text-center *ngIf="!a.ANM" >\n              <h1 ion-text color="primary">No ANM</h1><br/>\n            </ion-col>\n            \n            <ion-col col-2 text-center >\n              <button ion-button clear (click)="gtSchoolDetails(a)">Details\n                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n              </button>\n            </ion-col>\n          </ion-row>\n        </ion-card-content>\n      </ion-card>\n    </ion-grid>\n\n\n  \n  \n    <ion-fab right bottom>\n      <button ion-fab color="danger" (click)="gtAddArea()" >\n        <ion-icon name="add"></ion-icon>\n      </button>\n    </ion-fab>\n    </ion-content>'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Schools\view-schools\view-schools.html"*/,
+            selector: 'page-view-schools',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Schools\view-schools\view-schools.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  <ion-content padding>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-4 >\n\n    <ion-item no-lines class="content">\n\n    <h1 class="title" item-start>Schools</h1>\n\n    </ion-item>\n\n    </ion-col>\n\n    <ion-col col-6 push-2 >\n\n    <ion-searchbar item-end animated="true" placeholder="Search a School ..." \n\n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n    </ion-col>\n\n    </ion-row>\n\n    </ion-grid>\n\n  \n\n      \n\n    <ion-grid>\n\n      <ion-navbar color="primary">\n\n        <ion-row>\n\n          <ion-col col-1>\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            <p class="headBar">Schools</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Progress %</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Total Students</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">ANM</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar"></p>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-navbar>\n\n    </ion-grid>\n\n\n\n\n\n    <ion-grid>\n\n        <ion-card *ngFor="let a of area;let i = index">\n\n        <ion-card-content>\n\n          <ion-row>\n\n            <ion-col col-1  >\n\n              <p ion-text><strong>{{i+1}}</strong></p>\n\n            </ion-col>\n\n            <ion-col col-3>\n\n              {{a.Name}}\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">0%</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Strength}}</h1><br/>\n\n            </ion-col>\n\n\n\n            <ion-col col-2 text-center *ngIf="a.ANM" >\n\n              <button ion-button (click)="gtAnmDetails(a.AnmO)"> {{a.AnmName}} </button>\n\n            </ion-col>\n\n            \n\n            <ion-col col-2 text-center *ngIf="!a.ANM" >\n\n              <h1 ion-text color="primary">No ANM</h1><br/>\n\n            </ion-col>\n\n            \n\n            <ion-col col-2 text-center >\n\n              <button ion-button clear (click)="gtSchoolDetails(a)">Details\n\n                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n\n              </button>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-card-content>\n\n      </ion-card>\n\n    </ion-grid>\n\n\n\n\n\n  \n\n  \n\n    <ion-fab right bottom>\n\n      <button ion-fab color="danger" (click)="gtAddArea()" >\n\n        <ion-icon name="add"></ion-icon>\n\n      </button>\n\n    </ion-fab>\n\n    </ion-content>'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Schools\view-schools\view-schools.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__["AngularFireDatabase"],
@@ -1419,7 +1525,7 @@ var ViewSchoolsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 181:
+/***/ 182:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1532,7 +1638,7 @@ var AddVillagesPage = /** @class */ (function () {
     };
     AddVillagesPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-add-villages',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Villages\add-villages\add-villages.html"*/'<ion-header>\n    <ion-navbar color="primary" >\n      <ion-title>Add Village</ion-title>\n      <ion-buttons end>\n        <button ion-button clear icon-only (click)="close()">\n          <ion-icon name="md-close"></ion-icon>\n        </button>\n      </ion-buttons>\n    </ion-navbar>\n  \n  </ion-header>\n  \n  \n  <ion-content padding>\n  \n    <ion-card>\n      <ion-card-content>\n\n\n\n        <ion-item>\n          <ion-label floating>Select Mandal</ion-label>\n          <ion-select [(ngModel)]="mandalSel">\n            <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}} </ion-option>\n          </ion-select>\n        </ion-item>\n\n\n        <ion-item *ngIf="mandalSel">\n          <ion-label  floating>Village Name</ion-label>\n          <ion-input type="text" [(ngModel)]="name" (keyup.enter)="checkData()" (ionChange)="capsName(name)" autofocus ></ion-input>\n        </ion-item>\n        \n  \n      </ion-card-content>\n    </ion-card>\n  \n    <button ion-button *ngIf="name" block (click)="checkData()">Add</button>\n  \n  \n  </ion-content>\n  '/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Villages\add-villages\add-villages.html"*/,
+            selector: 'page-add-villages',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Villages\add-villages\add-villages.html"*/'<ion-header>\n\n    <ion-navbar color="primary" >\n\n      <ion-title>Add Village</ion-title>\n\n      <ion-buttons end>\n\n        <button ion-button clear icon-only (click)="close()">\n\n          <ion-icon name="md-close"></ion-icon>\n\n        </button>\n\n      </ion-buttons>\n\n    </ion-navbar>\n\n  \n\n  </ion-header>\n\n  \n\n  \n\n  <ion-content padding>\n\n  \n\n    <ion-card>\n\n      <ion-card-content>\n\n\n\n\n\n\n\n        <ion-item>\n\n          <ion-label floating>Select Mandal</ion-label>\n\n          <ion-select [(ngModel)]="mandalSel">\n\n            <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}} </ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n\n\n\n\n        <ion-item *ngIf="mandalSel">\n\n          <ion-label  floating>Village Name</ion-label>\n\n          <ion-input type="text" [(ngModel)]="name" (keyup.enter)="checkData()" (ionChange)="capsName(name)" autofocus ></ion-input>\n\n        </ion-item>\n\n        \n\n  \n\n      </ion-card-content>\n\n    </ion-card>\n\n  \n\n    <button ion-button *ngIf="name" block (click)="checkData()">Add</button>\n\n  \n\n  \n\n  </ion-content>\n\n  '/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Villages\add-villages\add-villages.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["n" /* ViewController */],
@@ -1547,7 +1653,7 @@ var AddVillagesPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 182:
+/***/ 183:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1557,7 +1663,7 @@ var AddVillagesPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_villages_add_villages__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_villages_add_villages__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__village_details_village_details__ = __webpack_require__(104);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1635,7 +1741,7 @@ var ViewVillagesPage = /** @class */ (function () {
     };
     ViewVillagesPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-view-villages',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Villages\view-villages\view-villages.html"*/'<ion-header>\n    <ion-navbar color="primary">\n      <button ion-button menuToggle>\n        <ion-icon name="menu"></ion-icon>\n      </button>\n    </ion-navbar>\n  </ion-header>\n  \n  <ion-content padding>\n    <ion-grid>\n      <ion-row>\n        <ion-col col-4 >\n    <ion-item no-lines class="content">\n    <h1 class="title" item-start>Villages</h1>\n    </ion-item>\n    </ion-col>\n    <ion-col col-6 push-2 >\n    <ion-searchbar item-end animated="true" placeholder="Search a Village" \n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n    </ion-col>\n    </ion-row>\n    </ion-grid>\n  \n  \n    <ion-grid>\n      <ion-navbar color="primary">\n        <ion-row>\n          <ion-col col-1>\n          </ion-col>\n          <ion-col col-3>\n            <p class="headBar">Villages</p>\n          </ion-col>\n          <ion-col col-2>\n            <p class="headBar">Schools</p>\n          </ion-col>\n          <ion-col col-2>\n            <p class="headBar">Students</p>\n          </ion-col>\n          <ion-col col-2>\n            <p class="headBar"></p>\n          </ion-col>\n        </ion-row>\n      </ion-navbar>\n    </ion-grid>\n\n\n    <ion-grid>\n        <ion-card *ngFor="let a of area;let i = index">\n        <ion-card-content>\n          <ion-row>\n            <ion-col col-1  >\n              <p ion-text><strong>{{i+1}}</strong></p>\n            </ion-col>\n            <ion-col col-3>\n              {{a.Name}}\n            </ion-col>\n            <ion-col col-2 text-center >\n              <h1 ion-text color="primary">{{a.Schools}}</h1><br/>\n            </ion-col>\n            <ion-col col-2 text-center >\n              <h1 ion-text color="primary">{{a.Anms}}</h1><br/>\n            </ion-col>\n            <ion-col col-2 text-center >\n              <h1 ion-text color="primary">{{a.Students}}0</h1><br/>\n            </ion-col>\n            <ion-col col-2 text-center >\n              <button ion-button clear (click)="gtVillageDetails(a)">Details\n                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n              </button>\n            </ion-col>\n          </ion-row>\n        </ion-card-content>\n      </ion-card>\n    </ion-grid>\n  \n  \n  \n  \n    <ion-fab right bottom>\n      <button ion-fab color="danger" (click)="gtAddArea()" >\n        <ion-icon name="add"></ion-icon>\n      </button>\n    </ion-fab>\n    </ion-content>'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Villages\view-villages\view-villages.html"*/,
+            selector: 'page-view-villages',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Villages\view-villages\view-villages.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  <ion-content padding>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-4 >\n\n    <ion-item no-lines class="content">\n\n    <h1 class="title" item-start>Villages</h1>\n\n    </ion-item>\n\n    </ion-col>\n\n    <ion-col col-6 push-2 >\n\n    <ion-searchbar item-end animated="true" placeholder="Search a Village" \n\n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n    </ion-col>\n\n    </ion-row>\n\n    </ion-grid>\n\n  \n\n  \n\n    <ion-grid>\n\n      <ion-navbar color="primary">\n\n        <ion-row>\n\n          <ion-col col-1>\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            <p class="headBar">Villages</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Schools</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Anms</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Students</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar"></p>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-navbar>\n\n    </ion-grid>\n\n\n\n\n\n    <ion-grid>\n\n        <ion-card *ngFor="let a of area;let i = index">\n\n        <ion-card-content>\n\n          <ion-row>\n\n            <ion-col col-1  >\n\n              <p ion-text><strong>{{i+1}}</strong></p>\n\n            </ion-col>\n\n            <ion-col col-3>\n\n              {{a.Name}}\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Schools}}</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Anms}}</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Students}}0</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <button ion-button clear (click)="gtVillageDetails(a)">Details\n\n                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n\n              </button>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-card-content>\n\n      </ion-card>\n\n    </ion-grid>\n\n  \n\n  \n\n  \n\n  \n\n    <ion-fab right bottom>\n\n      <button ion-fab color="danger" (click)="gtAddArea()" >\n\n        <ion-icon name="add"></ion-icon>\n\n      </button>\n\n    </ion-fab>\n\n    </ion-content>'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Villages\view-villages\view-villages.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__["AngularFireDatabase"],
@@ -1652,7 +1758,7 @@ var ViewVillagesPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 220:
+/***/ 221:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -1665,84 +1771,88 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 220;
+webpackEmptyAsyncContext.id = 221;
 
 /***/ }),
 
-/***/ 261:
+/***/ 262:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/Extra/dashboard/dashboard.module": [
-		693,
-		17
+		694,
+		18
 	],
 	"../pages/Extra/login/login.module": [
-		694,
-		16
+		695,
+		17
 	],
 	"../pages/Students/student-details/student-details.module": [
-		695,
-		15
+		696,
+		16
 	],
 	"../pages/Students/students/students.module": [
-		696,
-		14
+		697,
+		15
 	],
 	"../pages/Subs/Anms/add-amns/add-amns.module": [
-		697,
-		13
+		698,
+		14
 	],
 	"../pages/Subs/Anms/anm-details/anm-details.module": [
-		698,
-		12
+		699,
+		13
 	],
 	"../pages/Subs/Anms/assign-school/assign-school.module": [
-		699,
-		11
+		700,
+		12
 	],
 	"../pages/Subs/Anms/del-anm/del-anm.module": [
-		700,
+		701,
+		11
+	],
+	"../pages/Subs/Anms/edit-anm/edit-anm.module": [
+		702,
 		10
 	],
 	"../pages/Subs/Anms/view-amns/view-amns.module": [
-		701,
+		703,
 		9
 	],
 	"../pages/Subs/Mandals/add-mandals/add-mandals.module": [
-		702,
+		704,
 		8
 	],
 	"../pages/Subs/Mandals/mandal-details/mandal-details.module": [
-		703,
+		705,
 		7
 	],
 	"../pages/Subs/Mandals/view-mandals/view-mandals.module": [
-		704,
+		706,
 		6
 	],
 	"../pages/Subs/Schools/add-schools/add-schools.module": [
-		705,
+		707,
 		5
 	],
 	"../pages/Subs/Schools/school-details/school-details.module": [
-		706,
+		708,
 		4
 	],
 	"../pages/Subs/Schools/view-schools/view-schools.module": [
-		707,
+		709,
 		3
 	],
 	"../pages/Subs/Villages/add-villages/add-villages.module": [
-		708,
+		710,
 		2
 	],
 	"../pages/Subs/Villages/view-villages/view-villages.module": [
-		709,
+		711,
 		1
 	],
 	"../pages/Subs/Villages/village-details/village-details.module": [
-		710,
+		712,
 		0
 	]
 };
@@ -1757,12 +1867,12 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 261;
+webpackAsyncContext.id = 262;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 444:
+/***/ 445:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1796,7 +1906,7 @@ var StudentDetailsPage = /** @class */ (function () {
     };
     StudentDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-student-details',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Students\student-details\student-details.html"*/'<!--\n  Generated template for the StudentDetailsPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>studentDetails</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Students\student-details\student-details.html"*/,
+            selector: 'page-student-details',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Students\student-details\student-details.html"*/'<!--\n\n  Generated template for the StudentDetailsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>studentDetails</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Students\student-details\student-details.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
     ], StudentDetailsPage);
@@ -1807,13 +1917,13 @@ var StudentDetailsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 445:
+/***/ 446:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(446);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(579);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(447);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(580);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -1821,7 +1931,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 
 /***/ }),
 
-/***/ 579:
+/***/ 580:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1830,41 +1940,43 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(643);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(644);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Extra_login_login__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2__ = __webpack_require__(644);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2__ = __webpack_require__(645);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angularfire2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(49);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__ = __webpack_require__(645);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__ = __webpack_require__(646);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(178);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_Subs_Mandals_add_mandals_add_mandals__ = __webpack_require__(176);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(182);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_Subs_Villages_add_villages_add_villages__ = __webpack_require__(181);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(180);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_Subs_Schools_add_schools_add_schools__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_Subs_Mandals_add_mandals_add_mandals__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_Subs_Villages_add_villages_add_villages__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(181);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_Subs_Schools_add_schools_add_schools__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_Subs_Anms_view_amns_view_amns__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_Subs_Anms_add_amns_add_amns__ = __webpack_require__(173);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_Subs_Mandals_mandal_details_mandal_details__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_Subs_Mandals_mandal_details_mandal_details__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_Subs_Schools_school_details_school_details__ = __webpack_require__(83);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_Subs_Villages_village_details_village_details__ = __webpack_require__(104);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_Students_students_students__ = __webpack_require__(172);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_Students_student_details_student_details__ = __webpack_require__(444);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_Students_student_details_student_details__ = __webpack_require__(445);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_Subs_Anms_anm_details_anm_details__ = __webpack_require__(60);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_Subs_Anms_assign_school_assign_school__ = __webpack_require__(174);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25_ng2_charts__ = __webpack_require__(650);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25_ng2_charts__ = __webpack_require__(651);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_Subs_Anms_del_anm_del_anm__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_Subs_Anms_del_anm_del_anm__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_Subs_Anms_edit_anm_edit_anm__ = __webpack_require__(175);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -1926,6 +2038,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_22__pages_Students_student_details_student_details__["a" /* StudentDetailsPage */],
                 __WEBPACK_IMPORTED_MODULE_24__pages_Subs_Anms_assign_school_assign_school__["a" /* AssignSchoolPage */],
                 __WEBPACK_IMPORTED_MODULE_26__pages_Subs_Anms_del_anm_del_anm__["a" /* DelAnmPage */],
+                __WEBPACK_IMPORTED_MODULE_27__pages_Subs_Anms_edit_anm_edit_anm__["a" /* EditAnmPage */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -1939,6 +2052,7 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/Subs/Anms/anm-details/anm-details.module#AnmDetailsPageModule', name: 'AnmDetailsPage', segment: 'anm-details', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Anms/assign-school/assign-school.module#AssignSchoolPageModule', name: 'AssignSchoolPage', segment: 'assign-school', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Anms/del-anm/del-anm.module#DelAnmPageModule', name: 'DelAnmPage', segment: 'del-anm', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/Subs/Anms/edit-anm/edit-anm.module#EditAnmPageModule', name: 'EditAnmPage', segment: 'edit-anm', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Anms/view-amns/view-amns.module#ViewAmnsPageModule', name: 'ViewAmnsPage', segment: 'view-amns', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Mandals/add-mandals/add-mandals.module#AddMandalsPageModule', name: 'AddMandalsPage', segment: 'add-mandals', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Mandals/mandal-details/mandal-details.module#MandalDetailsPageModule', name: 'MandalDetailsPage', segment: 'mandal-details', priority: 'low', defaultHistory: [] },
@@ -1977,6 +2091,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_22__pages_Students_student_details_student_details__["a" /* StudentDetailsPage */],
                 __WEBPACK_IMPORTED_MODULE_24__pages_Subs_Anms_assign_school_assign_school__["a" /* AssignSchoolPage */],
                 __WEBPACK_IMPORTED_MODULE_26__pages_Subs_Anms_del_anm_del_anm__["a" /* DelAnmPage */],
+                __WEBPACK_IMPORTED_MODULE_27__pages_Subs_Anms_edit_anm_edit_anm__["a" /* EditAnmPage */],
             ],
             providers: [
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] }
@@ -1998,6 +2113,7 @@ var AppModule = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__assign_school_assign_school__ = __webpack_require__(174);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__edit_anm_edit_anm__ = __webpack_require__(175);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2010,21 +2126,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AnmDetailsPage = /** @class */ (function () {
-    function AnmDetailsPage(navCtrl, navParams) {
+    function AnmDetailsPage(navCtrl, modalCtrl, navParams) {
         this.navCtrl = navCtrl;
+        this.modalCtrl = modalCtrl;
         this.navParams = navParams;
         this.anmP = this.navParams.get("anm");
         console.log(this.anmP);
     }
+    AnmDetailsPage.prototype.editAnmDetails = function () {
+        var editAnm = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_3__edit_anm_edit_anm__["a" /* EditAnmPage */], { anm: this.anmP }, { enableBackdropDismiss: false });
+        editAnm.present();
+    };
     AnmDetailsPage.prototype.assignSchools = function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_2__assign_school_assign_school__["a" /* AssignSchoolPage */], { anm: this.anmP });
     };
     AnmDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-anm-details',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Anms\anm-details\anm-details.html"*/'<ion-header>\n  <ion-navbar color="primary" >\n    <ion-title>{{anmP.FirstName}}&nbsp;{{anmP.LastName}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n\n  <button ion-button float-right (click)="assignSchools()">Assign School</button>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col col-6>\n        <ion-card>\n          <ion-card-content>\n            <ion-card-title>{{anmP.FirstName}}&nbsp;{{anmP.LastName}}</ion-card-title>\n            <ion-item>\n              <p ion-text item-start color="primary">Phone Number</p>\n              <p item-end>{{anmP.Phone}}</p>\n            </ion-item>\n            <ion-item>\n              <p ion-text item-start color="primary">Gender</p>\n              <p item-end>{{anmP.Gender}}</p>\n            </ion-item>\n            <ion-item>\n              <p ion-text item-start color="primary">Email</p>\n              <p item-end>{{anmP.Email}}</p>\n            </ion-item>\n          </ion-card-content>\n        </ion-card>\n      </ion-col>\n\n      <ion-col col-6>\n        <ion-card>\n          <ion-card-content>\n            <ion-card-title>Status</ion-card-title>\n            <ion-item>\n              <p ion-text item-start color="primary">Progress</p>\n              <p  item-end >20%</p>\n            </ion-item>\n            <ion-item>\n              <p ion-text item-start color="primary">Schools</p>\n              <p  item-end >5</p>\n            </ion-item>\n            <ion-item>\n              <p ion-text item-start color="primary">Students</p>\n              <p  item-end >20</p>\n            </ion-item>\n          </ion-card-content>\n        </ion-card>\n      </ion-col>\n\n\n    </ion-row>\n  </ion-grid>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Anms\anm-details\anm-details.html"*/,
+            selector: 'page-anm-details',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\anm-details\anm-details.html"*/'<ion-header>\n\n  <ion-navbar color="primary" >\n\n    <ion-title>{{anmP.FirstName}}&nbsp;{{anmP.LastName}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <button ion-button float-right (click)="assignSchools()">Assign School</button>\n\n\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <button ion-button float-right clear icon-only (click)="editAnmDetails()">\n\n              <ion-icon name="md-create"></ion-icon>\n\n            </button>\n\n            <ion-card-title>{{anmP.FirstName}}&nbsp;{{anmP.LastName}}</ion-card-title>\n\n            <ion-item>\n\n              <p ion-text item-start color="primary">Phone Number</p>\n\n              <p item-end>{{anmP.Phone}}</p>\n\n            </ion-item>\n\n            <ion-item>\n\n              <p ion-text item-start color="primary">Gender</p>\n\n              <p item-end>{{anmP.Gender}}</p>\n\n            </ion-item>\n\n            <ion-item>\n\n              <p ion-text item-start color="primary">Email</p>\n\n              <p item-end>{{anmP.Email}}</p>\n\n            </ion-item>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n\n\n      <ion-col col-6>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-card-title>Status</ion-card-title>\n\n            <ion-item>\n\n              <p ion-text item-start color="primary">Progress</p>\n\n              <p  item-end >20%</p>\n\n            </ion-item>\n\n            <ion-item>\n\n              <p ion-text item-start color="primary">Schools</p>\n\n              <p  item-end >5</p>\n\n            </ion-item>\n\n            <ion-item>\n\n              <p ion-text item-start color="primary">Students</p>\n\n              <p  item-end >20</p>\n\n            </ion-item>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n\n\n\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\anm-details\anm-details.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
     ], AnmDetailsPage);
     return AnmDetailsPage;
@@ -2034,256 +2157,256 @@ var AnmDetailsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 625:
+/***/ 626:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 272,
-	"./af.js": 272,
-	"./ar": 273,
-	"./ar-dz": 274,
-	"./ar-dz.js": 274,
-	"./ar-kw": 275,
-	"./ar-kw.js": 275,
-	"./ar-ly": 276,
-	"./ar-ly.js": 276,
-	"./ar-ma": 277,
-	"./ar-ma.js": 277,
-	"./ar-sa": 278,
-	"./ar-sa.js": 278,
-	"./ar-tn": 279,
-	"./ar-tn.js": 279,
-	"./ar.js": 273,
-	"./az": 280,
-	"./az.js": 280,
-	"./be": 281,
-	"./be.js": 281,
-	"./bg": 282,
-	"./bg.js": 282,
-	"./bm": 283,
-	"./bm.js": 283,
-	"./bn": 284,
-	"./bn.js": 284,
-	"./bo": 285,
-	"./bo.js": 285,
-	"./br": 286,
-	"./br.js": 286,
-	"./bs": 287,
-	"./bs.js": 287,
-	"./ca": 288,
-	"./ca.js": 288,
-	"./cs": 289,
-	"./cs.js": 289,
-	"./cv": 290,
-	"./cv.js": 290,
-	"./cy": 291,
-	"./cy.js": 291,
-	"./da": 292,
-	"./da.js": 292,
-	"./de": 293,
-	"./de-at": 294,
-	"./de-at.js": 294,
-	"./de-ch": 295,
-	"./de-ch.js": 295,
-	"./de.js": 293,
-	"./dv": 296,
-	"./dv.js": 296,
-	"./el": 297,
-	"./el.js": 297,
-	"./en-au": 298,
-	"./en-au.js": 298,
-	"./en-ca": 299,
-	"./en-ca.js": 299,
-	"./en-gb": 300,
-	"./en-gb.js": 300,
-	"./en-ie": 301,
-	"./en-ie.js": 301,
-	"./en-il": 302,
-	"./en-il.js": 302,
-	"./en-nz": 303,
-	"./en-nz.js": 303,
-	"./eo": 304,
-	"./eo.js": 304,
-	"./es": 305,
-	"./es-do": 306,
-	"./es-do.js": 306,
-	"./es-us": 307,
-	"./es-us.js": 307,
-	"./es.js": 305,
-	"./et": 308,
-	"./et.js": 308,
-	"./eu": 309,
-	"./eu.js": 309,
-	"./fa": 310,
-	"./fa.js": 310,
-	"./fi": 311,
-	"./fi.js": 311,
-	"./fo": 312,
-	"./fo.js": 312,
-	"./fr": 313,
-	"./fr-ca": 314,
-	"./fr-ca.js": 314,
-	"./fr-ch": 315,
-	"./fr-ch.js": 315,
-	"./fr.js": 313,
-	"./fy": 316,
-	"./fy.js": 316,
-	"./gd": 317,
-	"./gd.js": 317,
-	"./gl": 318,
-	"./gl.js": 318,
-	"./gom-latn": 319,
-	"./gom-latn.js": 319,
-	"./gu": 320,
-	"./gu.js": 320,
-	"./he": 321,
-	"./he.js": 321,
-	"./hi": 322,
-	"./hi.js": 322,
-	"./hr": 323,
-	"./hr.js": 323,
-	"./hu": 324,
-	"./hu.js": 324,
-	"./hy-am": 325,
-	"./hy-am.js": 325,
-	"./id": 326,
-	"./id.js": 326,
-	"./is": 327,
-	"./is.js": 327,
-	"./it": 328,
-	"./it.js": 328,
-	"./ja": 329,
-	"./ja.js": 329,
-	"./jv": 330,
-	"./jv.js": 330,
-	"./ka": 331,
-	"./ka.js": 331,
-	"./kk": 332,
-	"./kk.js": 332,
-	"./km": 333,
-	"./km.js": 333,
-	"./kn": 334,
-	"./kn.js": 334,
-	"./ko": 335,
-	"./ko.js": 335,
-	"./ky": 336,
-	"./ky.js": 336,
-	"./lb": 337,
-	"./lb.js": 337,
-	"./lo": 338,
-	"./lo.js": 338,
-	"./lt": 339,
-	"./lt.js": 339,
-	"./lv": 340,
-	"./lv.js": 340,
-	"./me": 341,
-	"./me.js": 341,
-	"./mi": 342,
-	"./mi.js": 342,
-	"./mk": 343,
-	"./mk.js": 343,
-	"./ml": 344,
-	"./ml.js": 344,
-	"./mn": 345,
-	"./mn.js": 345,
-	"./mr": 346,
-	"./mr.js": 346,
-	"./ms": 347,
-	"./ms-my": 348,
-	"./ms-my.js": 348,
-	"./ms.js": 347,
-	"./mt": 349,
-	"./mt.js": 349,
-	"./my": 350,
-	"./my.js": 350,
-	"./nb": 351,
-	"./nb.js": 351,
-	"./ne": 352,
-	"./ne.js": 352,
-	"./nl": 353,
-	"./nl-be": 354,
-	"./nl-be.js": 354,
-	"./nl.js": 353,
-	"./nn": 355,
-	"./nn.js": 355,
-	"./pa-in": 356,
-	"./pa-in.js": 356,
-	"./pl": 357,
-	"./pl.js": 357,
-	"./pt": 358,
-	"./pt-br": 359,
-	"./pt-br.js": 359,
-	"./pt.js": 358,
-	"./ro": 360,
-	"./ro.js": 360,
-	"./ru": 361,
-	"./ru.js": 361,
-	"./sd": 362,
-	"./sd.js": 362,
-	"./se": 363,
-	"./se.js": 363,
-	"./si": 364,
-	"./si.js": 364,
-	"./sk": 365,
-	"./sk.js": 365,
-	"./sl": 366,
-	"./sl.js": 366,
-	"./sq": 367,
-	"./sq.js": 367,
-	"./sr": 368,
-	"./sr-cyrl": 369,
-	"./sr-cyrl.js": 369,
-	"./sr.js": 368,
-	"./ss": 370,
-	"./ss.js": 370,
-	"./sv": 371,
-	"./sv.js": 371,
-	"./sw": 372,
-	"./sw.js": 372,
-	"./ta": 373,
-	"./ta.js": 373,
-	"./te": 374,
-	"./te.js": 374,
-	"./tet": 375,
-	"./tet.js": 375,
-	"./tg": 376,
-	"./tg.js": 376,
-	"./th": 377,
-	"./th.js": 377,
-	"./tl-ph": 378,
-	"./tl-ph.js": 378,
-	"./tlh": 379,
-	"./tlh.js": 379,
-	"./tr": 380,
-	"./tr.js": 380,
-	"./tzl": 381,
-	"./tzl.js": 381,
-	"./tzm": 382,
-	"./tzm-latn": 383,
-	"./tzm-latn.js": 383,
-	"./tzm.js": 382,
-	"./ug-cn": 384,
-	"./ug-cn.js": 384,
-	"./uk": 385,
-	"./uk.js": 385,
-	"./ur": 386,
-	"./ur.js": 386,
-	"./uz": 387,
-	"./uz-latn": 388,
-	"./uz-latn.js": 388,
-	"./uz.js": 387,
-	"./vi": 389,
-	"./vi.js": 389,
-	"./x-pseudo": 390,
-	"./x-pseudo.js": 390,
-	"./yo": 391,
-	"./yo.js": 391,
-	"./zh-cn": 392,
-	"./zh-cn.js": 392,
-	"./zh-hk": 393,
-	"./zh-hk.js": 393,
-	"./zh-tw": 394,
-	"./zh-tw.js": 394
+	"./af": 273,
+	"./af.js": 273,
+	"./ar": 274,
+	"./ar-dz": 275,
+	"./ar-dz.js": 275,
+	"./ar-kw": 276,
+	"./ar-kw.js": 276,
+	"./ar-ly": 277,
+	"./ar-ly.js": 277,
+	"./ar-ma": 278,
+	"./ar-ma.js": 278,
+	"./ar-sa": 279,
+	"./ar-sa.js": 279,
+	"./ar-tn": 280,
+	"./ar-tn.js": 280,
+	"./ar.js": 274,
+	"./az": 281,
+	"./az.js": 281,
+	"./be": 282,
+	"./be.js": 282,
+	"./bg": 283,
+	"./bg.js": 283,
+	"./bm": 284,
+	"./bm.js": 284,
+	"./bn": 285,
+	"./bn.js": 285,
+	"./bo": 286,
+	"./bo.js": 286,
+	"./br": 287,
+	"./br.js": 287,
+	"./bs": 288,
+	"./bs.js": 288,
+	"./ca": 289,
+	"./ca.js": 289,
+	"./cs": 290,
+	"./cs.js": 290,
+	"./cv": 291,
+	"./cv.js": 291,
+	"./cy": 292,
+	"./cy.js": 292,
+	"./da": 293,
+	"./da.js": 293,
+	"./de": 294,
+	"./de-at": 295,
+	"./de-at.js": 295,
+	"./de-ch": 296,
+	"./de-ch.js": 296,
+	"./de.js": 294,
+	"./dv": 297,
+	"./dv.js": 297,
+	"./el": 298,
+	"./el.js": 298,
+	"./en-au": 299,
+	"./en-au.js": 299,
+	"./en-ca": 300,
+	"./en-ca.js": 300,
+	"./en-gb": 301,
+	"./en-gb.js": 301,
+	"./en-ie": 302,
+	"./en-ie.js": 302,
+	"./en-il": 303,
+	"./en-il.js": 303,
+	"./en-nz": 304,
+	"./en-nz.js": 304,
+	"./eo": 305,
+	"./eo.js": 305,
+	"./es": 306,
+	"./es-do": 307,
+	"./es-do.js": 307,
+	"./es-us": 308,
+	"./es-us.js": 308,
+	"./es.js": 306,
+	"./et": 309,
+	"./et.js": 309,
+	"./eu": 310,
+	"./eu.js": 310,
+	"./fa": 311,
+	"./fa.js": 311,
+	"./fi": 312,
+	"./fi.js": 312,
+	"./fo": 313,
+	"./fo.js": 313,
+	"./fr": 314,
+	"./fr-ca": 315,
+	"./fr-ca.js": 315,
+	"./fr-ch": 316,
+	"./fr-ch.js": 316,
+	"./fr.js": 314,
+	"./fy": 317,
+	"./fy.js": 317,
+	"./gd": 318,
+	"./gd.js": 318,
+	"./gl": 319,
+	"./gl.js": 319,
+	"./gom-latn": 320,
+	"./gom-latn.js": 320,
+	"./gu": 321,
+	"./gu.js": 321,
+	"./he": 322,
+	"./he.js": 322,
+	"./hi": 323,
+	"./hi.js": 323,
+	"./hr": 324,
+	"./hr.js": 324,
+	"./hu": 325,
+	"./hu.js": 325,
+	"./hy-am": 326,
+	"./hy-am.js": 326,
+	"./id": 327,
+	"./id.js": 327,
+	"./is": 328,
+	"./is.js": 328,
+	"./it": 329,
+	"./it.js": 329,
+	"./ja": 330,
+	"./ja.js": 330,
+	"./jv": 331,
+	"./jv.js": 331,
+	"./ka": 332,
+	"./ka.js": 332,
+	"./kk": 333,
+	"./kk.js": 333,
+	"./km": 334,
+	"./km.js": 334,
+	"./kn": 335,
+	"./kn.js": 335,
+	"./ko": 336,
+	"./ko.js": 336,
+	"./ky": 337,
+	"./ky.js": 337,
+	"./lb": 338,
+	"./lb.js": 338,
+	"./lo": 339,
+	"./lo.js": 339,
+	"./lt": 340,
+	"./lt.js": 340,
+	"./lv": 341,
+	"./lv.js": 341,
+	"./me": 342,
+	"./me.js": 342,
+	"./mi": 343,
+	"./mi.js": 343,
+	"./mk": 344,
+	"./mk.js": 344,
+	"./ml": 345,
+	"./ml.js": 345,
+	"./mn": 346,
+	"./mn.js": 346,
+	"./mr": 347,
+	"./mr.js": 347,
+	"./ms": 348,
+	"./ms-my": 349,
+	"./ms-my.js": 349,
+	"./ms.js": 348,
+	"./mt": 350,
+	"./mt.js": 350,
+	"./my": 351,
+	"./my.js": 351,
+	"./nb": 352,
+	"./nb.js": 352,
+	"./ne": 353,
+	"./ne.js": 353,
+	"./nl": 354,
+	"./nl-be": 355,
+	"./nl-be.js": 355,
+	"./nl.js": 354,
+	"./nn": 356,
+	"./nn.js": 356,
+	"./pa-in": 357,
+	"./pa-in.js": 357,
+	"./pl": 358,
+	"./pl.js": 358,
+	"./pt": 359,
+	"./pt-br": 360,
+	"./pt-br.js": 360,
+	"./pt.js": 359,
+	"./ro": 361,
+	"./ro.js": 361,
+	"./ru": 362,
+	"./ru.js": 362,
+	"./sd": 363,
+	"./sd.js": 363,
+	"./se": 364,
+	"./se.js": 364,
+	"./si": 365,
+	"./si.js": 365,
+	"./sk": 366,
+	"./sk.js": 366,
+	"./sl": 367,
+	"./sl.js": 367,
+	"./sq": 368,
+	"./sq.js": 368,
+	"./sr": 369,
+	"./sr-cyrl": 370,
+	"./sr-cyrl.js": 370,
+	"./sr.js": 369,
+	"./ss": 371,
+	"./ss.js": 371,
+	"./sv": 372,
+	"./sv.js": 372,
+	"./sw": 373,
+	"./sw.js": 373,
+	"./ta": 374,
+	"./ta.js": 374,
+	"./te": 375,
+	"./te.js": 375,
+	"./tet": 376,
+	"./tet.js": 376,
+	"./tg": 377,
+	"./tg.js": 377,
+	"./th": 378,
+	"./th.js": 378,
+	"./tl-ph": 379,
+	"./tl-ph.js": 379,
+	"./tlh": 380,
+	"./tlh.js": 380,
+	"./tr": 381,
+	"./tr.js": 381,
+	"./tzl": 382,
+	"./tzl.js": 382,
+	"./tzm": 383,
+	"./tzm-latn": 384,
+	"./tzm-latn.js": 384,
+	"./tzm.js": 383,
+	"./ug-cn": 385,
+	"./ug-cn.js": 385,
+	"./uk": 386,
+	"./uk.js": 386,
+	"./ur": 387,
+	"./ur.js": 387,
+	"./uz": 388,
+	"./uz-latn": 389,
+	"./uz-latn.js": 389,
+	"./uz.js": 388,
+	"./vi": 390,
+	"./vi.js": 390,
+	"./x-pseudo": 391,
+	"./x-pseudo.js": 391,
+	"./yo": 392,
+	"./yo.js": 392,
+	"./zh-cn": 393,
+	"./zh-cn.js": 393,
+	"./zh-hk": 394,
+	"./zh-hk.js": 394,
+	"./zh-tw": 395,
+	"./zh-tw.js": 395
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -2299,11 +2422,11 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 625;
+webpackContext.id = 626;
 
 /***/ }),
 
-/***/ 643:
+/***/ 644:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2314,9 +2437,9 @@ webpackContext.id = 625;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_Extra_login_login__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__ = __webpack_require__(170);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(178);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(182);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_Students_students_students__ = __webpack_require__(172);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_Subs_Anms_view_amns_view_amns__ = __webpack_require__(103);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2363,7 +2486,7 @@ var MyApp = /** @class */ (function () {
                     __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Admin Data").child("Admins").child(user.uid).once('value', function (itemSnap) {
                         if (itemSnap.exists()) {
                             var welMsg = "Welcome" + " " + itemSnap.val().Name;
-                            _this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__["a" /* DashboardPage */];
+                            _this.rootPage = __WEBPACK_IMPORTED_MODULE_9__pages_Subs_Anms_view_amns_view_amns__["a" /* ViewAmnsPage */];
                             _this.presentToast(welMsg);
                         }
                         else {
@@ -2416,7 +2539,7 @@ var MyApp = /** @class */ (function () {
         __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */]) === "function" && _a || Object)
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\app\app.html"*/'<ion-split-pane  >\n  <ion-menu [content]="content" [class.fullPain]="!full" [class.halfPain]="full" >\n    <ion-header>\n      <ion-toolbar color="dark">\n        <h1 *ngIf="full" class="t">Samatha Admin</h1>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content class="no-scroll bg-semidark">\n\n      <ion-list no-lines *ngIf="full" >\n        <button menuClose color="dark" [class.activeHighlight]="checkActive(p)" \n        ion-item *ngFor="let p of pages" (click)="openPage(p)">\n          <ion-icon class="menu-icon" item-left [name]="p.icon" [color]="p.color" ></ion-icon>\n          {{p.title}}\n        </button>\n      </ion-list>\n\n      <ion-list no-lines *ngIf="!full" >\n        <button menuClose color="dark" [class.activeHighlight]="checkActive(p)" \n        ion-item *ngFor="let p of pages" (click)="openPage(p)" icon-only >\n          <ion-icon class="menu-icon" item-left [name]="p.icon" [color]="p.color" ></ion-icon>\n        </button>\n      </ion-list>\n\n    </ion-content>\n    <ion-footer class="menu-footer">\n      <ion-list no-lines>\n      <button ion-button block *ngIf="full"  (click)="signOut()" color="danger">\n        Sign Out\n      </button>\n      <button ion-item block icon-only *ngIf="!full" (click)="signOut()" color="danger">\n        <ion-icon name="md-power" item-left ></ion-icon>\n      </button>\n\n\n      <button menuClose color="dark" *ngIf="full" ion-item (click)="collapse()">\n        <ion-icon class="menu-icon" item-end name="md-arrow-dropleft" color="whiter" ></ion-icon>\n      </button>\n\n      <button menuClose color="dark" *ngIf="!full" ion-item (click)="expand()">\n        <ion-icon class="menu-icon" item-end name="md-arrow-dropright" color="whiter" ></ion-icon>\n      </button>\n      </ion-list>\n    </ion-footer>\n  </ion-menu>\n\n  <!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n  <ion-nav [root]="rootPage" #content main swipeBackEnabled="false"></ion-nav>\n</ion-split-pane>'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\app\app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\app\app.html"*/'<ion-split-pane  >\n\n  <ion-menu [content]="content" [class.fullPain]="!full" [class.halfPain]="full" >\n\n    <ion-header>\n\n      <ion-toolbar color="dark">\n\n        <h1 *ngIf="full" class="t">Samatha Admin</h1>\n\n      </ion-toolbar>\n\n    </ion-header>\n\n\n\n    <ion-content class="no-scroll bg-semidark">\n\n\n\n      <ion-list no-lines *ngIf="full" >\n\n        <button menuClose color="dark" [class.activeHighlight]="checkActive(p)" \n\n        ion-item *ngFor="let p of pages" (click)="openPage(p)">\n\n          <ion-icon class="menu-icon" item-left [name]="p.icon" [color]="p.color" ></ion-icon>\n\n          {{p.title}}\n\n        </button>\n\n      </ion-list>\n\n\n\n      <ion-list no-lines *ngIf="!full" >\n\n        <button menuClose color="dark" [class.activeHighlight]="checkActive(p)" \n\n        ion-item *ngFor="let p of pages" (click)="openPage(p)" icon-only >\n\n          <ion-icon class="menu-icon" item-left [name]="p.icon" [color]="p.color" ></ion-icon>\n\n        </button>\n\n      </ion-list>\n\n\n\n    </ion-content>\n\n    <ion-footer class="menu-footer">\n\n      <ion-list no-lines>\n\n      <button ion-button block *ngIf="full"  (click)="signOut()" color="danger">\n\n        Sign Out\n\n      </button>\n\n      <button ion-item block icon-only *ngIf="!full" (click)="signOut()" color="danger">\n\n        <ion-icon name="md-power" item-left ></ion-icon>\n\n      </button>\n\n\n\n\n\n      <button menuClose color="dark" *ngIf="full" ion-item (click)="collapse()">\n\n        <ion-icon class="menu-icon" item-end name="md-arrow-dropleft" color="whiter" ></ion-icon>\n\n      </button>\n\n\n\n      <button menuClose color="dark" *ngIf="!full" ion-item (click)="expand()">\n\n        <ion-icon class="menu-icon" item-end name="md-arrow-dropright" color="whiter" ></ion-icon>\n\n      </button>\n\n      </ion-list>\n\n    </ion-footer>\n\n  </ion-menu>\n\n\n\n  <!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n  <ion-nav [root]="rootPage" #content main swipeBackEnabled="false"></ion-nav>\n\n</ion-split-pane>'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\app\app.html"*/
         }),
         __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */]) === "function" && _c || Object])
     ], MyApp);
@@ -2455,7 +2578,7 @@ var SchoolDetailsPage = /** @class */ (function () {
     }
     SchoolDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-school-details',template:/*ion-inline-start:"C:\Users\pc\Desktop\sa\src\pages\Subs\Schools\school-details\school-details.html"*/'<ion-header>\n  <ion-navbar color="primary" >\n    <ion-title>{{school.Name}}</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\pc\Desktop\sa\src\pages\Subs\Schools\school-details\school-details.html"*/,
+            selector: 'page-school-details',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Schools\school-details\school-details.html"*/'<ion-header>\n\n  <ion-navbar color="primary" >\n\n    <ion-title>{{school.Name}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Schools\school-details\school-details.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
@@ -2467,5 +2590,5 @@ var SchoolDetailsPage = /** @class */ (function () {
 
 /***/ })
 
-},[445]);
+},[446]);
 //# sourceMappingURL=main.js.map
