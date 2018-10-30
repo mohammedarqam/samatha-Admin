@@ -29,14 +29,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var ViewAmnsPage = /** @class */ (function () {
-    function ViewAmnsPage(navCtrl, db, menuCtrl, navParams) {
+    function ViewAmnsPage(navCtrl, db, alertCtrl, menuCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.db = db;
+        this.alertCtrl = alertCtrl;
         this.menuCtrl = menuCtrl;
         this.navParams = navParams;
         this.anmRef = this.db.list("Anms");
         this.anms = [];
         this.anmsLoaded = [];
+        this.selArray = [];
         this.menuCtrl.enable(true);
         this.getAnms();
     }
@@ -72,6 +74,45 @@ var ViewAmnsPage = /** @class */ (function () {
             }
         });
     };
+    ViewAmnsPage.prototype.addToArr = function (a) {
+        switch (a.Checked) {
+            case true:
+                this.selArray.push(a.key);
+                break;
+            case false:
+                this.rmFrmArray(a.key);
+                break;
+        }
+    };
+    ViewAmnsPage.prototype.rmFrmArray = function (key) {
+        var ind = this.selArray.indexOf(key);
+        this.selArray.splice(ind, 1);
+    };
+    ViewAmnsPage.prototype.delMulC = function () {
+        var _this = this;
+        var alert = this.alertCtrl.create({
+            title: 'Delete ' + this.selArray.length + ' ANMs?',
+            message: this.selArray[0].Name,
+            buttons: [
+                {
+                    text: 'Cancel',
+                    role: 'cancel',
+                    handler: function () {
+                        console.log('Cancel clicked');
+                    }
+                },
+                {
+                    text: 'Delete',
+                    handler: function () {
+                        _this.delMul();
+                    }
+                }
+            ]
+        });
+        alert.present();
+    };
+    ViewAmnsPage.prototype.delMul = function () {
+    };
     ViewAmnsPage.prototype.gtAnmDetails = function (a) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_4__anm_details_anm_details__["a" /* AnmDetailsPage */], { anm: a });
     };
@@ -80,14 +121,12 @@ var ViewAmnsPage = /** @class */ (function () {
     };
     ViewAmnsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-view-amns',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\view-amns\view-amns.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-4 >\n\n    <ion-item no-lines class="content">\n\n    <h1 class="title" item-start>ANM</h1>\n\n    </ion-item>\n\n    </ion-col>\n\n    <ion-col col-6 push-2 >\n\n    <ion-searchbar item-end animated="true" placeholder="Search an ANM.." \n\n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n    </ion-col>\n\n    </ion-row>\n\n    </ion-grid>\n\n\n\n    <ion-grid>\n\n      <ion-navbar color="primary">\n\n        <ion-row>\n\n          <ion-col col-1>\n\n            <ion-checkbox ></ion-checkbox>\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            <p class="headBar">Name</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Progress </p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Phone No.</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Schools</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar"></p>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-navbar>\n\n    </ion-grid>\n\n\n\n    <ion-grid>\n\n        <ion-card *ngFor="let a of anms;let i = index">\n\n        <ion-card-content>\n\n          <ion-row>\n\n            <ion-col col-1  >\n\n              <ion-checkbox></ion-checkbox>\n\n            </ion-col>\n\n            <ion-col col-3>\n\n              {{a.FirstName}}&nbsp;{{a.LastName}}\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">null </h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Phone}} </h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Schools}}</h1>\n\n              <button ion-button  clear>View</button>\n\n            </ion-col>\n\n            <button ion-button clear (click)="gtAnmDetails(a)">Details\n\n              <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n\n            </button>\n\n\n\n\n\n\n\n          </ion-row>\n\n        </ion-card-content>\n\n        </ion-card>\n\n    </ion-grid>    \n\n    <!-- <ion-item *ngFor= "let a of anms">{{a.FirstName}}</ion-item> -->\n\n\n\n\n\n\n\n  \n\n    <ion-fab right bottom>\n\n      <button ion-fab color="danger" (click)="gtAddANM()" >\n\n        <ion-icon name="add"></ion-icon>\n\n      </button>\n\n    </ion-fab>\n\n    </ion-content>'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\view-amns\view-amns.html"*/,
+            selector: 'page-view-amns',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\view-amns\view-amns.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-4 >\n\n    <ion-item no-lines class="content">\n\n    <h1 class="title" item-start>ANM</h1>\n\n    </ion-item>\n\n    </ion-col>\n\n    <ion-col col-6 push-2 >\n\n    <ion-searchbar item-end animated="true" placeholder="Search an ANM.." \n\n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n    </ion-col>\n\n    </ion-row>\n\n    </ion-grid>\n\n\n\n    <ion-grid>\n\n      <ion-navbar color="primary">\n\n        <ion-row>\n\n          <ion-col col-1>\n\n            <ion-checkbox ></ion-checkbox>\n\n          </ion-col>\n\n          <ion-col col-1>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Name</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Progress </p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Phone No.</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Schools</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar"></p>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-navbar>\n\n    </ion-grid>\n\n<!-- {{selArray | json}} -->\n\n    <ion-grid>\n\n        <ion-card *ngFor="let a of anms;let i = index">\n\n        <ion-card-content>\n\n          <ion-row>\n\n            <ion-col col-1  >\n\n              <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)" ></ion-checkbox>  \n\n            </ion-col>\n\n            <ion-col col-1  >\n\n              <p ion-text><strong>{{i+1}}</strong></p>\n\n            </ion-col>\n\n            <ion-col col-2>\n\n              {{a.FirstName}}&nbsp;{{a.LastName}}\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">null </h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Phone}} </h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Schools}}</h1>\n\n              <button ion-button  clear>View</button>\n\n            </ion-col>\n\n            <ion-col col-2>\n\n            <button ion-button clear (click)="gtAnmDetails(a)">Details\n\n              <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n\n            </button>\n\n            </ion-col>\n\n\n\n\n\n\n\n          </ion-row>\n\n        </ion-card-content>\n\n        </ion-card>\n\n    </ion-grid>    \n\n\n\n\n\n    <ion-fab right bottom *ngIf="!selArray.length">\n\n      <button ion-fab color="primary" (click)="gtAddANM()" >\n\n        <ion-icon name="add"></ion-icon>\n\n      </button>\n\n    </ion-fab>\n\n\n\n    <ion-fab right bottom *ngIf="selArray.length">\n\n      <button ion-fab color="danger" (click)="delMulC()" >\n\n        <ion-icon name="md-trash"></ion-icon>\n\n      </button>\n\n    </ion-fab>\n\n    </ion-content>'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Anms\view-amns\view-amns.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]) === "function" && _e || Object])
     ], ViewAmnsPage);
     return ViewAmnsPage;
+    var _a, _b, _c, _d, _e;
 }());
 
 //# sourceMappingURL=view-amns.js.map
@@ -266,6 +305,51 @@ var DashboardPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StudentsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the StudentsPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+var StudentsPage = /** @class */ (function () {
+    function StudentsPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    StudentsPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad StudentsPage');
+    };
+    StudentsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-students',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Students\students\students.html"*/'<!--\n\n  Generated template for the StudentsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>students</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Students\students\students.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
+    ], StudentsPage);
+    return StudentsPage;
+}());
+
+//# sourceMappingURL=students.js.map
+
+/***/ }),
+
+/***/ 171:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
@@ -349,51 +433,6 @@ var LoginPage = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=login.js.map
-
-/***/ }),
-
-/***/ 171:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StudentsPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-/**
- * Generated class for the StudentsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-var StudentsPage = /** @class */ (function () {
-    function StudentsPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-    }
-    StudentsPage.prototype.ionViewDidLoad = function () {
-        console.log('ionViewDidLoad StudentsPage');
-    };
-    StudentsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-students',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Students\students\students.html"*/'<!--\n\n  Generated template for the StudentsPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n  <ion-navbar>\n\n    <ion-title>students</ion-title>\n\n  </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Students\students\students.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
-    ], StudentsPage);
-    return StudentsPage;
-}());
-
-//# sourceMappingURL=students.js.map
 
 /***/ }),
 
@@ -899,121 +938,6 @@ var MandalDetailsPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewMandalsPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_mandals_add_mandals__ = __webpack_require__(175);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mandal_details_mandal_details__ = __webpack_require__(176);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var ViewMandalsPage = /** @class */ (function () {
-    // selArray : Array<any> = [];
-    function ViewMandalsPage(navCtrl, db, toastCtrl, alertCtrl, modalCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.db = db;
-        this.toastCtrl = toastCtrl;
-        this.alertCtrl = alertCtrl;
-        this.modalCtrl = modalCtrl;
-        this.navParams = navParams;
-        this.areaRef = this.db.list('Subs/Mandals', function (ref) { return ref.orderByChild("Name"); });
-        this.area = [];
-        this.areasLoaded = [];
-        this.getAreas();
-    }
-    // addToArr(a){
-    //   switch (a.Checked) {
-    //     case true:  this.selArray.push(a.key);
-    //       break;
-    //     case false:  this.rmFrmArray(a.key);
-    //       break;
-    //   }
-    // }
-    // rmFrmArray(key){
-    //   var ind = this.selArray.indexOf(key);
-    //   this.selArray.splice(ind,1)
-    // }
-    ViewMandalsPage.prototype.getAreas = function () {
-        var _this = this;
-        this.areaRef.snapshotChanges().subscribe(function (snap) {
-            var tempArray = [];
-            snap.forEach(function (snp) {
-                var temp = snp.payload.val();
-                temp.key = snp.key;
-                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(snp.key).child("Schools").once("value", function (schoolsSnap) {
-                    temp.Schools = schoolsSnap.numChildren();
-                });
-                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(snp.key).child("Villages").once("value", function (villageSnap) {
-                    temp.Villages = villageSnap.numChildren();
-                });
-                tempArray.push(temp);
-            });
-            _this.area = tempArray;
-            _this.areasLoaded = tempArray;
-        });
-    };
-    ViewMandalsPage.prototype.initializeItems = function () {
-        this.area = this.areasLoaded;
-    };
-    ViewMandalsPage.prototype.getItems = function (searchbar) {
-        this.initializeItems();
-        var q = searchbar;
-        if (!q) {
-            return;
-        }
-        this.area = this.area.filter(function (v) {
-            if (v.Name && q) {
-                if (v.Name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
-                    return true;
-                }
-                return false;
-            }
-        });
-    };
-    ViewMandalsPage.prototype.gtAddArea = function () {
-        var areaAdd = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_4__add_mandals_add_mandals__["a" /* AddMandalsPage */], null, { enableBackdropDismiss: false });
-        areaAdd.present();
-    };
-    ViewMandalsPage.prototype.gtMandalDetails = function (a) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__mandal_details_mandal_details__["a" /* MandalDetailsPage */], { mandal: a });
-    };
-    ViewMandalsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-view-mandals',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Mandals\view-mandals\view-mandals.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  <ion-content padding>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-4 >\n\n    <ion-item no-lines class="content">\n\n    <h1 class="title" item-start>Mandals</h1>\n\n    </ion-item>\n\n    </ion-col>\n\n    <ion-col col-6 push-2 >\n\n    <ion-searchbar item-end animated="true" placeholder="Search a Mandal" \n\n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n    </ion-col>\n\n    </ion-row>\n\n    </ion-grid>\n\n  \n\n    <ion-grid>\n\n      <ion-navbar color="primary">\n\n        <ion-row>\n\n          <ion-col col-1>\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            <p class="headBar">Mandal</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Villages</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Schools</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Students</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar"></p>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-navbar>\n\n    </ion-grid>\n\n\n\n\n\n    <ion-grid>\n\n        <ion-card *ngFor="let a of area;let i = index">\n\n        <ion-card-content>\n\n          <ion-row>\n\n            <ion-col col-1  >\n\n              <p ion-text><strong>{{i+1}}</strong></p>\n\n            </ion-col>\n\n            <ion-col col-3>\n\n              {{a.Name}}\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Villages}}</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Schools}}</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Students}}0</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <button ion-button clear (click)="gtMandalDetails(a)">Details\n\n                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n\n              </button>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-card-content>\n\n      </ion-card>\n\n    </ion-grid>\n\n\n\n\n\n\n\n  \n\n  \n\n  \n\n  \n\n    <ion-fab right bottom>\n\n      <button ion-fab color="danger" (click)="gtAddArea()" >\n\n        <ion-icon name="add"></ion-icon>\n\n      </button>\n\n    </ion-fab>\n\n    </ion-content>'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Mandals\view-mandals\view-mandals.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
-    ], ViewMandalsPage);
-    return ViewMandalsPage;
-}());
-
-//# sourceMappingURL=view-mandals.js.map
-
-/***/ }),
-
-/***/ 178:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddSchoolsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
@@ -1170,6 +1094,121 @@ var AddSchoolsPage = /** @class */ (function () {
 
 /***/ }),
 
+/***/ 178:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewMandalsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__ = __webpack_require__(76);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_mandals_add_mandals__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mandal_details_mandal_details__ = __webpack_require__(176);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var ViewMandalsPage = /** @class */ (function () {
+    // selArray : Array<any> = [];
+    function ViewMandalsPage(navCtrl, db, toastCtrl, alertCtrl, modalCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.db = db;
+        this.toastCtrl = toastCtrl;
+        this.alertCtrl = alertCtrl;
+        this.modalCtrl = modalCtrl;
+        this.navParams = navParams;
+        this.areaRef = this.db.list('Subs/Mandals', function (ref) { return ref.orderByChild("Name"); });
+        this.area = [];
+        this.areasLoaded = [];
+        this.getAreas();
+    }
+    // addToArr(a){
+    //   switch (a.Checked) {
+    //     case true:  this.selArray.push(a.key);
+    //       break;
+    //     case false:  this.rmFrmArray(a.key);
+    //       break;
+    //   }
+    // }
+    // rmFrmArray(key){
+    //   var ind = this.selArray.indexOf(key);
+    //   this.selArray.splice(ind,1)
+    // }
+    ViewMandalsPage.prototype.getAreas = function () {
+        var _this = this;
+        this.areaRef.snapshotChanges().subscribe(function (snap) {
+            var tempArray = [];
+            snap.forEach(function (snp) {
+                var temp = snp.payload.val();
+                temp.key = snp.key;
+                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(snp.key).child("Schools").once("value", function (schoolsSnap) {
+                    temp.Schools = schoolsSnap.numChildren();
+                });
+                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(snp.key).child("Villages").once("value", function (villageSnap) {
+                    temp.Villages = villageSnap.numChildren();
+                });
+                tempArray.push(temp);
+            });
+            _this.area = tempArray;
+            _this.areasLoaded = tempArray;
+        });
+    };
+    ViewMandalsPage.prototype.initializeItems = function () {
+        this.area = this.areasLoaded;
+    };
+    ViewMandalsPage.prototype.getItems = function (searchbar) {
+        this.initializeItems();
+        var q = searchbar;
+        if (!q) {
+            return;
+        }
+        this.area = this.area.filter(function (v) {
+            if (v.Name && q) {
+                if (v.Name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+                    return true;
+                }
+                return false;
+            }
+        });
+    };
+    ViewMandalsPage.prototype.gtAddArea = function () {
+        var areaAdd = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_4__add_mandals_add_mandals__["a" /* AddMandalsPage */], null, { enableBackdropDismiss: false });
+        areaAdd.present();
+    };
+    ViewMandalsPage.prototype.gtMandalDetails = function (a) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__mandal_details_mandal_details__["a" /* MandalDetailsPage */], { mandal: a });
+    };
+    ViewMandalsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-view-mandals',template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Mandals\view-mandals\view-mandals.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  <ion-content padding>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-4 >\n\n    <ion-item no-lines class="content">\n\n    <h1 class="title" item-start>Mandals</h1>\n\n    </ion-item>\n\n    </ion-col>\n\n    <ion-col col-6 push-2 >\n\n    <ion-searchbar item-end animated="true" placeholder="Search a Mandal" \n\n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n    </ion-col>\n\n    </ion-row>\n\n    </ion-grid>\n\n  \n\n    <ion-grid>\n\n      <ion-navbar color="primary">\n\n        <ion-row>\n\n          <ion-col col-1>\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            <p class="headBar">Mandal</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Villages</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Schools</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Students</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar"></p>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-navbar>\n\n    </ion-grid>\n\n\n\n\n\n    <ion-grid>\n\n        <ion-card *ngFor="let a of area;let i = index">\n\n        <ion-card-content>\n\n          <ion-row>\n\n            <ion-col col-1  >\n\n              <p ion-text><strong>{{i+1}}</strong></p>\n\n            </ion-col>\n\n            <ion-col col-3>\n\n              {{a.Name}}\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Villages}}</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Schools}}</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Students}}0</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <button ion-button clear (click)="gtMandalDetails(a)">Details\n\n                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n\n              </button>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-card-content>\n\n      </ion-card>\n\n    </ion-grid>\n\n\n\n\n\n\n\n  \n\n  \n\n  \n\n  \n\n    <ion-fab right bottom>\n\n      <button ion-fab color="danger" (click)="gtAddArea()" >\n\n        <ion-icon name="add"></ion-icon>\n\n      </button>\n\n    </ion-fab>\n\n    </ion-content>'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\pages\Subs\Mandals\view-mandals\view-mandals.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
+    ], ViewMandalsPage);
+    return ViewMandalsPage;
+}());
+
+//# sourceMappingURL=view-mandals.js.map
+
+/***/ }),
+
 /***/ 179:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1180,7 +1219,7 @@ var AddSchoolsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__ = __webpack_require__(76);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_schools_add_schools__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_schools_add_schools__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__school_details_school_details__ = __webpack_require__(82);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -1526,35 +1565,35 @@ var map = {
 		16
 	],
 	"../pages/Extra/login/login.module": [
-		693,
+		694,
 		15
 	],
 	"../pages/Students/student-details/student-details.module": [
-		694,
+		696,
 		14
 	],
 	"../pages/Students/students/students.module": [
-		695,
+		693,
 		13
 	],
 	"../pages/Subs/Anms/add-amns/add-amns.module": [
-		696,
+		695,
 		12
 	],
 	"../pages/Subs/Anms/anm-details/anm-details.module": [
-		697,
+		700,
 		11
 	],
 	"../pages/Subs/Anms/assign-school/assign-school.module": [
-		698,
+		697,
 		10
 	],
 	"../pages/Subs/Anms/view-amns/view-amns.module": [
-		699,
+		698,
 		9
 	],
 	"../pages/Subs/Mandals/add-mandals/add-mandals.module": [
-		700,
+		699,
 		8
 	],
 	"../pages/Subs/Mandals/mandal-details/mandal-details.module": [
@@ -1562,15 +1601,15 @@ var map = {
 		7
 	],
 	"../pages/Subs/Mandals/view-mandals/view-mandals.module": [
-		702,
+		704,
 		6
 	],
 	"../pages/Subs/Schools/add-schools/add-schools.module": [
-		704,
+		703,
 		5
 	],
 	"../pages/Subs/Schools/school-details/school-details.module": [
-		703,
+		702,
 		4
 	],
 	"../pages/Subs/Schools/view-schools/view-schools.module": [
@@ -1676,7 +1715,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(642);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__ = __webpack_require__(169);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Extra_login_login__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Extra_login_login__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2__ = __webpack_require__(643);
@@ -1685,18 +1724,18 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__ = __webpack_require__(644);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_Subs_Mandals_add_mandals_add_mandals__ = __webpack_require__(175);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_Subs_Villages_add_villages_add_villages__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(179);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_Subs_Schools_add_schools_add_schools__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_Subs_Schools_add_schools_add_schools__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_Subs_Anms_view_amns_view_amns__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_Subs_Anms_add_amns_add_amns__ = __webpack_require__(172);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_Subs_Mandals_mandal_details_mandal_details__ = __webpack_require__(176);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_Subs_Schools_school_details_school_details__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_Subs_Villages_village_details_village_details__ = __webpack_require__(103);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_Students_students_students__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_Students_students_students__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_Students_student_details_student_details__ = __webpack_require__(443);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_Subs_Anms_anm_details_anm_details__ = __webpack_require__(173);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_Subs_Anms_assign_school_assign_school__ = __webpack_require__(174);
@@ -1773,18 +1812,18 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
                         { loadChildren: '../pages/Extra/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/Extra/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/Students/student-details/student-details.module#StudentDetailsPageModule', name: 'StudentDetailsPage', segment: 'student-details', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Students/students/students.module#StudentsPageModule', name: 'StudentsPage', segment: 'students', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/Extra/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Anms/add-amns/add-amns.module#AddAmnsPageModule', name: 'AddAmnsPage', segment: 'add-amns', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/Subs/Anms/anm-details/anm-details.module#AnmDetailsPageModule', name: 'AnmDetailsPage', segment: 'anm-details', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/Students/student-details/student-details.module#StudentDetailsPageModule', name: 'StudentDetailsPage', segment: 'student-details', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Anms/assign-school/assign-school.module#AssignSchoolPageModule', name: 'AssignSchoolPage', segment: 'assign-school', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Anms/view-amns/view-amns.module#ViewAmnsPageModule', name: 'ViewAmnsPage', segment: 'view-amns', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Mandals/add-mandals/add-mandals.module#AddMandalsPageModule', name: 'AddMandalsPage', segment: 'add-mandals', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/Subs/Anms/anm-details/anm-details.module#AnmDetailsPageModule', name: 'AnmDetailsPage', segment: 'anm-details', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Mandals/mandal-details/mandal-details.module#MandalDetailsPageModule', name: 'MandalDetailsPage', segment: 'mandal-details', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/Subs/Mandals/view-mandals/view-mandals.module#ViewMandalsPageModule', name: 'ViewMandalsPage', segment: 'view-mandals', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Schools/school-details/school-details.module#SchoolDetailsPageModule', name: 'SchoolDetailsPage', segment: 'school-details', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Schools/add-schools/add-schools.module#AddSchoolsPageModule', name: 'AddSchoolsPage', segment: 'add-schools', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/Subs/Mandals/view-mandals/view-mandals.module#ViewMandalsPageModule', name: 'ViewMandalsPage', segment: 'view-mandals', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Schools/view-schools/view-schools.module#ViewSchoolsPageModule', name: 'ViewSchoolsPage', segment: 'view-schools', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Villages/add-villages/add-villages.module#AddVillagesPageModule', name: 'AddVillagesPage', segment: 'add-villages', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Villages/view-villages/view-villages.module#ViewVillagesPageModule', name: 'ViewVillagesPage', segment: 'view-villages', priority: 'low', defaultHistory: [] },
@@ -2107,12 +2146,12 @@ webpackContext.id = 624;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_Extra_login_login__ = __webpack_require__(170);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_Extra_login_login__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__ = __webpack_require__(169);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(179);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_Students_students_students__ = __webpack_require__(171);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_Students_students_students__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_Subs_Anms_view_amns_view_amns__ = __webpack_require__(102);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -2158,7 +2197,7 @@ var MyApp = /** @class */ (function () {
                     __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Admin Data").child("Admins").child(user.uid).once('value', function (itemSnap) {
                         if (itemSnap.exists()) {
                             var welMsg = "Welcome" + " " + itemSnap.val().Name;
-                            _this.rootPage = __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__["a" /* DashboardPage */];
+                            _this.rootPage = __WEBPACK_IMPORTED_MODULE_9__pages_Subs_Anms_view_amns_view_amns__["a" /* ViewAmnsPage */];
                             _this.presentToast(welMsg);
                         }
                         else {
@@ -2208,15 +2247,15 @@ var MyApp = /** @class */ (function () {
     };
     __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */]),
-        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */])
+        __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Nav */]) === "function" && _a || Object)
     ], MyApp.prototype, "nav", void 0);
     MyApp = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({template:/*ion-inline-start:"C:\Users\Olympus\Desktop\sa\src\app\app.html"*/'<ion-split-pane  >\n\n  <ion-menu [content]="content" [class.fullPain]="!full" [class.halfPain]="full" >\n\n    <ion-header>\n\n      <ion-toolbar color="dark">\n\n        <h1 *ngIf="full" class="t">Samatha Admin</h1>\n\n      </ion-toolbar>\n\n    </ion-header>\n\n\n\n    <ion-content class="no-scroll bg-semidark">\n\n\n\n      <ion-list no-lines *ngIf="full" >\n\n        <button menuClose color="dark" [class.activeHighlight]="checkActive(p)" \n\n        ion-item *ngFor="let p of pages" (click)="openPage(p)">\n\n          <ion-icon class="menu-icon" item-left [name]="p.icon" [color]="p.color" ></ion-icon>\n\n          {{p.title}}\n\n        </button>\n\n      </ion-list>\n\n\n\n      <ion-list no-lines *ngIf="!full" >\n\n        <button menuClose color="dark" [class.activeHighlight]="checkActive(p)" \n\n        ion-item *ngFor="let p of pages" (click)="openPage(p)" icon-only >\n\n          <ion-icon class="menu-icon" item-left [name]="p.icon" [color]="p.color" ></ion-icon>\n\n        </button>\n\n      </ion-list>\n\n\n\n    </ion-content>\n\n    <ion-footer class="menu-footer">\n\n      <ion-list no-lines>\n\n      <button ion-button block *ngIf="full"  (click)="signOut()" color="danger">\n\n        Sign Out\n\n      </button>\n\n      <button ion-item block icon-only *ngIf="!full" (click)="signOut()" color="danger">\n\n        <ion-icon name="md-power" item-left ></ion-icon>\n\n      </button>\n\n\n\n\n\n      <button menuClose color="dark" *ngIf="full" ion-item (click)="collapse()">\n\n        <ion-icon class="menu-icon" item-end name="md-arrow-dropleft" color="whiter" ></ion-icon>\n\n      </button>\n\n\n\n      <button menuClose color="dark" *ngIf="!full" ion-item (click)="expand()">\n\n        <ion-icon class="menu-icon" item-end name="md-arrow-dropright" color="whiter" ></ion-icon>\n\n      </button>\n\n      </ion-list>\n\n    </ion-footer>\n\n  </ion-menu>\n\n\n\n  <!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n\n  <ion-nav [root]="rootPage" #content main swipeBackEnabled="false"></ion-nav>\n\n</ion-split-pane>'/*ion-inline-end:"C:\Users\Olympus\Desktop\sa\src\app\app.html"*/
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */]])
+        __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["l" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */]) === "function" && _c || Object])
     ], MyApp);
     return MyApp;
+    var _a, _b, _c;
 }());
 
 //# sourceMappingURL=app.component.js.map

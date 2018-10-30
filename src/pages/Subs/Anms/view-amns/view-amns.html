@@ -27,7 +27,9 @@
           <ion-col col-1>
             <ion-checkbox ></ion-checkbox>
           </ion-col>
-          <ion-col col-3>
+          <ion-col col-1>
+          </ion-col>
+          <ion-col col-2>
             <p class="headBar">Name</p>
           </ion-col>
           <ion-col col-2>
@@ -45,15 +47,18 @@
         </ion-row>
       </ion-navbar>
     </ion-grid>
-
+<!-- {{selArray | json}} -->
     <ion-grid>
         <ion-card *ngFor="let a of anms;let i = index">
         <ion-card-content>
           <ion-row>
             <ion-col col-1  >
-              <ion-checkbox></ion-checkbox>
+              <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)" ></ion-checkbox>  
             </ion-col>
-            <ion-col col-3>
+            <ion-col col-1  >
+              <p ion-text><strong>{{i+1}}</strong></p>
+            </ion-col>
+            <ion-col col-2>
               {{a.FirstName}}&nbsp;{{a.LastName}}
             </ion-col>
             <ion-col col-2 text-center >
@@ -66,9 +71,11 @@
               <h1 ion-text color="primary">{{a.Schools}}</h1>
               <button ion-button  clear>View</button>
             </ion-col>
+            <ion-col col-2>
             <button ion-button clear (click)="gtAnmDetails(a)">Details
               <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>
             </button>
+            </ion-col>
 
 
 
@@ -76,14 +83,17 @@
         </ion-card-content>
         </ion-card>
     </ion-grid>    
-    <!-- <ion-item *ngFor= "let a of anms">{{a.FirstName}}</ion-item> -->
 
 
-
-  
-    <ion-fab right bottom>
-      <button ion-fab color="danger" (click)="gtAddANM()" >
+    <ion-fab right bottom *ngIf="!selArray.length">
+      <button ion-fab color="primary" (click)="gtAddANM()" >
         <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab>
+
+    <ion-fab right bottom *ngIf="selArray.length">
+      <button ion-fab color="danger" (click)="delMulC()" >
+        <ion-icon name="md-trash"></ion-icon>
       </button>
     </ion-fab>
     </ion-content>
