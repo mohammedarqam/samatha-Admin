@@ -32,8 +32,8 @@ export class MyApp {
     this.pages = [
       { title: 'DashBoard', component: DashboardPage, icon: "flash",color: "yellowi" },
       { title: "Mandals", component: ViewMandalsPage, icon: "md-pin",color: "whiter" },
-      { title: "Villages", component: ViewVillagesPage, icon: "md-pin",color: "whiter" },
-      { title: "Schools", component: ViewSchoolsPage, icon: "md-pin",color: "whiter" },
+      { title: "Villages", component: ViewVillagesPage, icon: "md-home",color: "whiter" },
+      { title: "Schools", component: ViewSchoolsPage, icon: "md-school",color: "whiter" },
       { title: "ANM's", component: ViewAmnsPage, icon: "ios-people",color: "whiter" },
       { title: "Students", component: StudentsPage, icon: "ios-person",color: "whiter" },
       
@@ -49,7 +49,7 @@ export class MyApp {
         firebase.database().ref("Admin Data").child("Admins").child(user.uid).once('value',itemSnap=>{
             if(itemSnap.exists()){
               var welMsg = "Welcome"+" "+itemSnap.val().Name;
-              this.rootPage = ViewAmnsPage ;
+              this.rootPage = DashboardPage ;
               this.presentToast(welMsg);
             }else{
               firebase.auth().signOut().then(()=>{

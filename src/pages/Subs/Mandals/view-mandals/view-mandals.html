@@ -22,26 +22,26 @@
     </ion-grid>
   
     <ion-grid>
-      <ion-navbar color="primary">
+      <ion-navbar color="primary"  >
         <ion-row>
           <ion-col col-1>
           </ion-col>
-          <ion-col col-3>
+          <ion-col col-2>
             <p class="headBar">Mandal</p>
           </ion-col>
-          <ion-col col-1>
+          <ion-col col-2>
             <p class="headBar">Villages</p>
           </ion-col>
-          <ion-col col-1>
+          <ion-col col-2>
             <p class="headBar">Schools</p>
           </ion-col>
-          <ion-col col-1>
+          <ion-col col-2>
             <p class="headBar">ANMs</p>
           </ion-col>
-          <ion-col col-1>
+          <ion-col col-2>
             <p class="headBar">Students</p>
           </ion-col>
-          <ion-col col-2>
+          <ion-col col-1>
             <p class="headBar"></p>
           </ion-col>
         </ion-row>
@@ -56,24 +56,24 @@
             <ion-col col-1  >
               <p ion-text><strong>{{i+1}}</strong></p>
             </ion-col>
-            <ion-col col-3>
-              {{a.Name}}
-            </ion-col>
-            <ion-col col-1 text-center >
-              <h1 ion-text color="primary">{{a.Villages}}</h1><br/>
-            </ion-col>
-            <ion-col col-1 text-center >
-              <h1 ion-text color="primary">{{a.Schools}}</h1><br/>
-            </ion-col>
-            <ion-col col-1 text-center >
-              <h1 ion-text color="primary">{{a.Anms}}</h1><br/>
-            </ion-col>
-            <ion-col col-1 text-center >
-              <h1 ion-text color="primary">{{a.Students}}0</h1><br/>
+            <ion-col col-2>
+              <h2>{{a.Name}}</h2>
             </ion-col>
             <ion-col col-2 text-center >
+              <h1 ion-text color="primary">{{a.Villages}}</h1><br/>
+            </ion-col>
+            <ion-col col-2 text-center >
+              <h1 ion-text color="primary">{{a.Schools}}</h1><br/>
+            </ion-col>
+            <ion-col col-2 text-center >
+              <h1 ion-text color="primary">{{a.Anms}}</h1><br/>
+            </ion-col>
+            <ion-col col-2 text-center >
+              <h1 ion-text color="primary">{{a.Students}}0</h1><br/>
+            </ion-col>
+            <ion-col col-1 text-center >
               <button ion-button clear (click)="gtMandalDetails(a)">Details
-                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>
+                <!-- <ion-icon padding-left name="md-arrow-round-forward"></ion-icon> -->
               </button>
             </ion-col>
           </ion-row>

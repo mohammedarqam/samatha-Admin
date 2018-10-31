@@ -47,6 +47,8 @@ export class ViewVillagesPage {
         })
         tempArray.push(temp);
       })
+      tempArray.sort(sn=>sn.Schools);
+      tempArray.reverse();
       this.area = tempArray;
       this.areasLoaded = tempArray;
     })

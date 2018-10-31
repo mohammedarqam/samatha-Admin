@@ -17,8 +17,8 @@
 <ion-grid>
 <ion-row>
 
-<ion-col col-2>
-  <ion-card>
+<ion-col col-2 (click)="gtMandals()">
+  <ion-card  >
     <ion-card-content>
       <p class="mNum">{{mandals}}</p>
       <p  class="mText">Mandals</p>
@@ -26,7 +26,7 @@
   </ion-card>
 </ion-col>
 
-<ion-col col-2>
+<ion-col col-2 (click)="gtVillages()" >
   <ion-card>
     <ion-card-content>
       <p class="mNum">{{villages}}</p>
@@ -35,7 +35,7 @@
   </ion-card>
 </ion-col>
 
-<ion-col col-2>
+<ion-col col-2 (click)="gtSchools()" >
   <ion-card>
     <ion-card-content>
       <p class="mNum">{{schools}}</p>
@@ -44,7 +44,7 @@
   </ion-card>
 </ion-col>
 
-<ion-col col-2>
+<ion-col col-2 (click)="gtAnms()" >
   <ion-card>
     <ion-card-content>
       <p class="mNum">{{anms}}</p>

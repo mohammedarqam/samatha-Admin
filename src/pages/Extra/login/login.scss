@@ -3,8 +3,8 @@ page-login {
         overflow: hidden;
       }
       .bg-main {
-        background-image: url("../assets/imgs/blur-bg.jpg");
-        position: fixed;
+        background-image: url("../assets/imgs/t2.png");
+        position: absolute;
         width: 100%;
         height: 100%;
         top: 0;
@@ -23,7 +23,7 @@ page-login {
         -webkit-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
         width: 50%;
-        background-color: rgba(0, 0, 0, 0.55);
+        background-color: rgba(0, 0, 0, 0);
       }
       .signinTitle {
         color: #fff;
@@ -36,10 +36,29 @@ page-login {
         background-color: transparent;
       }
       .input {
-        border: solid 1px;
-        border-color: #209E91;
-        color: #ffffff;
-        margin: 20px;
+        border: solid 1px map-get($colors,primary) ;
+        border-color: map-get($colors,primary);
+        margin: 5px;
+        padding-left : 5%;
+        // background: grey;
       }
-  }
+      .samlog{
+        position: absolute;
+        top: 20%;
+        right: 20%;
+        width: 20%;
+        height: auto;
+      }
+      .logs{
+        width: 30%;
+        position: absolute;
+        right: 15%;
+        top: 60%;
+
+      }
+      .negPad{
+
+      }
+  
+    }
   

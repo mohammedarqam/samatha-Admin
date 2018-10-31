@@ -39,12 +39,12 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #209E91,
+  primary:    #E51A4B,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
   whiter:     #ffffff,
-  dark:       #1C2B36,
+  dark:       #272627,
   yellowi :    yellow,
 );
 
@@ -67,7 +67,7 @@ $colors: (
 // --------------------------------------------------
 // Windows only Sass variables can go here
 
-$split-pane-side-max-width : 300px;
+$split-pane-side-max-width : 200px;
 
 
 

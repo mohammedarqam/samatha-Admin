@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { AngularFireDatabase, snapshotChanges } from '@angular/fire/database';
 import * as firebase from 'firebase';
+import { ViewMandalsPage } from '../../Subs/Mandals/view-mandals/view-mandals';
+import { ViewVillagesPage } from '../../Subs/Villages/view-villages/view-villages';
+import { ViewSchoolsPage } from '../../Subs/Schools/view-schools/view-schools';
+import { ViewAmnsPage } from '../../Subs/Anms/view-amns/view-amns';
 
 @IonicPage()
 @Component({
@@ -78,4 +82,18 @@ public doughnutLegend : boolean = true;
     public chartHovered(e:any):void {
       console.log(e);
     }
-}
+
+
+    gtMandals(){
+      this.navCtrl.push(ViewMandalsPage);
+    }
+    gtVillages(){
+      this.navCtrl.push(ViewVillagesPage);
+    }
+    gtSchools(){
+      this.navCtrl.push(ViewSchoolsPage);
+    }
+    gtAnms(){
+      this.navCtrl.push(ViewAmnsPage);
+    }
+  }
