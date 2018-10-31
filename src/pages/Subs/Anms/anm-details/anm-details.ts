@@ -17,7 +17,6 @@ export class AnmDetailsPage {
   public modalCtrl : ModalController,
   public navParams: NavParams
   ) {
-    console.log(this.anmP);
     
   }
 

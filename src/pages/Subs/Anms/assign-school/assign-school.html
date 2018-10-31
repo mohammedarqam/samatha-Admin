@@ -23,8 +23,14 @@
       <ion-col col-6>
         <ion-card>
           <ion-card-content>
-            <ion-card-title>Current Schools</ion-card-title>
-            <p *ngFor="let j of assignedJobs">{{j.SchoolName}}</p>
+            <ion-card-title color="primary">Current Schools</ion-card-title>
+            <ion-item *ngFor="let j of assignedJobs" >
+              <p item-start>{{j.SchoolName}} </p>
+              <ion-buttons end>
+                <button ion-button clear (click)="gtSchoolDetails(j)">Details</button>
+                <button ion-button color="danger" clear (click)="removeSchoolC(j)">Remove</button>
+              </ion-buttons>
+            </ion-item>
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -32,7 +38,7 @@
         <ion-card>
           <ion-card-content>
 
-            <ion-card-title>Assign School</ion-card-title>
+            <ion-card-title color="primary" >Assign School</ion-card-title>
 
             <ion-item>
               <ion-label floating>Select Mandal</ion-label>

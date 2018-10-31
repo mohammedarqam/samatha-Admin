@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import * as firebase from 'firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
+import { SchoolDetailsPage } from '../../Schools/school-details/school-details';
 
 @IonicPage()
 @Component({
@@ -24,6 +25,8 @@ export class AssignSchoolPage {
 
   anmJobRef = this.db.list(`Anm Assigns/${this.anmJ.key}`);
   assignedJobs: Array<any> = [];
+
+  public detSchool : any; 
   public nVillD: boolean = false;
   public nSchlD: boolean = false;
 
@@ -31,10 +34,10 @@ export class AssignSchoolPage {
     public navCtrl: NavController,
     public toastCtrl: ToastController,
     public db: AngularFireDatabase,
+    public alertCtrl : AlertController,
     public loadingCtrl: LoadingController,
     public navParams: NavParams
   ) {
-    console.log(this.nVillD);
 
     this.getAssignedSchools();
     this.getMandals();
@@ -70,6 +73,66 @@ export class AssignSchoolPage {
       })
     })
   }
+
+
+  gtSchoolDetails(s){
+    firebase.database().ref("Subs").child("Schools").child(s.School).once("value",snap=>{
+      var temp : any = snap.val();
+      temp.key = snap.key;
+      this.detSchool = temp;
+    }).then(()=>{
+      this.navCtrl.push(SchoolDetailsPage,{school : this.detSchool});
+    })
+  }
+  removeSchoolC(js){
+    let alert = this.alertCtrl.create({
+      title: 'Unassign School ?',
+      message: 'This action cannot be Undone ',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Remove',
+          handler: () => {
+            this.removeSchool(js);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  removeSchool(lj){
+    console.log(lj)
+    console.log(this.anmJ)
+    let loading = this.loadingCtrl.create({
+      content: 'Loading Villages ...'
+    });
+    loading.present();
+
+    firebase.database().ref("Anm Assigns").child(this.anmJ.key).child(lj.key).remove().then(()=>{
+      firebase.database().ref("Subs/Schools").child(lj.School).child("ANM").remove().then(()=>{
+        firebase.database().ref("SubsIndex/Mandals").child(lj.Mandal).child("Anms").child(this.anmJ.key).remove().then(()=>{
+          firebase.database().ref("SubsIndex/Villages").child(lj.Village).child("Anms").child(this.anmJ.key).remove().then(()=>{
+              loading.dismiss();
+              this.presentToast("School UnAssigned");
+          })
+        })
+      })
+    })
+  }
+
+
+
+
+
+
+
 
 
 
