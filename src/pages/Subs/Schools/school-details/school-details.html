@@ -9,28 +9,106 @@
 
   <ion-grid>
     <ion-row>
+
+    <ion-col col-6>
+      <ion-row>
+        <ion-card>
+          <ion-card-content>
+            <ion-item>
+              <h2 ion-text color="primary" item-start>Mandal</h2>
+              <h2 item-end>{{mandalName}}</h2>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </ion-row>
+
+      <ion-row>
+        <ion-card>
+          <ion-card-content>
+            <ion-item>
+              <h2 ion-text color="primary" item-start>Village</h2>
+              <h2 item-end>{{vName}}</h2>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+    
+      </ion-row>
+
+
+
+
+    </ion-col>
+      
+
+
+    <ion-col col-6>
+
+      <ion-row >
+        <ion-card>
+          <ion-card-content>
+            <ion-card-title>{{school.Name}}</ion-card-title>
+
+            <ion-item>
+              <p ion-text color="primary" item-start >Management</p>
+              <p item-end>{{school.Management}}</p>
+            </ion-item>
+
+            <ion-item>
+              <p ion-text color="primary" item-start >Progress</p>
+              <p item-end>20%</p>
+            </ion-item>
+
+            <ion-item>
+              <p ion-text color="primary" item-start >ANM</p>
+              <p item-end *ngIf="!school.ANM">Unassigned</p>
+              <p item-end *ngIf="school.ANM">{{school.ANM}}</p>
+            </ion-item>
+            <ion-item>
+              <p ion-text color="primary" item-start >Total Strength</p>
+              <p item-end>{{school.Strength}}</p>
+            </ion-item>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-row>
+
+
+    </ion-col>
+
+
+
+
+
+
+
+
+
+
+
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <ion-grid>
+    <ion-row>
       <ion-col col-6>
       
-        <ion-card>
-      <ion-card-content>
-        <ion-item>
-          <h2 ion-text color="primary" item-start>Mandal</h2>
-          <h2 item-end>{{mandalName}}</h2>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
     </ion-col>
     </ion-row>
     <ion-row>
       <ion-col col-6>
-    <ion-card>
-      <ion-card-content>
-        <ion-item>
-          <h2 ion-text color="primary" item-start>Village</h2>
-          <h2 item-end>{{vName}}</h2>
-        </ion-item>
-      </ion-card-content>
-    </ion-card>
     </ion-col>
     </ion-row>
   </ion-grid>  

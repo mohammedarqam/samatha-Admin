@@ -13,13 +13,14 @@ import { VillageDetailsPage } from '../village-details/village-details';
 })
 export class ViewVillagesPage {
 
-  areaRef =this.db.list('Subs/Villages');
+  areaRef =this.db.list('Subs/Villages', ref=>ref.orderByChild("Name"));
   area: Array<any> = [];
   areasLoaded: Array<any> = [];
 
+  allRef = this.areaRef;
 
-
-  areaFRef = firebase.database().ref("Subs/Villages");
+  mandals : Array<any> =[];
+  selMandal : string;
 
   constructor(
   public navCtrl: NavController, 
@@ -30,11 +31,17 @@ export class ViewVillagesPage {
   public navParams: NavParams,
   public menuCtrl : MenuController,
   ) {
+    this.getMandals();
     this.getAreas();
   }
 
+  mandalFilter(m){
+    console.log(m)
+  }
+
+
   getAreas(){
-    this.areaRef.snapshotChanges().subscribe(snap=>{
+    this.allRef.snapshotChanges().subscribe(snap=>{
       let tempArray = [];
       snap.forEach(snp=>{
         let temp : any = snp.payload.val();
@@ -72,6 +79,15 @@ export class ViewVillagesPage {
     });
   }
 
+  getMandals(){
+    this.db.list("Subs/Mandals", ref=>ref.orderByChild("Name")).snapshotChanges().subscribe(itemSnap=>{
+      itemSnap.forEach(snap=>{
+        var temp : any = snap.payload.val();
+        temp.key = snap.key;
+        this.mandals.push(temp);
+      })
+    })
+  }
 
 
   gtAddArea(){
