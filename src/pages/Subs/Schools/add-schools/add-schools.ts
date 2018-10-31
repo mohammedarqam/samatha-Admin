@@ -14,6 +14,8 @@ export class AddSchoolsPage {
   name : string="";
   str : string="";
 
+  manage : string;
+
   areaRef = firebase.database().ref("Subs/Schools");
 
   mandals : Array<any> = [];
@@ -54,20 +56,29 @@ export class AddSchoolsPage {
       content: 'Loading Villages ...'
     });
     loading.present();
-
+    
     firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Villages").once("value",snap=>{
       this.villages = [];
+      if(snap.exists()){
       snap.forEach(snp=>{
         firebase.database().ref("Subs/Villages").child(snp.key).once("value",vil=>{
           var temp : any = vil.val();
           temp.key = vil.key;
           this.villages.push(temp);
-        }).then(()=>{
+          this.villages.reverse();
+        }).catch((er)=>{
+          console.log(er);
+        }) .then(()=>{
           loading.dismiss();
         })
       })
+    }else{
+      loading.dismiss();
+      this.presentToast("No Villages Found")
+    }
     })
   }
+  
 
   getSchools(){
     this.schoolRef.snapshotChanges().subscribe(snap=>{
@@ -113,6 +124,7 @@ export class AddSchoolsPage {
       Mandal : this.mandalSel,
       Village  :this.villageSel,
       Strength  : this.str,
+      Management : this.manage,
       TimeStamp : moment().format()
     }).then((res)=>{
         firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Schools").child(res.key).set(true).then(()=>{

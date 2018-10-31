@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary" >
-    <ion-title>Add Amns</ion-title>
+    <ion-title>Add ANMs</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -11,17 +11,17 @@
   <ion-card-content>
 
   <ion-item>
-    <ion-label floating>First Name</ion-label>
+    <ion-label stacked>First Name</ion-label>
     <ion-input type="text" autofocus [(ngModel)]="fName" ></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Last Name</ion-label>
+    <ion-label stacked>Last Name</ion-label>
     <ion-input type="text" [(ngModel)]="lName" ></ion-input>
   </ion-item>
 
   <ion-item>
-  <ion-label floating>Gender</ion-label>
+  <ion-label stacked>Gender</ion-label>
   <ion-select [(ngModel)]="gender">
     <ion-option value="Male">Male</ion-option>
     <ion-option value="Female">Female</ion-option>
@@ -30,22 +30,22 @@
 </ion-item>
 
   <ion-item>
-    <ion-label floating>Email</ion-label>
+    <ion-label stacked>Email</ion-label>
     <ion-input type="text" [(ngModel)]="email"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Phone Number</ion-label>
+    <ion-label stacked>Phone Number</ion-label>
     <ion-input type="number" [(ngModel)]="phone"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Password</ion-label>
+    <ion-label stacked>Password</ion-label>
     <ion-input type="text" (ionChange)="checkPasses()" [(ngModel)]="pass"></ion-input>
   </ion-item>
 
   <ion-item>
-    <ion-label floating>Confirm Password</ion-label>
+    <ion-label stacked>Confirm Password</ion-label>
     <ion-input type="text" (ionChange)="checkPasses()" [(ngModel)]="cPass"></ion-input>
   </ion-item>
 

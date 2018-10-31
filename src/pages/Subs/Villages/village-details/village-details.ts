@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { SchoolDetailsPage } from '../../Schools/school-details/school-details';
 import { AnmDetailsPage } from '../../Anms/anm-details/anm-details';
+import * as firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -21,14 +22,22 @@ export class VillageDetailsPage {
   anms : Array<any> = [];
   showAnms : boolean = false;
 
+  mandalName : string;
 
   constructor(
   public navCtrl: NavController, 
   public db : AngularFireDatabase,
   public navParams: NavParams
   ) {
+    this.getMandal();
+    console.log(this.village); 
     this.getSchools();
     this.getAnms();
+  }
+  getMandal(){
+      firebase.database().ref("Subs/Mandals").child(this.village.Mandal).once("value",snap=>{
+          this.mandalName = snap.val().Name;
+      })    
   }
 
   getSchools(){

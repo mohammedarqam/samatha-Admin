@@ -15,9 +15,9 @@ export class AddAmnsPage {
   adminPass : string;
 
   fName : string;
-  lName :  string;
+  lName :  string='';
   gender : string;
-  email : string;
+  email : string='';
   phone : string;
   pass : string;
   cPass : string;
@@ -46,6 +46,10 @@ export class AddAmnsPage {
     firebase.database().ref("Admin Data/Admins").child(adminId).once("value",snap=>{
       this.adminEmail = snap.val().Email;
       this.adminPass = snap.val().Password;
+    }).catch((err)=>{
+      var e = err;
+      this.presentToast(e)
+      loading.dismiss();
     }).then(()=>{
       loading.dismiss();
     })

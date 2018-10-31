@@ -25,6 +25,7 @@ constructor(
   public menuCtrl : MenuController,
   public navParams: NavParams
   ) {
+    this.menuCtrl.enable(true);
     this.getAreas();
 }
 
