@@ -1614,6 +1614,126 @@ var ViewSchoolsPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewVillagesPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__ = __webpack_require__(78);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_villages_add_villages__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__village_details_village_details__ = __webpack_require__(104);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+var ViewVillagesPage = /** @class */ (function () {
+    function ViewVillagesPage(navCtrl, db, toastCtrl, alertCtrl, modalCtrl, navParams, menuCtrl) {
+        this.navCtrl = navCtrl;
+        this.db = db;
+        this.toastCtrl = toastCtrl;
+        this.alertCtrl = alertCtrl;
+        this.modalCtrl = modalCtrl;
+        this.navParams = navParams;
+        this.menuCtrl = menuCtrl;
+        this.areaRef = this.db.list('Subs/Villages', function (ref) { return ref.orderByChild("Name"); });
+        this.area = [];
+        this.areasLoaded = [];
+        this.allRef = this.areaRef;
+        this.mandals = [];
+        this.getMandals();
+        this.getAreas();
+    }
+    ViewVillagesPage.prototype.mandalFilter = function (m) {
+        console.log(m);
+    };
+    ViewVillagesPage.prototype.getAreas = function () {
+        var _this = this;
+        this.allRef.snapshotChanges().subscribe(function (snap) {
+            var tempArray = [];
+            snap.forEach(function (snp) {
+                var temp = snp.payload.val();
+                temp.key = snp.key;
+                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Villages").child(snp.key).child("Schools").once("value", function (schoolsSnap) {
+                    temp.Schools = schoolsSnap.numChildren();
+                });
+                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Villages").child(snp.key).child("Anms").once("value", function (anmSnap) {
+                    temp.Anms = anmSnap.numChildren();
+                });
+                tempArray.push(temp);
+            });
+            _this.area = tempArray;
+            _this.areasLoaded = tempArray;
+        });
+    };
+    ViewVillagesPage.prototype.initializeItems = function () {
+        this.area = this.areasLoaded;
+    };
+    ViewVillagesPage.prototype.getItems = function (searchbar) {
+        this.initializeItems();
+        var q = searchbar;
+        if (!q) {
+            return;
+        }
+        this.area = this.area.filter(function (v) {
+            if (v.Name && q) {
+                if (v.Name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+                    return true;
+                }
+                return false;
+            }
+        });
+    };
+    ViewVillagesPage.prototype.getMandals = function () {
+        var _this = this;
+        this.db.list("Subs/Mandals", function (ref) { return ref.orderByChild("Name"); }).snapshotChanges().subscribe(function (itemSnap) {
+            itemSnap.forEach(function (snap) {
+                var temp = snap.payload.val();
+                temp.key = snap.key;
+                _this.mandals.push(temp);
+            });
+        });
+    };
+    ViewVillagesPage.prototype.gtAddArea = function () {
+        var areaAdd = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_4__add_villages_add_villages__["a" /* AddVillagesPage */], null, { enableBackdropDismiss: false });
+        areaAdd.present();
+    };
+    ViewVillagesPage.prototype.gtVillageDetails = function (v) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__village_details_village_details__["a" /* VillageDetailsPage */], { village: v });
+    };
+    ViewVillagesPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-view-villages',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Villages\view-villages\view-villages.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  <ion-content padding>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-4 >\n\n    <ion-item no-lines class="content">\n\n    <h1 class="title" item-start>Villages</h1>\n\n    </ion-item>\n\n    </ion-col>\n\n    <ion-col col-6 push-2 >\n\n    <ion-searchbar item-end animated="true" placeholder="Search a Village" \n\n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n    </ion-col>\n\n    </ion-row>\n\n    </ion-grid>\n\n    \n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-6 push-6>\n\n    <ion-item>\n\n      <ion-label>Select Mandal</ion-label>\n\n      <ion-select [(ngModel)]="selMandal">\n\n        <ion-option *ngFor="let m of mandals" (ionChange)="mandalFilter(m)" [value]="m.key" >{{m.Name}}</ion-option>\n\n      </ion-select>\n\n    </ion-item>\n\n    </ion-col>\n\n    </ion-row>\n\n    </ion-grid>\n\n\n\n\n\n\n\n\n\n    <ion-grid>\n\n      <ion-navbar color="primary">\n\n        <ion-row>\n\n          <ion-col col-1>\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            <p class="headBar">Villages</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Schools</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Anms</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Students</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar"></p>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-navbar>\n\n    </ion-grid>\n\n\n\n\n\n    <ion-grid>\n\n        <ion-card *ngFor="let a of area;let i = index">\n\n        <ion-card-content>\n\n          <ion-row>\n\n            <ion-col col-1  >\n\n              <p ion-text><strong>{{i+1}}</strong></p>\n\n            </ion-col>\n\n            <ion-col col-3>\n\n              {{a.Name}}\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Schools}}</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Anms}}</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Students}}0</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <button ion-button clear (click)="gtVillageDetails(a)">Details\n\n                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n\n              </button>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-card-content>\n\n      </ion-card>\n\n    </ion-grid>\n\n  \n\n  \n\n  \n\n  \n\n    <ion-fab right bottom>\n\n      <button ion-fab color="danger" (click)="gtAddArea()" >\n\n        <ion-icon name="add"></ion-icon>\n\n      </button>\n\n    </ion-fab>\n\n    </ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Villages\view-villages\view-villages.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */]])
+    ], ViewVillagesPage);
+    return ViewVillagesPage;
+}());
+
+//# sourceMappingURL=view-villages.js.map
+
+/***/ }),
+
+/***/ 183:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddVillagesPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
@@ -1738,121 +1858,6 @@ var AddVillagesPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 183:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewVillagesPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__ = __webpack_require__(78);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_villages_add_villages__ = __webpack_require__(182);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__village_details_village_details__ = __webpack_require__(104);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-var ViewVillagesPage = /** @class */ (function () {
-    function ViewVillagesPage(navCtrl, db, toastCtrl, alertCtrl, modalCtrl, navParams, menuCtrl) {
-        this.navCtrl = navCtrl;
-        this.db = db;
-        this.toastCtrl = toastCtrl;
-        this.alertCtrl = alertCtrl;
-        this.modalCtrl = modalCtrl;
-        this.navParams = navParams;
-        this.menuCtrl = menuCtrl;
-        this.areaRef = this.db.list('Subs/Villages', function (ref) { return ref.orderByChild("Name"); });
-        this.area = [];
-        this.areasLoaded = [];
-        this.allRef = this.areaRef;
-        this.mandals = [];
-        this.getMandals();
-        this.getAreas();
-    }
-    ViewVillagesPage.prototype.mandalFilter = function (m) {
-        console.log(m);
-    };
-    ViewVillagesPage.prototype.getAreas = function () {
-        var _this = this;
-        this.allRef.snapshotChanges().subscribe(function (snap) {
-            var tempArray = [];
-            snap.forEach(function (snp) {
-                var temp = snp.payload.val();
-                temp.key = snp.key;
-                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Villages").child(snp.key).child("Schools").once("value", function (schoolsSnap) {
-                    temp.Schools = schoolsSnap.numChildren();
-                });
-                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Villages").child(snp.key).child("Anms").once("value", function (anmSnap) {
-                    temp.Anms = anmSnap.numChildren();
-                });
-                tempArray.push(temp);
-            });
-            _this.area = tempArray;
-            _this.areasLoaded = tempArray;
-        });
-    };
-    ViewVillagesPage.prototype.initializeItems = function () {
-        this.area = this.areasLoaded;
-    };
-    ViewVillagesPage.prototype.getItems = function (searchbar) {
-        this.initializeItems();
-        var q = searchbar;
-        if (!q) {
-            return;
-        }
-        this.area = this.area.filter(function (v) {
-            if (v.Name && q) {
-                if (v.Name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
-                    return true;
-                }
-                return false;
-            }
-        });
-    };
-    ViewVillagesPage.prototype.getMandals = function () {
-        var _this = this;
-        this.db.list("Subs/Mandals", function (ref) { return ref.orderByChild("Name"); }).snapshotChanges().subscribe(function (itemSnap) {
-            itemSnap.forEach(function (snap) {
-                var temp = snap.payload.val();
-                temp.key = snap.key;
-                _this.mandals.push(temp);
-            });
-        });
-    };
-    ViewVillagesPage.prototype.gtAddArea = function () {
-        var areaAdd = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_4__add_villages_add_villages__["a" /* AddVillagesPage */], null, { enableBackdropDismiss: false });
-        areaAdd.present();
-    };
-    ViewVillagesPage.prototype.gtVillageDetails = function (v) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__village_details_village_details__["a" /* VillageDetailsPage */], { village: v });
-    };
-    ViewVillagesPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-view-villages',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Villages\view-villages\view-villages.html"*/'<ion-header>\n\n    <ion-navbar color="primary">\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n    </ion-navbar>\n\n  </ion-header>\n\n  \n\n  <ion-content padding>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-4 >\n\n    <ion-item no-lines class="content">\n\n    <h1 class="title" item-start>Villages</h1>\n\n    </ion-item>\n\n    </ion-col>\n\n    <ion-col col-6 push-2 >\n\n    <ion-searchbar item-end animated="true" placeholder="Search a Village" \n\n    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n    </ion-col>\n\n    </ion-row>\n\n    </ion-grid>\n\n    \n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-6 push-6>\n\n    <ion-item>\n\n      <ion-label>Select Mandal</ion-label>\n\n      <ion-select [(ngModel)]="selMandal">\n\n        <ion-option *ngFor="let m of mandals" (ionChange)="mandalFilter(m)" [value]="m.key" >{{m.Name}}</ion-option>\n\n      </ion-select>\n\n    </ion-item>\n\n    </ion-col>\n\n    </ion-row>\n\n    </ion-grid>\n\n\n\n\n\n\n\n\n\n    <ion-grid>\n\n      <ion-navbar color="primary">\n\n        <ion-row>\n\n          <ion-col col-1>\n\n          </ion-col>\n\n          <ion-col col-3>\n\n            <p class="headBar">Villages</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Schools</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Anms</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar">Students</p>\n\n          </ion-col>\n\n          <ion-col col-2>\n\n            <p class="headBar"></p>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-navbar>\n\n    </ion-grid>\n\n\n\n\n\n    <ion-grid>\n\n        <ion-card *ngFor="let a of area;let i = index">\n\n        <ion-card-content>\n\n          <ion-row>\n\n            <ion-col col-1  >\n\n              <p ion-text><strong>{{i+1}}</strong></p>\n\n            </ion-col>\n\n            <ion-col col-3>\n\n              {{a.Name}}\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Schools}}</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Anms}}</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <h1 ion-text color="primary">{{a.Students}}0</h1><br/>\n\n            </ion-col>\n\n            <ion-col col-2 text-center >\n\n              <button ion-button clear (click)="gtVillageDetails(a)">Details\n\n                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>\n\n              </button>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-card-content>\n\n      </ion-card>\n\n    </ion-grid>\n\n  \n\n  \n\n  \n\n  \n\n    <ion-fab right bottom>\n\n      <button ion-fab color="danger" (click)="gtAddArea()" >\n\n        <ion-icon name="add"></ion-icon>\n\n      </button>\n\n    </ion-fab>\n\n    </ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Villages\view-villages\view-villages.html"*/,
-        }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__["AngularFireDatabase"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["m" /* ToastController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["a" /* AlertController */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */]) === "function" && _g || Object])
-    ], ViewVillagesPage);
-    return ViewVillagesPage;
-    var _a, _b, _c, _d, _e, _f, _g;
-}());
-
-//# sourceMappingURL=view-villages.js.map
-
-/***/ }),
-
 /***/ 221:
 /***/ (function(module, exports) {
 
@@ -1939,15 +1944,15 @@ var map = {
 		3
 	],
 	"../pages/Subs/Villages/add-villages/add-villages.module": [
-		710,
+		712,
 		2
 	],
 	"../pages/Subs/Villages/view-villages/view-villages.module": [
-		711,
+		710,
 		1
 	],
 	"../pages/Subs/Villages/village-details/village-details.module": [
-		712,
+		711,
 		0
 	]
 };
@@ -2048,8 +2053,8 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(179);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_Subs_Mandals_add_mandals_add_mandals__ = __webpack_require__(177);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(183);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_Subs_Villages_add_villages_add_villages__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(182);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_Subs_Villages_add_villages_add_villages__ = __webpack_require__(183);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_Subs_Schools_add_schools_add_schools__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_Subs_Anms_view_amns_view_amns__ = __webpack_require__(103);
@@ -2155,9 +2160,9 @@ var AppModule = /** @class */ (function () {
                         { loadChildren: '../pages/Subs/Schools/add-schools/add-schools.module#AddSchoolsPageModule', name: 'AddSchoolsPage', segment: 'add-schools', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Schools/school-details/school-details.module#SchoolDetailsPageModule', name: 'SchoolDetailsPage', segment: 'school-details', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Schools/view-schools/view-schools.module#ViewSchoolsPageModule', name: 'ViewSchoolsPage', segment: 'view-schools', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/Subs/Villages/add-villages/add-villages.module#AddVillagesPageModule', name: 'AddVillagesPage', segment: 'add-villages', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Villages/view-villages/view-villages.module#ViewVillagesPageModule', name: 'ViewVillagesPage', segment: 'view-villages', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/Subs/Villages/village-details/village-details.module#VillageDetailsPageModule', name: 'VillageDetailsPage', segment: 'village-details', priority: 'low', defaultHistory: [] }
+                        { loadChildren: '../pages/Subs/Villages/village-details/village-details.module#VillageDetailsPageModule', name: 'VillageDetailsPage', segment: 'village-details', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/Subs/Villages/add-villages/add-villages.module#AddVillagesPageModule', name: 'AddVillagesPage', segment: 'add-villages', priority: 'low', defaultHistory: [] }
                     ]
                 }),
                 __WEBPACK_IMPORTED_MODULE_7_angularfire2__["AngularFireModule"].initializeApp(firebaseCred),
@@ -2587,7 +2592,7 @@ webpackContext.id = 626;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_Extra_login_login__ = __webpack_require__(171);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__ = __webpack_require__(170);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(179);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_Students_students_students__ = __webpack_require__(172);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_Subs_Anms_view_amns_view_amns__ = __webpack_require__(103);
