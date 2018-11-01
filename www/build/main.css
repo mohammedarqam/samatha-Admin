@@ -30601,6 +30601,10 @@ page-dashboard .mText {
   text-align: center;
 }
 
+page-dashboard .curs {
+  cursor: pointer;
+}
+
 page-login .scroll-content {
   overflow: hidden;
 }
@@ -30663,6 +30667,18 @@ page-login .logs {
   position: absolute;
   right: 15%;
   top: 60%;
+}
+
+page-students .headBar {
+  color: #fff;
+  padding: 0 12px 0 12px;
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+page-students .titlCol {
+  text-align: left;
 }
 
 page-add-amns ion-select, page-add-amns ion-input {

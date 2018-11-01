@@ -25,7 +25,6 @@
       <ion-navbar color="primary">
         <ion-row>
           <ion-col col-1>
-            <ion-checkbox ></ion-checkbox>
           </ion-col>
           <ion-col col-1>
           </ion-col>
@@ -33,7 +32,7 @@
             <p class="headBar">Name</p>
           </ion-col>
           <ion-col col-2>
-            <p class="headBar">Progress </p>
+            <p class="headBar">Progress %</p>
           </ion-col>
           <ion-col col-2>
             <p class="headBar">Phone No.</p>
@@ -48,7 +47,7 @@
       </ion-navbar>
     </ion-grid>
 
-    <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button>
+    <!-- <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button> -->
 
     <ion-grid>
         <ion-card *ngFor="let a of anms;let i = index">
@@ -71,7 +70,6 @@
             </ion-col>
             <ion-col col-2 text-center >
               <h1 ion-text color="primary">{{a.Schools}}</h1>
-              <button ion-button  clear>View</button>
             </ion-col>
             <ion-col col-2>
             <button ion-button clear (click)="gtAnmDetails(a)">Details

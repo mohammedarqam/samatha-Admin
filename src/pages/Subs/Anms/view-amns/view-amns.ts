@@ -34,15 +34,17 @@ export class ViewAmnsPage {
 
   getAnms(){
     this.anmRef.snapshotChanges().subscribe(snap=>{
-      this.anms = [];
+      let tempArray = [];
       snap.forEach(snp=>{
         var temp : any  =snp.payload.val();
         temp.key = snp.key;
         firebase.database().ref("Anm Assigns").child(temp.key).once("value",itemSnap=>{
           temp.Schools = itemSnap.numChildren();
         })
-        this.anms.push(temp);
+        tempArray.push(temp);
       })
+      this.anms = tempArray;
+      this.anmsLoaded = tempArray;
     })
   }
 
@@ -57,7 +59,7 @@ export class ViewAmnsPage {
     }
     this.anms = this.anms.filter((v) => {
       if(v.FirstName && q) {
-        if (v.Name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+        if (v.FirstName.toLowerCase().indexOf(q.toLowerCase()) > -1) {
           return true;
         }
         return false;

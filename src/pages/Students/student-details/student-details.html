@@ -1,18 +1,99 @@
-<!--
-  Generated template for the StudentDetailsPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>studentDetails</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Student Details</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <ion-row>
+          <ion-card>
+            <ion-card-content>
+              <ion-card-title>{{student.StudentName}}</ion-card-title>
 
+              <ion-item>
+                <p item-start ion-text color="primary">Mobile </p>
+                <p item-end >{{student.Mobile}} </p>
+              </ion-item>
+
+              <ion-item>
+                <p item-start ion-text color="primary">Age</p>
+                <p item-end >{{student.Age}} </p>
+              </ion-item>
+
+              <ion-item>
+                <p item-start ion-text color="primary">HBL </p>
+                <p item-end >{{student.HBL}} </p>
+              </ion-item>
+
+              <ion-item>
+                <p item-start ion-text color="primary">Community </p>
+                <p item-end >{{student.Community}} </p>
+              </ion-item>
+
+              <ion-item>
+                <p item-start ion-text color="primary"> Aadhar</p>
+                <p item-end >{{student.Aadhar}} </p>
+              </ion-item>
+
+              <ion-item>
+                <p item-start ion-text color="primary">Address </p>
+                <p item-end >{{student.Address}} </p>
+              </ion-item>
+
+              <ion-item>
+                <p item-start ion-text color="primary">Community </p>
+                <p item-end >{{student.Community}} </p>
+              </ion-item>
+
+              <ion-item>
+                <p item-start ion-text color="primary">Height</p>
+                <p item-end >{{student.Height}} </p>
+              </ion-item>
+
+              <ion-item>
+                <p item-start ion-text color="primary">Weight </p>
+                <p item-end >{{student.Weight}} </p>
+              </ion-item>
+
+              <ion-item>
+                <p item-start ion-text color="primary">Class </p>
+                <p item-end >{{student.Class}} </p>
+              </ion-item>
+
+              <ion-item>
+                <p item-start ion-text color="primary"> Date of Entry</p>
+                <p item-end >{{student.EntryDate | date: 'dd/MM/yyyy' }} </p>
+              </ion-item>
+
+              
+              <!-- <ion-item>
+                <p item-start ion-text color="primary"> </p>
+                <p item-end >{{student.}} </p>
+              </ion-item> -->
+
+            </ion-card-content>
+          </ion-card>
+
+        </ion-row>
+      </ion-col>
+      <ion-col col-6>
+        <ion-row>
+          <ion-card>
+            <ion-card-content>
+              <ion-card-title>Follow Ups</ion-card-title>
+              <ion-item>
+                <p item-start ion-text color="primary">First Check Up </p>
+                <p item-end >{{student.EntryDate | date: 'dd/MM/yyyy'}} </p>
+              </ion-item>
+
+            </ion-card-content>
+          </ion-card>
+        </ion-row>
+      </ion-col>
+</ion-row>
+</ion-grid>
 </ion-content>
