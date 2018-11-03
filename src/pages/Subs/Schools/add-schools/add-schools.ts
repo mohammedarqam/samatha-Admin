@@ -12,7 +12,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class AddSchoolsPage {
   name : string="";
-  str : string="";
 
   manage : string;
 
@@ -93,11 +92,7 @@ export class AddSchoolsPage {
 
   checkData(){
     if(this.name){
-      if(this.str){
         this.checkDataInDb();
-      }else{
-        this.presentToast("Enter School Strength")
-      }
     }else{  
       this.presentToast("School Name Empty")
     }
@@ -115,7 +110,7 @@ export class AddSchoolsPage {
 
   addCat(){
     let loading = this.loadingCtrl.create({
-      content: 'Adding Village ...'
+      content: 'Adding School ...'
     });
     loading.present();
 
@@ -123,7 +118,6 @@ export class AddSchoolsPage {
       Name : this.name,
       Mandal : this.mandalSel,
       Village  :this.villageSel,
-      Strength  : this.str,
       Management : this.manage,
       TimeStamp : moment().format()
     }).then((res)=>{

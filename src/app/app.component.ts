@@ -9,7 +9,6 @@ import { ViewVillagesPage } from '../pages/Subs/Villages/view-villages/view-vill
 import { ViewSchoolsPage } from '../pages/Subs/Schools/view-schools/view-schools';
 import { StudentsPage } from '../pages/Students/students/students';
 import { ViewAmnsPage } from '../pages/Subs/Anms/view-amns/view-amns';
-import { AddAmnsPage } from '../pages/Subs/Anms/add-amns/add-amns';
 @Component({
   templateUrl: 'app.html'
 })
@@ -22,6 +21,8 @@ export class MyApp {
   full : boolean = true;
 
   pages: Array<{ title: string, component: any, icon: any, color : string }>;
+
+
 
   constructor(
     public platform: Platform,    
@@ -48,9 +49,7 @@ export class MyApp {
         if (user) {
         firebase.database().ref("Admin Data").child("Admins").child(user.uid).once('value',itemSnap=>{
             if(itemSnap.exists()){
-              var welMsg = "Welcome"+" "+itemSnap.val().Name;
-              this.rootPage = DashboardPage;
-              this.presentToast(welMsg);
+              this.rootPage = ViewMandalsPage;
             }else{
               firebase.auth().signOut().then(()=>{
                 this.rootPage = LoginPage;

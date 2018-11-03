@@ -15,100 +15,21 @@
 </ion-item>
 
 <ion-grid>
-<ion-row>
-
-<ion-col col-2 (click)="gtMandals()" class="curs">
-  <ion-card  >
-    <ion-card-content>
-      <p class="mNum">{{mandals}}</p>
-      <p  class="mText">Mandals</p>
-    </ion-card-content>
-  </ion-card>
-</ion-col>
-
-<ion-col col-2 (click)="gtVillages()" class="curs">
-  <ion-card>
-    <ion-card-content>
-      <p class="mNum">{{villages}}</p>
-      <p  class="mText">Villages</p>
-    </ion-card-content>
-  </ion-card>
-</ion-col>
-
-<ion-col col-2 (click)="gtSchools()" class="curs" >
-  <ion-card>
-    <ion-card-content>
-      <p class="mNum">{{schools}}</p>
-      <p  class="mText">Schools</p>
-    </ion-card-content>
-  </ion-card>
-</ion-col>
-
-<ion-col col-2 (click)="gtAnms()" class="curs" >
-  <ion-card>
-    <ion-card-content>
-      <p class="mNum">{{anms}}</p>
-      <p  class="mText">ANMs</p>
-    </ion-card-content>
-  </ion-card>
-</ion-col>
-
-<ion-col col-2 (click)="gtStudents()" class="curs" >
-  <ion-card>
-    <ion-card-content>
-      <p class="mNum">{{students}}</p>
-      <p  class="mText">Students</p>
-    </ion-card-content>
-  </ion-card>
-</ion-col>
-
-
-</ion-row>
-<ion-row>
-  <ion-col col-6>
-    <ion-card>
-      <ion-card-content>
-        <ion-card-title color="primary">Schools Status</ion-card-title>
-        <div style="display: block">
-          <canvas baseChart
-                      [data]="doughnutChartData"
-                      [labels]="doughnutChartLabels"
-                      [legend]="doughnutLegend"
-                      [chartType]="doughnutChartType"
-                      (chartHover)="chartHovered($event)"
-                      (chartClick)="chartClicked($event)"></canvas>
-        </div>
-      </ion-card-content>
-    </ion-card>
-  </ion-col>
-  <ion-col col-6>
-    <ion-card>
-      <ion-card-content>
-        <ion-card-title color="primary" >Anaemia in total Wanaparthy</ion-card-title>
-    <div style="display: block">
-      <canvas baseChart
-              [datasets]="barChartData"
-              [labels]="barChartLabels"
-              [options]="barChartOptions"
-              [legend]="barChartLegend"
-              [chartType]="barChartType"
-              (chartHover)="chartHovered1($event)"
-              (chartClick)="chartClicked1($event)"></canvas>
-    </div>
-    </ion-card-content>
-    </ion-card>
-</ion-col>
-
-
-
-
-
-
-</ion-row>
-
-
-
-
-
+  <ion-row>
+    <ion-col col-3>
+      <ion-item class="content  " >
+        <ion-label floating>Mandal</ion-label>
+        <ion-select  [(ngModel)]="mandalSel" multiple="true" interface="popover" >
+          <ion-option *ngFor="let m of mandals" [value]="m.Name" >{{m.Name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-col>
+  </ion-row>
 </ion-grid>
+
+
+
+
+
+
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ToastController, LoadingController } from 'ionic-angular';
 import * as firebase from 'firebase';
 import moment from 'moment';
 import { AngularFireDatabase } from 'angularfire2/database';
@@ -22,6 +22,7 @@ export class AddMandalsPage {
   public viewCtrl : ViewController,
   public db : AngularFireDatabase,
   public toastCtrl : ToastController,
+  public loadingCtrl : LoadingController,
   public navParams: NavParams
   ) {
     this.getAreas();
@@ -43,11 +44,16 @@ export class AddMandalsPage {
     }
   }
   addCat(){
+    let loading = this.loadingCtrl.create({
+      content: 'Adding Mandal ...'
+    });
+    loading.present();
     this.areaRef.push({
       Name : this.name,
       TimeStamp : moment().format()
     }).then(()=>{
       this.close();
+      loading.dismiss()
     })
   }
 

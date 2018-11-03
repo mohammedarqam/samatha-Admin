@@ -14,8 +14,7 @@ export class AddAmnsPage {
   adminEmail : string;
   adminPass : string;
 
-  fName : string;
-  lName :  string='';
+  name : string;
   gender : string;
   email : string='';
   phone : string;
@@ -80,8 +79,7 @@ export class AddAmnsPage {
       var genEmail = this.phone + "@samatha.anm";
       firebase.auth().createUserWithEmailAndPassword(genEmail,this.pass).then(()=>{
         firebase.database().ref("Anms").child(firebase.auth().currentUser.uid).set({
-          FirstName : this.fName,
-          LastName : this.lName,
+          Name : this.name,
           Gender : this.gender,
           Email : this.email,
           Phone : this.phone,

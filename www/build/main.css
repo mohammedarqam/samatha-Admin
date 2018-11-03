@@ -30590,6 +30590,10 @@ ion-menu .activeHighlight {
   max-width: 20% !important;
 }
 
+.curs {
+  cursor: pointer;
+}
+
 page-dashboard .mNum {
   text-align: center;
   color: #E51A4B;

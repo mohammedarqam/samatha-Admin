@@ -23,7 +23,7 @@
   
       
     <ion-grid>
-      <ion-navbar color="primary">
+      <ion-list-header color="primary">
         <ion-row>
           <ion-col col-1>
           </ion-col>
@@ -43,25 +43,24 @@
             <p class="headBar"></p>
           </ion-col>
         </ion-row>
-      </ion-navbar>
+      </ion-list-header>
     </ion-grid>
 
 
     <ion-grid>
-        <ion-card *ngFor="let a of area;let i = index">
-        <ion-card-content>
+        <ion-item *ngFor="let a of area;let i = index">
           <ion-row>
             <ion-col col-1  >
               <p ion-text><strong>{{i+1}}</strong></p>
             </ion-col>
-            <ion-col col-3>
-              {{a.Name}}
+            <ion-col col-3 (click)="gtSchoolDetails(a)" >
+              <h2 ion-text color="primary"> {{a.Name}}</h2>
             </ion-col>
             <ion-col col-2 text-center >
-              <h1 ion-text color="primary">0%</h1><br/>
+              <h2 >0%</h2><br/>
             </ion-col>
             <ion-col col-2 text-center >
-              <h1 ion-text color="primary">{{a.Strength}}</h1><br/>
+              <h2 >{{a.Strength}}</h2><br/>
             </ion-col>
 
             <ion-col col-2 text-center *ngIf="a.ANM" >
@@ -69,17 +68,11 @@
             </ion-col>
             
             <ion-col col-2 text-center *ngIf="!a.ANM" >
-              <h1 ion-text color="primary">No ANM</h1><br/>
+              <h2 >No ANM</h2><br/>
             </ion-col>
             
-            <ion-col col-2 text-center >
-              <button ion-button clear (click)="gtSchoolDetails(a)">Details
-                <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>
-              </button>
-            </ion-col>
           </ion-row>
-        </ion-card-content>
-      </ion-card>
+      </ion-item>
     </ion-grid>
 
 

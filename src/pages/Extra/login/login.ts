@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, MenuController, LoadingController, ToastController, Alert } from 'ionic-angular';
 import * as firebase from 'firebase';
+import { DashboardPage } from '../dashboard/dashboard';
+import { ViewMandalsPage } from '../../Subs/Mandals/view-mandals/view-mandals';
 
 
 @IonicPage()
@@ -27,7 +29,13 @@ export class LoginPage {
 }
 
 
-
+ionViewDidEnter(){
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      this.navCtrl.setRoot(ViewMandalsPage)
+    }
+  });
+}
 
 checkData(){
   if(this.email){

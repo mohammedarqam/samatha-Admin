@@ -32,7 +32,7 @@
           </ion-select>
         </ion-item>
 
-        <ion-item>
+        <ion-item *ngIf="villageSel">
           <ion-label floating>Select Management</ion-label>
           <ion-select [(ngModel)]="manage">
             <ion-option value="MPP_ZPP SCHOOLS">MPP_ZPP SCHOOLS</ion-option>
@@ -43,16 +43,11 @@
             <ion-option value="TS MODEL SCHOOLS">TS MODEL SCHOOLS</ion-option>
           </ion-select>
         </ion-item>
-        <ion-item *ngIf="villageSel" >
+
+        <ion-item *ngIf="manage" >
           <ion-label  floating>School Name</ion-label>
           <ion-input type="text" [(ngModel)]="name"  (ionChange)="capsName(name)" autofocus ></ion-input>
         </ion-item>
-        
-        <ion-item *ngIf="name.length" >
-          <ion-label  floating>School Total Strength</ion-label>
-          <ion-input type="number" [(ngModel)]="str" (keyup.enter)="checkData()"  ></ion-input>
-        </ion-item>
-        
         
 
       </ion-card-content>
