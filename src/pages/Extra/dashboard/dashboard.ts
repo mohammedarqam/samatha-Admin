@@ -45,7 +45,7 @@ public doughnutLegend : boolean = true;
       this.getVillages();
       this.getSchools();
       this.getAnms();
-      this.gtStudents();
+      // this.gtStudents();
     }
     
     getMandals(){
@@ -77,11 +77,11 @@ public doughnutLegend : boolean = true;
         this.anms= snap.length;
       })
     }
-    getStudents(){
-      this.studentRef.snapshotChanges().subscribe(snap=>{
-        this.students= snap.length;
-      })
-    }
+    // getStudents(){
+    //   this.studentRef.snapshotChanges().subscribe(snap=>{
+    //     this.students= snap.length;
+    //   })
+    // }
     public chartClicked(e:any):void {
       console.log(e);
     }
