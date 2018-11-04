@@ -30609,6 +30609,35 @@ page-dashboard .curs {
   cursor: pointer;
 }
 
+page-dashboard .darkBg {
+  background: #DFDEE0;
+}
+
+page-dashboard .whiteBg {
+  background: #ffffff;
+}
+
+page-dashboard ion-label {
+  color: black !important;
+  font-weight: 500 !important;
+  font-size: 20px !important;
+}
+
+page-dashboard .br1 {
+  border-right: 1px solid #DFDEE0;
+  border-bottom: 1px solid #DFDEE0;
+}
+
+page-dashboard .br4 {
+  border-top: 1px solid #DFDEE0;
+  border-left: 1px solid #DFDEE0;
+}
+
+page-dashboard .nums {
+  font-size: 34px;
+  text-align: center;
+}
+
 page-login .scroll-content {
   overflow: hidden;
 }

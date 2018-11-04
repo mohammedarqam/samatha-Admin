@@ -1,33 +1,190 @@
 <ion-header>
   <ion-navbar color="primary">
-  <ion-buttons end>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <p ion-text color="whiter">{{adminName}} </p>
-  </ion-buttons>
+    <ion-buttons end>
+      <button ion-button menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <p ion-text color="whiter">{{adminName}} </p>
+    </ion-buttons>
+    <ion-title>{{pageName}} </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-<ion-item no-lines class="content">
-<h1 class="title">DASHBOARD</h1>
-</ion-item>
+<ion-content class="darkBg">
 
-<ion-grid>
-  <ion-row>
-    <ion-col col-3>
-      <ion-item class="content  " >
-        <ion-label floating>Mandal</ion-label>
-        <ion-select  [(ngModel)]="mandalSel" multiple="true" interface="popover" >
-          <ion-option *ngFor="let m of mandals" [value]="m.Name" >{{m.Name}}</ion-option>
-        </ion-select>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+  <ion-grid class="whiteBg">
+    <ion-row>
 
 
+      <ion-col col-2>
+        <ion-item no-lines>
+          <ion-label stacked>Districts</ion-label>
+          <ion-select [(ngModel)]="districtSel" class="darkBg" >
+            <ion-option>Wanaparthy</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-2>
+        <ion-item no-lines>
+          <ion-label stacked>Mandals</ion-label>
+          <ion-select class="darkBg" [(ngModel)]="mandalSel" multiple="true" >
+            <ion-option *ngFor="let m of mandals" [value]="m.Name">{{m.Name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-2>
+        <ion-item no-lines>
+          <ion-label  stacked>Villages</ion-label>
+          <ion-select class="darkBg" [(ngModel)]="mandalSel" multiple="true" >
+            <ion-option *ngFor="let m of mandals" [value]="m.Name">{{m.Name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-2>
+        <ion-item no-lines>
+          <ion-label stacked>Schools</ion-label>
+          <ion-select class="darkBg" [(ngModel)]="mandalSel" multiple="true" >
+            <ion-option *ngFor="let m of mandals" [value]="m.Name">{{m.Name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-2>
+        <ion-item no-lines>
+          <ion-label stacked>Class</ion-label>
+          <ion-select class="darkBg" [(ngModel)]="mandalSel" multiple="true" >
+            <ion-option *ngFor="let m of mandals" [value]="m.Name">{{m.Name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-2>
+        <ion-item no-lines>
+          <ion-label stacked>Community</ion-label>
+          <ion-select class="darkBg" [(ngModel)]="mandalSel" multiple="true" >
+            <ion-option *ngFor="let m of mandals" [value]="m.Name">{{m.Name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+
+      <ion-col col-2>
+        <ion-item no-lines>
+          <ion-label stacked>Age</ion-label>
+          <ion-select class="darkBg" [(ngModel)]="mandalSel" multiple="true" >
+            <ion-option *ngFor="let m of mandals" [value]="m.Name">{{m.Name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-2>
+        <ion-item no-lines>
+          <ion-label stacked>Anaemia Level</ion-label>
+          <ion-select class="darkBg" [(ngModel)]="mandalSel" multiple="true" >
+            <ion-option *ngFor="let m of mandals" [value]="m.Name">{{m.Name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+
+
+
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3 margin-horizontal push-1>
+        <h1 padding-left> Anaemia Level</h1>
+        <ion-card >
+          <ion-card-content>
+            <ion-row>
+              <ion-col class="br1" col-6>
+                Severely<br/>
+                <p class="nums">20</p>
+              </ion-col>
+              <ion-col col-6>
+                Moderately
+                <p class="nums">20</p>
+              </ion-col>
+              <ion-col col-6>
+                Mildly
+                <p class="nums">20</p>
+              </ion-col>
+              <ion-col class="br4" col-6>
+                Healthy
+                <p class="nums">20</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col col-3 margin-horizontal push-1>
+        <h1 padding-left>Community</h1>
+        <ion-card >
+          <ion-card-content>
+            <ion-row>
+              <ion-col class="br1" col-6>
+                Severely<br/>
+                <p class="nums">20</p>
+              </ion-col>
+              <ion-col col-6>
+                Moderately
+                <p class="nums">20</p>
+              </ion-col>
+              <ion-col col-6>
+                Mildly
+                <p class="nums">20</p>
+              </ion-col>
+              <ion-col class="br4" col-6>
+                Healthy
+                <p class="nums">20</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col col-3 margin-horizontal push-1>
+        <h1 padding-left>People</h1>
+        <ion-card >
+          <ion-card-content>
+            <ion-row>
+              <ion-col class="br1" col-6>
+                Severely<br/>
+                <p class="nums">20</p>
+              </ion-col>
+              <ion-col col-6>
+                Moderately
+                <p class="nums">20</p>
+              </ion-col>
+              <ion-col col-6>
+                Mildly
+                <p class="nums">20</p>
+              </ion-col>
+              <ion-col class="br4" col-6>
+                Healthy
+                <p class="nums">20</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+
+
+    </ion-row>
+
+
+
+
+
+  </ion-grid>
 
 
 

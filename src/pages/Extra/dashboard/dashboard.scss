@@ -13,4 +13,28 @@ page-dashboard {
     .curs{
         cursor: pointer;
     }
+    .darkBg{
+        background: #DFDEE0;
+    }
+    .whiteBg{
+        background: #ffffff;
+    }
+
+    ion-label{
+        color: black !important;
+        font-weight: 500 !important;
+        font-size: 20px !important;
+    }
+    .br1{
+        border-right: 1px solid #DFDEE0;
+        border-bottom: 1px solid #DFDEE0;
+    }
+    .br4{
+        border-top: 1px solid #DFDEE0;
+        border-left: 1px solid #DFDEE0;
+    }
+    .nums{
+        font-size: 34px;
+        text-align: center;
+    }
 }

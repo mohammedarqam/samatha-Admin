@@ -8,9 +8,13 @@ import { AngularFireDatabase } from '@angular/fire/database';
   templateUrl: 'dashboard.html',
 })
 export class DashboardPage {
+  pageName="Dashboard";
+  districtSel = "Wanaparthy";
+
+
 
   mandals : Array<any> = [];
-
+  mandalSel = "All";
   constructor(
   public navCtrl: NavController,
   private db: AngularFireDatabase,
