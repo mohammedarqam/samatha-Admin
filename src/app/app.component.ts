@@ -15,7 +15,7 @@ import { ViewAmnsPage } from '../pages/Subs/Anms/view-amns/view-amns';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginPage;
+  rootPage: any = ViewMandalsPage;
   activePage: any;
 
   full : boolean = true;

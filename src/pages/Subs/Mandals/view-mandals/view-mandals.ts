@@ -4,6 +4,9 @@ import * as firebase from 'firebase';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AddMandalsPage } from '../add-mandals/add-mandals';
 import { MandalDetailsPage } from '../mandal-details/mandal-details';
+import * as XLSX from 'xlsx';
+import * as saveAs from 'file-saver';
+
 
 @IonicPage()
 @Component({
@@ -11,6 +14,7 @@ import { MandalDetailsPage } from '../mandal-details/mandal-details';
   templateUrl: 'view-mandals.html',
 })
 export class ViewMandalsPage {
+  pageName = "Mandals";
 
   areaRef =this.db.list('Subs/Mandals', ref=>ref.orderByChild("Name"));
   area: Array<any> = [];
@@ -83,8 +87,38 @@ getAreas(){
   }
 
 
+exporti(){
+  let newArea = this.area;
+  newArea.forEach(snip=>{
+    delete snip.TimeStamp;
+    delete snip.key;
+  })
+  let sheet = XLSX.utils.json_to_sheet(newArea);
+  let wb = {
+      SheetNames: ["export"],
+      Sheets: {
+          "export": sheet
+      }
+  };
 
+  let wbout = XLSX.write(wb, {
+      bookType: 'xlsx',
+      bookSST: false,
+      type: 'binary'
+  });
 
+  function s2ab(s) {
+      let buf = new ArrayBuffer(s.length);
+      let view = new Uint8Array(buf);
+      for (let i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+      return buf;
+  }
+
+  let blob = new Blob([s2ab(wbout)], {type: 'application/octet-stream'});
+  let self = this;
+  saveAs(blob,this.pageName+'.xlsx');
+
+}
 
 
 }

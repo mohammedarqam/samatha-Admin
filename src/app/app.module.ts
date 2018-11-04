@@ -26,6 +26,7 @@ import { AssignSchoolPage } from '../pages/Subs/Anms/assign-school/assign-school
 import { ChartsModule } from 'ng2-charts';
 import { DelAnmPage } from '../pages/Subs/Anms/del-anm/del-anm';
 import { EditAnmPage } from '../pages/Subs/Anms/edit-anm/edit-anm';
+import {File} from '@ionic-native/file';
 
 
 export const firebaseCred = {
@@ -96,7 +97,8 @@ firebase.initializeApp(firebaseCred);
     EditAnmPage,
   ],
   providers: [
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    File,
   ]
 })
 export class AppModule {}
