@@ -15,7 +15,7 @@ import { ViewAmnsPage } from '../pages/Subs/Anms/view-amns/view-amns';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = StudentsPage;
+  rootPage: any = DashboardPage;
   activePage: any;
 
   full : boolean = true;
@@ -49,7 +49,7 @@ export class MyApp {
         if (user) {
         firebase.database().ref("Admin Data").child("Admins").child(user.uid).once('value',itemSnap=>{
             if(itemSnap.exists()){
-              this.rootPage = StudentsPage;
+              this.rootPage = DashboardPage;
             }else{
               firebase.auth().signOut().then(()=>{
                 this.rootPage = LoginPage;
