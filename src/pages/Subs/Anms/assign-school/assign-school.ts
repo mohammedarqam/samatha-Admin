@@ -14,7 +14,7 @@ export class AssignSchoolPage {
   anmJ = this.navParams.get("anm");
 
   mandals: Array<any> = [];
-  mandalRef = this.db.list('Subs/Mandals');
+  mandalRef = this.db.list('Subs/Mandals', ref=>ref.orderByChild("Name") );
   mandalSel: string;
 
   villages: Array<any> = [];
@@ -55,7 +55,7 @@ export class AssignSchoolPage {
       firebase.database().ref("Subs/Schools").child(this.schoolSel.key).child("ANM").set(this.anmJ.key).then(() => {
         firebase.database().ref("SubsIndex/Villages").child(this.villageSel).child("Anms").child(this.anmJ.key).set(true).then(() => {
           firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Anms").child(this.anmJ.key).set(true).then(() => {
-            this.presentToast(this.schoolSel.Name + " is assigned to " + this.anmJ.FirstName + " " + this.anmJ.LastName);
+            this.presentToast(this.schoolSel.Name + " is assigned to " + this.anmJ.Name);
           })
         })
       });

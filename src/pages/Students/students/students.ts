@@ -4,6 +4,7 @@ import { StudentDetailsPage } from '../student-details/student-details';
 import { DelAnmPage } from '../../Subs/Anms/del-anm/del-anm';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
+import { query } from '@angular/core/src/render3/instructions';
 
 @IonicPage()
 @Component({
@@ -14,6 +15,9 @@ export class StudentsPage {
 
 
   anmRef = this.db.list("Students");
+
+
+
   anms : Array<any> = [];
   anmsLoaded : Array<any> = [];
 
