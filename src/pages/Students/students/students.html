@@ -9,17 +9,51 @@
 <ion-content padding>
   <ion-grid>
     <ion-row>
-      <ion-col col-4 >
-  <ion-item no-lines class="content">
-  <h1 class="title" item-start>Students</h1>
-  </ion-item>
-  </ion-col>
-  <ion-col col-6 push-2 >
-  <ion-searchbar item-end animated="true" placeholder="Search an Student.." 
-  [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>
-  </ion-col>
-  </ion-row>
+      <ion-col col-4>
+        <ion-item no-lines class="content">
+          <h1 class="title" item-start>Students</h1>
+        </ion-item>
+      </ion-col>
+      <ion-col col-6 push-2>
+        <ion-searchbar item-end animated="true" placeholder="Search an Student.." [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>
+      </ion-col>
+    </ion-row>
   </ion-grid>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <ion-item>
+          <ion-label floating>Community</ion-label>
+          <ion-select [(ngModel)]="casteSel" (ionChange)="filterExact('Community',casteSel)" >
+            <ion-option value="SC">SC</ion-option>
+            <ion-option value="ST">ST</ion-option>
+            <ion-option value="BC">BC</ion-option>
+            <ion-option value="OC">OC</ion-option>
+            <ion-option value="Minority">Minority</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+
+      <ion-col col-3>
+        <ion-item>
+          <ion-label floating>Severity</ion-label>
+          <ion-select [(ngModel)]="anL" (ionChange)="filterExact('Severity',anL)" >
+            <ion-option value="Severely Anaemic">Severely Anaemic</ion-option>
+            <ion-option value="Moderately Anaemic">Moderately Anaemic</ion-option>
+            <ion-option value="Mildly  Anaemic">Mildly Anaemic</ion-option>
+            <ion-option value="Healthy">Healthy</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+
+
+    </ion-row>
+  </ion-grid>
+
+
 
   <ion-grid>
     <ion-navbar color="primary">
@@ -35,7 +69,7 @@
           <p class="headBar">Severity</p>
         </ion-col>
         <ion-col col-1>
-          <p class="headBar">Age</p>
+          <p class="headBar">Community</p>
         </ion-col>
         <ion-col col-2>
           <p class="headBar">Mobile</p>
@@ -50,43 +84,42 @@
   <!-- <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button> -->
 
   <ion-grid>
-      <ion-card *ngFor="let a of anms;let i = index">
+    <ion-card *ngFor="let a of filteredStudents;let i = index">
       <ion-card-content>
         <ion-row>
-          <ion-col col-1  >
-            <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)" ></ion-checkbox>  
+          <ion-col col-1>
+            <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)"></ion-checkbox>
           </ion-col>
-          <ion-col col-1  >
+          <ion-col col-1>
             <p ion-text><strong>{{i+1}}</strong></p>
           </ion-col>
           <ion-col col-2>
             {{a.StudentName}}
           </ion-col>
-          <ion-col col-2 text-center >
-            <h1 ion-text color="primary">{{a.Severity }}</h1><br/>
+          <ion-col col-2 text-center>
+            <h1 ion-text color="primary">{{a.Severity }}</h1><br />
           </ion-col>
-          <ion-col col-1 text-center >
-            <h1 ion-text color="primary">{{a.Age}} </h1><br/>
+          <ion-col col-1 text-center>
+            <h1 ion-text color="primary">{{a.Community}} </h1><br />
           </ion-col>
-          <ion-col col-2 text-center >
+          <ion-col col-2 text-center>
             <h1 ion-text color="primary">{{a.Mobile}}</h1>
           </ion-col>
           <ion-col col-2>
-          <button ion-button clear (click)="gtAnmDetails(a)">Details
-            <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>
-          </button>
+            <button ion-button clear (click)="gtAnmDetails(a)">Details
+              <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>
+            </button>
           </ion-col>
 
 
 
         </ion-row>
       </ion-card-content>
-      </ion-card>
-  </ion-grid>    
+    </ion-card>
+  </ion-grid>
 
 
 
 
-  
+
 </ion-content>
-

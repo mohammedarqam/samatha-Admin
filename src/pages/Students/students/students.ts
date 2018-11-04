@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController, ModalController } from 'ionic-angular';
-import { StudentDetailsPage } from '../student-details/student-details';
-import { DelAnmPage } from '../../Subs/Anms/del-anm/del-anm';
-import { AngularFireDatabase } from 'angularfire2/database';
 import * as firebase from 'firebase';
-import { query } from '@angular/core/src/render3/instructions';
+import { AngularFireDatabase } from 'angularfire2/database';
+import * as _ from 'lodash';
+
 
 @IonicPage()
 @Component({
@@ -13,102 +12,59 @@ import { query } from '@angular/core/src/render3/instructions';
 })
 export class StudentsPage {
 
+  studentsRef = firebase.database().ref("Students");
+  
+  casteSel : string;
+  anL  :string;
 
-  anmRef = this.db.list("Students");
-
-
-
-  anms : Array<any> = [];
-  anmsLoaded : Array<any> = [];
-
-  selArray : Array<any> = [];
-
-
+  students: Array<any>=[];
+  filteredStudents: any;
+  
+  
   constructor(
   public navCtrl: NavController, 
-  public db : AngularFireDatabase,
   public modalCtrl : ModalController,
   public menuCtrl : MenuController,
+  public db : AngularFireDatabase,
   public navParams: NavParams,
   ) {
     this.menuCtrl.enable(true);
-    this.getAnms();
-
   }
+  filters = {}
 
-  getAnms(){
-    this.anmRef.snapshotChanges().subscribe(snap=>{
-      let tempArray = [];
-      snap.forEach(snp=>{
-        var temp : any  =snp.payload.val();
-        temp.key = snp.key;
-        firebase.database().ref("Anm Assigns").child(temp.key).once("value",itemSnap=>{
-          temp.Schools = itemSnap.numChildren();
+  ngOnInit() {
+    this.db.list('Students').snapshotChanges()
+      .subscribe(itemSnap => {
+        itemSnap.forEach(snip=>{
+          let temp : any = snip.payload.val();
+          temp.key= snip.key;
+          console.log(temp);
+          this.students.push(temp)
         })
-        tempArray.push(temp);
-      })
-      this.anms = tempArray;
-      this.anmsLoaded = tempArray;
+        this.applyFilters()
     })
   }
 
-  initializeItems(): void {
-    this.anms = this.anmsLoaded;
+  private applyFilters() {
+    this.filteredStudents = _.filter(this.students, _.conforms(this.filters) )
   }
-  getItems(searchbar) {
-    this.initializeItems();
-    let q = searchbar;
-    if (!q) {
-      return;
-    }
-    this.anms = this.anms.filter((v) => {
-      if(v.FirstName && q) {
-        if (v.FirstName.toLowerCase().indexOf(q.toLowerCase()) > -1) {
-          return true;
-        }
-        return false;
-      }
-    });
+
+  /// filter property by equality to rule
+  filterExact(property: string, rule: any) {
+    this.filters[property] = val => val == rule
+    this.applyFilters()
   }
 
 
-addToArr(a){
-  switch (a.Checked) {
-    case true:  this.selArray.push(a.key);
-      break;
-    case false:  this.rmFrmArray(a.key);
-      break;
-  }
 
-}
-
-rmFrmArray(key){
-  var ind = this.selArray.indexOf(key);
-  this.selArray.splice(ind,1)
-}
-
-
-
-delMulC(){
-  let partnerView = this.modalCtrl.create(DelAnmPage,{delAnms : this.selArray},{enableBackdropDismiss : false});
-  partnerView.present();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-  gtAnmDetails(a){
-    this.navCtrl.push(StudentDetailsPage,{anm  :a});
-  }
-
-
+  // getStudents(){
+  //   this.studentsRef.orderByChild("Severity").equalTo(this.anL).orderByChild("Community").equalTo(this.casteSel).once("value",itemSnapshot=>{
+  //     this.anms = [];
+  //     itemSnapshot.forEach(itemSnap=>{
+  //       this.anms.push(itemSnap.val())
+  //       console.log(itemSnap.val())
+  //     })
+  //   })
+  // }
 
 }
