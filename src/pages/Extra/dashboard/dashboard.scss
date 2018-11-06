@@ -48,5 +48,29 @@ page-dashboard {
     .titlCol{
       text-align: left;
     }
+}    .severe{
+        background: #ff0000 !important;
+        color: white; 
+        font-weight: 500px;
+        p{color: white}
+      }
+    .moder{
+        background: #ffa400 !important;
+        color: white; 
+        font-weight: 500px;
+        p{color: white}
+      }
+    .mild{
+        background: #ffbbc9 !important;
+        color: white; 
+        font-weight: 500px;
+        p{color: white}
+      }
+    .heal{
+        background: #008700 !important;
+        color: white; 
+        font-weight: 500px;
+        p{color: white}
+      }
+    
 
-}

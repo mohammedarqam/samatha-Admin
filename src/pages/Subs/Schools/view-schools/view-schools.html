@@ -1,86 +1,83 @@
 <ion-header>
-    <ion-navbar color="primary">
-      <button ion-button menuToggle>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-navbar>
-  </ion-header>
-  
-  <ion-content padding>
-    <ion-grid>
-      <ion-row>
-        <ion-col col-4 >
-    <ion-item no-lines class="content">
-    <h1 class="title" item-start>Schools</h1>
-    </ion-item>
-    </ion-col>
-    <ion-col col-6 push-2 >
-    <ion-searchbar item-end animated="true" placeholder="Search a School ..." 
-    [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>
-    </ion-col>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{pgName}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <ion-searchbar item-end animated="true" placeholder="Search a School ..." [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button float-right (click)="exporti()">
+          Export
+          <ion-icon padding-left name="share-alt"></ion-icon>
+        </button>
+      </ion-col>
     </ion-row>
-    </ion-grid>
-  
-      
-    <ion-grid>
-      <ion-list-header color="primary">
-        <ion-row>
-          <ion-col col-1>
-          </ion-col>
-          <ion-col col-3>
-            <p class="headBar1">Schools</p>
-          </ion-col>
-          <ion-col col-2>
-            <p class="headBar">Progress %</p>
-          </ion-col>
-          <ion-col col-2>
-            <p class="headBar">Total Students</p>
-          </ion-col>
-          <ion-col col-2>
-            <p class="headBar">ANM</p>
-          </ion-col>
-          <ion-col col-2>
-            <p class="headBar"></p>
-          </ion-col>
-        </ion-row>
-      </ion-list-header>
-    </ion-grid>
+  </ion-grid>
 
 
-    <ion-grid>
-        <ion-item *ngFor="let a of area;let i = index">
-          <ion-row>
-            <ion-col col-1  >
-              <p ion-text><strong>{{i+1}}</strong></p>
-            </ion-col>
-            <ion-col col-3 class="curs" (click)="gtSchoolDetails(a)" >
-              <h2 ion-text color="primary"> {{a.Name}}</h2>
-            </ion-col>
-            <ion-col col-2 text-center >
-              <h2 >0%</h2><br/>
-            </ion-col>
-            <ion-col col-2 text-center >
-              <h2 >{{a.Strength}}</h2><br/>
-            </ion-col>
+  <ion-grid>
+    <ion-list-header color="primary">
+      <ion-row>
+        <ion-col col-1>
+        </ion-col>
+        <ion-col col-2>
+          <p class="headBar">Name</p>
+        </ion-col>
+        <ion-col col-2>
+          <p class="headBar">Severely Anaemic</p>
+        </ion-col>
+        <ion-col col-2>
+          <p class="headBar">Moderately Anaemic</p>
+        </ion-col>
+        <ion-col col-2>
+          <p class="headBar">Mildly Anaemic</p>
+        </ion-col>
+        <ion-col col-2>
+          <p class="headBar">Healthy</p>
+        </ion-col>
+      </ion-row>
+    </ion-list-header>
+  </ion-grid>
 
-            <ion-col col-2 text-center *ngIf="a.ANM" >
-              <button ion-button (click)="gtAnmDetails(a.AnmO)"> {{a.AnmName}} </button>
-            </ion-col>
-            
-            <ion-col col-2 text-center *ngIf="!a.ANM" >
-              <h2 >No ANM</h2><br/>
-            </ion-col>
-            
-          </ion-row>
-      </ion-item>
-    </ion-grid>
+  <ion-grid>
+    <ion-item *ngFor="let a of area;let i = index">
+      <ion-row>
+        <ion-col col-1>
+          <p ion-text text-center><strong>{{i+1}}</strong></p>
+        </ion-col>
+        <ion-col col-2 (click)="gtSchoolDetails(a)" class="curs">
+          <h2 ion-text text-center color="primary">{{a.Name}}</h2>
+        </ion-col>
+        <ion-col col-2 text-center>
+          <h2></h2><br />
+        </ion-col>
+        <ion-col col-2 text-center>
+          <h2></h2><br />
+        </ion-col>
+        <ion-col col-2 text-center>
+          <h2></h2><br />
+        </ion-col>
+        <ion-col col-2 text-center>
+          <h2></h2><br />
+        </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-grid>
 
 
-  
-  
-    <ion-fab right bottom>
-      <button ion-fab color="danger" (click)="gtAddArea()" >
-        <ion-icon name="add"></ion-icon>
-      </button>
-    </ion-fab>
-    </ion-content>
+
+
+  <ion-fab right bottom>
+    <button ion-fab color="danger" (click)="gtAddArea()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

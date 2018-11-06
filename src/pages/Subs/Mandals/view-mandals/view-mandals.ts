@@ -16,38 +16,29 @@ import * as saveAs from 'file-saver';
 export class ViewMandalsPage {
   pageName = "Mandals";
 
-  areaRef =this.db.list('Subs/Mandals', ref=>ref.orderByChild("Name"));
+  areaRef = this.db.list('Subs/Mandals');
   area: Array<any> = [];
   areasLoaded: Array<any> = [];
 
-constructor(
-  public navCtrl: NavController, 
-  public db : AngularFireDatabase,
-  public toastCtrl : ToastController,
-  public alertCtrl: AlertController,
-  public modalCtrl : ModalController,
-  public menuCtrl : MenuController,
-  public navParams: NavParams
+  constructor(
+    public navCtrl: NavController,
+    public db: AngularFireDatabase,
+    public toastCtrl: ToastController,
+    public alertCtrl: AlertController,
+    public modalCtrl: ModalController,
+    public menuCtrl: MenuController,
+    public navParams: NavParams
   ) {
     this.menuCtrl.enable(true);
     this.getAreas();
-}
-
-getAreas(){
-    this.areaRef.snapshotChanges().subscribe(snap=>{
+  }
+  getAreas() {
+    this.areaRef.snapshotChanges().subscribe(snap => {
       let tempArray = [];
-      snap.forEach(snp=>{
-        let temp : any = snp.payload.val();
+      snap.forEach(snp => {
+        let temp: any = snp.payload.val();
         temp.key = snp.key;
-        firebase.database().ref("SubsIndex/Mandals").child(snp.key).child("Schools").once("value",schoolsSnap=>{
-          temp.Schools = schoolsSnap.numChildren();
-        })
-        firebase.database().ref("SubsIndex/Mandals").child(snp.key).child("Villages").once("value",villageSnap=>{
-          temp.Villages = villageSnap.numChildren();
-        })
-        firebase.database().ref("SubsIndex/Mandals").child(snp.key).child("Anms").once("value",anmSnap=>{
-          temp.Anms = anmSnap.numChildren();
-        })
+        console.log(temp)
         tempArray.push(temp);
       })
       this.area = tempArray;
@@ -66,7 +57,7 @@ getAreas(){
       return;
     }
     this.area = this.area.filter((v) => {
-      if(v.Name && q) {
+      if (v.Name && q) {
         if (v.Name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
           return true;
         }
@@ -77,48 +68,48 @@ getAreas(){
 
 
 
-  gtAddArea(){
-    let areaAdd = this.modalCtrl.create(AddMandalsPage,null,{enableBackdropDismiss : false});
+  gtAddArea() {
+    let areaAdd = this.modalCtrl.create(AddMandalsPage, null, { enableBackdropDismiss: false });
     areaAdd.present();
   }
 
-  gtMandalDetails(a){
-    this.navCtrl.push(MandalDetailsPage,{mandal : a});
+  gtMandalDetails(a) {
+    this.navCtrl.push(MandalDetailsPage, { mandal: a });
   }
 
 
-exporti(){
-  let newArea = this.area;
-  newArea.forEach(snip=>{
-    delete snip.TimeStamp;
-    delete snip.key;
-  })
-  let sheet = XLSX.utils.json_to_sheet(newArea);
-  let wb = {
+  exporti() {
+    let newArea = this.area;
+    newArea.forEach(snip => {
+      delete snip.TimeStamp;
+      delete snip.key;
+    })
+    let sheet = XLSX.utils.json_to_sheet(newArea);
+    let wb = {
       SheetNames: ["export"],
       Sheets: {
-          "export": sheet
+        "export": sheet
       }
-  };
+    };
 
-  let wbout = XLSX.write(wb, {
+    let wbout = XLSX.write(wb, {
       bookType: 'xlsx',
       bookSST: false,
       type: 'binary'
-  });
+    });
 
-  function s2ab(s) {
+    function s2ab(s) {
       let buf = new ArrayBuffer(s.length);
       let view = new Uint8Array(buf);
       for (let i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
       return buf;
+    }
+
+    let blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
+    let self = this;
+    saveAs(blob, this.pageName + '.xlsx');
+
   }
-
-  let blob = new Blob([s2ab(wbout)], {type: 'application/octet-stream'});
-  let self = this;
-  saveAs(blob,this.pageName+'.xlsx');
-
-}
 
 
 }

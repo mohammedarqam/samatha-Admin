@@ -10,16 +10,33 @@ import * as firebase from 'firebase';
 export class SchoolDetailsPage {
 
   school = this.navParams.get("school");
-
   mandalName :  string;
   vName : string;
+
+  anms: Array<any>=[];
+
 
   constructor(
   public navCtrl: NavController, 
   public navParams: NavParams
   ) {
+    console.log(this.school)
       this.getMandal();
       this.getVillage();
+      this.getAnms();
+  }
+
+  getAnms(){
+    firebase.database().ref("Subs/Schools").child(this.school.key).child("ANM").once("value",itemSnap=>{
+      itemSnap.forEach(item=>{
+        firebase.database().ref("Organisms/Anms").child(item.key).once("value",ssSnip=>{
+          var temp : any = ssSnip.val();
+          temp.key = ssSnip.key;
+          this.anms.push(temp);
+          console.log(temp)
+        })
+      })
+    })
   }
 
   getMandal(){

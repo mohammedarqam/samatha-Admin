@@ -23,12 +23,10 @@ export class AssignSchoolPage {
   schools: Array<any> = [];
   schoolSel: any;
 
-  anmJobRef = this.db.list(`Anm Assigns/${this.anmJ.key}`);
+  anmJobRef = this.db.list(`Organisms/Anm Assigns/${this.anmJ.key}`);
   assignedJobs: Array<any> = [];
 
   public detSchool : any; 
-  public nVillD: boolean = false;
-  public nSchlD: boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -38,7 +36,7 @@ export class AssignSchoolPage {
     public loadingCtrl: LoadingController,
     public navParams: NavParams
   ) {
-
+    console.log(this.anmJ)
     this.getAssignedSchools();
     this.getMandals();
   }
@@ -46,13 +44,13 @@ export class AssignSchoolPage {
 
 
   assignSchool() {
-    firebase.database().ref("Anm Assigns").child(this.anmJ.key).push({
+    firebase.database().ref("Organisms/Anm Assigns").child(this.anmJ.key).push({
       Mandal: this.mandalSel,
       Village: this.villageSel,
       School: this.schoolSel.key,
       SchoolName: this.schoolSel.Name,
     }).then(() => {
-      firebase.database().ref("Subs/Schools").child(this.schoolSel.key).child("ANM").set(this.anmJ.key).then(() => {
+      firebase.database().ref("Subs/Schools").child(this.schoolSel.key).child("ANM").child(this.anmJ.key).set(true).then(() => {
         firebase.database().ref("SubsIndex/Villages").child(this.villageSel).child("Anms").child(this.anmJ.key).set(true).then(() => {
           firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Anms").child(this.anmJ.key).set(true).then(() => {
             this.presentToast(this.schoolSel.Name + " is assigned to " + this.anmJ.Name);
@@ -115,7 +113,7 @@ export class AssignSchoolPage {
     });
     loading.present();
 
-    firebase.database().ref("Anm Assigns").child(this.anmJ.key).child(lj.key).remove().then(()=>{
+    firebase.database().ref("Organisms/Anm Assigns").child(this.anmJ.key).child(lj.key).remove().then(()=>{
       firebase.database().ref("Subs/Schools").child(lj.School).child("ANM").remove().then(()=>{
         firebase.database().ref("SubsIndex/Mandals").child(lj.Mandal).child("Anms").child(this.anmJ.key).remove().then(()=>{
           firebase.database().ref("SubsIndex/Villages").child(lj.Village).child("Anms").child(this.anmJ.key).remove().then(()=>{
@@ -151,9 +149,13 @@ export class AssignSchoolPage {
       content: 'Loading Villages ...'
     });
     loading.present();
-      this.nVillD = true;
     firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Villages").once("value", snap => {
       this.villages = [];
+      if(!snap.exists()){
+        this.presentToast("No Villages Found");
+        loading.dismiss()
+      }
+
       snap.forEach(snp => {
         firebase.database().ref("Subs/Villages").child(snp.key).once("value", vil => {
           var temp: any = vil.val();
@@ -161,9 +163,9 @@ export class AssignSchoolPage {
           this.villages.push(temp);
 
         }).then(() => {
+          loading.dismiss();
         })
       })
-      loading.dismiss();
     })
   }
   getSchools() {
@@ -174,38 +176,30 @@ export class AssignSchoolPage {
 
     firebase.database().ref("SubsIndex/Villages").child(this.villageSel).child("Schools").once("value", snap => {
       this.schools = [];
-      if (!snap.exists()) {
-        this.nSchlD = true;
-      }else{
-        this.nSchlD = false;
+      if(!snap.exists()){
+        this.presentToast("No Schools Found");
+        loading.dismiss()
       }
       snap.forEach(snp => {
         firebase.database().ref("Subs/Schools").child(snp.key).once("value", vil => {
           var temp: any = vil.val();
           temp.key = vil.key;
-          if (!temp.ANM) {
-            this.schools.push(temp);
-          }else{
-            
-          }
+          this.schools.push(temp);
         }).then(() => {
+          loading.dismiss();
         })
       })
-      loading.dismiss();
     })
 
   }
 
-  clear() {
-    this.schoolSel = null;
-  }
 
 
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 4000,
-      position: "bottom"
+      position: "middle"
 
     })
     toast.present();

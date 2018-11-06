@@ -15,16 +15,6 @@
   <ion-grid class="whiteBg">
     <ion-row>
 
-
-      <ion-col col-2>
-        <ion-item no-lines>
-          <ion-label stacked>Districts</ion-label>
-          <ion-select [(ngModel)]="districtSel" class="darkBg">
-            <ion-option>Wanaparthy</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
       <ion-col col-2>
         <ion-item no-lines>
           <ion-label stacked>Mandals</ion-label>
@@ -55,16 +45,15 @@
         </ion-item>
       </ion-col>
 
-      <ion-col col-2>
+      <ion-col col-1>
         <ion-item no-lines>
           <ion-label stacked>Class</ion-label>
           <ion-select class="darkBg" (ionChange)="filterExact('Class',clSel)" [(ngModel)]="clSel" multiple="true">
-              <ion-option value="7">7th</ion-option>
+            <ion-option value="6">6th</ion-option>
+            <ion-option value="7">7th</ion-option>
               <ion-option value="8">8th</ion-option>
               <ion-option value="9">9th</ion-option>
               <ion-option value="10">10th</ion-option>
-              <ion-option value="11">11th</ion-option>
-              <ion-option value="12">12th</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
@@ -83,11 +72,19 @@
       </ion-col>
 
 
-      <ion-col col-2>
+      <ion-col col-1>
         <ion-item no-lines>
           <ion-label stacked>Age</ion-label>
           <ion-select class="darkBg" [(ngModel)]="mandalSel" multiple="true">
-            <ion-option *ngFor="let m of mandals" [value]="m.Name">{{m.Name}}</ion-option>
+            <ion-option value="10" >10</ion-option>
+            <ion-option value="11" >11</ion-option>
+            <ion-option value="12" >12</ion-option>
+            <ion-option value="13" >13</ion-option>
+            <ion-option value="14" >14</ion-option>
+            <ion-option value="15" >15</ion-option>
+            <ion-option value="16" >16</ion-option>
+            <ion-option value="17" >17</ion-option>
+            <ion-option value="18" >18</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
@@ -117,19 +114,19 @@
         <ion-card>
           <ion-card-content>
             <ion-row>
-              <ion-col class="br1" col-6>
+              <ion-col  class="br1 severe" col-6>
                 Severely<br />
-                <p class="nums">20</p>
+                <p class="nums">200</p>
               </ion-col>
-              <ion-col col-6>
+              <ion-col class="moder" col-6>
                 Moderately
                 <p class="nums">20</p>
               </ion-col>
-              <ion-col col-6>
+              <ion-col col-6 class="mild" >
                 Mildly
                 <p class="nums">20</p>
               </ion-col>
-              <ion-col class="br4" col-6>
+              <ion-col class="br4 heal" col-6>
                 Healthy
                 <p class="nums">20</p>
               </ion-col>
@@ -143,20 +140,24 @@
         <ion-card>
           <ion-card-content>
             <ion-row>
-              <ion-col class="br1" col-6>
-                Severely<br />
+              <ion-col class="br1 br4" col-6>
+                SC<br />
                 <p class="nums">20</p>
               </ion-col>
-              <ion-col col-6>
-                Moderately
+              <ion-col col-6 class="br1 br4" >
+                ST
                 <p class="nums">20</p>
               </ion-col>
-              <ion-col col-6>
-                Mildly
+              <ion-col col-6 class="br1 br4" >
+                BC
                 <p class="nums">20</p>
               </ion-col>
-              <ion-col class="br4" col-6>
-                Healthy
+              <ion-col class="br1 br4 " col-6>
+                OC
+                <p class="nums">20</p>
+              </ion-col>
+              <ion-col class="br1 br4" col-6>
+                Minority
                 <p class="nums">20</p>
               </ion-col>
             </ion-row>
@@ -165,25 +166,21 @@
       </ion-col>
 
       <ion-col col-3 margin-horizontal push-1>
-        <h1 padding-left>People</h1>
+        <h1 padding-left>Overall</h1>
         <ion-card>
           <ion-card-content>
             <ion-row>
-              <ion-col class="br1" col-6>
-                Severely<br />
+              <ion-col class="br1 br4" col-12>
+                No. of Students<br />
                 <p class="nums">20</p>
               </ion-col>
-              <ion-col col-6>
-                Moderately
+              <ion-col class="br4 br1" col-6>
+                No. of  Schools
                 <p class="nums">20</p>
               </ion-col>
-              <ion-col col-6>
-                Mildly
-                <p class="nums">20</p>
-              </ion-col>
-              <ion-col class="br4" col-6>
-                Healthy
-                <p class="nums">20</p>
+              <ion-col class="br4 br1" col-6>
+                No. of  ANMs
+                <p class="nums">{{totAnms}}</p>
               </ion-col>
             </ion-row>
           </ion-card-content>

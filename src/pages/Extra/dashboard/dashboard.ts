@@ -32,14 +32,15 @@ export class DashboardPage {
   filteredStudents: Array<any>=[];
   filters = {}
 
+  totAnms : number = 0;
   
-
   constructor(
   public navCtrl: NavController,
   private db: AngularFireDatabase,
   private menuCtrl : MenuController,
   ) {
     this.menuCtrl.enable(true);
+    this.gtAnms();
     this.getMandals();
     this.getVillages();
     this.getSchools();
@@ -115,7 +116,11 @@ export class DashboardPage {
   //   })
   // }
 
-
-
+  //getting Numbers
+  gtAnms(){
+    this.db.list("Organisms/Anms").snapshotChanges().subscribe(snap=>{
+      this.totAnms = snap.length;
+    })
+  }
 
   }

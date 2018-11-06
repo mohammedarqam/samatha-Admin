@@ -53,19 +53,13 @@
               <p item-end>{{school.Management}}</p>
             </ion-item>
 
-            <ion-item>
-              <p ion-text color="primary" item-start >Progress</p>
-              <p item-end>20%</p>
-            </ion-item>
 
             <ion-item>
-              <p ion-text color="primary" item-start >ANM</p>
+              <p ion-text color="primary" item-start >ANMs</p>
               <p item-end *ngIf="!school.ANM">Unassigned</p>
-              <p item-end *ngIf="school.ANM">{{school.ANM}}</p>
-            </ion-item>
-            <ion-item>
-              <p ion-text color="primary" item-start >Total Strength</p>
-              <p item-end>{{school.Strength}}</p>
+              <div item-end *ngIf="school.ANM" >
+              <p  *ngFor="let ss of anms;let i = index" >{{i+1}}.{{ss.Name}}</p>
+              </div>
             </ion-item>
 
           </ion-card-content>

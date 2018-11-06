@@ -46,21 +46,15 @@
                 <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}} </ion-option>
               </ion-select>
             </ion-item>
-            <ion-item *ngIf="nVillD">
-              <p ion-text color="danger"> No Villages Found</p>
-            </ion-item>
-            <ion-item *ngIf="villages.length">
+
+            <ion-item >
               <ion-label floating>Select Village</ion-label>
               <ion-select [(ngModel)]="villageSel" (ionChange)="getSchools()">
                 <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}} </ion-option>
               </ion-select>
             </ion-item>
 
-
-            <ion-item *ngIf="nSchlD && !schools.length">
-              <p ion-text color="danger"> No Schools Found</p>
-            </ion-item>
-            <ion-item *ngIf="schools.length">
+            <ion-item >
               <ion-label floating>Select School</ion-label>
               <ion-select [(ngModel)]="schoolSel">
                 <ion-option *ngFor="let s of schools" [value]="s">{{s.Name}} </ion-option>

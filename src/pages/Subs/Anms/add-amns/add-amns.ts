@@ -78,7 +78,7 @@ export class AddAmnsPage {
       loading.present();
       var genEmail = this.phone + "@samatha.anm";
       firebase.auth().createUserWithEmailAndPassword(genEmail,this.pass).then(()=>{
-        firebase.database().ref("Anms").child(firebase.auth().currentUser.uid).set({
+        firebase.database().ref("Organisms").child("Anms").child(firebase.auth().currentUser.uid).set({
           Name : this.name,
           Gender : this.gender,
           Email : this.email,

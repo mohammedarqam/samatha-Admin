@@ -14,7 +14,7 @@ import { DelAnmPage } from '../del-anm/del-anm';
 })
 export class ViewAmnsPage {
 
-  anmRef = this.db.list("Anms");
+  anmRef = this.db.list("Organisms/Anms");
   anms : Array<any> = [];
   anmsLoaded : Array<any> = [];
 
@@ -38,8 +38,8 @@ export class ViewAmnsPage {
       snap.forEach(snp=>{
         var temp : any  =snp.payload.val();
         temp.key = snp.key;
-        firebase.database().ref("Anm Assigns").child(temp.key).once("value",itemSnap=>{
-          temp.Schools = itemSnap.numChildren();
+        firebase.database().ref("OrganismsIndex").child("Anm Assigns").child(temp.key).once("value",itemSnap=>{
+          temp.Schools = itemSnap.val();
         })
         tempArray.push(temp);
       })
@@ -59,7 +59,7 @@ export class ViewAmnsPage {
     }
     this.anms = this.anms.filter((v) => {
       if(v.FirstName && q) {
-        if (v.FirstName.toLowerCase().indexOf(q.toLowerCase()) > -1) {
+        if (v.Name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
           return true;
         }
         return false;
