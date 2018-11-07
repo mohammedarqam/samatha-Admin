@@ -16,7 +16,7 @@ import { MandalDetailsPage } from '../pages/Subs/Mandals/mandal-details/mandal-d
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ViewAmnsPage;
+  rootPage: any = StudentsPage;
   activePage: any;
 
   full : boolean = true;

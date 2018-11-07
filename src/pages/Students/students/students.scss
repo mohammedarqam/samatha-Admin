@@ -9,5 +9,16 @@ page-students {
     .titlCol{
       text-align: left;
     }
+    ion-label{
+        color: black !important;
+        font-weight: 500 !important;
+        font-size: 20px !important;
+    }
 
+    .darkBg{
+        background: #DFDEE0;
+    }
+    .whiteBg{
+        background: #ffffff;
+    }
 }

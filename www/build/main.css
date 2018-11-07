@@ -40024,6 +40024,20 @@ page-students .titlCol {
   text-align: left;
 }
 
+page-students ion-label {
+  color: black !important;
+  font-weight: 500 !important;
+  font-size: 20px !important;
+}
+
+page-students .darkBg {
+  background: #DFDEE0;
+}
+
+page-students .whiteBg {
+  background: #ffffff;
+}
+
 page-add-amns ion-select, page-add-amns ion-input {
   border-bottom: 1px solid #E51A4B;
 }

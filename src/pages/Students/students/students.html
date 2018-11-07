@@ -3,29 +3,19 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
+    <ion-title>{{pgName}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-grid>
-    <ion-row>
-      <ion-col col-4>
-        <ion-item no-lines class="content">
-          <h1 class="title" item-start>Students</h1>
-        </ion-item>
-      </ion-col>
-      <ion-col col-6 push-2>
-        <ion-searchbar item-end animated="true" placeholder="Search an Student.." [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
 
-  <ion-grid>
+  <ion-grid class="whiteBg">
     <ion-row>
-      <ion-col col-3>
-        <ion-item>
-          <ion-label floating>Community</ion-label>
-          <ion-select [(ngModel)]="casteSel" (ionChange)="filterExact('Community',casteSel)" >
+      <ion-col col-2>
+        <ion-item no-lines>
+          <ion-label stacked>Community</ion-label>
+          <ion-select [(ngModel)]="casteSel" class="darkBg" (ionChange)="filterExact('Community',casteSel)">
+            <ion-option value="all">All</ion-option>
             <ion-option value="SC">SC</ion-option>
             <ion-option value="ST">ST</ion-option>
             <ion-option value="BC">BC</ion-option>
@@ -34,12 +24,28 @@
           </ion-select>
         </ion-item>
       </ion-col>
-
-
-      <ion-col col-3>
-        <ion-item>
-          <ion-label floating>Severity</ion-label>
-          <ion-select [(ngModel)]="anL" (ionChange)="filterExact('Severity',anL)" >
+      <ion-col col-1>
+        <ion-item no-lines>
+          <ion-label stacked>Age</ion-label>
+          <ion-select class="darkBg" [(ngModel)]="age" (ionChange)="filterExact('Age',age)" >
+            <ion-option value="all">All</ion-option>
+            <ion-option value="10" >10</ion-option>
+            <ion-option value="11" >11</ion-option>
+            <ion-option value="12" >12</ion-option>
+            <ion-option value="13" >13</ion-option>
+            <ion-option value="14" >14</ion-option>
+            <ion-option value="15" >15</ion-option>
+            <ion-option value="16" >16</ion-option>
+            <ion-option value="17" >17</ion-option>
+            <ion-option value="18" >18</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2>
+        <ion-item no-lines>
+          <ion-label stacked>Severity</ion-label>
+          <ion-select [(ngModel)]="anL" class="darkBg" (ionChange)="filterExact('Severity', this.anL)">
+            <ion-option value="all">All</ion-option>
             <ion-option value="Severely Anaemic">Severely Anaemic</ion-option>
             <ion-option value="Moderately Anaemic">Moderately Anaemic</ion-option>
             <ion-option value="Mildly  Anaemic">Mildly Anaemic</ion-option>
@@ -48,9 +54,9 @@
         </ion-item>
       </ion-col>
 
-
-
     </ion-row>
+
+
   </ion-grid>
 
 
@@ -80,7 +86,20 @@
       </ion-row>
     </ion-navbar>
   </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <ion-searchbar item-end animated="true" placeholder="Search a Student .." [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>
+      </ion-col>
+      <ion-col col-6>
+      <button ion-button float-right (click)="exporti()">
+          Export
+          <ion-icon padding-left name="share-alt"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
 
+  </ion-grid>
   <!-- <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button> -->
 
   <ion-grid>
