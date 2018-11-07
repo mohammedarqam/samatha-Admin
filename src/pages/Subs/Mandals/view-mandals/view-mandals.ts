@@ -38,6 +38,11 @@ export class ViewMandalsPage {
       snap.forEach(snp => {
         let temp: any = snp.payload.val();
         temp.key = snp.key;
+        var severeRef = firebase.database().ref("Counters/Mandals").child(snp.key).child("Severity");
+        severeRef.child("Severely Anaemic").once("value",svereSnap=>{temp.Severe = svereSnap.numChildren();})
+        severeRef.child("Moderately Anaemic").once("value",svereSnap=>{temp.Moderate = svereSnap.numChildren();})
+        severeRef.child("Mildly  Anaemic").once("value",svereSnap=>{temp.Mildly = svereSnap.numChildren();})
+        severeRef.child("Healthy").once("value",svereSnap=>{temp.Healthy = svereSnap.numChildren();})
         console.log(temp)
         tempArray.push(temp);
       })

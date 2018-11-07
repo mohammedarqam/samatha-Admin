@@ -5,7 +5,7 @@ import { AddSchoolsPage } from '../add-schools/add-schools';
 import { SchoolDetailsPage } from '../school-details/school-details';
 import * as XLSX from 'xlsx';
 import * as saveAs from 'file-saver';
-
+import * as firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -38,9 +38,13 @@ export class ViewSchoolsPage {
     this.areaRef.snapshotChanges().subscribe(snap=>{
       let tempArray = [];
       snap.forEach(snp=>{
-        
         let temp : any = snp.payload.val();
         temp.key = snp.key;
+        var severeRef = firebase.database().ref("Counters/Schools").child(snp.key).child("Severity");
+        severeRef.child("Severely Anaemic").once("value",svereSnap=>{temp.Severe = svereSnap.numChildren();})
+        severeRef.child("Moderately Anaemic").once("value",svereSnap=>{temp.Moderate = svereSnap.numChildren();})
+        severeRef.child("Mildly  Anaemic").once("value",svereSnap=>{temp.Mildly = svereSnap.numChildren();})
+        severeRef.child("Healthy").once("value",svereSnap=>{temp.Healthy = svereSnap.numChildren();})
         tempArray.push(temp);
       })
       this.area = tempArray;

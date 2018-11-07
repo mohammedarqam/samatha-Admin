@@ -5,6 +5,9 @@ import { AngularFireDatabase } from 'angularfire2/database';
 import { AnmDetailsPage } from '../anm-details/anm-details';
 import * as firebase from 'firebase';
 import { DelAnmPage } from '../del-anm/del-anm';
+import { SchoolDetailsPage } from '../../Schools/school-details/school-details';
+import * as XLSX from 'xlsx';
+import * as saveAs from 'file-saver';
 
 
 @IonicPage()
@@ -13,33 +16,37 @@ import { DelAnmPage } from '../del-anm/del-anm';
   templateUrl: 'view-amns.html',
 })
 export class ViewAmnsPage {
-
+  pgName = "ANMs"
   anmRef = this.db.list("Organisms/Anms");
-  anms : Array<any> = [];
-  anmsLoaded : Array<any> = [];
+  anms: Array<any> = [];
+  anmsLoaded: Array<any> = [];
 
-  selArray : Array<any> = [];
-
+  selArray: Array<any> = [];
+  selSchool: any;
   constructor(
-  public navCtrl: NavController, 
-  public db : AngularFireDatabase,
-  public alertCtrl : AlertController,
-  public menuCtrl : MenuController,
-  public modalCtrl : ModalController,
-  public navParams: NavParams
+    public navCtrl: NavController,
+    public db: AngularFireDatabase,
+    public alertCtrl: AlertController,
+    public menuCtrl: MenuController,
+    public modalCtrl: ModalController,
+    public navParams: NavParams
   ) {
     this.menuCtrl.enable(true);
     this.getAnms();
   }
 
-  getAnms(){
-    this.anmRef.snapshotChanges().subscribe(snap=>{
+  getAnms() {
+    this.anmRef.snapshotChanges().subscribe(snap => {
       let tempArray = [];
-      snap.forEach(snp=>{
-        var temp : any  =snp.payload.val();
+      snap.forEach(snp => {
+        var temp: any = snp.payload.val();
         temp.key = snp.key;
-        firebase.database().ref("OrganismsIndex").child("Anm Assigns").child(temp.key).once("value",itemSnap=>{
-          temp.Schools = itemSnap.val();
+        firebase.database().ref("Organisms").child("Anm Assigns").child(temp.key).once("value", itemSnap => {
+          var sklsArr: Array<any> = [];
+          itemSnap.forEach(snip => {
+            sklsArr.push(snip.val());
+          })
+          temp.Schools = sklsArr;
         })
         tempArray.push(temp);
       })
@@ -58,7 +65,7 @@ export class ViewAmnsPage {
       return;
     }
     this.anms = this.anms.filter((v) => {
-      if(v.FirstName && q) {
+      if (v.Name && q) {
         if (v.Name.toLowerCase().indexOf(q.toLowerCase()) > -1) {
           return true;
         }
@@ -68,54 +75,87 @@ export class ViewAmnsPage {
   }
 
 
-addToArr(a){
-  switch (a.Checked) {
-    case true:  this.selArray.push(a.key);
-      break;
-    case false:  this.rmFrmArray(a.key);
-      break;
+  addToArr(a) {
+    switch (a.Checked) {
+      case true: this.selArray.push(a.key);
+        break;
+      case false: this.rmFrmArray(a.key);
+        break;
+    }
+
   }
 
-}
-
-rmFrmArray(key){
-  var ind = this.selArray.indexOf(key);
-  this.selArray.splice(ind,1)
-}
-
-
-
-delMulC(){
-  let partnerView = this.modalCtrl.create(DelAnmPage,{delAnms : this.selArray},{enableBackdropDismiss : false});
-  partnerView.present();
-}
-
-
-
-
-
-
-
-
-
-
-
-// clearSel(){
-//   console.log(this.anms)
-//   this.selArray.forEach(snip=>{
-//     var i = this.anms.indexOf(x=> x.key == snip)
-//     console.log(i)
-//   })
-//   console.log(this.selArray)
-// }
-
-  gtAnmDetails(a){
-    this.navCtrl.push(AnmDetailsPage,{anm  :a});
+  rmFrmArray(key) {
+    var ind = this.selArray.indexOf(key);
+    this.selArray.splice(ind, 1)
   }
 
 
 
-  gtAddANM(){
+  delMulC() {
+    let partnerView = this.modalCtrl.create(DelAnmPage, { delAnms: this.selArray }, { enableBackdropDismiss: false });
+    partnerView.present();
+  }
+
+
+
+  gtSchooolDetails(s) {
+    firebase.database().ref("Subs/Schools").child(s.School).once("value", itemSnap => {
+      this.selSchool = itemSnap.val();
+      this.selSchool.key = itemSnap.key;
+    }).then(() => {
+      this.navCtrl.push(SchoolDetailsPage, { school: this.selSchool })
+    })
+  }
+
+
+
+  gtAnmDetails(a) {
+    this.navCtrl.push(AnmDetailsPage, { anm: a });
+  }
+
+
+
+  gtAddANM() {
     this.navCtrl.push(AddAmnsPage);
   }
+
+  exporti() {
+    let newArea = this.anms;
+    newArea.forEach(snip => {
+      delete snip.key;
+      
+      // snip.Schools.forEach(sn=>{
+      //   console.log(sn.SchoolName)
+      // })
+    })
+    let sheet = XLSX.utils.json_to_sheet(newArea);
+    let wb = {
+      SheetNames: ["export"],
+      Sheets: {
+        "export": sheet
+      }
+    };
+  
+    let wbout = XLSX.write(wb, {
+      bookType: 'xlsx',
+      bookSST: false,
+      type: 'binary'
+    });
+  
+    function s2ab(s) {
+      let buf = new ArrayBuffer(s.length);
+      let view = new Uint8Array(buf);
+      for (let i = 0; i != s.length; ++i) view[i] = s.charCodeAt(i) & 0xFF;
+      return buf;
+    }
+  
+    let blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
+    let self = this;
+    saveAs(blob, this.pgName + '.xlsx');
+  
+  }
+  
+
+
 }
