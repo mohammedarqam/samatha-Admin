@@ -11,6 +11,39 @@
 
   <ion-grid class="whiteBg">
     <ion-row>
+
+      <ion-col col-2>
+        <ion-item no-lines>
+          <ion-label stacked>Mandals</ion-label>
+          <ion-select class="darkBg" [(ngModel)]="mandalSel" (ionChange)="checkMandal()">
+            <ion-option value="all">All</ion-option>
+            <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col col-2>
+        <ion-item no-lines>
+          <ion-label stacked>Villages</ion-label>
+          <ion-select class="darkBg" [(ngModel)]="villageSel" (ionChange)="checkVillage()" >
+            <ion-option value="all">All</ion-option>
+            <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col col-2>
+        <ion-item no-lines>
+          <ion-label stacked>Schools</ion-label>
+          <ion-select class="darkBg" [(ngModel)]="schoolSel">
+            <ion-option value="all">All</ion-option>
+            <ion-option *ngFor="let s of schools" [value]="s.key">{{s.Name}}</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+
+
+
       <ion-col col-2>
         <ion-item no-lines>
           <ion-label stacked>Community</ion-label>
@@ -27,17 +60,17 @@
       <ion-col col-1>
         <ion-item no-lines>
           <ion-label stacked>Age</ion-label>
-          <ion-select class="darkBg" [(ngModel)]="age" (ionChange)="filterExact('Age',age)" >
+          <ion-select class="darkBg" [(ngModel)]="age" (ionChange)="filterExact('Age',age)">
             <ion-option value="all">All</ion-option>
-            <ion-option value="10" >10</ion-option>
-            <ion-option value="11" >11</ion-option>
-            <ion-option value="12" >12</ion-option>
-            <ion-option value="13" >13</ion-option>
-            <ion-option value="14" >14</ion-option>
-            <ion-option value="15" >15</ion-option>
-            <ion-option value="16" >16</ion-option>
-            <ion-option value="17" >17</ion-option>
-            <ion-option value="18" >18</ion-option>
+            <ion-option value="10">10</ion-option>
+            <ion-option value="11">11</ion-option>
+            <ion-option value="12">12</ion-option>
+            <ion-option value="13">13</ion-option>
+            <ion-option value="14">14</ion-option>
+            <ion-option value="15">15</ion-option>
+            <ion-option value="16">16</ion-option>
+            <ion-option value="17">17</ion-option>
+            <ion-option value="18">18</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
@@ -50,6 +83,19 @@
             <ion-option value="Moderately Anaemic">Moderately Anaemic</ion-option>
             <ion-option value="Mildly  Anaemic">Mildly Anaemic</ion-option>
             <ion-option value="Healthy">Healthy</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col col-1>
+        <ion-item no-lines>
+          <ion-label stacked>Class</ion-label>
+          <ion-select class="darkBg" (ionChange)="filterExact('Class',clSel)" [(ngModel)]="clSel">
+            <ion-option value="all">All</ion-option>
+            <ion-option value="6">6th</ion-option>
+            <ion-option value="7">7th</ion-option>
+            <ion-option value="8">8th</ion-option>
+            <ion-option value="9">9th</ion-option>
+            <ion-option value="10">10th</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
@@ -92,7 +138,7 @@
         <ion-searchbar item-end animated="true" placeholder="Search a Student .." [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>
       </ion-col>
       <ion-col col-6>
-      <button ion-button float-right (click)="exporti()">
+        <button ion-button float-right (click)="exporti()">
           Export
           <ion-icon padding-left name="share-alt"></ion-icon>
         </button>
@@ -112,7 +158,7 @@
           <ion-col col-1>
             <p ion-text><strong>{{i+1}}</strong></p>
           </ion-col>
-          <ion-col col-2>
+          <ion-col col-2 (click)="gtStudentDetails(a)" class="curs">
             {{a.StudentName}}
           </ion-col>
           <ion-col col-2 text-center>
@@ -123,11 +169,6 @@
           </ion-col>
           <ion-col col-2 text-center>
             <h1 ion-text color="primary">{{a.Mobile}}</h1>
-          </ion-col>
-          <ion-col col-2>
-            <button ion-button clear (click)="gtAnmDetails(a)">Details
-              <ion-icon padding-left name="md-arrow-round-forward"></ion-icon>
-            </button>
           </ion-col>
 
 

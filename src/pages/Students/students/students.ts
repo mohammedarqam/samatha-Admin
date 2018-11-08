@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ModalController, LoadingController } from 'ionic-angular';
 import * as firebase from 'firebase';
 import { AngularFireDatabase } from 'angularfire2/database';
 import * as _ from 'lodash';
 import * as XLSX from 'xlsx';
 import * as saveAs from 'file-saver';
+import { StudentDetailsPage } from '../student-details/student-details';
 
 
 @IonicPage()
@@ -20,15 +21,24 @@ export class StudentsPage {
   students: Array<any> = [];
   filteredStudents: any;
 
+  mandals : Array<any>=[];
+  villages : Array<any>=[];
+  schools : Array<any>=[];
+
+  mandalSel = "all";
+  villageSel = "all";
+  schoolSel = "all";
+
   casteSel : string = "all";
   anL : string = "all";
   age : string = "all";
-  
+  clSel : string = 'all';
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
     public menuCtrl: MenuController,
     public db: AngularFireDatabase,
+    public loadingCtrl : LoadingController,
     public navParams: NavParams,
   ) {
     this.menuCtrl.enable(true);
@@ -49,7 +59,10 @@ export class StudentsPage {
         })
         this.applyFilters()
       })
-  }
+      this.getMandals();
+      this.getVillages();
+      this.getSchools();
+    }
 
   private applyFilters() {
     this.filteredStudents = _.filter(this.students, _.conforms(this.filters))
@@ -105,7 +118,135 @@ export class StudentsPage {
   }
 
 
+  gtStudentDetails(a){
+    this.navCtrl.push(StudentDetailsPage,{student : a})
+  }
 
+
+  checkMandal(){
+    if(this.mandalSel=="all"){
+      this.getMandals();
+      this.getVillages();
+      this.getSchools();
+      this.villageSel = "all";
+      this.schoolSel = "all";
+    }else{
+      this.manWiseVills();
+    }
+  }
+  manWiseVills(){
+
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+
+    this.db.list(`SubsIndex/Mandals/${this.mandalSel}/Villages`, ref=>ref.orderByChild("Name"))
+    .snapshotChanges().subscribe(itemSnap=>{
+      this.villages =[];
+      itemSnap.forEach(item=>{
+        firebase.database().ref("Subs/Villages/").child(item.key).orderByChild("Name").once("value",iSnap=>{
+          var temp : any = iSnap.val();
+          temp.key = iSnap.val();
+          console.log(temp);
+          this.villages.push(temp); 
+        }).then(()=>{
+
+          this.db.list(`SubsIndex/Mandals/${this.mandalSel}/Schools`, ref=>ref.orderByChild("Name"))
+          .snapshotChanges().subscribe(itemSnap=>{
+            this.schools =[];
+            itemSnap.forEach(item=>{
+              firebase.database().ref("Subs/Schools/").child(item.key).orderByChild("Name").once("value",iSnap=>{
+                var temp : any = iSnap.val();
+                temp.key = iSnap.val();
+                console.log(temp);
+                this.schools.push(temp); 
+              }).then(()=>{
+                loading.dismiss();
+              })
+            })
+          })
+
+
+        })
+      })
+    })
+  }
+
+  checkVillage(){
+    if(this.villageSel=="all"){
+      this.getVillages();
+      this.getSchools();
+      this.schoolSel = "all";
+    }else{
+      this.schoolSel = "all";
+      this.villWiseVills();
+    }
+  }
+  villWiseVills(){
+    console.log(this.villageSel)
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+
+
+          this.db.list(`SubsIndex/Villages/${this.villageSel}/Schools`, ref=>ref.orderByChild("Name"))
+          .snapshotChanges().subscribe(itemSnap=>{
+            this.schools =[];
+            itemSnap.forEach(item=>{
+              firebase.database().ref("Subs/Schools/").child(item.key).orderByChild("Name").once("value",iSnap=>{
+                var temp : any = iSnap.val();
+                temp.key = iSnap.val();
+                console.log(temp);
+                this.schools.push(temp); 
+              }).then(()=>{
+                loading.dismiss();
+              })
+            })
+          })
+
+
+  }
+
+
+
+
+
+  //originals
+  getMandals(){
+    this.db.list("Subs/Mandals", ref=>ref.orderByChild("Name"))
+    .snapshotChanges().subscribe(itemSnap=>{
+      this.mandals =[];
+      itemSnap.forEach(item=>{
+        var temp : any = item.payload.val();
+        temp.key = item.key;
+        this.mandals.push(temp);
+      })
+    })
+  }
+
+  getVillages(){
+    this.db.list("Subs/Villages", ref=>ref.orderByChild("Name"))
+    .snapshotChanges().subscribe(itemSnap=>{
+      this.villages =[];
+      itemSnap.forEach(item=>{
+        var temp : any = item.payload.val();
+        temp.key = item.key;
+        this.villages.push(temp);
+      })
+    })
+  }
+
+  getSchools(){
+    this.db.list("Subs/Schools", ref=>ref.orderByChild("Name"))
+    .snapshotChanges().subscribe(itemSnap=>{
+      this.schools =[];
+      itemSnap.forEach(item=>{
+        var temp : any = item.payload.val();
+        temp.key = item.key;
+        this.schools.push(temp);
+      })
+    })
+  }
 
 
 

@@ -18,7 +18,7 @@
       <ion-col col-2>
         <ion-item no-lines>
           <ion-label stacked>Mandals</ion-label>
-          <ion-select class="darkBg" [(ngModel)]="mandalSel" (ionChange)="manWiseVills()">
+          <ion-select class="darkBg" [(ngModel)]="mandalSel" (ionChange)="manWiseVills(mandalSel)">
             <ion-option value="All">All</ion-option>
             <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}}</ion-option>
           </ion-select>

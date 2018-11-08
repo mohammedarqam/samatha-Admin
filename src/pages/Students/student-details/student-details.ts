@@ -10,12 +10,13 @@ import * as firebase from 'firebase';
 })
 export class StudentDetailsPage {
 
-  student  = this.navParams.get("anm");
+  student  = this.navParams.get("student");
   
   constructor(
   public navCtrl: NavController, 
   public navParams: NavParams
   ) {
+    console.log(this.student);
   }
 
 
