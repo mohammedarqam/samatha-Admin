@@ -27,6 +27,7 @@ import { ChartsModule } from 'ng2-charts';
 import { DelAnmPage } from '../pages/Subs/Anms/del-anm/del-anm';
 import { EditAnmPage } from '../pages/Subs/Anms/edit-anm/edit-anm';
 import {File} from '@ionic-native/file';
+import { DataUploadPage } from '../pages/data-upload/data-upload';
 
 
 export const firebaseCred = {
@@ -64,6 +65,7 @@ firebase.initializeApp(firebaseCred);
     AssignSchoolPage,
     DelAnmPage,
     EditAnmPage,
+    DataUploadPage,
   ],
   imports: [
     BrowserModule,
@@ -95,6 +97,7 @@ firebase.initializeApp(firebaseCred);
     AssignSchoolPage,
     DelAnmPage,
     EditAnmPage,
+    DataUploadPage,
   ],
   providers: [
     {provide: ErrorHandler, useClass: IonicErrorHandler},

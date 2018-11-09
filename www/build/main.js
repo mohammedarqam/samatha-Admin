@@ -1,4 +1,4 @@
-webpackJsonp([19],{
+webpackJsonp([20],{
 
 /***/ 105:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -6,12 +6,12 @@ webpackJsonp([19],{
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewMandalsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_fire_database__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_mandals_add_mandals__ = __webpack_require__(177);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mandal_details_mandal_details__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__add_mandals_add_mandals__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__mandal_details_mandal_details__ = __webpack_require__(179);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_xlsx__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_xlsx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_xlsx__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_file_saver__ = __webpack_require__(81);
@@ -147,7 +147,7 @@ var ViewMandalsPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewAmnsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_amns_add_amns__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
@@ -321,7 +321,7 @@ var ViewAmnsPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AnmDetailsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__assign_school_assign_school__ = __webpack_require__(182);
@@ -404,11 +404,66 @@ var AnmDetailsPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataUploadPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var DataUploadPage = /** @class */ (function () {
+    function DataUploadPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.mandalsArray = ["AMARCHINTA", "Atmakur", "Chinnamabavi", "Ghanpur", "Gopalpet", "Kothakota", "Madanapur", "Pangal", "Pebbair", "Peddamandadi", "Revally", "", "Veepanagandla", "Wanaparthy"];
+    }
+    DataUploadPage.prototype.UploadMandals = function () {
+        console.log(this.mandalsArray);
+        this.mandalsArray.forEach(function (manSnip) {
+            __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Mandals").push({
+                Name: manSnip,
+                TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format()
+            }).then(function () {
+                console.log("Done");
+            });
+        });
+    };
+    DataUploadPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-data-upload',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\data-upload\data-upload.html"*/'<ion-header>\n  <ion-navbar color="primary" >\n    <ion-title>DataUpload</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n\n\n\n\n  <button ion-button (click)="UploadMandals()" >Upload Mandals</button>\n\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\data-upload\data-upload.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
+    ], DataUploadPage);
+    return DataUploadPage;
+}());
+
+//# sourceMappingURL=data-upload.js.map
+
+/***/ }),
+
+/***/ 176:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(278);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(404);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -536,13 +591,13 @@ var DashboardPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 176:
+/***/ 177:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(105);
@@ -636,13 +691,13 @@ var LoginPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 177:
+/***/ 178:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddMandalsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(1);
@@ -748,13 +803,13 @@ var AddMandalsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 178:
+/***/ 179:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MandalDetailsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -791,13 +846,13 @@ var MandalDetailsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 179:
+/***/ 180:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StudentDetailsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -830,264 +885,13 @@ var StudentDetailsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 180:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StudentsPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash__ = __webpack_require__(278);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_xlsx__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_file_saver__ = __webpack_require__(81);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_file_saver___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_file_saver__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__student_details_student_details__ = __webpack_require__(179);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-
-
-
-
-var StudentsPage = /** @class */ (function () {
-    function StudentsPage(navCtrl, modalCtrl, menuCtrl, db, loadingCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.modalCtrl = modalCtrl;
-        this.menuCtrl = menuCtrl;
-        this.db = db;
-        this.loadingCtrl = loadingCtrl;
-        this.navParams = navParams;
-        this.pgName = "Students";
-        this.studentsRef = __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Organisms/Students");
-        this.students = [];
-        this.mandals = [];
-        this.villages = [];
-        this.schools = [];
-        this.mandalSel = "all";
-        this.villageSel = "all";
-        this.schoolSel = "all";
-        this.casteSel = "all";
-        this.anL = "all";
-        this.age = "all";
-        this.clSel = 'all';
-        this.filters = {};
-        this.menuCtrl.enable(true);
-    }
-    StudentsPage.prototype.ngOnInit = function () {
-        var _this = this;
-        this.db.list('Organisms/Students').snapshotChanges()
-            .subscribe(function (itemSnap) {
-            itemSnap.forEach(function (snip) {
-                var temp = snip.payload.val();
-                temp.key = snip.key;
-                _this.students.push(temp);
-            });
-            _this.applyFilters();
-        });
-        this.getMandals();
-        this.getVillages();
-        this.getSchools();
-    };
-    StudentsPage.prototype.applyFilters = function () {
-        this.filteredStudents = __WEBPACK_IMPORTED_MODULE_4_lodash__["filter"](this.students, __WEBPACK_IMPORTED_MODULE_4_lodash__["conforms"](this.filters));
-    };
-    /// filter property by equality to rule
-    StudentsPage.prototype.filterExact = function (property, rule) {
-        if (rule == "all")
-            this.removeFilter(property);
-        else {
-            this.filters[property] = function (val) { return val == rule; };
-            this.applyFilters();
-        }
-    };
-    /// removes filter
-    StudentsPage.prototype.removeFilter = function (property) {
-        delete this.filters[property];
-        this[property] = null;
-        this.applyFilters();
-    };
-    StudentsPage.prototype.exporti = function () {
-        var newArea = this.students;
-        newArea.forEach(function (snip) {
-            delete snip.key;
-        });
-        var sheet = __WEBPACK_IMPORTED_MODULE_5_xlsx__["utils"].json_to_sheet(newArea);
-        var wb = {
-            SheetNames: ["export"],
-            Sheets: {
-                "export": sheet
-            }
-        };
-        var wbout = __WEBPACK_IMPORTED_MODULE_5_xlsx__["write"](wb, {
-            bookType: 'xlsx',
-            bookSST: false,
-            type: 'binary'
-        });
-        function s2ab(s) {
-            var buf = new ArrayBuffer(s.length);
-            var view = new Uint8Array(buf);
-            for (var i = 0; i != s.length; ++i)
-                view[i] = s.charCodeAt(i) & 0xFF;
-            return buf;
-        }
-        var blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
-        var self = this;
-        __WEBPACK_IMPORTED_MODULE_6_file_saver__(blob, this.pgName + '.xlsx');
-    };
-    StudentsPage.prototype.gtStudentDetails = function (a) {
-        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__student_details_student_details__["a" /* StudentDetailsPage */], { student: a });
-    };
-    StudentsPage.prototype.checkMandal = function () {
-        if (this.mandalSel == "all") {
-            this.getMandals();
-            this.getVillages();
-            this.getSchools();
-            this.villageSel = "all";
-            this.schoolSel = "all";
-        }
-        else {
-            this.manWiseVills();
-        }
-    };
-    StudentsPage.prototype.manWiseVills = function () {
-        var _this = this;
-        var loading = this.loadingCtrl.create({
-            content: 'Please wait...'
-        });
-        this.db.list("SubsIndex/Mandals/" + this.mandalSel + "/Villages", function (ref) { return ref.orderByChild("Name"); })
-            .snapshotChanges().subscribe(function (itemSnap) {
-            _this.villages = [];
-            itemSnap.forEach(function (item) {
-                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Villages/").child(item.key).orderByChild("Name").once("value", function (iSnap) {
-                    var temp = iSnap.val();
-                    temp.key = iSnap.val();
-                    console.log(temp);
-                    _this.villages.push(temp);
-                }).then(function () {
-                    _this.db.list("SubsIndex/Mandals/" + _this.mandalSel + "/Schools", function (ref) { return ref.orderByChild("Name"); })
-                        .snapshotChanges().subscribe(function (itemSnap) {
-                        _this.schools = [];
-                        itemSnap.forEach(function (item) {
-                            __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Schools/").child(item.key).orderByChild("Name").once("value", function (iSnap) {
-                                var temp = iSnap.val();
-                                temp.key = iSnap.val();
-                                console.log(temp);
-                                _this.schools.push(temp);
-                            }).then(function () {
-                                loading.dismiss();
-                            });
-                        });
-                    });
-                });
-            });
-        });
-    };
-    StudentsPage.prototype.checkVillage = function () {
-        if (this.villageSel == "all") {
-            this.getVillages();
-            this.getSchools();
-            this.schoolSel = "all";
-        }
-        else {
-            this.schoolSel = "all";
-            this.villWiseVills();
-        }
-    };
-    StudentsPage.prototype.villWiseVills = function () {
-        var _this = this;
-        console.log(this.villa);
-        var loading = this.loadingCtrl.create({
-            content: 'Please wait...'
-        });
-        this.db.list("SubsIndex/Villages/" + this.villageSel + "/Schools", function (ref) { return ref.orderByChild("Name"); })
-            .snapshotChanges().subscribe(function (itemSnap) {
-            _this.schools = [];
-            itemSnap.forEach(function (item) {
-                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Schools/").child(item.key).orderByChild("Name").once("value", function (iSnap) {
-                    var temp = iSnap.val();
-                    temp.key = iSnap.val();
-                    console.log(temp);
-                    _this.schools.push(temp);
-                }).then(function () {
-                    loading.dismiss();
-                });
-            });
-        });
-    };
-    //originals
-    StudentsPage.prototype.getMandals = function () {
-        var _this = this;
-        this.db.list("Subs/Mandals", function (ref) { return ref.orderByChild("Name"); })
-            .snapshotChanges().subscribe(function (itemSnap) {
-            _this.mandals = [];
-            itemSnap.forEach(function (item) {
-                var temp = item.payload.val();
-                temp.key = item.key;
-                _this.mandals.push(temp);
-            });
-        });
-    };
-    StudentsPage.prototype.getVillages = function () {
-        var _this = this;
-        this.db.list("Subs/Villages", function (ref) { return ref.orderByChild("Name"); })
-            .snapshotChanges().subscribe(function (itemSnap) {
-            _this.villages = [];
-            itemSnap.forEach(function (item) {
-                var temp = item.payload.val();
-                temp.key = item.key;
-                _this.villages.push(temp);
-            });
-        });
-    };
-    StudentsPage.prototype.getSchools = function () {
-        var _this = this;
-        this.db.list("Subs/Schools", function (ref) { return ref.orderByChild("Name"); })
-            .snapshotChanges().subscribe(function (itemSnap) {
-            _this.schools = [];
-            itemSnap.forEach(function (item) {
-                var temp = item.payload.val();
-                temp.key = item.key;
-                _this.schools.push(temp);
-            });
-        });
-    };
-    StudentsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-students',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Students\students\students.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>{{pgName}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid class="whiteBg">\n\n    <ion-row>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Mandals</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="mandalSel" (ionChange)="checkMandal()">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Villages</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="villageSel" (ionChange)="checkVillage()" >\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Schools</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="schoolSel">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option *ngFor="let s of schools" [value]="s.key">{{s.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n\n\n\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Community</ion-label>\n\n          <ion-select [(ngModel)]="casteSel" class="darkBg" (ionChange)="filterExact(\'Community\',casteSel)">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="SC">SC</ion-option>\n\n            <ion-option value="ST">ST</ion-option>\n\n            <ion-option value="BC">BC</ion-option>\n\n            <ion-option value="OC">OC</ion-option>\n\n            <ion-option value="Minority">Minority</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-1>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Age</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="age" (ionChange)="filterExact(\'Age\',age)">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="10">10</ion-option>\n\n            <ion-option value="11">11</ion-option>\n\n            <ion-option value="12">12</ion-option>\n\n            <ion-option value="13">13</ion-option>\n\n            <ion-option value="14">14</ion-option>\n\n            <ion-option value="15">15</ion-option>\n\n            <ion-option value="16">16</ion-option>\n\n            <ion-option value="17">17</ion-option>\n\n            <ion-option value="18">18</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Severity</ion-label>\n\n          <ion-select [(ngModel)]="anL" class="darkBg" (ionChange)="filterExact(\'Severity\', this.anL)">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="Severely Anaemic">Severely Anaemic</ion-option>\n\n            <ion-option value="Moderately Anaemic">Moderately Anaemic</ion-option>\n\n            <ion-option value="Mildly  Anaemic">Mildly Anaemic</ion-option>\n\n            <ion-option value="Healthy">Healthy</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-1>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Class</ion-label>\n\n          <ion-select class="darkBg" (ionChange)="filterExact(\'Class\',clSel)" [(ngModel)]="clSel">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="6">6th</ion-option>\n\n            <ion-option value="7">7th</ion-option>\n\n            <ion-option value="8">8th</ion-option>\n\n            <ion-option value="9">9th</ion-option>\n\n            <ion-option value="10">10th</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n    </ion-row>\n\n\n\n\n\n  </ion-grid>\n\n\n\n\n\n\n\n  <ion-grid>\n\n    <ion-navbar color="primary">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Name</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Severity</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Community</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Mobile</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar"></p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-navbar>\n\n  </ion-grid>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <ion-searchbar item-end animated="true" placeholder="Search a Student .." [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <button ion-button float-right (click)="exporti()">\n\n          Export\n\n          <ion-icon padding-left name="share-alt"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n  </ion-grid>\n\n  <!-- <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button> -->\n\n\n\n  <ion-grid>\n\n    <ion-card *ngFor="let a of filteredStudents;let i = index">\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-1>\n\n            <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)"></ion-checkbox>\n\n          </ion-col>\n\n          <ion-col col-1>\n\n            <p ion-text><strong>{{i+1}}</strong></p>\n\n          </ion-col>\n\n          <ion-col col-2 (click)="gtStudentDetails(a)" class="curs">\n\n            {{a.StudentName}}\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Severity }}</h1><br />\n\n          </ion-col>\n\n          <ion-col col-1 text-center>\n\n            <h1 ion-text color="primary">{{a.Community}} </h1><br />\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Mobile}}</h1>\n\n          </ion-col>\n\n\n\n\n\n\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-grid>\n\n\n\n\n\n\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Students\students\students.html"*/,
-        }),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]) === "function" && _f || Object])
-    ], StudentsPage);
-    return StudentsPage;
-    var _a, _b, _c, _d, _e, _f;
-}());
-
-//# sourceMappingURL=students.js.map
-
-/***/ }),
-
 /***/ 181:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddAmnsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__view_amns_view_amns__ = __webpack_require__(106);
@@ -1205,7 +1009,7 @@ var AddAmnsPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AssignSchoolPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(39);
@@ -1412,7 +1216,7 @@ var AssignSchoolPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return EditAnmPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1508,7 +1312,7 @@ var EditAnmPage = /** @class */ (function () {
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DelAnmPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -1589,9 +1393,264 @@ var DelAnmPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StudentsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash__ = __webpack_require__(404);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx__ = __webpack_require__(80);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_xlsx__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_file_saver__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_file_saver___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_file_saver__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__student_details_student_details__ = __webpack_require__(180);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+
+
+
+var StudentsPage = /** @class */ (function () {
+    function StudentsPage(navCtrl, modalCtrl, menuCtrl, db, loadingCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.modalCtrl = modalCtrl;
+        this.menuCtrl = menuCtrl;
+        this.db = db;
+        this.loadingCtrl = loadingCtrl;
+        this.navParams = navParams;
+        this.pgName = "Students";
+        this.studentsRef = __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Organisms/Students");
+        this.students = [];
+        this.mandals = [];
+        this.villages = [];
+        this.schools = [];
+        this.mandalSel = "all";
+        this.villageSel = "all";
+        this.schoolSel = "all";
+        this.casteSel = "all";
+        this.anL = "all";
+        this.age = "all";
+        this.clSel = 'all';
+        this.filters = {};
+        this.menuCtrl.enable(true);
+    }
+    StudentsPage.prototype.ngOnInit = function () {
+        var _this = this;
+        this.db.list('Organisms/Students').snapshotChanges()
+            .subscribe(function (itemSnap) {
+            itemSnap.forEach(function (snip) {
+                var temp = snip.payload.val();
+                temp.key = snip.key;
+                _this.students.push(temp);
+            });
+            _this.applyFilters();
+        });
+        this.getMandals();
+        this.getVillages();
+        this.getSchools();
+    };
+    StudentsPage.prototype.applyFilters = function () {
+        this.filteredStudents = __WEBPACK_IMPORTED_MODULE_4_lodash__["filter"](this.students, __WEBPACK_IMPORTED_MODULE_4_lodash__["conforms"](this.filters));
+    };
+    /// filter property by equality to rule
+    StudentsPage.prototype.filterExact = function (property, rule) {
+        if (rule == "all")
+            this.removeFilter(property);
+        else {
+            this.filters[property] = function (val) { return val == rule; };
+            this.applyFilters();
+        }
+    };
+    /// removes filter
+    StudentsPage.prototype.removeFilter = function (property) {
+        delete this.filters[property];
+        this[property] = null;
+        this.applyFilters();
+    };
+    StudentsPage.prototype.exporti = function () {
+        var newArea = this.students;
+        newArea.forEach(function (snip) {
+            delete snip.key;
+        });
+        var sheet = __WEBPACK_IMPORTED_MODULE_5_xlsx__["utils"].json_to_sheet(newArea);
+        var wb = {
+            SheetNames: ["export"],
+            Sheets: {
+                "export": sheet
+            }
+        };
+        var wbout = __WEBPACK_IMPORTED_MODULE_5_xlsx__["write"](wb, {
+            bookType: 'xlsx',
+            bookSST: false,
+            type: 'binary'
+        });
+        function s2ab(s) {
+            var buf = new ArrayBuffer(s.length);
+            var view = new Uint8Array(buf);
+            for (var i = 0; i != s.length; ++i)
+                view[i] = s.charCodeAt(i) & 0xFF;
+            return buf;
+        }
+        var blob = new Blob([s2ab(wbout)], { type: 'application/octet-stream' });
+        var self = this;
+        __WEBPACK_IMPORTED_MODULE_6_file_saver__(blob, this.pgName + '.xlsx');
+    };
+    StudentsPage.prototype.gtStudentDetails = function (a) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_7__student_details_student_details__["a" /* StudentDetailsPage */], { student: a });
+    };
+    StudentsPage.prototype.checkMandal = function () {
+        if (this.mandalSel == "all") {
+            this.getMandals();
+            this.getVillages();
+            this.getSchools();
+            this.villageSel = "all";
+            this.schoolSel = "all";
+        }
+        else {
+            this.manWiseVills();
+        }
+    };
+    StudentsPage.prototype.manWiseVills = function () {
+        var _this = this;
+        var loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+        this.db.list("SubsIndex/Mandals/" + this.mandalSel + "/Villages", function (ref) { return ref.orderByChild("Name"); })
+            .snapshotChanges().subscribe(function (itemSnap) {
+            _this.villages = [];
+            itemSnap.forEach(function (item) {
+                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Villages/").child(item.key).orderByChild("Name").once("value", function (iSnap) {
+                    var temp = iSnap.val();
+                    temp.key = iSnap.val();
+                    console.log(temp);
+                    _this.villages.push(temp);
+                }).then(function () {
+                    _this.db.list("SubsIndex/Mandals/" + _this.mandalSel + "/Schools", function (ref) { return ref.orderByChild("Name"); })
+                        .snapshotChanges().subscribe(function (itemSnap) {
+                        _this.schools = [];
+                        itemSnap.forEach(function (item) {
+                            __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Schools/").child(item.key).orderByChild("Name").once("value", function (iSnap) {
+                                var temp = iSnap.val();
+                                temp.key = iSnap.val();
+                                console.log(temp);
+                                _this.schools.push(temp);
+                            }).then(function () {
+                                loading.dismiss();
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    };
+    StudentsPage.prototype.checkVillage = function () {
+        if (this.villageSel == "all") {
+            this.getVillages();
+            this.getSchools();
+            this.schoolSel = "all";
+        }
+        else {
+            this.schoolSel = "all";
+            this.villWiseVills();
+        }
+    };
+    StudentsPage.prototype.villWiseVills = function () {
+        var _this = this;
+        console.log(this.villageSel);
+        var loading = this.loadingCtrl.create({
+            content: 'Please wait...'
+        });
+        this.db.list("SubsIndex/Villages/" + this.villageSel + "/Schools", function (ref) { return ref.orderByChild("Name"); })
+            .snapshotChanges().subscribe(function (itemSnap) {
+            _this.schools = [];
+            itemSnap.forEach(function (item) {
+                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Schools/").child(item.key).orderByChild("Name").once("value", function (iSnap) {
+                    var temp = iSnap.val();
+                    temp.key = iSnap.val();
+                    console.log(temp);
+                    _this.schools.push(temp);
+                }).then(function () {
+                    loading.dismiss();
+                });
+            });
+        });
+    };
+    //originals
+    StudentsPage.prototype.getMandals = function () {
+        var _this = this;
+        this.db.list("Subs/Mandals", function (ref) { return ref.orderByChild("Name"); })
+            .snapshotChanges().subscribe(function (itemSnap) {
+            _this.mandals = [];
+            itemSnap.forEach(function (item) {
+                var temp = item.payload.val();
+                temp.key = item.key;
+                _this.mandals.push(temp);
+            });
+        });
+    };
+    StudentsPage.prototype.getVillages = function () {
+        var _this = this;
+        this.db.list("Subs/Villages", function (ref) { return ref.orderByChild("Name"); })
+            .snapshotChanges().subscribe(function (itemSnap) {
+            _this.villages = [];
+            itemSnap.forEach(function (item) {
+                var temp = item.payload.val();
+                temp.key = item.key;
+                _this.villages.push(temp);
+            });
+        });
+    };
+    StudentsPage.prototype.getSchools = function () {
+        var _this = this;
+        this.db.list("Subs/Schools", function (ref) { return ref.orderByChild("Name"); })
+            .snapshotChanges().subscribe(function (itemSnap) {
+            _this.schools = [];
+            itemSnap.forEach(function (item) {
+                var temp = item.payload.val();
+                temp.key = item.key;
+                _this.schools.push(temp);
+            });
+        });
+    };
+    StudentsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-students',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Students\students\students.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>{{pgName}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid class="whiteBg">\n\n    <ion-row>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Mandals</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="mandalSel" (ionChange)="checkMandal()">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Villages</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="villageSel" (ionChange)="checkVillage()" >\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Schools</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="schoolSel">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option *ngFor="let s of schools" [value]="s.key">{{s.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n\n\n\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Community</ion-label>\n\n          <ion-select [(ngModel)]="casteSel" class="darkBg" (ionChange)="filterExact(\'Community\',casteSel)">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="SC">SC</ion-option>\n\n            <ion-option value="ST">ST</ion-option>\n\n            <ion-option value="BC">BC</ion-option>\n\n            <ion-option value="OC">OC</ion-option>\n\n            <ion-option value="Minority">Minority</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-1>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Age</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="age" (ionChange)="filterExact(\'Age\',age)">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="10">10</ion-option>\n\n            <ion-option value="11">11</ion-option>\n\n            <ion-option value="12">12</ion-option>\n\n            <ion-option value="13">13</ion-option>\n\n            <ion-option value="14">14</ion-option>\n\n            <ion-option value="15">15</ion-option>\n\n            <ion-option value="16">16</ion-option>\n\n            <ion-option value="17">17</ion-option>\n\n            <ion-option value="18">18</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Severity</ion-label>\n\n          <ion-select [(ngModel)]="anL" class="darkBg" (ionChange)="filterExact(\'Severity\', this.anL)">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="Severely Anaemic">Severely Anaemic</ion-option>\n\n            <ion-option value="Moderately Anaemic">Moderately Anaemic</ion-option>\n\n            <ion-option value="Mildly  Anaemic">Mildly Anaemic</ion-option>\n\n            <ion-option value="Healthy">Healthy</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-1>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Class</ion-label>\n\n          <ion-select class="darkBg" (ionChange)="filterExact(\'Class\',clSel)" [(ngModel)]="clSel">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="6">6th</ion-option>\n\n            <ion-option value="7">7th</ion-option>\n\n            <ion-option value="8">8th</ion-option>\n\n            <ion-option value="9">9th</ion-option>\n\n            <ion-option value="10">10th</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n    </ion-row>\n\n\n\n\n\n  </ion-grid>\n\n\n\n\n\n\n\n  <ion-grid>\n\n    <ion-navbar color="primary">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Name</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Severity</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Community</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Mobile</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar"></p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-navbar>\n\n  </ion-grid>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <ion-searchbar item-end animated="true" placeholder="Search a Student .." [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <button ion-button float-right (click)="exporti()">\n\n          Export\n\n          <ion-icon padding-left name="share-alt"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n  </ion-grid>\n\n  <!-- <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button> -->\n\n\n\n  <ion-grid>\n\n    <ion-card *ngFor="let a of filteredStudents;let i = index">\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-1>\n\n            <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)"></ion-checkbox>\n\n          </ion-col>\n\n          <ion-col col-1>\n\n            <p ion-text><strong>{{i+1}}</strong></p>\n\n          </ion-col>\n\n          <ion-col col-2 (click)="gtStudentDetails(a)" class="curs">\n\n            {{a.StudentName}}\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Severity }}</h1><br />\n\n          </ion-col>\n\n          <ion-col col-1 text-center>\n\n            <h1 ion-text color="primary">{{a.Community}} </h1><br />\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Mobile}}</h1>\n\n          </ion-col>\n\n\n\n\n\n\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-grid>\n\n\n\n\n\n\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Students\students\students.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */],
+            __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
+    ], StudentsPage);
+    return StudentsPage;
+}());
+
+//# sourceMappingURL=students.js.map
+
+/***/ }),
+
+/***/ 186:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddSchoolsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(1);
@@ -1748,15 +1807,15 @@ var AddSchoolsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 186:
+/***/ 187:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewSchoolsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__add_schools_add_schools__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__add_schools_add_schools__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__school_details_school_details__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_xlsx__);
@@ -1890,13 +1949,13 @@ var ViewSchoolsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 187:
+/***/ 188:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AddVillagesPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(1);
@@ -2024,16 +2083,16 @@ var AddVillagesPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 188:
+/***/ 189:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewVillagesPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__add_villages_add_villages__ = __webpack_require__(187);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__village_details_village_details__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__add_villages_add_villages__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__village_details_village_details__ = __webpack_require__(190);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_xlsx__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_file_saver__ = __webpack_require__(81);
@@ -2166,13 +2225,13 @@ var ViewVillagesPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 189:
+/***/ 190:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return VillageDetailsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Schools_school_details_school_details__ = __webpack_require__(55);
@@ -2268,7 +2327,7 @@ var VillageDetailsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 227:
+/***/ 228:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -2281,88 +2340,92 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 227;
+webpackEmptyAsyncContext.id = 228;
 
 /***/ }),
 
-/***/ 268:
+/***/ 269:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/Extra/dashboard/dashboard.module": [
-		718,
-		18
+		720,
+		19
 	],
 	"../pages/Extra/login/login.module": [
-		719,
-		17
+		721,
+		18
 	],
 	"../pages/Students/student-details/student-details.module": [
-		720,
-		16
+		722,
+		17
 	],
 	"../pages/Students/students/students.module": [
-		721,
-		15
+		724,
+		16
 	],
 	"../pages/Subs/Anms/add-amns/add-amns.module": [
-		722,
-		14
+		723,
+		15
 	],
 	"../pages/Subs/Anms/anm-details/anm-details.module": [
-		723,
-		13
+		725,
+		14
 	],
 	"../pages/Subs/Anms/assign-school/assign-school.module": [
-		724,
-		12
+		726,
+		13
 	],
 	"../pages/Subs/Anms/del-anm/del-anm.module": [
-		725,
-		11
+		727,
+		12
 	],
 	"../pages/Subs/Anms/edit-anm/edit-anm.module": [
-		726,
-		10
+		728,
+		11
 	],
 	"../pages/Subs/Anms/view-amns/view-amns.module": [
-		727,
-		9
+		729,
+		10
 	],
 	"../pages/Subs/Mandals/add-mandals/add-mandals.module": [
-		728,
-		8
+		730,
+		9
 	],
 	"../pages/Subs/Mandals/mandal-details/mandal-details.module": [
-		729,
-		7
+		731,
+		8
 	],
 	"../pages/Subs/Mandals/view-mandals/view-mandals.module": [
-		730,
-		6
+		732,
+		7
 	],
 	"../pages/Subs/Schools/add-schools/add-schools.module": [
-		731,
-		5
+		733,
+		6
 	],
 	"../pages/Subs/Schools/school-details/school-details.module": [
-		732,
-		4
+		734,
+		5
 	],
 	"../pages/Subs/Schools/view-schools/view-schools.module": [
-		733,
-		3
+		735,
+		4
 	],
 	"../pages/Subs/Villages/add-villages/add-villages.module": [
-		734,
-		2
+		736,
+		3
 	],
 	"../pages/Subs/Villages/view-villages/view-villages.module": [
-		735,
-		1
+		737,
+		2
 	],
 	"../pages/Subs/Villages/village-details/village-details.module": [
-		736,
+		738,
+		1
+	],
+	"../pages/data-upload/data-upload.module": [
+		719,
 		0
 	]
 };
@@ -2377,25 +2440,25 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 268;
+webpackAsyncContext.id = 269;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 405:
+/***/ 406:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 456:
+/***/ 457:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(457);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(589);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__ = __webpack_require__(458);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_module__ = __webpack_require__(590);
 
 
 Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
@@ -2409,7 +2472,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SchoolDetailsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -2474,7 +2537,7 @@ var SchoolDetailsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 589:
+/***/ 590:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2482,44 +2545,46 @@ var SchoolDetailsPage = /** @class */ (function () {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__ = __webpack_require__(59);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(659);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__ = __webpack_require__(175);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Extra_login_login__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(660);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Extra_login_login__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2__ = __webpack_require__(660);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2__ = __webpack_require__(661);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angularfire2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angularfire2__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__ = __webpack_require__(661);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__ = __webpack_require__(662);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_Subs_Mandals_add_mandals_add_mandals__ = __webpack_require__(177);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_Subs_Villages_add_villages_add_villages__ = __webpack_require__(187);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(186);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_Subs_Schools_add_schools_add_schools__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_Subs_Mandals_add_mandals_add_mandals__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_Subs_Villages_add_villages_add_villages__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_Subs_Schools_add_schools_add_schools__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_Subs_Anms_view_amns_view_amns__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_Subs_Anms_add_amns_add_amns__ = __webpack_require__(181);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_Subs_Mandals_mandal_details_mandal_details__ = __webpack_require__(178);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_Subs_Mandals_mandal_details_mandal_details__ = __webpack_require__(179);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_Subs_Schools_school_details_school_details__ = __webpack_require__(55);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_Subs_Villages_village_details_village_details__ = __webpack_require__(189);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_Students_students_students__ = __webpack_require__(180);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_Students_student_details_student_details__ = __webpack_require__(179);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_Subs_Villages_village_details_village_details__ = __webpack_require__(190);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_Students_students_students__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_Students_student_details_student_details__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_Subs_Anms_anm_details_anm_details__ = __webpack_require__(107);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_Subs_Anms_assign_school_assign_school__ = __webpack_require__(182);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25_ng2_charts__ = __webpack_require__(666);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25_ng2_charts__ = __webpack_require__(667);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25_ng2_charts__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_Subs_Anms_del_anm_del_anm__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_Subs_Anms_edit_anm_edit_anm__ = __webpack_require__(183);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_file__ = __webpack_require__(709);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_file__ = __webpack_require__(710);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_data_upload_data_upload__ = __webpack_require__(175);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -2584,16 +2649,18 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_24__pages_Subs_Anms_assign_school_assign_school__["a" /* AssignSchoolPage */],
                 __WEBPACK_IMPORTED_MODULE_26__pages_Subs_Anms_del_anm_del_anm__["a" /* DelAnmPage */],
                 __WEBPACK_IMPORTED_MODULE_27__pages_Subs_Anms_edit_anm_edit_anm__["a" /* EditAnmPage */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_data_upload_data_upload__["a" /* DataUploadPage */],
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
+                        { loadChildren: '../pages/data-upload/data-upload.module#DataUploadPageModule', name: 'DataUploadPage', segment: 'data-upload', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Extra/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Extra/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Students/student-details/student-details.module#StudentDetailsPageModule', name: 'StudentDetailsPage', segment: 'student-details', priority: 'low', defaultHistory: [] },
-                        { loadChildren: '../pages/Students/students/students.module#StudentsPageModule', name: 'StudentsPage', segment: 'students', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Anms/add-amns/add-amns.module#AddAmnsPageModule', name: 'AddAmnsPage', segment: 'add-amns', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/Students/students/students.module#StudentsPageModule', name: 'StudentsPage', segment: 'students', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Anms/anm-details/anm-details.module#AnmDetailsPageModule', name: 'AnmDetailsPage', segment: 'anm-details', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Anms/assign-school/assign-school.module#AssignSchoolPageModule', name: 'AssignSchoolPage', segment: 'assign-school', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Subs/Anms/del-anm/del-anm.module#DelAnmPageModule', name: 'DelAnmPage', segment: 'del-anm', priority: 'low', defaultHistory: [] },
@@ -2637,6 +2704,7 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_24__pages_Subs_Anms_assign_school_assign_school__["a" /* AssignSchoolPage */],
                 __WEBPACK_IMPORTED_MODULE_26__pages_Subs_Anms_del_anm_del_anm__["a" /* DelAnmPage */],
                 __WEBPACK_IMPORTED_MODULE_27__pages_Subs_Anms_edit_anm_edit_anm__["a" /* EditAnmPage */],
+                __WEBPACK_IMPORTED_MODULE_29__pages_data_upload_data_upload__["a" /* DataUploadPage */],
             ],
             providers: [
                 { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["ErrorHandler"], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] },
@@ -2651,256 +2719,256 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 634:
+/***/ 624:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 281,
-	"./af.js": 281,
-	"./ar": 282,
-	"./ar-dz": 283,
-	"./ar-dz.js": 283,
-	"./ar-kw": 284,
-	"./ar-kw.js": 284,
-	"./ar-ly": 285,
-	"./ar-ly.js": 285,
-	"./ar-ma": 286,
-	"./ar-ma.js": 286,
-	"./ar-sa": 287,
-	"./ar-sa.js": 287,
-	"./ar-tn": 288,
-	"./ar-tn.js": 288,
-	"./ar.js": 282,
-	"./az": 289,
-	"./az.js": 289,
-	"./be": 290,
-	"./be.js": 290,
-	"./bg": 291,
-	"./bg.js": 291,
-	"./bm": 292,
-	"./bm.js": 292,
-	"./bn": 293,
-	"./bn.js": 293,
-	"./bo": 294,
-	"./bo.js": 294,
-	"./br": 295,
-	"./br.js": 295,
-	"./bs": 296,
-	"./bs.js": 296,
-	"./ca": 297,
-	"./ca.js": 297,
-	"./cs": 298,
-	"./cs.js": 298,
-	"./cv": 299,
-	"./cv.js": 299,
-	"./cy": 300,
-	"./cy.js": 300,
-	"./da": 301,
-	"./da.js": 301,
-	"./de": 302,
-	"./de-at": 303,
-	"./de-at.js": 303,
-	"./de-ch": 304,
-	"./de-ch.js": 304,
-	"./de.js": 302,
-	"./dv": 305,
-	"./dv.js": 305,
-	"./el": 306,
-	"./el.js": 306,
-	"./en-au": 307,
-	"./en-au.js": 307,
-	"./en-ca": 308,
-	"./en-ca.js": 308,
-	"./en-gb": 309,
-	"./en-gb.js": 309,
-	"./en-ie": 310,
-	"./en-ie.js": 310,
-	"./en-il": 311,
-	"./en-il.js": 311,
-	"./en-nz": 312,
-	"./en-nz.js": 312,
-	"./eo": 313,
-	"./eo.js": 313,
-	"./es": 314,
-	"./es-do": 315,
-	"./es-do.js": 315,
-	"./es-us": 316,
-	"./es-us.js": 316,
-	"./es.js": 314,
-	"./et": 317,
-	"./et.js": 317,
-	"./eu": 318,
-	"./eu.js": 318,
-	"./fa": 319,
-	"./fa.js": 319,
-	"./fi": 320,
-	"./fi.js": 320,
-	"./fo": 321,
-	"./fo.js": 321,
-	"./fr": 322,
-	"./fr-ca": 323,
-	"./fr-ca.js": 323,
-	"./fr-ch": 324,
-	"./fr-ch.js": 324,
-	"./fr.js": 322,
-	"./fy": 325,
-	"./fy.js": 325,
-	"./gd": 326,
-	"./gd.js": 326,
-	"./gl": 327,
-	"./gl.js": 327,
-	"./gom-latn": 328,
-	"./gom-latn.js": 328,
-	"./gu": 329,
-	"./gu.js": 329,
-	"./he": 330,
-	"./he.js": 330,
-	"./hi": 331,
-	"./hi.js": 331,
-	"./hr": 332,
-	"./hr.js": 332,
-	"./hu": 333,
-	"./hu.js": 333,
-	"./hy-am": 334,
-	"./hy-am.js": 334,
-	"./id": 335,
-	"./id.js": 335,
-	"./is": 336,
-	"./is.js": 336,
-	"./it": 337,
-	"./it.js": 337,
-	"./ja": 338,
-	"./ja.js": 338,
-	"./jv": 339,
-	"./jv.js": 339,
-	"./ka": 340,
-	"./ka.js": 340,
-	"./kk": 341,
-	"./kk.js": 341,
-	"./km": 342,
-	"./km.js": 342,
-	"./kn": 343,
-	"./kn.js": 343,
-	"./ko": 344,
-	"./ko.js": 344,
-	"./ky": 345,
-	"./ky.js": 345,
-	"./lb": 346,
-	"./lb.js": 346,
-	"./lo": 347,
-	"./lo.js": 347,
-	"./lt": 348,
-	"./lt.js": 348,
-	"./lv": 349,
-	"./lv.js": 349,
-	"./me": 350,
-	"./me.js": 350,
-	"./mi": 351,
-	"./mi.js": 351,
-	"./mk": 352,
-	"./mk.js": 352,
-	"./ml": 353,
-	"./ml.js": 353,
-	"./mn": 354,
-	"./mn.js": 354,
-	"./mr": 355,
-	"./mr.js": 355,
-	"./ms": 356,
-	"./ms-my": 357,
-	"./ms-my.js": 357,
-	"./ms.js": 356,
-	"./mt": 358,
-	"./mt.js": 358,
-	"./my": 359,
-	"./my.js": 359,
-	"./nb": 360,
-	"./nb.js": 360,
-	"./ne": 361,
-	"./ne.js": 361,
-	"./nl": 362,
-	"./nl-be": 363,
-	"./nl-be.js": 363,
-	"./nl.js": 362,
-	"./nn": 364,
-	"./nn.js": 364,
-	"./pa-in": 365,
-	"./pa-in.js": 365,
-	"./pl": 366,
-	"./pl.js": 366,
-	"./pt": 367,
-	"./pt-br": 368,
-	"./pt-br.js": 368,
-	"./pt.js": 367,
-	"./ro": 369,
-	"./ro.js": 369,
-	"./ru": 370,
-	"./ru.js": 370,
-	"./sd": 371,
-	"./sd.js": 371,
-	"./se": 372,
-	"./se.js": 372,
-	"./si": 373,
-	"./si.js": 373,
-	"./sk": 374,
-	"./sk.js": 374,
-	"./sl": 375,
-	"./sl.js": 375,
-	"./sq": 376,
-	"./sq.js": 376,
-	"./sr": 377,
-	"./sr-cyrl": 378,
-	"./sr-cyrl.js": 378,
-	"./sr.js": 377,
-	"./ss": 379,
-	"./ss.js": 379,
-	"./sv": 380,
-	"./sv.js": 380,
-	"./sw": 381,
-	"./sw.js": 381,
-	"./ta": 382,
-	"./ta.js": 382,
-	"./te": 383,
-	"./te.js": 383,
-	"./tet": 384,
-	"./tet.js": 384,
-	"./tg": 385,
-	"./tg.js": 385,
-	"./th": 386,
-	"./th.js": 386,
-	"./tl-ph": 387,
-	"./tl-ph.js": 387,
-	"./tlh": 388,
-	"./tlh.js": 388,
-	"./tr": 389,
-	"./tr.js": 389,
-	"./tzl": 390,
-	"./tzl.js": 390,
-	"./tzm": 391,
-	"./tzm-latn": 392,
-	"./tzm-latn.js": 392,
-	"./tzm.js": 391,
-	"./ug-cn": 393,
-	"./ug-cn.js": 393,
-	"./uk": 394,
-	"./uk.js": 394,
-	"./ur": 395,
-	"./ur.js": 395,
-	"./uz": 396,
-	"./uz-latn": 397,
-	"./uz-latn.js": 397,
-	"./uz.js": 396,
-	"./vi": 398,
-	"./vi.js": 398,
-	"./x-pseudo": 399,
-	"./x-pseudo.js": 399,
-	"./yo": 400,
-	"./yo.js": 400,
-	"./zh-cn": 401,
-	"./zh-cn.js": 401,
-	"./zh-hk": 402,
-	"./zh-hk.js": 402,
-	"./zh-tw": 403,
-	"./zh-tw.js": 403
+	"./af": 275,
+	"./af.js": 275,
+	"./ar": 276,
+	"./ar-dz": 277,
+	"./ar-dz.js": 277,
+	"./ar-kw": 278,
+	"./ar-kw.js": 278,
+	"./ar-ly": 279,
+	"./ar-ly.js": 279,
+	"./ar-ma": 280,
+	"./ar-ma.js": 280,
+	"./ar-sa": 281,
+	"./ar-sa.js": 281,
+	"./ar-tn": 282,
+	"./ar-tn.js": 282,
+	"./ar.js": 276,
+	"./az": 283,
+	"./az.js": 283,
+	"./be": 284,
+	"./be.js": 284,
+	"./bg": 285,
+	"./bg.js": 285,
+	"./bm": 286,
+	"./bm.js": 286,
+	"./bn": 287,
+	"./bn.js": 287,
+	"./bo": 288,
+	"./bo.js": 288,
+	"./br": 289,
+	"./br.js": 289,
+	"./bs": 290,
+	"./bs.js": 290,
+	"./ca": 291,
+	"./ca.js": 291,
+	"./cs": 292,
+	"./cs.js": 292,
+	"./cv": 293,
+	"./cv.js": 293,
+	"./cy": 294,
+	"./cy.js": 294,
+	"./da": 295,
+	"./da.js": 295,
+	"./de": 296,
+	"./de-at": 297,
+	"./de-at.js": 297,
+	"./de-ch": 298,
+	"./de-ch.js": 298,
+	"./de.js": 296,
+	"./dv": 299,
+	"./dv.js": 299,
+	"./el": 300,
+	"./el.js": 300,
+	"./en-au": 301,
+	"./en-au.js": 301,
+	"./en-ca": 302,
+	"./en-ca.js": 302,
+	"./en-gb": 303,
+	"./en-gb.js": 303,
+	"./en-ie": 304,
+	"./en-ie.js": 304,
+	"./en-il": 305,
+	"./en-il.js": 305,
+	"./en-nz": 306,
+	"./en-nz.js": 306,
+	"./eo": 307,
+	"./eo.js": 307,
+	"./es": 308,
+	"./es-do": 309,
+	"./es-do.js": 309,
+	"./es-us": 310,
+	"./es-us.js": 310,
+	"./es.js": 308,
+	"./et": 311,
+	"./et.js": 311,
+	"./eu": 312,
+	"./eu.js": 312,
+	"./fa": 313,
+	"./fa.js": 313,
+	"./fi": 314,
+	"./fi.js": 314,
+	"./fo": 315,
+	"./fo.js": 315,
+	"./fr": 316,
+	"./fr-ca": 317,
+	"./fr-ca.js": 317,
+	"./fr-ch": 318,
+	"./fr-ch.js": 318,
+	"./fr.js": 316,
+	"./fy": 319,
+	"./fy.js": 319,
+	"./gd": 320,
+	"./gd.js": 320,
+	"./gl": 321,
+	"./gl.js": 321,
+	"./gom-latn": 322,
+	"./gom-latn.js": 322,
+	"./gu": 323,
+	"./gu.js": 323,
+	"./he": 324,
+	"./he.js": 324,
+	"./hi": 325,
+	"./hi.js": 325,
+	"./hr": 326,
+	"./hr.js": 326,
+	"./hu": 327,
+	"./hu.js": 327,
+	"./hy-am": 328,
+	"./hy-am.js": 328,
+	"./id": 329,
+	"./id.js": 329,
+	"./is": 330,
+	"./is.js": 330,
+	"./it": 331,
+	"./it.js": 331,
+	"./ja": 332,
+	"./ja.js": 332,
+	"./jv": 333,
+	"./jv.js": 333,
+	"./ka": 334,
+	"./ka.js": 334,
+	"./kk": 335,
+	"./kk.js": 335,
+	"./km": 336,
+	"./km.js": 336,
+	"./kn": 337,
+	"./kn.js": 337,
+	"./ko": 338,
+	"./ko.js": 338,
+	"./ky": 339,
+	"./ky.js": 339,
+	"./lb": 340,
+	"./lb.js": 340,
+	"./lo": 341,
+	"./lo.js": 341,
+	"./lt": 342,
+	"./lt.js": 342,
+	"./lv": 343,
+	"./lv.js": 343,
+	"./me": 344,
+	"./me.js": 344,
+	"./mi": 345,
+	"./mi.js": 345,
+	"./mk": 346,
+	"./mk.js": 346,
+	"./ml": 347,
+	"./ml.js": 347,
+	"./mn": 348,
+	"./mn.js": 348,
+	"./mr": 349,
+	"./mr.js": 349,
+	"./ms": 350,
+	"./ms-my": 351,
+	"./ms-my.js": 351,
+	"./ms.js": 350,
+	"./mt": 352,
+	"./mt.js": 352,
+	"./my": 353,
+	"./my.js": 353,
+	"./nb": 354,
+	"./nb.js": 354,
+	"./ne": 355,
+	"./ne.js": 355,
+	"./nl": 356,
+	"./nl-be": 357,
+	"./nl-be.js": 357,
+	"./nl.js": 356,
+	"./nn": 358,
+	"./nn.js": 358,
+	"./pa-in": 359,
+	"./pa-in.js": 359,
+	"./pl": 360,
+	"./pl.js": 360,
+	"./pt": 361,
+	"./pt-br": 362,
+	"./pt-br.js": 362,
+	"./pt.js": 361,
+	"./ro": 363,
+	"./ro.js": 363,
+	"./ru": 364,
+	"./ru.js": 364,
+	"./sd": 365,
+	"./sd.js": 365,
+	"./se": 366,
+	"./se.js": 366,
+	"./si": 367,
+	"./si.js": 367,
+	"./sk": 368,
+	"./sk.js": 368,
+	"./sl": 369,
+	"./sl.js": 369,
+	"./sq": 370,
+	"./sq.js": 370,
+	"./sr": 371,
+	"./sr-cyrl": 372,
+	"./sr-cyrl.js": 372,
+	"./sr.js": 371,
+	"./ss": 373,
+	"./ss.js": 373,
+	"./sv": 374,
+	"./sv.js": 374,
+	"./sw": 375,
+	"./sw.js": 375,
+	"./ta": 376,
+	"./ta.js": 376,
+	"./te": 377,
+	"./te.js": 377,
+	"./tet": 378,
+	"./tet.js": 378,
+	"./tg": 379,
+	"./tg.js": 379,
+	"./th": 380,
+	"./th.js": 380,
+	"./tl-ph": 381,
+	"./tl-ph.js": 381,
+	"./tlh": 382,
+	"./tlh.js": 382,
+	"./tr": 383,
+	"./tr.js": 383,
+	"./tzl": 384,
+	"./tzl.js": 384,
+	"./tzm": 385,
+	"./tzm-latn": 386,
+	"./tzm-latn.js": 386,
+	"./tzm.js": 385,
+	"./ug-cn": 387,
+	"./ug-cn.js": 387,
+	"./uk": 388,
+	"./uk.js": 388,
+	"./ur": 389,
+	"./ur.js": 389,
+	"./uz": 390,
+	"./uz-latn": 391,
+	"./uz-latn.js": 391,
+	"./uz.js": 390,
+	"./vi": 392,
+	"./vi.js": 392,
+	"./x-pseudo": 393,
+	"./x-pseudo.js": 393,
+	"./yo": 394,
+	"./yo.js": 394,
+	"./zh-cn": 395,
+	"./zh-cn.js": 395,
+	"./zh-hk": 396,
+	"./zh-hk.js": 396,
+	"./zh-tw": 397,
+	"./zh-tw.js": 397
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -2916,14 +2984,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 634;
-
-/***/ }),
-
-/***/ 640:
-/***/ (function(module, exports) {
-
-/* (ignored) */
+webpackContext.id = 624;
 
 /***/ }),
 
@@ -2934,22 +2995,30 @@ webpackContext.id = 634;
 
 /***/ }),
 
-/***/ 659:
+/***/ 642:
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+
+/***/ 660:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_Extra_login_login__ = __webpack_require__(176);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__ = __webpack_require__(175);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_Extra_login_login__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__ = __webpack_require__(176);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(186);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_Students_students_students__ = __webpack_require__(180);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_Students_students_students__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_Subs_Anms_view_amns_view_amns__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_data_upload_data_upload__ = __webpack_require__(175);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2969,11 +3038,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var MyApp = /** @class */ (function () {
     function MyApp(platform, toastCtrl) {
         this.platform = platform;
         this.toastCtrl = toastCtrl;
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_8__pages_Students_students_students__["a" /* StudentsPage */];
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_10__pages_data_upload_data_upload__["a" /* DataUploadPage */];
         this.full = true;
         this.initializeApp();
         this.pages = [
@@ -3055,5 +3125,5 @@ var MyApp = /** @class */ (function () {
 
 /***/ })
 
-},[456]);
+},[457]);
 //# sourceMappingURL=main.js.map

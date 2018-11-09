@@ -10,13 +10,14 @@ import { ViewSchoolsPage } from '../pages/Subs/Schools/view-schools/view-schools
 import { StudentsPage } from '../pages/Students/students/students';
 import { ViewAmnsPage } from '../pages/Subs/Anms/view-amns/view-amns';
 import { MandalDetailsPage } from '../pages/Subs/Mandals/mandal-details/mandal-details';
+import { DataUploadPage } from '../pages/data-upload/data-upload';
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = StudentsPage;
+  rootPage: any = DataUploadPage;
   activePage: any;
 
   full : boolean = true;
