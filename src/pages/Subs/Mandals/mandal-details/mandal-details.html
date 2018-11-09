@@ -19,8 +19,7 @@
           
               <ion-card-content *ngIf="showVillage" >
                 <ion-item *ngFor="let v of villages" >
-                  <button item-start clear ion-button color="dark" large>{{v.Name}}</button>
-                  <button ion-button item-end clear (click)="gtVillageDetails(v)" >Details</button>
+                  <button item-start clear ion-button (click)="gtVillageDetails(v)" color="dark" large>{{v.Name}}</button>
                 </ion-item>
               </ion-card-content>
             </ion-card>
@@ -35,8 +34,7 @@
             
                 <ion-card-content *ngIf="showSchool" >
                   <ion-item *ngFor="let s of schools" >
-                    <button item-start clear ion-button color="dark" large>{{s.Name}}</button>
-                    <button ion-button item-end clear (click)="gtSchoolsDetails(s)" >Details</button>
+                    <button item-start clear ion-button (click)="gtSchoolsDetails(s)" color="dark" large>{{s.Name}}</button>
                   </ion-item>
                 </ion-card-content>
             
@@ -53,7 +51,7 @@
 
             <ion-item>
               <p item-start color="primary" ion-text>Total Students</p>
-              <p item-end>200</p>
+              <p item-end>{{totStudents}}</p>
             </ion-item>
             <ion-item>
               <p item-start color="primary" ion-text>Severely Anaemic</p>

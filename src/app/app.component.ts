@@ -17,7 +17,7 @@ import { DataUploadPage } from '../pages/data-upload/data-upload';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ViewAmnsPage;
+  rootPage: any = ViewMandalsPage;
   activePage: any;
 
   full : boolean = true;
@@ -47,11 +47,11 @@ export class MyApp {
 
   initializeApp() {
     this.platform.ready().then(() => {
-    //   firebase.auth().onAuthStateChanged((user) => {
+      firebase.auth().onAuthStateChanged((user) => {
     //     if (user) {
     //     firebase.database().ref("Admin Data").child("Admins").child(user.uid).once('value',itemSnap=>{
     //         if(itemSnap.exists()){
-    //           this.rootPage = ViewMandalsPage;
+    //           this.rootPage = DashboardPage;
     //         }else{
     //           firebase.auth().signOut().then(()=>{
     //             this.rootPage = LoginPage;
@@ -63,7 +63,7 @@ export class MyApp {
     //   else{
     //     this.rootPage = LoginPage;
     //   }
-    // });  
+    });  
      });
   }
 

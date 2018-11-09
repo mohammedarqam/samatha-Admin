@@ -61,7 +61,6 @@ var ViewMandalsPage = /** @class */ (function () {
                 severeRef.child("Moderately Anaemic").once("value", function (svereSnap) { temp.Moderate = svereSnap.numChildren(); });
                 severeRef.child("Mildly  Anaemic").once("value", function (svereSnap) { temp.Mildly = svereSnap.numChildren(); });
                 severeRef.child("Healthy").once("value", function (svereSnap) { temp.Healthy = svereSnap.numChildren(); });
-                console.log(temp);
                 tempArray.push(temp);
             });
             _this.area = tempArray;
@@ -122,6 +121,10 @@ var ViewMandalsPage = /** @class */ (function () {
         var self = this;
         __WEBPACK_IMPORTED_MODULE_7_file_saver__(blob, this.pageName + '.xlsx');
     };
+    ViewMandalsPage.prototype.prnt = function () {
+        window.print();
+        return false;
+    };
     ViewMandalsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-view-mandals',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Mandals\view-mandals\view-mandals.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>{{pageName}} </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n\n\n\n      <ion-col col-6>\n\n        <ion-searchbar item-end animated="true" placeholder="Search a Mandal" [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n      </ion-col>\n\n      <ion-col col-6> \n\n        <button ion-button float-right (click)="prnt()">\n\n          Print\n\n          <ion-icon padding-left name="md-print"></ion-icon>\n\n        </button>\n\n        <button ion-button float-right (click)="exporti()">\n\n          Export\n\n          <ion-icon padding-left name="share-alt"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n\n\n\n\n  <ion-grid>\n\n    <ion-list-header color="primary">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-2 >\n\n          <p class="headBar">Name</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Severely Anaemic</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Moderately Anaemic</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Mildly Anaemic</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Healthy</p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-list-header>\n\n  </ion-grid>\n\n\n\n\n\n  <ion-grid>\n\n    <ion-item *ngFor="let a of area;let i = index">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n          <p ion-text text-center><strong>{{i+1}}</strong></p>\n\n        </ion-col>\n\n        <ion-col col-2 (click)="gtMandalDetails(a)" class="curs">\n\n          <h2 ion-text text-center color="primary">{{a.Name}}</h2>\n\n        </ion-col>\n\n        <ion-col col-2 text-center>\n\n          <h2>{{a.Severe}}</h2><br />\n\n        </ion-col>\n\n        <ion-col col-2 text-center>\n\n          <h2>{{a.Moderate}}</h2><br />\n\n        </ion-col>\n\n        <ion-col col-2 text-center>\n\n          <h2>{{a.Mildly}}</h2><br />\n\n        </ion-col>\n\n        <ion-col col-2 text-center>\n\n          <h2>{{a.Healthy}}</h2><br />\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-item>\n\n  </ion-grid>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  <ion-fab right bottom>\n\n    <button ion-fab color="danger" (click)="gtAddArea()">\n\n      <ion-icon name="add"></ion-icon>\n\n    </button>\n\n  </ion-fab>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Mandals\view-mandals\view-mandals.html"*/,
@@ -151,7 +154,7 @@ var ViewMandalsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_angularfire2_database__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Schools_school_details_school_details__ = __webpack_require__(53);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Anms_anm_details_anm_details__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Anms_anm_details_anm_details__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -181,6 +184,8 @@ var VillageDetailsPage = /** @class */ (function () {
         this.anmRef = this.db.list("SubsIndex/Villages/" + this.village.key + "/Anms");
         this.anms = [];
         this.showAnms = false;
+        this.totStudents = 0;
+        this.totStudents = this.village.Healthy + this.village.Mildly + this.village.Moderate + this.village.Severe;
         this.getMandal();
         console.log(this.village);
         this.getSchools();
@@ -208,7 +213,7 @@ var VillageDetailsPage = /** @class */ (function () {
         var _this = this;
         this.anmRef.snapshotChanges().subscribe(function (snap) {
             snap.forEach(function (snp) {
-                _this.db.object("Anms/" + snp.key).snapshotChanges().subscribe(function (snap) {
+                _this.db.object("Organisms/Anms/" + snp.key).snapshotChanges().subscribe(function (snap) {
                     var temp = snap.payload.val();
                     temp.key = snap.key;
                     _this.anms.push(temp);
@@ -230,7 +235,7 @@ var VillageDetailsPage = /** @class */ (function () {
     };
     VillageDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-village-details',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Villages\village-details\village-details.html"*/'<ion-header>\n\n  <ion-navbar color="primary" >\n\n    <ion-title>{{village.Name}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n\n\n<ion-content padding>\n\n\n\n\n\n\n\n\n\n\n\n  <ion-content padding>\n\n      <ion-grid>\n\n        <ion-row>\n\n          <ion-col col-6>\n\n              <ion-card>\n\n                  <ion-navbar color="primary" (click)="toggleSchools()" class="curs" >\n\n                    <ion-title>Schools</ion-title>\n\n                    <ion-buttons end>\n\n                    <button ion-button large clear>{{village.Schools}}</button>\n\n                    <button ion-button clear icon-only  *ngIf="!showSchool" (click)="toggleSchools()">\n\n                      <ion-icon name="ios-arrow-down"></ion-icon>\n\n                    </button>\n\n                    <button ion-button clear icon-only  *ngIf="showSchool" (click)="toggleSchools()">\n\n                      <ion-icon name="ios-arrow-up"></ion-icon>\n\n                    </button>\n\n                    </ion-buttons>\n\n                  </ion-navbar>\n\n              \n\n                  <ion-card-content *ngIf="showSchool" >\n\n                    <ion-item *ngFor="let s of schools" >\n\n                      <button item-start clear ion-button color="dark" large>{{s.Name}}</button>\n\n                      <button ion-button item-end clear (click)="gtSchoolsDetails(s)" >Details</button>\n\n                    </ion-item>\n\n                  </ion-card-content>\n\n              \n\n              \n\n                </ion-card>\n\n                <ion-card>\n\n                    <ion-navbar color="primary" (click)="toggleAnms()" class="curs" >\n\n                      <ion-title>Anms</ion-title>\n\n                      <ion-buttons end>\n\n                      <button ion-button large clear>{{village.Anms}}</button>\n\n                      <button ion-button clear icon-only  *ngIf="!showAnms" (click)="toggleAnms()">\n\n                        <ion-icon name="ios-arrow-down"></ion-icon>\n\n                      </button>\n\n                      <button ion-button clear icon-only  *ngIf="showAnms" (click)="toggleAnms()">\n\n                        <ion-icon name="ios-arrow-up"></ion-icon>\n\n                      </button>\n\n                      </ion-buttons>\n\n                    </ion-navbar>\n\n                \n\n                    <ion-card-content *ngIf="showAnms" >\n\n                      <ion-item *ngFor="let a of anms" >\n\n                        <button item-start clear ion-button color="dark" large>{{a.FirstName}}</button>\n\n                        <button ion-button item-end clear (click)="gtAnmsDetails(a)" >Details</button>\n\n                      </ion-item>\n\n                    </ion-card-content>\n\n                \n\n                \n\n                  </ion-card>\n\n                \n\n                              \n\n          </ion-col>\n\n          <ion-col col-6>\n\n            <ion-card>\n\n              <ion-card-content>\n\n                <ion-card-title>\n\n                  Village Stats\n\n                </ion-card-title>\n\n    \n\n                <ion-item>\n\n                  <p item-start color="primary" ion-text>Total Students</p>\n\n                  <p item-end>200</p>\n\n                </ion-item>\n\n                <ion-item>\n\n                  <p item-start color="primary" ion-text>Severely Anaemic</p>\n\n                  <p item-end>{{village.Severe}}</p>\n\n                </ion-item>\n\n                <ion-item>\n\n                  <p item-start color="primary" ion-text>Moderately Anaemic</p>\n\n                  <p item-end>{{village.Moderate}}</p>\n\n                </ion-item>\n\n                <ion-item>\n\n                  <p item-start color="primary" ion-text>Mildly Anaemic</p>\n\n                  <p item-end>{{village.Mildly}}</p>\n\n                </ion-item>\n\n                <ion-item>\n\n                  <p item-start color="primary" ion-text>Healthy</p>\n\n                  <p item-end>{{village.Healthy}}</p>\n\n                </ion-item>\n\n    \n\n    \n\n              </ion-card-content>\n\n            </ion-card>\n\n    \n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-grid>\n\n    \n\n    \n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Villages\village-details\village-details.html"*/,
+            selector: 'page-village-details',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Villages\village-details\village-details.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <ion-title>{{village.Name}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n\n\n<ion-content padding>\n\n\n\n\n\n\n\n\n\n\n\n  <ion-content padding>\n\n    <ion-grid>\n\n      <ion-row>\n\n        <ion-col col-6>\n\n          <ion-card>\n\n            <ion-navbar color="primary" (click)="toggleSchools()" class="curs">\n\n              <ion-title>Schools</ion-title>\n\n              <ion-buttons end>\n\n                <button ion-button large clear>{{village.Schools}}</button>\n\n                <button ion-button clear icon-only *ngIf="!showSchool" (click)="toggleSchools()">\n\n                  <ion-icon name="ios-arrow-down"></ion-icon>\n\n                </button>\n\n                <button ion-button clear icon-only *ngIf="showSchool" (click)="toggleSchools()">\n\n                  <ion-icon name="ios-arrow-up"></ion-icon>\n\n                </button>\n\n              </ion-buttons>\n\n            </ion-navbar>\n\n\n\n            <ion-card-content *ngIf="showSchool">\n\n              <ion-item *ngFor="let s of schools">\n\n                <button item-start clear ion-button (click)="gtSchoolsDetails(s)" color="dark" large>{{s.Name}}</button>\n\n              </ion-item>\n\n            </ion-card-content>\n\n\n\n\n\n          </ion-card>\n\n          <ion-card>\n\n            <ion-navbar color="primary" (click)="toggleAnms()" class="curs">\n\n              <ion-title>Anms</ion-title>\n\n              <ion-buttons end>\n\n                <button ion-button large clear>{{village.Anms}}</button>\n\n                <button ion-button clear icon-only *ngIf="!showAnms" (click)="toggleAnms()">\n\n                  <ion-icon name="ios-arrow-down"></ion-icon>\n\n                </button>\n\n                <button ion-button clear icon-only *ngIf="showAnms" (click)="toggleAnms()">\n\n                  <ion-icon name="ios-arrow-up"></ion-icon>\n\n                </button>\n\n              </ion-buttons>\n\n            </ion-navbar>\n\n\n\n            <ion-card-content *ngIf="showAnms">\n\n              <ion-item *ngFor="let a of anms">\n\n                <button item-start clear ion-button (click)="gtAnmsDetails(a)" color="dark" large>{{a.Name}}</button>\n\n              </ion-item>\n\n            </ion-card-content>\n\n\n\n\n\n          </ion-card>\n\n\n\n\n\n        </ion-col>\n\n        <ion-col col-6>\n\n          <ion-card>\n\n            <ion-card-content>\n\n              <ion-card-title>\n\n                Village Stats\n\n              </ion-card-title>\n\n\n\n              <ion-item>\n\n                <p item-start color="primary" ion-text>Total Students</p>\n\n                <p item-end>{{totStudents}}</p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start color="primary" ion-text>Severely Anaemic</p>\n\n                <p item-end>{{village.Severe}}</p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start color="primary" ion-text>Moderately Anaemic</p>\n\n                <p item-end>{{village.Moderate}}</p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start color="primary" ion-text>Mildly Anaemic</p>\n\n                <p item-end>{{village.Mildly}}</p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start color="primary" ion-text>Healthy</p>\n\n                <p item-end>{{village.Healthy}}</p>\n\n              </ion-item>\n\n\n\n\n\n            </ion-card-content>\n\n          </ion-card>\n\n\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-grid>\n\n\n\n\n\n  </ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Villages\village-details\village-details.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
@@ -244,6 +249,45 @@ var VillageDetailsPage = /** @class */ (function () {
 /***/ }),
 
 /***/ 107:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StudentDetailsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var StudentDetailsPage = /** @class */ (function () {
+    function StudentDetailsPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.student = this.navParams.get("student");
+        console.log(this.student);
+    }
+    StudentDetailsPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-student-details',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Students\student-details\student-details.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <ion-title>Student Details</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <ion-row>\n\n          <ion-card>\n\n            <ion-card-content>\n\n              <ion-card-title>{{student.StudentName}}</ion-card-title>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Mobile </p>\n\n                <p item-end >{{student.Mobile}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Age</p>\n\n                <p item-end >{{student.Age}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">HBL </p>\n\n                <p item-end >{{student.HBL}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Community </p>\n\n                <p item-end >{{student.Community}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary"> Aadhar</p>\n\n                <p item-end >{{student.Aadhar}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Address </p>\n\n                <p item-end >{{student.Address}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Community </p>\n\n                <p item-end >{{student.Community}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Height</p>\n\n                <p item-end >{{student.Height}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Weight </p>\n\n                <p item-end >{{student.Weight}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Class </p>\n\n                <p item-end >{{student.Class}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary"> Date of Entry</p>\n\n                <p item-end >{{student.EntryDate | date: \'dd/MM/yyyy\' }} </p>\n\n              </ion-item>\n\n\n\n              \n\n              <!-- <ion-item>\n\n                <p item-start ion-text color="primary"> </p>\n\n                <p item-end >{{student.}} </p>\n\n              </ion-item> -->\n\n\n\n            </ion-card-content>\n\n          </ion-card>\n\n\n\n        </ion-row>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <ion-row>\n\n          <ion-card>\n\n            <ion-card-content>\n\n              <ion-card-title>Follow Ups</ion-card-title>\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">First Check Up </p>\n\n                <p item-end >{{student.EntryDate | date: \'dd/MM/yyyy\'}} </p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Next Check Up </p>\n\n                <p item-end >{{student.FollowUpDate | date: \'dd/MM/yyyy\'}} </p>\n\n              </ion-item>\n\n\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-row>\n\n      </ion-col>\n\n</ion-row>\n\n</ion-grid>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Students\student-details\student-details.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
+    ], StudentDetailsPage);
+    return StudentDetailsPage;
+}());
+
+//# sourceMappingURL=student-details.js.map
+
+/***/ }),
+
+/***/ 108:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -328,20 +372,20 @@ var AnmDetailsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 108:
+/***/ 109:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ViewAmnsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_amns_add_amns__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__add_amns_add_amns__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__anm_details_anm_details__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__anm_details_anm_details__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__del_anm_del_anm__ = __webpack_require__(186);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__del_anm_del_anm__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Schools_school_details_school_details__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_xlsx__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_xlsx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_xlsx__);
@@ -486,7 +530,7 @@ var ViewAmnsPage = /** @class */ (function () {
     };
     ViewAmnsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-view-amns',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Anms\view-amns\view-amns.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>{{pgName}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <ion-searchbar item-end animated="true" placeholder="Search an ANM ..." [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <button ion-button float-right (click)="exporti()">\n\n          Export\n\n          <ion-icon padding-left name="share-alt"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n\n\n  <ion-grid>\n\n    <ion-navbar color="primary">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Name</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Phone No.</p>\n\n        </ion-col>\n\n        <ion-col col-4>\n\n          <p class="headBar" text-center>Schools</p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-navbar>\n\n  </ion-grid>\n\n\n\n  <!-- <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button> -->\n\n\n\n  <ion-grid>\n\n    <ion-card *ngFor="let a of anms;let i = index">\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-1>\n\n            <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)"></ion-checkbox>\n\n          </ion-col>\n\n          <ion-col col-1>\n\n            <p ion-text><strong>{{i+1}}</strong></p>\n\n          </ion-col>\n\n          <ion-col col-2 (click)="gtAnmDetails(a)" class="curs" ion-text color="primary">\n\n            {{a.Name}}\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Phone}} </h1><br />\n\n          </ion-col>\n\n          <ion-col col-4 text-center class="curs">\n\n            <h2 (click)="gtSchooolDetails(s)" *ngFor="let s of a.Schools" padding-bottom ion-text color="primary">{{s.SchoolName}}</h2>\n\n          </ion-col>\n\n\n\n\n\n\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-grid>\n\n\n\n\n\n  <ion-fab right bottom *ngIf="!selArray.length">\n\n    <button ion-fab color="primary" (click)="gtAddANM()">\n\n      <ion-icon name="add"></ion-icon>\n\n    </button>\n\n  </ion-fab>\n\n\n\n  <ion-fab right bottom *ngIf="selArray.length">\n\n    <button ion-fab color="danger" (click)="delMulC()">\n\n      <ion-icon name="md-trash"></ion-icon>\n\n    </button>\n\n  </ion-fab>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Anms\view-amns\view-amns.html"*/,
+            selector: 'page-view-amns',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Anms\view-amns\view-amns.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>{{pgName}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <ion-searchbar item-end animated="true" placeholder="Search an ANM ..." [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <button ion-button float-right (click)="exporti()">\n\n          Export\n\n          <ion-icon padding-left name="share-alt"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n\n\n\n\n\n\n  <ion-grid>\n\n    <ion-navbar color="primary">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Name</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Phone No.</p>\n\n        </ion-col>\n\n        <ion-col col-4>\n\n          <p class="headBar" text-center>Schools</p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-navbar>\n\n  </ion-grid>\n\n\n\n  <!-- <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button> -->\n\n\n\n  <ion-grid>\n\n    <ion-card *ngFor="let a of anms;let i = index">\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-1>\n\n            <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)"></ion-checkbox>\n\n          </ion-col>\n\n          <ion-col col-1>\n\n            <p ion-text><strong>{{i+1}}</strong></p>\n\n          </ion-col>\n\n          <ion-col col-2 (click)="gtAnmDetails(a)" class="curs" ion-text color="primary">\n\n            {{a.Name}}\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Phone}} </h1><br />\n\n          </ion-col>\n\n          <ion-col col-4 text-center class="curs">\n\n            <h2 (click)="gtSchooolDetails(s)" *ngFor="let s of a.Schools" padding-bottom ion-text color="primary">{{s.SchoolName}}</h2>\n\n          </ion-col>\n\n\n\n\n\n\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-grid>\n\n\n\n\n\n  <ion-fab right bottom *ngIf="!selArray.length">\n\n    <button ion-fab color="primary" (click)="gtAddANM()">\n\n      <ion-icon name="add"></ion-icon>\n\n    </button>\n\n  </ion-fab>\n\n\n\n  <ion-fab right bottom *ngIf="selArray.length">\n\n    <button ion-fab color="danger" (click)="delMulC()">\n\n      <ion-icon name="md-trash"></ion-icon>\n\n    </button>\n\n  </ion-fab>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Anms\view-amns\view-amns.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
@@ -502,7 +546,7 @@ var ViewAmnsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 176:
+/***/ 177:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -510,7 +554,7 @@ var ViewAmnsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash__ = __webpack_require__(403);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_lodash__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -625,7 +669,7 @@ var DashboardPage = /** @class */ (function () {
     };
     DashboardPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Extra\dashboard\dashboard.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <ion-buttons end>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <p ion-text color="whiter">{{adminName}} </p>\n\n    </ion-buttons>\n\n    <ion-title>{{pageName}} </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content class="darkBg">\n\n\n\n  <ion-grid class="whiteBg">\n\n    <ion-row>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Mandals</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="mandalSel" (ionChange)="manWiseVills(mandalSel)">\n\n            <ion-option value="All">All</ion-option>\n\n            <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Villages</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="villageSel" multiple="true">\n\n            <ion-option value="All">All</ion-option>\n\n            <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Schools</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="schoolSel" multiple="true">\n\n            <ion-option value="All">All</ion-option>\n\n            <ion-option *ngFor="let s of schools" [value]="s.Name">{{s.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-1>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Class</ion-label>\n\n          <ion-select class="darkBg" (ionChange)="filterExact(\'Class\',clSel)" [(ngModel)]="clSel" multiple="true">\n\n            <ion-option value="6">6th</ion-option>\n\n            <ion-option value="7">7th</ion-option>\n\n              <ion-option value="8">8th</ion-option>\n\n              <ion-option value="9">9th</ion-option>\n\n              <ion-option value="10">10th</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Community</ion-label>\n\n          <ion-select [(ngModel)]="casteSel" class="darkBg" (ionChange)="filterExact(\'Community\',casteSel)" multiple="true">\n\n            <ion-option value="SC">SC</ion-option>\n\n            <ion-option value="ST">ST</ion-option>\n\n            <ion-option value="BC">BC</ion-option>\n\n            <ion-option value="OC">OC</ion-option>\n\n            <ion-option value="Minority">Minority</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n\n\n      <ion-col col-1>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Age</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="mandalSel" multiple="true">\n\n            <ion-option value="10" >10</ion-option>\n\n            <ion-option value="11" >11</ion-option>\n\n            <ion-option value="12" >12</ion-option>\n\n            <ion-option value="13" >13</ion-option>\n\n            <ion-option value="14" >14</ion-option>\n\n            <ion-option value="15" >15</ion-option>\n\n            <ion-option value="16" >16</ion-option>\n\n            <ion-option value="17" >17</ion-option>\n\n            <ion-option value="18" >18</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Severity</ion-label>\n\n          <ion-select [(ngModel)]="anL" class="darkBg" (ionChange)="filterExact(\'Severity\',anL)">\n\n            <ion-option value="Severely Anaemic">Severely Anaemic</ion-option>\n\n            <ion-option value="Moderately Anaemic">Moderately Anaemic</ion-option>\n\n            <ion-option value="Mildly  Anaemic">Mildly Anaemic</ion-option>\n\n            <ion-option value="Healthy">Healthy</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n\n\n\n\n\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-3 margin-horizontal push-1>\n\n        <h1 padding-left> Anaemia Level</h1>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-row>\n\n              <ion-col  class="br1 severe" col-6>\n\n                Severely<br />\n\n                <p class="nums">200</p>\n\n              </ion-col>\n\n              <ion-col class="moder" col-6>\n\n                Moderately\n\n                <p class="nums">20</p>\n\n              </ion-col>\n\n              <ion-col col-6 class="mild" >\n\n                Mildly\n\n                <p class="nums">20</p>\n\n              </ion-col>\n\n              <ion-col class="br4 heal" col-6>\n\n                Healthy\n\n                <p class="nums">20</p>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n\n\n      <ion-col col-3 margin-horizontal push-1>\n\n        <h1 padding-left>Community</h1>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-row>\n\n              <ion-col class="br1 br4" col-6>\n\n                SC<br />\n\n                <p class="nums">20</p>\n\n              </ion-col>\n\n              <ion-col col-6 class="br1 br4" >\n\n                ST\n\n                <p class="nums">20</p>\n\n              </ion-col>\n\n              <ion-col col-6 class="br1 br4" >\n\n                BC\n\n                <p class="nums">20</p>\n\n              </ion-col>\n\n              <ion-col class="br1 br4 " col-6>\n\n                OC\n\n                <p class="nums">20</p>\n\n              </ion-col>\n\n              <ion-col class="br1 br4" col-6>\n\n                Minority\n\n                <p class="nums">20</p>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n\n\n      <ion-col col-3 margin-horizontal push-1>\n\n        <h1 padding-left>Overall</h1>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-row>\n\n              <ion-col class="br1 br4" col-12>\n\n                No. of Students<br />\n\n                <p class="nums">20</p>\n\n              </ion-col>\n\n              <ion-col class="br4 br1" col-6>\n\n                No. of  Schools\n\n                <p class="nums">20</p>\n\n              </ion-col>\n\n              <ion-col class="br4 br1" col-6>\n\n                No. of  ANMs\n\n                <p class="nums">{{totAnms}}</p>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n\n\n\n\n\n\n    </ion-row>\n\n\n\n\n\n\n\n\n\n\n\n  </ion-grid>\n\n\n\n\n\n  <ion-grid>\n\n    <ion-navbar color="primary">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Name</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Severity</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Community</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Class</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Mobile</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar"></p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-navbar>\n\n  </ion-grid>\n\n\n\n  <ion-grid>\n\n    <ion-card *ngFor="let a of filteredStudents;let i = index">\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-1>\n\n            <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)"></ion-checkbox>\n\n          </ion-col>\n\n          <ion-col col-1>\n\n            <p ion-text><strong>{{i+1}}</strong></p>\n\n          </ion-col>\n\n          <ion-col col-2 (click)="gtAnmDetails(a)" class="curs" >\n\n            {{a.StudentName}}\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Severity }}</h1><br />\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Community}} </h1><br />\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Class}} </h1><br />\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Mobile}}</h1>\n\n          </ion-col>\n\n\n\n\n\n\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-grid>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Extra\dashboard\dashboard.html"*/,
+            selector: 'page-dashboard',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Extra\dashboard\dashboard.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <ion-buttons end>\n\n      <button ion-button menuToggle>\n\n        <ion-icon name="menu"></ion-icon>\n\n      </button>\n\n      <p ion-text color="whiter">{{adminName}} </p>\n\n    </ion-buttons>\n\n    <ion-title>{{pageName}} </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content class="darkBg">\n\n\n\n  <ion-grid class="whiteBg">\n\n    <ion-row>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Mandals</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="mandalSel" (ionChange)="manWiseVills(mandalSel)">\n\n            <ion-option value="All">All</ion-option>\n\n            <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Villages</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="villageSel" multiple="true">\n\n            <ion-option value="All">All</ion-option>\n\n            <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Schools</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="schoolSel" multiple="true">\n\n            <ion-option value="All">All</ion-option>\n\n            <ion-option *ngFor="let s of schools" [value]="s.Name">{{s.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-1>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Class</ion-label>\n\n          <ion-select class="darkBg" (ionChange)="filterExact(\'Class\',clSel)" [(ngModel)]="clSel" multiple="true">\n\n            <ion-option value="6">6th</ion-option>\n\n            <ion-option value="7">7th</ion-option>\n\n              <ion-option value="8">8th</ion-option>\n\n              <ion-option value="9">9th</ion-option>\n\n              <ion-option value="10">10th</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Community</ion-label>\n\n          <ion-select [(ngModel)]="casteSel" class="darkBg" (ionChange)="filterExact(\'Community\',casteSel)" multiple="true">\n\n            <ion-option value="SC">SC</ion-option>\n\n            <ion-option value="ST">ST</ion-option>\n\n            <ion-option value="BC">BC</ion-option>\n\n            <ion-option value="OC">OC</ion-option>\n\n            <ion-option value="Minority">Minority</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n\n\n      <ion-col col-1>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Age</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="mandalSel" multiple="true">\n\n            <ion-option value="10" >10</ion-option>\n\n            <ion-option value="11" >11</ion-option>\n\n            <ion-option value="12" >12</ion-option>\n\n            <ion-option value="13" >13</ion-option>\n\n            <ion-option value="14" >14</ion-option>\n\n            <ion-option value="15" >15</ion-option>\n\n            <ion-option value="16" >16</ion-option>\n\n            <ion-option value="17" >17</ion-option>\n\n            <ion-option value="18" >18</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Severity</ion-label>\n\n          <ion-select [(ngModel)]="anL" class="darkBg" (ionChange)="filterExact(\'Severity\',anL)">\n\n            <ion-option value="Severely Anaemic">Severely Anaemic</ion-option>\n\n            <ion-option value="Moderately Anaemic">Moderately Anaemic</ion-option>\n\n            <ion-option value="Mildly  Anaemic">Mildly Anaemic</ion-option>\n\n            <ion-option value="Healthy">Healthy</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n\n\n\n\n\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-3 margin-horizontal push-1>\n\n        <h1 padding-left> Anaemia Level</h1>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-row>\n\n              <ion-col  class="br1 severe" col-6>\n\n                Severely<br />\n\n                <p class="nums">0</p>\n\n              </ion-col>\n\n              <ion-col class="moder" col-6>\n\n                Moderately\n\n                <p class="nums">0</p>\n\n              </ion-col>\n\n              <ion-col col-6 class="mild" >\n\n                Mildly\n\n                <p class="nums">0</p>\n\n              </ion-col>\n\n              <ion-col class="br4 heal" col-6>\n\n                Healthy\n\n                <p class="nums">0</p>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n\n\n      <ion-col col-3 margin-horizontal push-1>\n\n        <h1 padding-left>Community</h1>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-row>\n\n              <ion-col class="br1 br4" col-6>\n\n                SC<br />\n\n                <p class="nums">0</p>\n\n              </ion-col>\n\n              <ion-col col-6 class="br1 br4" >\n\n                ST\n\n                <p class="nums">0</p>\n\n              </ion-col>\n\n              <ion-col col-6 class="br1 br4" >\n\n                BC\n\n                <p class="nums">0</p>\n\n              </ion-col>\n\n              <ion-col class="br1 br4 " col-6>\n\n                OC\n\n                <p class="nums">0</p>\n\n              </ion-col>\n\n              <ion-col class="br1 br4" col-6>\n\n                Minority\n\n                <p class="nums">0</p>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n\n\n      <ion-col col-3 margin-horizontal push-1>\n\n        <h1 padding-left>Overall</h1>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-row>\n\n              <ion-col class="br1 br4" col-12>\n\n                No. of Students<br />\n\n                <p class="nums">0</p>\n\n              </ion-col>\n\n              <ion-col class="br4 br1" col-6>\n\n                No. of  Schools\n\n                <p class="nums">0</p>\n\n              </ion-col>\n\n              <ion-col class="br4 br1" col-6>\n\n                No. of  ANMs\n\n                <p class="nums">{{totAnms}}</p>\n\n              </ion-col>\n\n            </ion-row>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-col>\n\n\n\n\n\n\n\n    </ion-row>\n\n\n\n\n\n\n\n\n\n\n\n  </ion-grid>\n\n\n\n\n\n  <ion-grid>\n\n    <ion-navbar color="primary">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Name</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Severity</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Community</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Class</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Mobile</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar"></p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-navbar>\n\n  </ion-grid>\n\n\n\n  <ion-grid>\n\n    <ion-card *ngFor="let a of filteredStudents;let i = index">\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-1>\n\n            <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)"></ion-checkbox>\n\n          </ion-col>\n\n          <ion-col col-1>\n\n            <p ion-text><strong>{{i+1}}</strong></p>\n\n          </ion-col>\n\n          <ion-col col-2 (click)="gtAnmDetails(a)" class="curs" >\n\n            {{a.StudentName}}\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Severity }}</h1><br />\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Community}} </h1><br />\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Class}} </h1><br />\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Mobile}}</h1>\n\n          </ion-col>\n\n\n\n\n\n\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-grid>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Extra\dashboard\dashboard.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__["AngularFireDatabase"],
@@ -635,172 +679,6 @@ var DashboardPage = /** @class */ (function () {
 }());
 
 //# sourceMappingURL=dashboard.js.map
-
-/***/ }),
-
-/***/ 177:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataUploadPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var DataUploadPage = /** @class */ (function () {
-    function DataUploadPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.mandalsArray = ["Amarachinta", "Atmakur", "Chinnamabavi", "Ghanpur", "Gopalpet", "Kothakota", "Madanapur", "Pangal", "Pebbair", "Peddamandadi", "Revally", "SriRangapur", "Veepanagandla", "Wanaparthy"];
-        //Villages Array
-        this.Amarachinta = ["Amarachintha", "Masthipur", "Mulamallu", "Nandimullu", "Nagal Kadmoor", "Erladinne"];
-        this.Atmakur = ["Atmakur", "Balakistapur", "Thippadampally", "Motlampally", "Rechinthala",];
-        this.Chinnamabavi = ["Koppunur", "Veltoor", "Ayyavaripally", "Bekkem", "Gudem", "Gaddabaswapuram", "Kalluru", "Chellapadu", "Velagonda", "Peddamaroor", "Peddadagada", "Chinnadagada",];
-        this.Ghanpur = ["Ghanpur A", "Appireddypally", "Manajipet", "Malkapur", "Solipur", "Upparpally", "Kamuluddinpoor", "Agaram", "Almaipaipally", "Mamidimada",];
-        this.Gopalpet = ["Thadiparthy", "Gopalpet", "Buddaram", "Yedutla", "Edulla", "Jayanna Thirmalapur", "Munnanur", "Chennur",];
-        this.Kothakota = ["Kothakota", "Vaddevata", "Kanimetta", "Palem", "Amadabakula", "Sankireddypally", "Apparala", "Pamapuram", "Mirasipally", "Natavelly",];
-        this.Madanapur = ["Madanapur", "Madanapur", "Madanapur", "Madanapur", "Konnur", "Ajjakollu", "Duppally", "Gopanapet",];
-        this.Pangal = ["Remaddula", "Shakapur", "Kadirepadu", "Kethepally", "Vengalaipally", "Jamapur", "Bandapally", "Mahammadapur", "Chinthakunta", "Busireddypally", "Rainpally", "Chikkapally", "Annaram Tanda", "Annaram", "Bhavaji", "Pangal", "Goplapur",];
-        this.Pebbair = ["Pebbair", "Shagapur", "Kanchiraopally", "Rangapur", "Ayyavaripally", "Pathepally", "Gumadam", "Yaparla", "Chelimilla", "Sugoor",];
-        this.Peddamandadi = ["Manigilla", "Jagathpally", "Pamireddypally", "Veeraipally", "Balijepally", "Dondaguntapally", "Gatlakhanapur", "Peddamandadi", "Mojarla", "Madigatla", "Veltoor",];
-        this.Revally = ["Chennaram", "Chirkapally", "Bandaravipakula", "Revally", "Keshampeta", "Chakalapally", "Polikepadu", "Thalupunuru", "Nagapur",];
-        this.SriRangapur = ["Srirangapur", "Venkatapur", "Narsingaipally", "Venkatapur (S)", "Thatipamula", "Kambalapur",];
-        this.Veepanagandla = ["Veepanagandla", "Govardanagiri", "Sanginenipally", "Thoomukunta", "Pulgarcherla", "Gopaldinne", "Kalvarala", "Bollaram",];
-        this.Wanaparthy = ["Wanaparthy", "Rajanagaram", "Chandapur", "Savaigudem", "Nagavaram", "Marrikunta", "Rajapeta", "Peddagudem", "Kadukunta", "Kistagiri", "Chimanguntally", "Chityala", "Appaipally", "Khashimnagar",];
-        this.areaRef = __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Villages");
-        this.Amarachintakey = "-LQruugyyNOpTn5WunYM";
-        this.AtmakurKey = "-LQruuh8MWUNs4IUUTEh";
-        this.ChinnamabaviKey = "-LQruuhAikqfU1K1wh0T";
-        this.GhanpurKey = "-LQruuhBtxfvbQEdwG4n";
-        this.GopalpetKey = "-LQruuhD3aC_qpEtIs6N";
-        this.KothakotaKey = "-LQruuhEljPcYszSXeHl";
-        this.MadanapurKey = "-LQruuhFnFh7BG0oOXWj";
-        this.PangalKey = "-LQruuhGdcBhYTVLyBnV";
-        this.PebbairKey = "-LQruuhHLnLMHCxw0h8v";
-        this.PeddamandadiKey = "-LQruuhHLnLMHCxw0h8w";
-        this.RevallyKey = "-LQruuhIYoGREgjZWbBb";
-        this.SriRangapurKey = "-LQruuhIYoGREgjZWbBc";
-        this.VeepanagandlaKey = "-LQruuhJZQvV1iXFSPLK";
-        this.WanaparthyKey = "-LQruuhKjEYRqgn75PZn";
-        this.geMandals();
-    }
-    DataUploadPage.prototype.geMandals = function () {
-        __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Mandals").once("value", function (itemSnap) {
-            itemSnap.forEach(function (snip) {
-                var temp = snip.val();
-                temp.key = snip.key;
-                console.log(temp);
-            });
-        });
-    };
-    DataUploadPage.prototype.UploadMandals = function () {
-        this.mandalsArray.forEach(function (manSnip) {
-            __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Mandals").push({
-                Name: manSnip,
-                TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format()
-            }).then(function () {
-                console.log("Mandals Uploaded");
-            });
-        });
-    };
-    DataUploadPage.prototype.uploadVills = function () {
-        this.UploadAmarachinta();
-        this.UploadAtmakur();
-        this.UploadChinnamabavi();
-        this.UploadGhanpur();
-        this.UploadGopalpet();
-        this.UploadKothakota();
-        this.UploadMadanapur();
-        this.UploadPangal();
-        this.UploadPebbair();
-        this.UploadPeddamandadi();
-        this.UploadRevally();
-        this.UploadSriRangapur();
-        this.UploadVeepanagandla();
-        this.UploadWanaparthy();
-    };
-    DataUploadPage.prototype.UploadAmarachinta = function () {
-        var _this = this;
-        this.Amarachinta.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.Amarachintakey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.Amarachintakey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage.prototype.UploadAtmakur = function () {
-        var _this = this;
-        this.Atmakur.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.AtmakurKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.AtmakurKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage.prototype.UploadChinnamabavi = function () {
-        var _this = this;
-        this.Chinnamabavi.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.ChinnamabaviKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.ChinnamabaviKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage.prototype.UploadGhanpur = function () {
-        var _this = this;
-        this.Ghanpur.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.GhanpurKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.GhanpurKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage.prototype.UploadGopalpet = function () {
-        var _this = this;
-        this.Gopalpet.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.GopalpetKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.GopalpetKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage.prototype.UploadKothakota = function () {
-        var _this = this;
-        this.Kothakota.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.KothakotaKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.KothakotaKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage.prototype.UploadMadanapur = function () {
-        var _this = this;
-        this.Madanapur.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.MadanapurKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.MadanapurKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage.prototype.UploadPangal = function () {
-        var _this = this;
-        this.Pangal.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.PangalKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.PangalKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage.prototype.UploadPebbair = function () {
-        var _this = this;
-        this.Pebbair.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.PebbairKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.PebbairKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage.prototype.UploadPeddamandadi = function () {
-        var _this = this;
-        this.Peddamandadi.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.PeddamandadiKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.PeddamandadiKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage.prototype.UploadRevally = function () {
-        var _this = this;
-        this.Revally.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.RevallyKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.RevallyKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage.prototype.UploadSriRangapur = function () {
-        var _this = this;
-        this.SriRangapur.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.SriRangapurKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.SriRangapurKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage.prototype.UploadVeepanagandla = function () {
-        var _this = this;
-        this.Veepanagandla.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.VeepanagandlaKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.VeepanagandlaKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage.prototype.UploadWanaparthy = function () {
-        var _this = this;
-        this.Wanaparthy.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.WanaparthyKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.WanaparthyKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
-    };
-    DataUploadPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-data-upload',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\data-upload\data-upload.html"*/'<ion-header>\n  <ion-navbar color="primary" >\n    <ion-title>DataUpload</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n\n\n\n\n  <button ion-button (click)="UploadMandals()" >Upload Mandals</button>\n  <button ion-button (click)="uploadVills()">Upload Villages</button>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\data-upload\data-upload.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
-    ], DataUploadPage);
-    return DataUploadPage;
-}());
-
-//# sourceMappingURL=data-upload.js.map
 
 /***/ }),
 
@@ -1053,7 +931,9 @@ var MandalDetailsPage = /** @class */ (function () {
         this.schoolRef = this.db.list("SubsIndex/Mandals/" + this.mandal.key + "/Schools");
         this.schools = [];
         this.showSchool = false;
+        this.totStudents = 0;
         console.log(this.mandal);
+        this.getStudents();
         this.getVillages();
         this.getSchools();
     }
@@ -1081,6 +961,9 @@ var MandalDetailsPage = /** @class */ (function () {
             });
         });
     };
+    MandalDetailsPage.prototype.getStudents = function () {
+        this.totStudents = this.mandal.Healthy + this.mandal.Mildly + this.mandal.Moderate + this.mandal.Severe;
+    };
     MandalDetailsPage.prototype.gtVillageDetails = function (v) {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__Villages_village_details_village_details__["a" /* VillageDetailsPage */], { village: v });
     };
@@ -1095,7 +978,7 @@ var MandalDetailsPage = /** @class */ (function () {
     };
     MandalDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-mandal-details',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Mandals\mandal-details\mandal-details.html"*/'<ion-header>\n\n  <ion-navbar color="primary" >\n\n    <ion-title>{{mandal.Name}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n          <ion-card>\n\n              <ion-navbar color="primary" (click)="toggleVillages()" class="curs" >\n\n                <ion-title>Villages</ion-title>\n\n                <ion-buttons end>\n\n                <button ion-button large clear>{{villages.length}}</button>\n\n                </ion-buttons>\n\n              </ion-navbar>\n\n          \n\n              <ion-card-content *ngIf="showVillage" >\n\n                <ion-item *ngFor="let v of villages" >\n\n                  <button item-start clear ion-button color="dark" large>{{v.Name}}</button>\n\n                  <button ion-button item-end clear (click)="gtVillageDetails(v)" >Details</button>\n\n                </ion-item>\n\n              </ion-card-content>\n\n            </ion-card>\n\n            <ion-card>\n\n                <ion-navbar color="primary" (click)="toggleSchools()" class="curs" >\n\n                  <ion-title>Schools</ion-title>\n\n                  <ion-buttons end>\n\n                  <button ion-button large clear>{{mandal.Schools}}</button>\n\n                  <button ion-button large clear>{{schools.length}}</button>\n\n                  </ion-buttons>\n\n                </ion-navbar>\n\n            \n\n                <ion-card-content *ngIf="showSchool" >\n\n                  <ion-item *ngFor="let s of schools" >\n\n                    <button item-start clear ion-button color="dark" large>{{s.Name}}</button>\n\n                    <button ion-button item-end clear (click)="gtSchoolsDetails(s)" >Details</button>\n\n                  </ion-item>\n\n                </ion-card-content>\n\n            \n\n            \n\n              </ion-card>\n\n            \n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-card-title>\n\n              Mandal Stats\n\n            </ion-card-title>\n\n\n\n            <ion-item>\n\n              <p item-start color="primary" ion-text>Total Students</p>\n\n              <p item-end>200</p>\n\n            </ion-item>\n\n            <ion-item>\n\n              <p item-start color="primary" ion-text>Severely Anaemic</p>\n\n              <p item-end>{{mandal.Severe}}</p>\n\n            </ion-item>\n\n            <ion-item>\n\n              <p item-start color="primary" ion-text>Moderately Anaemic</p>\n\n              <p item-end>{{mandal.Moderate}}</p>\n\n            </ion-item>\n\n            <ion-item>\n\n              <p item-start color="primary" ion-text>Mildly Anaemic</p>\n\n              <p item-end>{{mandal.Mildly}}</p>\n\n            </ion-item>\n\n            <ion-item>\n\n              <p item-start color="primary" ion-text>Healthy</p>\n\n              <p item-end>{{mandal.Healthy}}</p>\n\n            </ion-item>\n\n\n\n\n\n          </ion-card-content>\n\n        </ion-card>\n\n\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Mandals\mandal-details\mandal-details.html"*/,
+            selector: 'page-mandal-details',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Mandals\mandal-details\mandal-details.html"*/'<ion-header>\n\n  <ion-navbar color="primary" >\n\n    <ion-title>{{mandal.Name}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n          <ion-card>\n\n              <ion-navbar color="primary" (click)="toggleVillages()" class="curs" >\n\n                <ion-title>Villages</ion-title>\n\n                <ion-buttons end>\n\n                <button ion-button large clear>{{villages.length}}</button>\n\n                </ion-buttons>\n\n              </ion-navbar>\n\n          \n\n              <ion-card-content *ngIf="showVillage" >\n\n                <ion-item *ngFor="let v of villages" >\n\n                  <button item-start clear ion-button (click)="gtVillageDetails(v)" color="dark" large>{{v.Name}}</button>\n\n                </ion-item>\n\n              </ion-card-content>\n\n            </ion-card>\n\n            <ion-card>\n\n                <ion-navbar color="primary" (click)="toggleSchools()" class="curs" >\n\n                  <ion-title>Schools</ion-title>\n\n                  <ion-buttons end>\n\n                  <button ion-button large clear>{{mandal.Schools}}</button>\n\n                  <button ion-button large clear>{{schools.length}}</button>\n\n                  </ion-buttons>\n\n                </ion-navbar>\n\n            \n\n                <ion-card-content *ngIf="showSchool" >\n\n                  <ion-item *ngFor="let s of schools" >\n\n                    <button item-start clear ion-button (click)="gtSchoolsDetails(s)" color="dark" large>{{s.Name}}</button>\n\n                  </ion-item>\n\n                </ion-card-content>\n\n            \n\n            \n\n              </ion-card>\n\n            \n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-card-title>\n\n              Mandal Stats\n\n            </ion-card-title>\n\n\n\n            <ion-item>\n\n              <p item-start color="primary" ion-text>Total Students</p>\n\n              <p item-end>{{totStudents}}</p>\n\n            </ion-item>\n\n            <ion-item>\n\n              <p item-start color="primary" ion-text>Severely Anaemic</p>\n\n              <p item-end>{{mandal.Severe}}</p>\n\n            </ion-item>\n\n            <ion-item>\n\n              <p item-start color="primary" ion-text>Moderately Anaemic</p>\n\n              <p item-end>{{mandal.Moderate}}</p>\n\n            </ion-item>\n\n            <ion-item>\n\n              <p item-start color="primary" ion-text>Mildly Anaemic</p>\n\n              <p item-end>{{mandal.Mildly}}</p>\n\n            </ion-item>\n\n            <ion-item>\n\n              <p item-start color="primary" ion-text>Healthy</p>\n\n              <p item-end>{{mandal.Healthy}}</p>\n\n            </ion-item>\n\n\n\n\n\n          </ion-card-content>\n\n        </ion-card>\n\n\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Mandals\mandal-details\mandal-details.html"*/,
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
             __WEBPACK_IMPORTED_MODULE_2_angularfire2_database__["AngularFireDatabase"],
@@ -1415,45 +1298,6 @@ var EditAnmPage = /** @class */ (function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StudentDetailsPage; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-var StudentDetailsPage = /** @class */ (function () {
-    function StudentDetailsPage(navCtrl, navParams) {
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.student = this.navParams.get("student");
-        console.log(this.student);
-    }
-    StudentDetailsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-student-details',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Students\student-details\student-details.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <ion-title>Student Details</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <ion-row>\n\n          <ion-card>\n\n            <ion-card-content>\n\n              <ion-card-title>{{student.StudentName}}</ion-card-title>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Mobile </p>\n\n                <p item-end >{{student.Mobile}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Age</p>\n\n                <p item-end >{{student.Age}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">HBL </p>\n\n                <p item-end >{{student.HBL}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Community </p>\n\n                <p item-end >{{student.Community}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary"> Aadhar</p>\n\n                <p item-end >{{student.Aadhar}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Address </p>\n\n                <p item-end >{{student.Address}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Community </p>\n\n                <p item-end >{{student.Community}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Height</p>\n\n                <p item-end >{{student.Height}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Weight </p>\n\n                <p item-end >{{student.Weight}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Class </p>\n\n                <p item-end >{{student.Class}} </p>\n\n              </ion-item>\n\n\n\n              <ion-item>\n\n                <p item-start ion-text color="primary"> Date of Entry</p>\n\n                <p item-end >{{student.EntryDate | date: \'dd/MM/yyyy\' }} </p>\n\n              </ion-item>\n\n\n\n              \n\n              <!-- <ion-item>\n\n                <p item-start ion-text color="primary"> </p>\n\n                <p item-end >{{student.}} </p>\n\n              </ion-item> -->\n\n\n\n            </ion-card-content>\n\n          </ion-card>\n\n\n\n        </ion-row>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <ion-row>\n\n          <ion-card>\n\n            <ion-card-content>\n\n              <ion-card-title>Follow Ups</ion-card-title>\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">First Check Up </p>\n\n                <p item-end >{{student.EntryDate | date: \'dd/MM/yyyy\'}} </p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start ion-text color="primary">Next Check Up </p>\n\n                <p item-end >{{student.FollowUpDate | date: \'dd/MM/yyyy\'}} </p>\n\n              </ion-item>\n\n\n\n            </ion-card-content>\n\n          </ion-card>\n\n        </ion-row>\n\n      </ion-col>\n\n</ion-row>\n\n</ion-grid>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Students\student-details\student-details.html"*/,
-        }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
-    ], StudentDetailsPage);
-    return StudentDetailsPage;
-}());
-
-//# sourceMappingURL=student-details.js.map
-
-/***/ }),
-
-/***/ 184:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return StudentsPage; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
@@ -1461,13 +1305,13 @@ var StudentDetailsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angularfire2_database___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angularfire2_database__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash__ = __webpack_require__(279);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash__ = __webpack_require__(403);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_lodash__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_xlsx__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_file_saver__ = __webpack_require__(81);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_file_saver___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_file_saver__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__student_details_student_details__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__student_details_student_details__ = __webpack_require__(107);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1516,6 +1360,32 @@ var StudentsPage = /** @class */ (function () {
             itemSnap.forEach(function (snip) {
                 var temp = snip.payload.val();
                 temp.key = snip.key;
+                switch (temp.Severity) {
+                    case 'Severely Anaemic':
+                        temp.colori = "s";
+                        break;
+                    case 'Moderately Anaemic':
+                        temp.colori = "mo";
+                        break;
+                    case 'Mildly  Anaemic':
+                        temp.colori = "mi";
+                        break;
+                    case 'Healthy':
+                        temp.colori = "h";
+                        break;
+                }
+                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Schools").child(temp.Schools).once("value", function (s) {
+                    temp.SchoolName = s.val().Name;
+                });
+                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Villages").child(temp.Village).once("value", function (s) {
+                    temp.VillageName = s.val().Name;
+                });
+                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Mandals").child(temp.Mandal).once("value", function (s) {
+                    temp.MandalName = s.val().Name;
+                });
+                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Organisms/Anms").child(temp.ANM).once("value", function (s) {
+                    temp.ANMName = s.val().Name;
+                });
                 _this.students.push(temp);
             });
             _this.applyFilters();
@@ -1526,6 +1396,7 @@ var StudentsPage = /** @class */ (function () {
     };
     StudentsPage.prototype.applyFilters = function () {
         this.filteredStudents = __WEBPACK_IMPORTED_MODULE_4_lodash__["filter"](this.students, __WEBPACK_IMPORTED_MODULE_4_lodash__["conforms"](this.filters));
+        console.log(this.filteredStudents);
     };
     /// filter property by equality to rule
     StudentsPage.prototype.filterExact = function (property, rule) {
@@ -1689,23 +1560,19 @@ var StudentsPage = /** @class */ (function () {
     };
     StudentsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-students',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Students\students\students.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>{{pgName}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid class="whiteBg">\n\n    <ion-row>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Mandals</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="mandalSel" (ionChange)="checkMandal()">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Villages</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="villageSel" (ionChange)="checkVillage()" >\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Schools</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="schoolSel">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option *ngFor="let s of schools" [value]="s.key">{{s.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n\n\n\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Community</ion-label>\n\n          <ion-select [(ngModel)]="casteSel" class="darkBg" (ionChange)="filterExact(\'Community\',casteSel)">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="SC">SC</ion-option>\n\n            <ion-option value="ST">ST</ion-option>\n\n            <ion-option value="BC">BC</ion-option>\n\n            <ion-option value="OC">OC</ion-option>\n\n            <ion-option value="Minority">Minority</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-1>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Age</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="age" (ionChange)="filterExact(\'Age\',age)">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="10">10</ion-option>\n\n            <ion-option value="11">11</ion-option>\n\n            <ion-option value="12">12</ion-option>\n\n            <ion-option value="13">13</ion-option>\n\n            <ion-option value="14">14</ion-option>\n\n            <ion-option value="15">15</ion-option>\n\n            <ion-option value="16">16</ion-option>\n\n            <ion-option value="17">17</ion-option>\n\n            <ion-option value="18">18</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Severity</ion-label>\n\n          <ion-select [(ngModel)]="anL" class="darkBg" (ionChange)="filterExact(\'Severity\', this.anL)">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="Severely Anaemic">Severely Anaemic</ion-option>\n\n            <ion-option value="Moderately Anaemic">Moderately Anaemic</ion-option>\n\n            <ion-option value="Mildly  Anaemic">Mildly Anaemic</ion-option>\n\n            <ion-option value="Healthy">Healthy</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-1>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Class</ion-label>\n\n          <ion-select class="darkBg" (ionChange)="filterExact(\'Class\',clSel)" [(ngModel)]="clSel">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="6">6th</ion-option>\n\n            <ion-option value="7">7th</ion-option>\n\n            <ion-option value="8">8th</ion-option>\n\n            <ion-option value="9">9th</ion-option>\n\n            <ion-option value="10">10th</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n    </ion-row>\n\n\n\n\n\n  </ion-grid>\n\n\n\n\n\n\n\n  <ion-grid>\n\n    <ion-navbar color="primary">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Name</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Severity</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Community</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Mobile</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar"></p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-navbar>\n\n  </ion-grid>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <ion-searchbar item-end animated="true" placeholder="Search a Student .." [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <button ion-button float-right (click)="exporti()">\n\n          Export\n\n          <ion-icon padding-left name="share-alt"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n  </ion-grid>\n\n  <!-- <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button> -->\n\n\n\n  <ion-grid>\n\n    <ion-card *ngFor="let a of filteredStudents;let i = index">\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-1>\n\n            <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)"></ion-checkbox>\n\n          </ion-col>\n\n          <ion-col col-1>\n\n            <p ion-text><strong>{{i+1}}</strong></p>\n\n          </ion-col>\n\n          <ion-col col-2 (click)="gtStudentDetails(a)" class="curs">\n\n            {{a.StudentName}}\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Severity }}</h1><br />\n\n          </ion-col>\n\n          <ion-col col-1 text-center>\n\n            <h1 ion-text color="primary">{{a.Community}} </h1><br />\n\n          </ion-col>\n\n          <ion-col col-2 text-center>\n\n            <h1 ion-text color="primary">{{a.Mobile}}</h1>\n\n          </ion-col>\n\n\n\n\n\n\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-grid>\n\n\n\n\n\n\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Students\students\students.html"*/,
+            selector: 'page-students',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Students\students\students.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>{{pgName}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid class="whiteBg">\n\n    <ion-row>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Mandals</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="mandalSel" (ionChange)="checkMandal()">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Villages</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="villageSel" (ionChange)="checkVillage()" >\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Schools</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="schoolSel">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option *ngFor="let s of schools" [value]="s.key">{{s.Name}}</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n\n\n\n\n\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Community</ion-label>\n\n          <ion-select [(ngModel)]="casteSel" class="darkBg" (ionChange)="filterExact(\'Community\',casteSel)">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="SC">SC</ion-option>\n\n            <ion-option value="ST">ST</ion-option>\n\n            <ion-option value="BC">BC</ion-option>\n\n            <ion-option value="OC">OC</ion-option>\n\n            <ion-option value="Minority">Minority</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-1>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Age</ion-label>\n\n          <ion-select class="darkBg" [(ngModel)]="age" (ionChange)="filterExact(\'Age\',age)">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="10">10</ion-option>\n\n            <ion-option value="11">11</ion-option>\n\n            <ion-option value="12">12</ion-option>\n\n            <ion-option value="13">13</ion-option>\n\n            <ion-option value="14">14</ion-option>\n\n            <ion-option value="15">15</ion-option>\n\n            <ion-option value="16">16</ion-option>\n\n            <ion-option value="17">17</ion-option>\n\n            <ion-option value="18">18</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-2>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Severity</ion-label>\n\n          <ion-select [(ngModel)]="anL" class="darkBg" (ionChange)="filterExact(\'Severity\', this.anL)">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="Severely Anaemic">Severely Anaemic</ion-option>\n\n            <ion-option value="Moderately Anaemic">Moderately Anaemic</ion-option>\n\n            <ion-option value="Mildly  Anaemic">Mildly Anaemic</ion-option>\n\n            <ion-option value="Healthy">Healthy</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n      <ion-col col-1>\n\n        <ion-item no-lines>\n\n          <ion-label stacked>Class</ion-label>\n\n          <ion-select class="darkBg" (ionChange)="filterExact(\'Class\',clSel)" [(ngModel)]="clSel">\n\n            <ion-option value="all">All</ion-option>\n\n            <ion-option value="6">6th</ion-option>\n\n            <ion-option value="7">7th</ion-option>\n\n            <ion-option value="8">8th</ion-option>\n\n            <ion-option value="9">9th</ion-option>\n\n            <ion-option value="10">10th</ion-option>\n\n          </ion-select>\n\n        </ion-item>\n\n      </ion-col>\n\n\n\n    </ion-row>\n\n\n\n\n\n  </ion-grid>\n\n\n\n\n\n  <ion-grid>\n\n    <ion-navbar color="primary">\n\n      <ion-row>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Name</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Age</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Class</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">School</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Village</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Mandal</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Severity</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">HBl</p>\n\n        </ion-col>\n\n                <ion-col col-1>\n\n          <p class="headBar">Phone</p>\n\n        </ion-col>\n\n\n\n        <ion-col col-1>\n\n          <p class="headBar">ANM</p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-navbar>\n\n  </ion-grid>\n\n\n\n  <!-- <ion-grid>\n\n    <ion-navbar color="primary">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Name</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Severity</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Community</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Mobile</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Class</p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-navbar>\n\n  </ion-grid> -->\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <ion-searchbar item-end animated="true" placeholder="Search a Student .." [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n        <button ion-button float-right (click)="exporti()">\n\n          Export\n\n          <ion-icon padding-left name="share-alt"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n\n\n  </ion-grid>\n\n  <!-- <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button> -->\n\n\n\n\n\n  <!-- {{filteredStudents | json}} -->\n\n\n\n  <ion-grid>\n\n    <ion-card *ngFor="let a of filteredStudents;let i = index" [color]="a.colori" >\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-1>\n\n            <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)"></ion-checkbox>\n\n            <p ion-text><strong>{{i+1}}</strong></p>\n\n          </ion-col>\n\n          <ion-col col-1  (click)="gtStudentDetails(a)" class="curs">\n\n            {{a.StudentName}}\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.Age }}</h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.Class}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.SchoolName}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.VillageName}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.MandalName}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.Severity}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.HBL}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.Mobile}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.ANMName}} </h2><br />\n\n          </ion-col>\n\n\n\n\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-grid>\n\n\n\n\n\n<!-- <ion-grid>\n\n  <ion-row *ngFor="let a of filteredStudents;let i = index" >\n\n    <ion-card>\n\n    <ion-col col-2>\n\n      {{a.StudentName}}\n\n    </ion-col>\n\n    <ion-col col-1>\n\n      {{a.Class}}\n\n    </ion-col>\n\n    <ion-col col-1>\n\n      {{a.Severity}}\n\n    </ion-col>\n\n    </ion-card>\n\n  </ion-row>\n\n</ion-grid> -->\n\n\n\n\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Students\students\students.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */],
-            __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ModalController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angularfire2_database__["AngularFireDatabase"]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]) === "function" && _f || Object])
     ], StudentsPage);
     return StudentsPage;
+    var _a, _b, _c, _d, _e, _f;
 }());
 
 //# sourceMappingURL=students.js.map
 
 /***/ }),
 
-/***/ 185:
+/***/ 184:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1714,7 +1581,7 @@ var StudentsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__view_amns_view_amns__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__view_amns_view_amns__ = __webpack_require__(109);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1823,7 +1690,7 @@ var AddAmnsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 186:
+/***/ 185:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1906,7 +1773,7 @@ var DelAnmPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 187:
+/***/ 186:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2068,7 +1935,7 @@ var AddSchoolsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 188:
+/***/ 187:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2076,7 +1943,7 @@ var AddSchoolsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__add_schools_add_schools__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__add_schools_add_schools__ = __webpack_require__(186);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__school_details_school_details__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_xlsx__);
@@ -2191,6 +2058,10 @@ var ViewSchoolsPage = /** @class */ (function () {
         var self = this;
         __WEBPACK_IMPORTED_MODULE_6_file_saver__(blob, this.pgName + '.xlsx');
     };
+    ViewSchoolsPage.prototype.prnt = function () {
+        window.print();
+        return false;
+    };
     ViewSchoolsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-view-schools',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Schools\view-schools\view-schools.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>{{pgName}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <ion-searchbar item-end animated="true" placeholder="Search a School ..." [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n          <button ion-button float-right (click)="prnt()">\n\n              Print\n\n              <ion-icon padding-left name="md-print"></ion-icon>\n\n            </button>\n\n    \n\n        <button ion-button float-right (click)="exporti()">\n\n          Export\n\n          <ion-icon padding-left name="share-alt"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n\n\n  <ion-grid>\n\n    <ion-list-header color="primary">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Name</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Severely Anaemic</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Moderately Anaemic</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Mildly Anaemic</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Healthy</p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-list-header>\n\n  </ion-grid>\n\n\n\n  <ion-grid>\n\n    <ion-item *ngFor="let a of area;let i = index">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n          <p ion-text text-center><strong>{{i+1}}</strong></p>\n\n        </ion-col>\n\n        <ion-col col-2 (click)="gtSchoolDetails(a)" class="curs">\n\n          <h2 ion-text text-center color="primary">{{a.Name}}</h2>\n\n        </ion-col>\n\n        <ion-col col-2 text-center>\n\n          <h2>{{a.Severe}}</h2><br />\n\n        </ion-col>\n\n        <ion-col col-2 text-center>\n\n          <h2>{{a.Moderate}}</h2><br />\n\n        </ion-col>\n\n        <ion-col col-2 text-center>\n\n          <h2>{{a.Mildly}}</h2><br />\n\n        </ion-col>\n\n        <ion-col col-2 text-center>\n\n          <h2>{{a.Healthy}}</h2><br />\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-item>\n\n  </ion-grid>\n\n\n\n\n\n\n\n\n\n  <ion-fab right bottom>\n\n    <button ion-fab color="danger" (click)="gtAddArea()">\n\n      <ion-icon name="add"></ion-icon>\n\n    </button>\n\n  </ion-fab>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Schools\view-schools\view-schools.html"*/,
@@ -2210,7 +2081,7 @@ var ViewSchoolsPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 189:
+/***/ 188:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2344,7 +2215,7 @@ var AddVillagesPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 190:
+/***/ 189:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2352,7 +2223,7 @@ var AddVillagesPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_fire_database__ = __webpack_require__(77);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__add_villages_add_villages__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__add_villages_add_villages__ = __webpack_require__(188);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__village_details_village_details__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx__ = __webpack_require__(80);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_xlsx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_xlsx__);
@@ -2467,6 +2338,10 @@ var ViewVillagesPage = /** @class */ (function () {
         var self = this;
         __WEBPACK_IMPORTED_MODULE_6_file_saver__(blob, this.pgName + '.xlsx');
     };
+    ViewVillagesPage.prototype.prnt = function () {
+        window.print();
+        return false;
+    };
     ViewVillagesPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'page-view-villages',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Villages\view-villages\view-villages.html"*/'<ion-header>\n\n  <ion-navbar color="primary">\n\n    <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n    <ion-title>{{pgName}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n        <ion-searchbar item-end animated="true" placeholder="Search a Village" [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>\n\n      </ion-col>\n\n      <ion-col col-6>\n\n                <button ion-button float-right (click)="prnt()">\n\n          Print\n\n          <ion-icon padding-left name="md-print"></ion-icon>\n\n        </button>\n\n\n\n        <button ion-button float-right (click)="exporti()">\n\n          Export\n\n          <ion-icon padding-left name="share-alt"></ion-icon>\n\n        </button>\n\n      </ion-col>\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n\n\n\n\n\n\n\n\n  <ion-grid>\n\n    <ion-list-header color="primary">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Name</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Severely Anaemic</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Moderately Anaemic</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Mildly Anaemic</p>\n\n        </ion-col>\n\n        <ion-col col-2>\n\n          <p class="headBar">Healthy</p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-list-header>\n\n  </ion-grid>\n\n\n\n  <ion-grid>\n\n    <ion-item *ngFor="let a of area;let i = index">\n\n      <ion-row>\n\n        <ion-col col-1>\n\n          <p ion-text text-center><strong>{{i+1}}</strong></p>\n\n        </ion-col>\n\n        <ion-col col-2 (click)="gtVillageDetails(a)" class="curs">\n\n          <h2 ion-text text-center color="primary">{{a.Name}}</h2>\n\n        </ion-col>\n\n        <ion-col col-2 text-center>\n\n          <h2>{{a.Severe}}</h2><br />\n\n        </ion-col>\n\n        <ion-col col-2 text-center>\n\n          <h2>{{a.Moderate}}</h2><br />\n\n        </ion-col>\n\n        <ion-col col-2 text-center>\n\n          <h2>{{a.Mildly}}</h2><br />\n\n        </ion-col>\n\n        <ion-col col-2 text-center>\n\n          <h2>{{a.Healthy}}</h2><br />\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-item>\n\n  </ion-grid>\n\n\n\n\n\n\n\n\n\n  <ion-fab right bottom>\n\n    <button ion-fab color="danger" (click)="gtAddArea()">\n\n      <ion-icon name="add"></ion-icon>\n\n    </button>\n\n  </ion-fab>\n\n</ion-content>'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Villages\view-villages\view-villages.html"*/,
@@ -2486,7 +2361,7 @@ var ViewVillagesPage = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 228:
+/***/ 227:
 /***/ (function(module, exports) {
 
 function webpackEmptyAsyncContext(req) {
@@ -2499,16 +2374,16 @@ function webpackEmptyAsyncContext(req) {
 webpackEmptyAsyncContext.keys = function() { return []; };
 webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
 module.exports = webpackEmptyAsyncContext;
-webpackEmptyAsyncContext.id = 228;
+webpackEmptyAsyncContext.id = 227;
 
 /***/ }),
 
-/***/ 269:
+/***/ 268:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
 	"../pages/Extra/dashboard/dashboard.module": [
-		719,
+		720,
 		19
 	],
 	"../pages/Extra/login/login.module": [
@@ -2584,7 +2459,7 @@ var map = {
 		1
 	],
 	"../pages/data-upload/data-upload.module": [
-		720,
+		719,
 		0
 	]
 };
@@ -2599,15 +2474,181 @@ function webpackAsyncContext(req) {
 webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
-webpackAsyncContext.id = 269;
+webpackAsyncContext.id = 268;
 module.exports = webpackAsyncContext;
 
 /***/ }),
 
-/***/ 406:
+/***/ 405:
 /***/ (function(module, exports) {
 
 /* (ignored) */
+
+/***/ }),
+
+/***/ 456:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DataUploadPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_moment__);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var DataUploadPage = /** @class */ (function () {
+    function DataUploadPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.mandalsArray = ["Amarachinta", "Atmakur", "Chinnamabavi", "Ghanpur", "Gopalpet", "Kothakota", "Madanapur", "Pangal", "Pebbair", "Peddamandadi", "Revally", "SriRangapur", "Veepanagandla", "Wanaparthy"];
+        //Villages Array
+        this.Amarachinta = ["Amarachintha", "Masthipur", "Mulamallu", "Nandimullu", "Nagal Kadmoor", "Erladinne"];
+        this.Atmakur = ["Atmakur", "Balakistapur", "Thippadampally", "Motlampally", "Rechinthala",];
+        this.Chinnamabavi = ["Koppunur", "Veltoor", "Ayyavaripally", "Bekkem", "Gudem", "Gaddabaswapuram", "Kalluru", "Chellapadu", "Velagonda", "Peddamaroor", "Peddadagada", "Chinnadagada",];
+        this.Ghanpur = ["Ghanpur A", "Appireddypally", "Manajipet", "Malkapur", "Solipur", "Upparpally", "Kamuluddinpoor", "Agaram", "Almaipaipally", "Mamidimada",];
+        this.Gopalpet = ["Thadiparthy", "Gopalpet", "Buddaram", "Yedutla", "Edulla", "Jayanna Thirmalapur", "Munnanur", "Chennur",];
+        this.Kothakota = ["Kothakota", "Vaddevata", "Kanimetta", "Palem", "Amadabakula", "Sankireddypally", "Apparala", "Pamapuram", "Mirasipally", "Natavelly",];
+        this.Madanapur = ["Madanapur", "Konnur", "Ajjakollu", "Duppally", "Gopanapet",];
+        this.Pangal = ["Remaddula", "Shakapur", "Kadirepadu", "Kethepally", "Vengalaipally", "Jamapur", "Bandapally", "Mahammadapur", "Chinthakunta", "Busireddypally", "Rainpally", "Chikkapally", "Annaram Tanda", "Annaram", "Bhavaji", "Pangal", "Goplapur",];
+        this.Pebbair = ["Pebbair", "Shagapur", "Kanchiraopally", "Rangapur", "Ayyavaripally", "Pathepally", "Gumadam", "Yaparla", "Chelimilla", "Sugoor",];
+        this.Peddamandadi = ["Manigilla", "Jagathpally", "Pamireddypally", "Veeraipally", "Balijepally", "Dondaguntapally", "Gatlakhanapur", "Peddamandadi", "Mojarla", "Madigatla", "Veltoor",];
+        this.Revally = ["Chennaram", "Chirkapally", "Bandaravipakula", "Revally", "Keshampeta", "Chakalapally", "Polikepadu", "Thalupunuru", "Nagapur",];
+        this.SriRangapur = ["Srirangapur", "Venkatapur", "Narsingaipally", "Venkatapur (S)", "Thatipamula", "Kambalapur",];
+        this.Veepanagandla = ["Veepanagandla", "Govardanagiri", "Sanginenipally", "Thoomukunta", "Pulgarcherla", "Gopaldinne", "Kalvarala", "Bollaram",];
+        this.Wanaparthy = ["Wanaparthy", "Rajanagaram", "Chandapur", "Savaigudem", "Nagavaram", "Marrikunta", "Rajapeta", "Peddagudem", "Kadukunta", "Kistagiri", "Chimanguntally", "Chityala", "Appaipally", "Khashimnagar",];
+        this.areaRef = __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Villages");
+        this.Amarachintakey = "-LQruugyyNOpTn5WunYM";
+        this.AtmakurKey = "-LQruuh8MWUNs4IUUTEh";
+        this.ChinnamabaviKey = "-LQruuhAikqfU1K1wh0T";
+        this.GhanpurKey = "-LQruuhBtxfvbQEdwG4n";
+        this.GopalpetKey = "-LQruuhD3aC_qpEtIs6N";
+        this.KothakotaKey = "-LQruuhEljPcYszSXeHl";
+        this.MadanapurKey = "-LQruuhFnFh7BG0oOXWj";
+        this.PangalKey = "-LQruuhGdcBhYTVLyBnV";
+        this.PebbairKey = "-LQruuhHLnLMHCxw0h8v";
+        this.PeddamandadiKey = "-LQruuhHLnLMHCxw0h8w";
+        this.RevallyKey = "-LQruuhIYoGREgjZWbBb";
+        this.SriRangapurKey = "-LQruuhIYoGREgjZWbBc";
+        this.VeepanagandlaKey = "-LQruuhJZQvV1iXFSPLK";
+        this.WanaparthyKey = "-LQruuhKjEYRqgn75PZn";
+        this.geMandals();
+    }
+    DataUploadPage.prototype.geMandals = function () {
+        __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Mandals").once("value", function (itemSnap) {
+            itemSnap.forEach(function (snip) {
+                var temp = snip.val();
+                temp.key = snip.key;
+                console.log(temp);
+            });
+        });
+    };
+    DataUploadPage.prototype.UploadMandals = function () {
+        this.mandalsArray.forEach(function (manSnip) {
+            __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Mandals").push({
+                Name: manSnip,
+                TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format()
+            }).then(function () {
+                console.log("Mandals Uploaded");
+            });
+        });
+    };
+    DataUploadPage.prototype.uploadVills = function () {
+        this.UploadAmarachinta();
+        this.UploadAtmakur();
+        this.UploadChinnamabavi();
+        this.UploadGhanpur();
+        this.UploadGopalpet();
+        this.UploadKothakota();
+        this.UploadMadanapur();
+        this.UploadPangal();
+        this.UploadPebbair();
+        this.UploadPeddamandadi();
+        this.UploadRevally();
+        this.UploadSriRangapur();
+        this.UploadVeepanagandla();
+        this.UploadWanaparthy();
+    };
+    DataUploadPage.prototype.UploadAmarachinta = function () {
+        var _this = this;
+        this.Amarachinta.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.Amarachintakey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.Amarachintakey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage.prototype.UploadAtmakur = function () {
+        var _this = this;
+        this.Atmakur.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.AtmakurKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.AtmakurKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage.prototype.UploadChinnamabavi = function () {
+        var _this = this;
+        this.Chinnamabavi.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.ChinnamabaviKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.ChinnamabaviKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage.prototype.UploadGhanpur = function () {
+        var _this = this;
+        this.Ghanpur.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.GhanpurKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.GhanpurKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage.prototype.UploadGopalpet = function () {
+        var _this = this;
+        this.Gopalpet.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.GopalpetKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.GopalpetKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage.prototype.UploadKothakota = function () {
+        var _this = this;
+        this.Kothakota.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.KothakotaKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.KothakotaKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage.prototype.UploadMadanapur = function () {
+        var _this = this;
+        this.Madanapur.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.MadanapurKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.MadanapurKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage.prototype.UploadPangal = function () {
+        var _this = this;
+        this.Pangal.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.PangalKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.PangalKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage.prototype.UploadPebbair = function () {
+        var _this = this;
+        this.Pebbair.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.PebbairKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.PebbairKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage.prototype.UploadPeddamandadi = function () {
+        var _this = this;
+        this.Peddamandadi.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.PeddamandadiKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.PeddamandadiKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage.prototype.UploadRevally = function () {
+        var _this = this;
+        this.Revally.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.RevallyKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.RevallyKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage.prototype.UploadSriRangapur = function () {
+        var _this = this;
+        this.SriRangapur.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.SriRangapurKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.SriRangapurKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage.prototype.UploadVeepanagandla = function () {
+        var _this = this;
+        this.Veepanagandla.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.VeepanagandlaKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.VeepanagandlaKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage.prototype.UploadWanaparthy = function () {
+        var _this = this;
+        this.Wanaparthy.forEach(function (er) { _this.areaRef.push({ Name: er, Mandal: _this.WanaparthyKey, TimeStamp: __WEBPACK_IMPORTED_MODULE_3_moment___default()().format() }).then(function (res) { __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Mandals").child(_this.WanaparthyKey).child("Villages").child(res.key).set(true).then(function () { }).then(function () { console.log("Villages Added"); }); }); });
+    };
+    DataUploadPage = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+            selector: 'page-data-upload',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\data-upload\data-upload.html"*/'<ion-header>\n  <ion-navbar color="primary" >\n    <ion-title>DataUpload</ion-title>\n  </ion-navbar>\n</ion-header>\n\n\n<ion-content padding>\n\n\n\n\n  <button ion-button (click)="UploadMandals()" >Upload Mandals</button>\n  <button ion-button (click)="uploadVills()">Upload Villages</button>\n\n</ion-content>\n'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\data-upload\data-upload.html"*/,
+        }),
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
+    ], DataUploadPage);
+    return DataUploadPage;
+}());
+
+//# sourceMappingURL=data-upload.js.map
 
 /***/ }),
 
@@ -2634,6 +2675,7 @@ Object(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* pl
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Students_student_details_student_details__ = __webpack_require__(107);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2646,16 +2688,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var SchoolDetailsPage = /** @class */ (function () {
     function SchoolDetailsPage(navCtrl, navParams) {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.school = this.navParams.get("school");
         this.anms = [];
+        this.students = [];
         console.log(this.school);
         this.getMandal();
         this.getVillage();
         this.getAnms();
+        this.getStudents();
     }
     SchoolDetailsPage.prototype.getAnms = function () {
         var _this = this;
@@ -2665,10 +2710,51 @@ var SchoolDetailsPage = /** @class */ (function () {
                     var temp = ssSnip.val();
                     temp.key = ssSnip.key;
                     _this.anms.push(temp);
-                    console.log(temp);
                 });
             });
         });
+    };
+    SchoolDetailsPage.prototype.getStudents = function () {
+        var _this = this;
+        __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("SubsIndex/Schools").child(this.school.key).child("Students").once("value", function (itemSnapshot) {
+            itemSnapshot.forEach(function (itemSnap) {
+                console.log(itemSnap.key);
+                __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Organisms/Students").child(itemSnap.key).once("value", function (itemSna) {
+                    var temp = itemSna.val();
+                    temp.key = itemSna.key;
+                    switch (temp.Severity) {
+                        case 'Severely Anaemic':
+                            temp.colori = "s";
+                            break;
+                        case 'Moderately Anaemic':
+                            temp.colori = "mo";
+                            break;
+                        case 'Mildly  Anaemic':
+                            temp.colori = "mi";
+                            break;
+                        case 'Healthy':
+                            temp.colori = "h";
+                            break;
+                    }
+                    __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Schools").child(temp.Schools).once("value", function (s) {
+                        temp.SchoolName = s.val().Name;
+                    });
+                    __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Villages").child(temp.Village).once("value", function (s) {
+                        temp.VillageName = s.val().Name;
+                    });
+                    __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Subs/Mandals").child(temp.Mandal).once("value", function (s) {
+                        temp.MandalName = s.val().Name;
+                    });
+                    __WEBPACK_IMPORTED_MODULE_2_firebase__["database"]().ref("Organisms/Anms").child(temp.ANM).once("value", function (s) {
+                        temp.ANMName = s.val().Name;
+                    });
+                    _this.students.push(temp);
+                });
+            });
+        });
+    };
+    SchoolDetailsPage.prototype.gtStudentDetails = function (a) {
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_3__Students_student_details_student_details__["a" /* StudentDetailsPage */], { student: a });
     };
     SchoolDetailsPage.prototype.getMandal = function () {
         var _this = this;
@@ -2684,12 +2770,12 @@ var SchoolDetailsPage = /** @class */ (function () {
     };
     SchoolDetailsPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-            selector: 'page-school-details',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Schools\school-details\school-details.html"*/'<ion-header>\n\n  <ion-navbar color="primary" >\n\n    <ion-title>{{school.Name}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid>\n\n    <ion-row>\n\n\n\n    <ion-col col-6>\n\n      <ion-row>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-item>\n\n              <h2 ion-text color="primary" item-start>Mandal</h2>\n\n              <h2 item-end>{{mandalName}}</h2>\n\n            </ion-item>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-row>\n\n\n\n      <ion-row>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-item>\n\n              <h2 ion-text color="primary" item-start>Village</h2>\n\n              <h2 item-end>{{vName}}</h2>\n\n            </ion-item>\n\n          </ion-card-content>\n\n        </ion-card>\n\n    \n\n      </ion-row>\n\n\n\n\n\n\n\n\n\n    </ion-col>\n\n      \n\n\n\n\n\n    <ion-col col-6>\n\n\n\n      <ion-row >\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-card-title>{{school.Name}}</ion-card-title>\n\n\n\n            <ion-item>\n\n              <p ion-text color="primary" item-start >ANMs</p>\n\n              <p item-end *ngIf="!school.ANM">Unassigned</p>\n\n              <div item-end *ngIf="school.ANM" >\n\n              <p  *ngFor="let ss of anms;let i = index" >{{i+1}}.{{ss.Name}}</p>\n\n              </div>\n\n            </ion-item>\n\n            <ion-item>\n\n                <p item-start color="primary" ion-text>Total Students</p>\n\n                <p item-end>200</p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start color="primary" ion-text>Severely Anaemic</p>\n\n                <p item-end>{{school.Severe}}</p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start color="primary" ion-text>Moderately Anaemic</p>\n\n                <p item-end>{{school.Moderate}}</p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start color="primary" ion-text>Mildly Anaemic</p>\n\n                <p item-end>{{school.Mildly}}</p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start color="primary" ion-text>Healthy</p>\n\n                <p item-end>{{school.Healthy}}</p>\n\n              </ion-item>\n\n\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-row>\n\n\n\n\n\n    </ion-col>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  <ion-grid>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n      \n\n    </ion-col>\n\n    </ion-row>\n\n    <ion-row>\n\n      <ion-col col-6>\n\n    </ion-col>\n\n    </ion-row>\n\n  </ion-grid>  \n\n\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Schools\school-details\school-details.html"*/,
+            selector: 'page-school-details',template:/*ion-inline-start:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Schools\school-details\school-details.html"*/'<ion-header>\n\n  <ion-navbar color="primary" >\n\n    <ion-title>{{school.Name}}</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid>\n\n    <ion-row>\n\n\n\n    <ion-col col-6>\n\n      <ion-row>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-item>\n\n              <h2 ion-text color="primary" item-start>Mandal</h2>\n\n              <h2 item-end>{{mandalName}}</h2>\n\n            </ion-item>\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-row>\n\n\n\n      <ion-row>\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-item>\n\n              <h2 ion-text color="primary" item-start>Village</h2>\n\n              <h2 item-end>{{vName}}</h2>\n\n            </ion-item>\n\n          </ion-card-content>\n\n        </ion-card>\n\n    \n\n      </ion-row>\n\n\n\n\n\n\n\n\n\n    </ion-col>\n\n      \n\n\n\n\n\n    <ion-col col-6>\n\n\n\n      <ion-row >\n\n        <ion-card>\n\n          <ion-card-content>\n\n            <ion-card-title>{{school.Name}}</ion-card-title>\n\n\n\n            <ion-item>\n\n              <p ion-text color="primary" item-start >ANMs</p>\n\n              <p item-end *ngIf="!school.ANM">Unassigned</p>\n\n              <div item-end *ngIf="school.ANM" >\n\n              <p  *ngFor="let ss of anms;let i = index" >{{i+1}}.{{ss.Name}}</p>\n\n              </div>\n\n            </ion-item>\n\n            <ion-item>\n\n                <p item-start color="primary" ion-text>Total Students</p>\n\n                <p item-end>{{students.length}}</p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start color="primary" ion-text>Severely Anaemic</p>\n\n                <p item-end>{{school.Severe}}</p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start color="primary" ion-text>Moderately Anaemic</p>\n\n                <p item-end>{{school.Moderate}}</p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start color="primary" ion-text>Mildly Anaemic</p>\n\n                <p item-end>{{school.Mildly}}</p>\n\n              </ion-item>\n\n              <ion-item>\n\n                <p item-start color="primary" ion-text>Healthy</p>\n\n                <p item-end>{{school.Healthy}}</p>\n\n              </ion-item>\n\n\n\n          </ion-card-content>\n\n        </ion-card>\n\n      </ion-row>\n\n\n\n\n\n    </ion-col>\n\n\n\n\n\n    \n\n  \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n    </ion-row>\n\n  </ion-grid>\n\n\n\n\n\n  <ion-grid>\n\n    <ion-navbar color="primary">\n\n      <ion-row>\n\n        <ion-col col-1></ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Name</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Age</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Class</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">School</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Village</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Mandal</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">Severity</p>\n\n        </ion-col>\n\n        <ion-col col-1>\n\n          <p class="headBar">HBl</p>\n\n        </ion-col>\n\n                <ion-col col-1>\n\n          <p class="headBar">Phone</p>\n\n        </ion-col>\n\n\n\n        <ion-col col-1>\n\n          <p class="headBar">ANM</p>\n\n        </ion-col>\n\n      </ion-row>\n\n    </ion-navbar>\n\n  </ion-grid>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  <ion-grid>\n\n    <ion-card *ngFor="let a of students;let i = index" [color]="a.colori" >\n\n      <ion-card-content>\n\n        <ion-row>\n\n          <ion-col col-1>\n\n            <p ion-text><strong>{{i+1}}</strong></p>\n\n          </ion-col>\n\n          <ion-col col-1 ion-text color="primary" (click)="gtStudentDetails(a)" class="curs">\n\n            {{a.StudentName}}\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.Age }}</h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.Class}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.SchoolName}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.VillageName}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.MandalName}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.Severity}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.HBL}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.Mobile}} </h2><br />\n\n          </ion-col>\n\n          <ion-col col-1 >\n\n            <h2  >{{a.ANMName}} </h2><br />\n\n          </ion-col>\n\n\n\n\n\n        </ion-row>\n\n      </ion-card-content>\n\n    </ion-card>\n\n  </ion-grid>\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\Visualizer\Desktop\sa\src\pages\Subs\Schools\school-details\school-details.html"*/,
         }),
-        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */],
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]])
+        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* NavParams */]) === "function" && _b || Object])
     ], SchoolDetailsPage);
     return SchoolDetailsPage;
+    var _a, _b;
 }());
 
 //# sourceMappingURL=school-details.js.map
@@ -2706,7 +2792,7 @@ var SchoolDetailsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_component__ = __webpack_require__(660);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Extra_login_login__ = __webpack_require__(178);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_firebase__);
@@ -2718,25 +2804,25 @@ var SchoolDetailsPage = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_angularfire2_auth___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9_angularfire2_auth__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_Subs_Mandals_add_mandals_add_mandals__ = __webpack_require__(179);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(190);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_Subs_Villages_add_villages_add_villages__ = __webpack_require__(189);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_Subs_Schools_add_schools_add_schools__ = __webpack_require__(187);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_Subs_Anms_view_amns_view_amns__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_Subs_Anms_add_amns_add_amns__ = __webpack_require__(185);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__pages_Subs_Villages_add_villages_add_villages__ = __webpack_require__(188);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__pages_Subs_Schools_add_schools_add_schools__ = __webpack_require__(186);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__pages_Subs_Anms_view_amns_view_amns__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__pages_Subs_Anms_add_amns_add_amns__ = __webpack_require__(184);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__pages_Subs_Mandals_mandal_details_mandal_details__ = __webpack_require__(180);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__pages_Subs_Schools_school_details_school_details__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__pages_Subs_Villages_village_details_village_details__ = __webpack_require__(106);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_Students_students_students__ = __webpack_require__(184);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_Students_student_details_student_details__ = __webpack_require__(183);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_Subs_Anms_anm_details_anm_details__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21__pages_Students_students_students__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__pages_Students_student_details_student_details__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23__pages_Subs_Anms_anm_details_anm_details__ = __webpack_require__(108);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__pages_Subs_Anms_assign_school_assign_school__ = __webpack_require__(181);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25_ng2_charts__ = __webpack_require__(667);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25_ng2_charts___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25_ng2_charts__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_Subs_Anms_del_anm_del_anm__ = __webpack_require__(186);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__pages_Subs_Anms_del_anm_del_anm__ = __webpack_require__(185);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__pages_Subs_Anms_edit_anm_edit_anm__ = __webpack_require__(182);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__ionic_native_file__ = __webpack_require__(710);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_data_upload_data_upload__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__pages_data_upload_data_upload__ = __webpack_require__(456);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2814,8 +2900,8 @@ var AppModule = /** @class */ (function () {
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
                 __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["d" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */], {}, {
                     links: [
-                        { loadChildren: '../pages/Extra/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/data-upload/data-upload.module#DataUploadPageModule', name: 'DataUploadPage', segment: 'data-upload', priority: 'low', defaultHistory: [] },
+                        { loadChildren: '../pages/Extra/dashboard/dashboard.module#DashboardPageModule', name: 'DashboardPage', segment: 'dashboard', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Extra/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Students/student-details/student-details.module#StudentDetailsPageModule', name: 'StudentDetailsPage', segment: 'student-details', priority: 'low', defaultHistory: [] },
                         { loadChildren: '../pages/Students/students/students.module#StudentsPageModule', name: 'StudentsPage', segment: 'students', priority: 'low', defaultHistory: [] },
@@ -2878,256 +2964,256 @@ var AppModule = /** @class */ (function () {
 
 /***/ }),
 
-/***/ 635:
+/***/ 624:
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"./af": 282,
-	"./af.js": 282,
-	"./ar": 283,
-	"./ar-dz": 284,
-	"./ar-dz.js": 284,
-	"./ar-kw": 285,
-	"./ar-kw.js": 285,
-	"./ar-ly": 286,
-	"./ar-ly.js": 286,
-	"./ar-ma": 287,
-	"./ar-ma.js": 287,
-	"./ar-sa": 288,
-	"./ar-sa.js": 288,
-	"./ar-tn": 289,
-	"./ar-tn.js": 289,
-	"./ar.js": 283,
-	"./az": 290,
-	"./az.js": 290,
-	"./be": 291,
-	"./be.js": 291,
-	"./bg": 292,
-	"./bg.js": 292,
-	"./bm": 293,
-	"./bm.js": 293,
-	"./bn": 294,
-	"./bn.js": 294,
-	"./bo": 295,
-	"./bo.js": 295,
-	"./br": 296,
-	"./br.js": 296,
-	"./bs": 297,
-	"./bs.js": 297,
-	"./ca": 298,
-	"./ca.js": 298,
-	"./cs": 299,
-	"./cs.js": 299,
-	"./cv": 300,
-	"./cv.js": 300,
-	"./cy": 301,
-	"./cy.js": 301,
-	"./da": 302,
-	"./da.js": 302,
-	"./de": 303,
-	"./de-at": 304,
-	"./de-at.js": 304,
-	"./de-ch": 305,
-	"./de-ch.js": 305,
-	"./de.js": 303,
-	"./dv": 306,
-	"./dv.js": 306,
-	"./el": 307,
-	"./el.js": 307,
-	"./en-au": 308,
-	"./en-au.js": 308,
-	"./en-ca": 309,
-	"./en-ca.js": 309,
-	"./en-gb": 310,
-	"./en-gb.js": 310,
-	"./en-ie": 311,
-	"./en-ie.js": 311,
-	"./en-il": 312,
-	"./en-il.js": 312,
-	"./en-nz": 313,
-	"./en-nz.js": 313,
-	"./eo": 314,
-	"./eo.js": 314,
-	"./es": 315,
-	"./es-do": 316,
-	"./es-do.js": 316,
-	"./es-us": 317,
-	"./es-us.js": 317,
-	"./es.js": 315,
-	"./et": 318,
-	"./et.js": 318,
-	"./eu": 319,
-	"./eu.js": 319,
-	"./fa": 320,
-	"./fa.js": 320,
-	"./fi": 321,
-	"./fi.js": 321,
-	"./fo": 322,
-	"./fo.js": 322,
-	"./fr": 323,
-	"./fr-ca": 324,
-	"./fr-ca.js": 324,
-	"./fr-ch": 325,
-	"./fr-ch.js": 325,
-	"./fr.js": 323,
-	"./fy": 326,
-	"./fy.js": 326,
-	"./gd": 327,
-	"./gd.js": 327,
-	"./gl": 328,
-	"./gl.js": 328,
-	"./gom-latn": 329,
-	"./gom-latn.js": 329,
-	"./gu": 330,
-	"./gu.js": 330,
-	"./he": 331,
-	"./he.js": 331,
-	"./hi": 332,
-	"./hi.js": 332,
-	"./hr": 333,
-	"./hr.js": 333,
-	"./hu": 334,
-	"./hu.js": 334,
-	"./hy-am": 335,
-	"./hy-am.js": 335,
-	"./id": 336,
-	"./id.js": 336,
-	"./is": 337,
-	"./is.js": 337,
-	"./it": 338,
-	"./it.js": 338,
-	"./ja": 339,
-	"./ja.js": 339,
-	"./jv": 340,
-	"./jv.js": 340,
-	"./ka": 341,
-	"./ka.js": 341,
-	"./kk": 342,
-	"./kk.js": 342,
-	"./km": 343,
-	"./km.js": 343,
-	"./kn": 344,
-	"./kn.js": 344,
-	"./ko": 345,
-	"./ko.js": 345,
-	"./ky": 346,
-	"./ky.js": 346,
-	"./lb": 347,
-	"./lb.js": 347,
-	"./lo": 348,
-	"./lo.js": 348,
-	"./lt": 349,
-	"./lt.js": 349,
-	"./lv": 350,
-	"./lv.js": 350,
-	"./me": 351,
-	"./me.js": 351,
-	"./mi": 352,
-	"./mi.js": 352,
-	"./mk": 353,
-	"./mk.js": 353,
-	"./ml": 354,
-	"./ml.js": 354,
-	"./mn": 355,
-	"./mn.js": 355,
-	"./mr": 356,
-	"./mr.js": 356,
-	"./ms": 357,
-	"./ms-my": 358,
-	"./ms-my.js": 358,
-	"./ms.js": 357,
-	"./mt": 359,
-	"./mt.js": 359,
-	"./my": 360,
-	"./my.js": 360,
-	"./nb": 361,
-	"./nb.js": 361,
-	"./ne": 362,
-	"./ne.js": 362,
-	"./nl": 363,
-	"./nl-be": 364,
-	"./nl-be.js": 364,
-	"./nl.js": 363,
-	"./nn": 365,
-	"./nn.js": 365,
-	"./pa-in": 366,
-	"./pa-in.js": 366,
-	"./pl": 367,
-	"./pl.js": 367,
-	"./pt": 368,
-	"./pt-br": 369,
-	"./pt-br.js": 369,
-	"./pt.js": 368,
-	"./ro": 370,
-	"./ro.js": 370,
-	"./ru": 371,
-	"./ru.js": 371,
-	"./sd": 372,
-	"./sd.js": 372,
-	"./se": 373,
-	"./se.js": 373,
-	"./si": 374,
-	"./si.js": 374,
-	"./sk": 375,
-	"./sk.js": 375,
-	"./sl": 376,
-	"./sl.js": 376,
-	"./sq": 377,
-	"./sq.js": 377,
-	"./sr": 378,
-	"./sr-cyrl": 379,
-	"./sr-cyrl.js": 379,
-	"./sr.js": 378,
-	"./ss": 380,
-	"./ss.js": 380,
-	"./sv": 381,
-	"./sv.js": 381,
-	"./sw": 382,
-	"./sw.js": 382,
-	"./ta": 383,
-	"./ta.js": 383,
-	"./te": 384,
-	"./te.js": 384,
-	"./tet": 385,
-	"./tet.js": 385,
-	"./tg": 386,
-	"./tg.js": 386,
-	"./th": 387,
-	"./th.js": 387,
-	"./tl-ph": 388,
-	"./tl-ph.js": 388,
-	"./tlh": 389,
-	"./tlh.js": 389,
-	"./tr": 390,
-	"./tr.js": 390,
-	"./tzl": 391,
-	"./tzl.js": 391,
-	"./tzm": 392,
-	"./tzm-latn": 393,
-	"./tzm-latn.js": 393,
-	"./tzm.js": 392,
-	"./ug-cn": 394,
-	"./ug-cn.js": 394,
-	"./uk": 395,
-	"./uk.js": 395,
-	"./ur": 396,
-	"./ur.js": 396,
-	"./uz": 397,
-	"./uz-latn": 398,
-	"./uz-latn.js": 398,
-	"./uz.js": 397,
-	"./vi": 399,
-	"./vi.js": 399,
-	"./x-pseudo": 400,
-	"./x-pseudo.js": 400,
-	"./yo": 401,
-	"./yo.js": 401,
-	"./zh-cn": 402,
-	"./zh-cn.js": 402,
-	"./zh-hk": 403,
-	"./zh-hk.js": 403,
-	"./zh-tw": 404,
-	"./zh-tw.js": 404
+	"./af": 274,
+	"./af.js": 274,
+	"./ar": 275,
+	"./ar-dz": 276,
+	"./ar-dz.js": 276,
+	"./ar-kw": 277,
+	"./ar-kw.js": 277,
+	"./ar-ly": 278,
+	"./ar-ly.js": 278,
+	"./ar-ma": 279,
+	"./ar-ma.js": 279,
+	"./ar-sa": 280,
+	"./ar-sa.js": 280,
+	"./ar-tn": 281,
+	"./ar-tn.js": 281,
+	"./ar.js": 275,
+	"./az": 282,
+	"./az.js": 282,
+	"./be": 283,
+	"./be.js": 283,
+	"./bg": 284,
+	"./bg.js": 284,
+	"./bm": 285,
+	"./bm.js": 285,
+	"./bn": 286,
+	"./bn.js": 286,
+	"./bo": 287,
+	"./bo.js": 287,
+	"./br": 288,
+	"./br.js": 288,
+	"./bs": 289,
+	"./bs.js": 289,
+	"./ca": 290,
+	"./ca.js": 290,
+	"./cs": 291,
+	"./cs.js": 291,
+	"./cv": 292,
+	"./cv.js": 292,
+	"./cy": 293,
+	"./cy.js": 293,
+	"./da": 294,
+	"./da.js": 294,
+	"./de": 295,
+	"./de-at": 296,
+	"./de-at.js": 296,
+	"./de-ch": 297,
+	"./de-ch.js": 297,
+	"./de.js": 295,
+	"./dv": 298,
+	"./dv.js": 298,
+	"./el": 299,
+	"./el.js": 299,
+	"./en-au": 300,
+	"./en-au.js": 300,
+	"./en-ca": 301,
+	"./en-ca.js": 301,
+	"./en-gb": 302,
+	"./en-gb.js": 302,
+	"./en-ie": 303,
+	"./en-ie.js": 303,
+	"./en-il": 304,
+	"./en-il.js": 304,
+	"./en-nz": 305,
+	"./en-nz.js": 305,
+	"./eo": 306,
+	"./eo.js": 306,
+	"./es": 307,
+	"./es-do": 308,
+	"./es-do.js": 308,
+	"./es-us": 309,
+	"./es-us.js": 309,
+	"./es.js": 307,
+	"./et": 310,
+	"./et.js": 310,
+	"./eu": 311,
+	"./eu.js": 311,
+	"./fa": 312,
+	"./fa.js": 312,
+	"./fi": 313,
+	"./fi.js": 313,
+	"./fo": 314,
+	"./fo.js": 314,
+	"./fr": 315,
+	"./fr-ca": 316,
+	"./fr-ca.js": 316,
+	"./fr-ch": 317,
+	"./fr-ch.js": 317,
+	"./fr.js": 315,
+	"./fy": 318,
+	"./fy.js": 318,
+	"./gd": 319,
+	"./gd.js": 319,
+	"./gl": 320,
+	"./gl.js": 320,
+	"./gom-latn": 321,
+	"./gom-latn.js": 321,
+	"./gu": 322,
+	"./gu.js": 322,
+	"./he": 323,
+	"./he.js": 323,
+	"./hi": 324,
+	"./hi.js": 324,
+	"./hr": 325,
+	"./hr.js": 325,
+	"./hu": 326,
+	"./hu.js": 326,
+	"./hy-am": 327,
+	"./hy-am.js": 327,
+	"./id": 328,
+	"./id.js": 328,
+	"./is": 329,
+	"./is.js": 329,
+	"./it": 330,
+	"./it.js": 330,
+	"./ja": 331,
+	"./ja.js": 331,
+	"./jv": 332,
+	"./jv.js": 332,
+	"./ka": 333,
+	"./ka.js": 333,
+	"./kk": 334,
+	"./kk.js": 334,
+	"./km": 335,
+	"./km.js": 335,
+	"./kn": 336,
+	"./kn.js": 336,
+	"./ko": 337,
+	"./ko.js": 337,
+	"./ky": 338,
+	"./ky.js": 338,
+	"./lb": 339,
+	"./lb.js": 339,
+	"./lo": 340,
+	"./lo.js": 340,
+	"./lt": 341,
+	"./lt.js": 341,
+	"./lv": 342,
+	"./lv.js": 342,
+	"./me": 343,
+	"./me.js": 343,
+	"./mi": 344,
+	"./mi.js": 344,
+	"./mk": 345,
+	"./mk.js": 345,
+	"./ml": 346,
+	"./ml.js": 346,
+	"./mn": 347,
+	"./mn.js": 347,
+	"./mr": 348,
+	"./mr.js": 348,
+	"./ms": 349,
+	"./ms-my": 350,
+	"./ms-my.js": 350,
+	"./ms.js": 349,
+	"./mt": 351,
+	"./mt.js": 351,
+	"./my": 352,
+	"./my.js": 352,
+	"./nb": 353,
+	"./nb.js": 353,
+	"./ne": 354,
+	"./ne.js": 354,
+	"./nl": 355,
+	"./nl-be": 356,
+	"./nl-be.js": 356,
+	"./nl.js": 355,
+	"./nn": 357,
+	"./nn.js": 357,
+	"./pa-in": 358,
+	"./pa-in.js": 358,
+	"./pl": 359,
+	"./pl.js": 359,
+	"./pt": 360,
+	"./pt-br": 361,
+	"./pt-br.js": 361,
+	"./pt.js": 360,
+	"./ro": 362,
+	"./ro.js": 362,
+	"./ru": 363,
+	"./ru.js": 363,
+	"./sd": 364,
+	"./sd.js": 364,
+	"./se": 365,
+	"./se.js": 365,
+	"./si": 366,
+	"./si.js": 366,
+	"./sk": 367,
+	"./sk.js": 367,
+	"./sl": 368,
+	"./sl.js": 368,
+	"./sq": 369,
+	"./sq.js": 369,
+	"./sr": 370,
+	"./sr-cyrl": 371,
+	"./sr-cyrl.js": 371,
+	"./sr.js": 370,
+	"./ss": 372,
+	"./ss.js": 372,
+	"./sv": 373,
+	"./sv.js": 373,
+	"./sw": 374,
+	"./sw.js": 374,
+	"./ta": 375,
+	"./ta.js": 375,
+	"./te": 376,
+	"./te.js": 376,
+	"./tet": 377,
+	"./tet.js": 377,
+	"./tg": 378,
+	"./tg.js": 378,
+	"./th": 379,
+	"./th.js": 379,
+	"./tl-ph": 380,
+	"./tl-ph.js": 380,
+	"./tlh": 381,
+	"./tlh.js": 381,
+	"./tr": 382,
+	"./tr.js": 382,
+	"./tzl": 383,
+	"./tzl.js": 383,
+	"./tzm": 384,
+	"./tzm-latn": 385,
+	"./tzm-latn.js": 385,
+	"./tzm.js": 384,
+	"./ug-cn": 386,
+	"./ug-cn.js": 386,
+	"./uk": 387,
+	"./uk.js": 387,
+	"./ur": 388,
+	"./ur.js": 388,
+	"./uz": 389,
+	"./uz-latn": 390,
+	"./uz-latn.js": 390,
+	"./uz.js": 389,
+	"./vi": 391,
+	"./vi.js": 391,
+	"./x-pseudo": 392,
+	"./x-pseudo.js": 392,
+	"./yo": 393,
+	"./yo.js": 393,
+	"./zh-cn": 394,
+	"./zh-cn.js": 394,
+	"./zh-hk": 395,
+	"./zh-hk.js": 395,
+	"./zh-tw": 396,
+	"./zh-tw.js": 396
 };
 function webpackContext(req) {
 	return __webpack_require__(webpackContextResolve(req));
@@ -3143,7 +3229,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 635;
+webpackContext.id = 624;
 
 /***/ }),
 
@@ -3171,13 +3257,12 @@ webpackContext.id = 635;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_firebase___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_firebase__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_Extra_login_login__ = __webpack_require__(178);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__ = __webpack_require__(176);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_Extra_dashboard_dashboard__ = __webpack_require__(177);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_Subs_Mandals_view_mandals_view_mandals__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(190);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(188);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_Students_students_students__ = __webpack_require__(184);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_Subs_Anms_view_amns_view_amns__ = __webpack_require__(108);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_data_upload_data_upload__ = __webpack_require__(177);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_Subs_Villages_view_villages_view_villages__ = __webpack_require__(189);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_Subs_Schools_view_schools_view_schools__ = __webpack_require__(187);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_Students_students_students__ = __webpack_require__(183);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_Subs_Anms_view_amns_view_amns__ = __webpack_require__(109);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3197,12 +3282,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var MyApp = /** @class */ (function () {
     function MyApp(platform, toastCtrl) {
         this.platform = platform;
         this.toastCtrl = toastCtrl;
-        this.rootPage = __WEBPACK_IMPORTED_MODULE_10__pages_data_upload_data_upload__["a" /* DataUploadPage */];
+        this.rootPage = __WEBPACK_IMPORTED_MODULE_5__pages_Subs_Mandals_view_mandals_view_mandals__["a" /* ViewMandalsPage */];
         this.full = true;
         this.initializeApp();
         this.pages = [
@@ -3217,23 +3301,23 @@ var MyApp = /** @class */ (function () {
     }
     MyApp.prototype.initializeApp = function () {
         this.platform.ready().then(function () {
-            //   firebase.auth().onAuthStateChanged((user) => {
-            //     if (user) {
-            //     firebase.database().ref("Admin Data").child("Admins").child(user.uid).once('value',itemSnap=>{
-            //         if(itemSnap.exists()){
-            //           this.rootPage = ViewMandalsPage;
-            //         }else{
-            //           firebase.auth().signOut().then(()=>{
-            //             this.rootPage = LoginPage;
-            //             this.presentToast("You are not registered a Admin")
-            //           })
-            //         }
-            // });
-            //   }
-            //   else{
-            //     this.rootPage = LoginPage;
-            //   }
-            // });  
+            __WEBPACK_IMPORTED_MODULE_2_firebase__["auth"]().onAuthStateChanged(function (user) {
+                //     if (user) {
+                //     firebase.database().ref("Admin Data").child("Admins").child(user.uid).once('value',itemSnap=>{
+                //         if(itemSnap.exists()){
+                //           this.rootPage = DashboardPage;
+                //         }else{
+                //           firebase.auth().signOut().then(()=>{
+                //             this.rootPage = LoginPage;
+                //             this.presentToast("You are not registered a Admin")
+                //           })
+                //         }
+                // });
+                //   }
+                //   else{
+                //     this.rootPage = LoginPage;
+                //   }
+            });
         });
     };
     MyApp.prototype.openPage = function (page) {

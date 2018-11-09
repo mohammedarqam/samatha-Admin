@@ -25,7 +25,7 @@ export class DataUploadPage {
   Ghanpur: Array<any> = ["Ghanpur A", "Appireddypally", "Manajipet", "Malkapur", "Solipur", "Upparpally", "Kamuluddinpoor", "Agaram", "Almaipaipally", "Mamidimada",]
   Gopalpet: Array<any> = ["Thadiparthy", "Gopalpet", "Buddaram", "Yedutla", "Edulla", "Jayanna Thirmalapur", "Munnanur", "Chennur",]
   Kothakota: Array<any> = ["Kothakota", "Vaddevata", "Kanimetta", "Palem", "Amadabakula", "Sankireddypally", "Apparala", "Pamapuram", "Mirasipally", "Natavelly",]
-  Madanapur: Array<any> = ["Madanapur", "Madanapur", "Madanapur", "Madanapur", "Konnur", "Ajjakollu", "Duppally", "Gopanapet",]
+  Madanapur: Array<any> = ["Madanapur", "Konnur", "Ajjakollu", "Duppally", "Gopanapet",]
   Pangal: Array<any> = ["Remaddula","Shakapur","Kadirepadu","Kethepally","Vengalaipally","Jamapur","Bandapally","Mahammadapur","Chinthakunta","Busireddypally","Rainpally","Chikkapally","Annaram Tanda","Annaram","Bhavaji","Pangal","Goplapur",]
   Pebbair: Array<any> = ["Pebbair", "Shagapur", "Kanchiraopally", "Rangapur", "Ayyavaripally", "Pathepally", "Gumadam", "Yaparla", "Chelimilla", "Sugoor",]
   Peddamandadi: Array<any> = ["Manigilla", "Jagathpally", "Pamireddypally", "Veeraipally", "Balijepally", "Dondaguntapally", "Gatlakhanapur", "Peddamandadi", "Mojarla", "Madigatla", "Veltoor",]

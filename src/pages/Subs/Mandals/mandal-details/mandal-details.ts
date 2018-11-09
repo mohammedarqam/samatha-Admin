@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { VillageDetailsPage } from '../../Villages/village-details/village-details';
 import { SchoolDetailsPage } from '../../Schools/school-details/school-details';
+import * as firebase from 'firebase';
 
 @IonicPage()
 @Component({
@@ -20,13 +21,14 @@ export class MandalDetailsPage {
   schoolRef = this.db.list(`SubsIndex/Mandals/${this.mandal.key}/Schools`)
   schools : Array<any> = [];
   showSchool : boolean = false;
-
+  totStudents : number = 0;
   constructor(
   public navCtrl: NavController, 
   public db : AngularFireDatabase,
   public navParams: NavParams
   ) {
     console.log(this.mandal);
+    this.getStudents();
     this.getVillages();
     this.getSchools();
   }
@@ -54,6 +56,10 @@ export class MandalDetailsPage {
         
       })
     })
+  }
+
+  getStudents(){
+    this.totStudents = this.mandal.Healthy+this.mandal.Mildly+this.mandal.Moderate+this.mandal.Severe;
   }
   gtVillageDetails(v){
     this.navCtrl.push(VillageDetailsPage,{village : v});

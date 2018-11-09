@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar color="primary" >
+  <ion-navbar color="primary">
     <ion-title>{{village.Name}}</ion-title>
   </ion-navbar>
 </ion-header>
@@ -13,93 +13,91 @@
 
 
   <ion-content padding>
-      <ion-grid>
-        <ion-row>
-          <ion-col col-6>
-              <ion-card>
-                  <ion-navbar color="primary" (click)="toggleSchools()" class="curs" >
-                    <ion-title>Schools</ion-title>
-                    <ion-buttons end>
-                    <button ion-button large clear>{{village.Schools}}</button>
-                    <button ion-button clear icon-only  *ngIf="!showSchool" (click)="toggleSchools()">
-                      <ion-icon name="ios-arrow-down"></ion-icon>
-                    </button>
-                    <button ion-button clear icon-only  *ngIf="showSchool" (click)="toggleSchools()">
-                      <ion-icon name="ios-arrow-up"></ion-icon>
-                    </button>
-                    </ion-buttons>
-                  </ion-navbar>
-              
-                  <ion-card-content *ngIf="showSchool" >
-                    <ion-item *ngFor="let s of schools" >
-                      <button item-start clear ion-button color="dark" large>{{s.Name}}</button>
-                      <button ion-button item-end clear (click)="gtSchoolsDetails(s)" >Details</button>
-                    </ion-item>
-                  </ion-card-content>
-              
-              
-                </ion-card>
-                <ion-card>
-                    <ion-navbar color="primary" (click)="toggleAnms()" class="curs" >
-                      <ion-title>Anms</ion-title>
-                      <ion-buttons end>
-                      <button ion-button large clear>{{village.Anms}}</button>
-                      <button ion-button clear icon-only  *ngIf="!showAnms" (click)="toggleAnms()">
-                        <ion-icon name="ios-arrow-down"></ion-icon>
-                      </button>
-                      <button ion-button clear icon-only  *ngIf="showAnms" (click)="toggleAnms()">
-                        <ion-icon name="ios-arrow-up"></ion-icon>
-                      </button>
-                      </ion-buttons>
-                    </ion-navbar>
-                
-                    <ion-card-content *ngIf="showAnms" >
-                      <ion-item *ngFor="let a of anms" >
-                        <button item-start clear ion-button color="dark" large>{{a.FirstName}}</button>
-                        <button ion-button item-end clear (click)="gtAnmsDetails(a)" >Details</button>
-                      </ion-item>
-                    </ion-card-content>
-                
-                
-                  </ion-card>
-                
-                              
-          </ion-col>
-          <ion-col col-6>
-            <ion-card>
-              <ion-card-content>
-                <ion-card-title>
-                  Village Stats
-                </ion-card-title>
-    
-                <ion-item>
-                  <p item-start color="primary" ion-text>Total Students</p>
-                  <p item-end>200</p>
-                </ion-item>
-                <ion-item>
-                  <p item-start color="primary" ion-text>Severely Anaemic</p>
-                  <p item-end>{{village.Severe}}</p>
-                </ion-item>
-                <ion-item>
-                  <p item-start color="primary" ion-text>Moderately Anaemic</p>
-                  <p item-end>{{village.Moderate}}</p>
-                </ion-item>
-                <ion-item>
-                  <p item-start color="primary" ion-text>Mildly Anaemic</p>
-                  <p item-end>{{village.Mildly}}</p>
-                </ion-item>
-                <ion-item>
-                  <p item-start color="primary" ion-text>Healthy</p>
-                  <p item-end>{{village.Healthy}}</p>
-                </ion-item>
-    
-    
-              </ion-card-content>
-            </ion-card>
-    
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    
-    
-</ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <ion-card>
+            <ion-navbar color="primary" (click)="toggleSchools()" class="curs">
+              <ion-title>Schools</ion-title>
+              <ion-buttons end>
+                <button ion-button large clear>{{village.Schools}}</button>
+                <button ion-button clear icon-only *ngIf="!showSchool" (click)="toggleSchools()">
+                  <ion-icon name="ios-arrow-down"></ion-icon>
+                </button>
+                <button ion-button clear icon-only *ngIf="showSchool" (click)="toggleSchools()">
+                  <ion-icon name="ios-arrow-up"></ion-icon>
+                </button>
+              </ion-buttons>
+            </ion-navbar>
+
+            <ion-card-content *ngIf="showSchool">
+              <ion-item *ngFor="let s of schools">
+                <button item-start clear ion-button (click)="gtSchoolsDetails(s)" color="dark" large>{{s.Name}}</button>
+              </ion-item>
+            </ion-card-content>
+
+
+          </ion-card>
+          <ion-card>
+            <ion-navbar color="primary" (click)="toggleAnms()" class="curs">
+              <ion-title>Anms</ion-title>
+              <ion-buttons end>
+                <button ion-button large clear>{{village.Anms}}</button>
+                <button ion-button clear icon-only *ngIf="!showAnms" (click)="toggleAnms()">
+                  <ion-icon name="ios-arrow-down"></ion-icon>
+                </button>
+                <button ion-button clear icon-only *ngIf="showAnms" (click)="toggleAnms()">
+                  <ion-icon name="ios-arrow-up"></ion-icon>
+                </button>
+              </ion-buttons>
+            </ion-navbar>
+
+            <ion-card-content *ngIf="showAnms">
+              <ion-item *ngFor="let a of anms">
+                <button item-start clear ion-button (click)="gtAnmsDetails(a)" color="dark" large>{{a.Name}}</button>
+              </ion-item>
+            </ion-card-content>
+
+
+          </ion-card>
+
+
+        </ion-col>
+        <ion-col col-6>
+          <ion-card>
+            <ion-card-content>
+              <ion-card-title>
+                Village Stats
+              </ion-card-title>
+
+              <ion-item>
+                <p item-start color="primary" ion-text>Total Students</p>
+                <p item-end>{{totStudents}}</p>
+              </ion-item>
+              <ion-item>
+                <p item-start color="primary" ion-text>Severely Anaemic</p>
+                <p item-end>{{village.Severe}}</p>
+              </ion-item>
+              <ion-item>
+                <p item-start color="primary" ion-text>Moderately Anaemic</p>
+                <p item-end>{{village.Moderate}}</p>
+              </ion-item>
+              <ion-item>
+                <p item-start color="primary" ion-text>Mildly Anaemic</p>
+                <p item-end>{{village.Mildly}}</p>
+              </ion-item>
+              <ion-item>
+                <p item-start color="primary" ion-text>Healthy</p>
+                <p item-end>{{village.Healthy}}</p>
+              </ion-item>
+
+
+            </ion-card-content>
+          </ion-card>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  </ion-content>

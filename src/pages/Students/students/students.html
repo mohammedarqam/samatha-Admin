@@ -106,8 +106,46 @@
   </ion-grid>
 
 
-
   <ion-grid>
+    <ion-navbar color="primary">
+      <ion-row>
+        <ion-col col-1></ion-col>
+        <ion-col col-1>
+          <p class="headBar">Name</p>
+        </ion-col>
+        <ion-col col-1>
+          <p class="headBar">Age</p>
+        </ion-col>
+        <ion-col col-1>
+          <p class="headBar">Class</p>
+        </ion-col>
+        <ion-col col-1>
+          <p class="headBar">School</p>
+        </ion-col>
+        <ion-col col-1>
+          <p class="headBar">Village</p>
+        </ion-col>
+        <ion-col col-1>
+          <p class="headBar">Mandal</p>
+        </ion-col>
+        <ion-col col-1>
+          <p class="headBar">Severity</p>
+        </ion-col>
+        <ion-col col-1>
+          <p class="headBar">HBl</p>
+        </ion-col>
+                <ion-col col-1>
+          <p class="headBar">Phone</p>
+        </ion-col>
+
+        <ion-col col-1>
+          <p class="headBar">ANM</p>
+        </ion-col>
+      </ion-row>
+    </ion-navbar>
+  </ion-grid>
+
+  <!-- <ion-grid>
     <ion-navbar color="primary">
       <ion-row>
         <ion-col col-1>
@@ -126,12 +164,12 @@
         <ion-col col-2>
           <p class="headBar">Mobile</p>
         </ion-col>
-        <ion-col col-2>
-          <p class="headBar"></p>
+        <ion-col col-1>
+          <p class="headBar">Class</p>
         </ion-col>
       </ion-row>
     </ion-navbar>
-  </ion-grid>
+  </ion-grid> -->
   <ion-grid>
     <ion-row>
       <ion-col col-6>
@@ -148,29 +186,47 @@
   </ion-grid>
   <!-- <button ion-button float-right color="light" *ngIf="selArray.length" (click)="clearSel()">Clear Selection</button> -->
 
+
+  <!-- {{filteredStudents | json}} -->
+
   <ion-grid>
-    <ion-card *ngFor="let a of filteredStudents;let i = index">
+    <ion-card *ngFor="let a of filteredStudents;let i = index" [color]="a.colori" >
       <ion-card-content>
         <ion-row>
           <ion-col col-1>
             <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)"></ion-checkbox>
-          </ion-col>
-          <ion-col col-1>
             <p ion-text><strong>{{i+1}}</strong></p>
           </ion-col>
-          <ion-col col-2 (click)="gtStudentDetails(a)" class="curs">
+          <ion-col col-1  (click)="gtStudentDetails(a)" class="curs">
             {{a.StudentName}}
           </ion-col>
-          <ion-col col-2 text-center>
-            <h1 ion-text color="primary">{{a.Severity }}</h1><br />
+          <ion-col col-1 >
+            <h2  >{{a.Age }}</h2><br />
           </ion-col>
-          <ion-col col-1 text-center>
-            <h1 ion-text color="primary">{{a.Community}} </h1><br />
+          <ion-col col-1 >
+            <h2  >{{a.Class}} </h2><br />
           </ion-col>
-          <ion-col col-2 text-center>
-            <h1 ion-text color="primary">{{a.Mobile}}</h1>
+          <ion-col col-1 >
+            <h2  >{{a.SchoolName}} </h2><br />
           </ion-col>
-
+          <ion-col col-1 >
+            <h2  >{{a.VillageName}} </h2><br />
+          </ion-col>
+          <ion-col col-1 >
+            <h2  >{{a.MandalName}} </h2><br />
+          </ion-col>
+          <ion-col col-1 >
+            <h2  >{{a.Severity}} </h2><br />
+          </ion-col>
+          <ion-col col-1 >
+            <h2  >{{a.HBL}} </h2><br />
+          </ion-col>
+          <ion-col col-1 >
+            <h2  >{{a.Mobile}} </h2><br />
+          </ion-col>
+          <ion-col col-1 >
+            <h2  >{{a.ANMName}} </h2><br />
+          </ion-col>
 
 
         </ion-row>
@@ -179,7 +235,21 @@
   </ion-grid>
 
 
-
+<!-- <ion-grid>
+  <ion-row *ngFor="let a of filteredStudents;let i = index" >
+    <ion-card>
+    <ion-col col-2>
+      {{a.StudentName}}
+    </ion-col>
+    <ion-col col-1>
+      {{a.Class}}
+    </ion-col>
+    <ion-col col-1>
+      {{a.Severity}}
+    </ion-col>
+    </ion-card>
+  </ion-row>
+</ion-grid> -->
 
 
 </ion-content>

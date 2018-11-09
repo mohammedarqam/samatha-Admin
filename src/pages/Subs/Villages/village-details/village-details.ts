@@ -15,66 +15,67 @@ export class VillageDetailsPage {
   village = this.navParams.get("village");
 
   schoolRef = this.db.list(`SubsIndex/Villages/${this.village.key}/Schools`)
-  schools : Array<any> = [];
-  showSchool : boolean = false;
+  schools: Array<any> = [];
+  showSchool: boolean = false;
 
   anmRef = this.db.list(`SubsIndex/Villages/${this.village.key}/Anms`)
-  anms : Array<any> = [];
-  showAnms : boolean = false;
+  anms: Array<any> = [];
+  showAnms: boolean = false;
 
-  mandalName : string;
-
+  mandalName: string;
+  totStudents: number = 0;
   constructor(
-  public navCtrl: NavController, 
-  public db : AngularFireDatabase,
-  public navParams: NavParams
+    public navCtrl: NavController,
+    public db: AngularFireDatabase,
+    public navParams: NavParams
   ) {
+    this.totStudents = this.village.Healthy + this.village.Mildly + this.village.Moderate + this.village.Severe;
     this.getMandal();
-    console.log(this.village); 
+    console.log(this.village);
     this.getSchools();
     this.getAnms();
   }
-  getMandal(){
-      firebase.database().ref("Subs/Mandals").child(this.village.Mandal).once("value",snap=>{
-          this.mandalName = snap.val().Name;
-      })    
+  getMandal() {
+    firebase.database().ref("Subs/Mandals").child(this.village.Mandal).once("value", snap => {
+      this.mandalName = snap.val().Name;
+    })
   }
 
-  getSchools(){
-    this.schoolRef.snapshotChanges().subscribe(snap=>{
-      snap.forEach(snp=>{
-        this.db.object(`Subs/Schools/${snp.key}`).snapshotChanges().subscribe(snap=>{
-          var temp : any = snap.payload.val();
+  getSchools() {
+    this.schoolRef.snapshotChanges().subscribe(snap => {
+      snap.forEach(snp => {
+        this.db.object(`Subs/Schools/${snp.key}`).snapshotChanges().subscribe(snap => {
+          var temp: any = snap.payload.val();
           temp.key = snap.key;
           this.schools.push(temp);
         })
-        
+
       })
     })
   }
-  getAnms(){
-    this.anmRef.snapshotChanges().subscribe(snap=>{
-      snap.forEach(snp=>{
-        this.db.object(`Anms/${snp.key}`).snapshotChanges().subscribe(snap=>{
-          var temp : any = snap.payload.val();
+  getAnms() {
+    this.anmRef.snapshotChanges().subscribe(snap => {
+      snap.forEach(snp => {
+        this.db.object(`Organisms/Anms/${snp.key}`).snapshotChanges().subscribe(snap => {
+          var temp: any = snap.payload.val();
           temp.key = snap.key;
           this.anms.push(temp);
         })
-        
+
       })
     })
   }
-  toggleSchools(){
+  toggleSchools() {
     this.showSchool = !this.showSchool;
   }
-  gtSchoolsDetails(s){
-    this.navCtrl.push(SchoolDetailsPage,{school : s});
+  gtSchoolsDetails(s) {
+    this.navCtrl.push(SchoolDetailsPage, { school: s });
   }
-  toggleAnms(){
+  toggleAnms() {
     this.showAnms = !this.showAnms;
   }
-  gtAnmsDetails(a){
-    this.navCtrl.push(AnmDetailsPage,{anm : a});
+  gtAnmsDetails(a) {
+    this.navCtrl.push(AnmDetailsPage, { anm: a });
   }
 
 }

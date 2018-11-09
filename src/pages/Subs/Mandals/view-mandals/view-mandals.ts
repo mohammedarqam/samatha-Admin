@@ -43,7 +43,6 @@ export class ViewMandalsPage {
         severeRef.child("Moderately Anaemic").once("value",svereSnap=>{temp.Moderate = svereSnap.numChildren();})
         severeRef.child("Mildly  Anaemic").once("value",svereSnap=>{temp.Mildly = svereSnap.numChildren();})
         severeRef.child("Healthy").once("value",svereSnap=>{temp.Healthy = svereSnap.numChildren();})
-        console.log(temp)
         tempArray.push(temp);
       })
       this.area = tempArray;
