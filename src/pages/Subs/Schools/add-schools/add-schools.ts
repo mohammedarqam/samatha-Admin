@@ -132,7 +132,7 @@ export class AddSchoolsPage {
   let toast = this.toastCtrl.create({
     message: msg,
     duration: 4000,
-    position :"bottom"
+    position :"middle"
     
   })
   toast.present();

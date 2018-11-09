@@ -78,7 +78,7 @@ checkData(){
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 4000,
-      position : "top",
+      position : "middle",
       showCloseButton: false,
     });
     toast.present();

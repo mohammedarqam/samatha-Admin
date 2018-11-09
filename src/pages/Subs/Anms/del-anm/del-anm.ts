@@ -60,7 +60,7 @@ export class DelAnmPage {
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 3000,
-      position: 'top'
+      position: 'middle'
     });
   }
 
