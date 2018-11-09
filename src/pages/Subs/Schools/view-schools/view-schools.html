@@ -14,6 +14,11 @@
         <ion-searchbar item-end animated="true" placeholder="Search a School ..." [(ngModel)]="searchbar" (ionInput)="getItems(searchbar)"></ion-searchbar>
       </ion-col>
       <ion-col col-6>
+          <button ion-button float-right (click)="prnt()">
+              Print
+              <ion-icon padding-left name="md-print"></ion-icon>
+            </button>
+    
         <button ion-button float-right (click)="exporti()">
           Export
           <ion-icon padding-left name="share-alt"></ion-icon>

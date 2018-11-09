@@ -13,7 +13,6 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class AddSchoolsPage {
   name : string="";
 
-  manage : string;
 
   areaRef = firebase.database().ref("Subs/Schools");
 
@@ -56,7 +55,7 @@ export class AddSchoolsPage {
     });
     loading.present();
     
-    firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Villages").once("value",snap=>{
+    firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Villages").orderByChild("Name").once("value",snap=>{
       this.villages = [];
       if(snap.exists()){
       snap.forEach(snp=>{
@@ -118,7 +117,6 @@ export class AddSchoolsPage {
       Name : this.name,
       Mandal : this.mandalSel,
       Village  :this.villageSel,
-      Management : this.manage,
       TimeStamp : moment().format()
     }).then((res)=>{
         firebase.database().ref("SubsIndex/Mandals").child(this.mandalSel).child("Schools").child(res.key).set(true).then(()=>{

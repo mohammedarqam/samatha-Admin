@@ -49,18 +49,32 @@
             <ion-card-title>{{school.Name}}</ion-card-title>
 
             <ion-item>
-              <p ion-text color="primary" item-start >Management</p>
-              <p item-end>{{school.Management}}</p>
-            </ion-item>
-
-
-            <ion-item>
               <p ion-text color="primary" item-start >ANMs</p>
               <p item-end *ngIf="!school.ANM">Unassigned</p>
               <div item-end *ngIf="school.ANM" >
               <p  *ngFor="let ss of anms;let i = index" >{{i+1}}.{{ss.Name}}</p>
               </div>
             </ion-item>
+            <ion-item>
+                <p item-start color="primary" ion-text>Total Students</p>
+                <p item-end>200</p>
+              </ion-item>
+              <ion-item>
+                <p item-start color="primary" ion-text>Severely Anaemic</p>
+                <p item-end>{{school.Severe}}</p>
+              </ion-item>
+              <ion-item>
+                <p item-start color="primary" ion-text>Moderately Anaemic</p>
+                <p item-end>{{school.Moderate}}</p>
+              </ion-item>
+              <ion-item>
+                <p item-start color="primary" ion-text>Mildly Anaemic</p>
+                <p item-end>{{school.Mildly}}</p>
+              </ion-item>
+              <ion-item>
+                <p item-start color="primary" ion-text>Healthy</p>
+                <p item-end>{{school.Healthy}}</p>
+              </ion-item>
 
           </ion-card-content>
         </ion-card>

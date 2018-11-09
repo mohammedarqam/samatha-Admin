@@ -32,19 +32,8 @@
           </ion-select>
         </ion-item>
 
-        <ion-item *ngIf="villageSel">
-          <ion-label floating>Select Management</ion-label>
-          <ion-select [(ngModel)]="manage">
-            <ion-option value="MPP_ZPP SCHOOLS">MPP_ZPP SCHOOLS</ion-option>
-            <ion-option value="TS TWREI Society Schools">TS TWREI Society Schools</ion-option>
-            <ion-option value="KGBVs (SSA)">KGBVs (SSA)</ion-option>
-            <ion-option value="Pvt.aided">Pvt.aided</ion-option>
-            <ion-option value="State Govt.">State Govt.</ion-option>
-            <ion-option value="TS MODEL SCHOOLS">TS MODEL SCHOOLS</ion-option>
-          </ion-select>
-        </ion-item>
 
-        <ion-item *ngIf="manage" >
+        <ion-item *ngIf="villageSel" >
           <ion-label  floating>School Name</ion-label>
           <ion-input type="text" [(ngModel)]="name"  (ionChange)="capsName(name)" autofocus ></ion-input>
         </ion-item>

@@ -118,5 +118,8 @@ exporti() {
   saveAs(blob, this.pgName + '.xlsx');
 
 }
-
+prnt(){
+  window.print();
+  return false;
+}
 }

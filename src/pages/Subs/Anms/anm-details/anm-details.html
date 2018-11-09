@@ -14,10 +14,10 @@
       <ion-col col-6>
         <ion-card>
           <ion-card-content>
-            <button ion-button float-right clear icon-only (click)="editAnmDetails()">
+            <!-- <button ion-button float-right clear icon-only (click)="editAnmDetails()">
               <ion-icon name="md-create"></ion-icon>
-            </button>
-            <ion-card-title>{{anmP.FirstName}}&nbsp;{{anmP.LastName}}</ion-card-title>
+            </button> -->
+            <ion-card-title>{{anmP.Name}}</ion-card-title>
             <ion-item>
               <p ion-text item-start color="primary">Phone Number</p>
               <p item-end>{{anmP.Phone}}</p>
@@ -39,12 +39,8 @@
           <ion-card-content>
             <ion-card-title>Status</ion-card-title>
             <ion-item>
-              <p ion-text item-start color="primary">Progress</p>
-              <p item-end>20%</p>
-            </ion-item>
-            <ion-item>
               <p ion-text item-start color="primary">Schools</p>
-              <p item-end>5</p>
+              <p item-end>{{assignedJobs.length}}</p>
             </ion-item>
             <ion-item>
               <p ion-text item-start color="primary">Students</p>

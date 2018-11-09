@@ -116,5 +116,8 @@ export class ViewMandalsPage {
 
   }
 
-
+  prnt(){
+    window.print();
+    return false;
+  }
 }
