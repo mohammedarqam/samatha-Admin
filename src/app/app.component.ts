@@ -17,7 +17,7 @@ import { DataUploadPage } from '../pages/data-upload/data-upload';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = ViewMandalsPage;
+  rootPage: any = DashboardPage;
   activePage: any;
 
   full : boolean = true;

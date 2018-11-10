@@ -87,10 +87,8 @@ export class StudentsPage {
       this.getVillages();
       this.getSchools();
     }
-
   private applyFilters() {
     this.filteredStudents = _.filter(this.students, _.conforms(this.filters))
-    console.log(this.filteredStudents);
   }
 
   /// filter property by equality to rule

@@ -25,6 +25,7 @@ export class AnmDetailsPage {
   public db: AngularFireDatabase,
   public navParams: NavParams
   ) {
+    console.log(this.anmP)
     this.getAssignedSchools();
   }
 

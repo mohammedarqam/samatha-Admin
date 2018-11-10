@@ -21,12 +21,7 @@
               <ion-title>Schools</ion-title>
               <ion-buttons end>
                 <button ion-button large clear>{{village.Schools}}</button>
-                <button ion-button clear icon-only *ngIf="!showSchool" (click)="toggleSchools()">
-                  <ion-icon name="ios-arrow-down"></ion-icon>
-                </button>
-                <button ion-button clear icon-only *ngIf="showSchool" (click)="toggleSchools()">
-                  <ion-icon name="ios-arrow-up"></ion-icon>
-                </button>
+                <h1 ion-text color="whiter">{{schools.length}}</h1>
               </ion-buttons>
             </ion-navbar>
 
@@ -43,12 +38,7 @@
               <ion-title>Anms</ion-title>
               <ion-buttons end>
                 <button ion-button large clear>{{village.Anms}}</button>
-                <button ion-button clear icon-only *ngIf="!showAnms" (click)="toggleAnms()">
-                  <ion-icon name="ios-arrow-down"></ion-icon>
-                </button>
-                <button ion-button clear icon-only *ngIf="showAnms" (click)="toggleAnms()">
-                  <ion-icon name="ios-arrow-up"></ion-icon>
-                </button>
+                <h1 ion-text color="whiter">{{anms.length}}</h1>
               </ion-buttons>
             </ion-navbar>
 

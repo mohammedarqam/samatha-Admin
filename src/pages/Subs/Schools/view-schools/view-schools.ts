@@ -15,7 +15,7 @@ import * as firebase from 'firebase';
 export class ViewSchoolsPage {
   pgName = "Schools"
 
-  areaRef =this.db.list('Subs/Schools');
+  areaRef =this.db.list('Subs/Schools',ref=>ref.orderByChild("Name"));
   area: Array<any> = [];
   areasLoaded: Array<any> = [];
 

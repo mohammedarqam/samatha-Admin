@@ -16,10 +16,10 @@
     <ion-row>
 
       <ion-col col-2>
-        <ion-item no-lines>
+        <ion-item no-lines >
           <ion-label stacked>Mandals</ion-label>
-          <ion-select class="darkBg" [(ngModel)]="mandalSel" (ionChange)="manWiseVills(mandalSel)">
-            <ion-option value="All">All</ion-option>
+          <ion-select class="darkBg" [(ngModel)]="mandalSel" (ionChange)="checkMandal()">
+            <ion-option value="all">All</ion-option>
             <ion-option *ngFor="let m of mandals" [value]="m.key">{{m.Name}}</ion-option>
           </ion-select>
         </ion-item>
@@ -28,40 +28,30 @@
       <ion-col col-2>
         <ion-item no-lines>
           <ion-label stacked>Villages</ion-label>
-          <ion-select class="darkBg" [(ngModel)]="villageSel" multiple="true">
-            <ion-option value="All">All</ion-option>
+          <ion-select class="darkBg" [(ngModel)]="villageSel" (ionChange)="checkVillage()" >
+            <ion-option value="all">All</ion-option>
             <ion-option *ngFor="let v of villages" [value]="v.key">{{v.Name}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
-
       <ion-col col-2>
         <ion-item no-lines>
           <ion-label stacked>Schools</ion-label>
-          <ion-select class="darkBg" [(ngModel)]="schoolSel" multiple="true">
-            <ion-option value="All">All</ion-option>
-            <ion-option *ngFor="let s of schools" [value]="s.Name">{{s.Name}}</ion-option>
+          <ion-select class="darkBg" [(ngModel)]="schoolSel" (ionChange)="checkSchool()" >
+            <ion-option value="all">All</ion-option>
+            <ion-option *ngFor="let s of schools" [value]="s.key">{{s.Name}}</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
 
-      <ion-col col-1>
-        <ion-item no-lines>
-          <ion-label stacked>Class</ion-label>
-          <ion-select class="darkBg" (ionChange)="filterExact('Class',clSel)" [(ngModel)]="clSel" multiple="true">
-            <ion-option value="6">6th</ion-option>
-            <ion-option value="7">7th</ion-option>
-              <ion-option value="8">8th</ion-option>
-              <ion-option value="9">9th</ion-option>
-              <ion-option value="10">10th</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
+
+
 
       <ion-col col-2>
         <ion-item no-lines>
           <ion-label stacked>Community</ion-label>
-          <ion-select [(ngModel)]="casteSel" class="darkBg" (ionChange)="filterExact('Community',casteSel)" multiple="true">
+          <ion-select [(ngModel)]="casteSel" class="darkBg" (ionChange)="filterExact('Community',casteSel)">
+            <ion-option value="all">All</ion-option>
             <ion-option value="SC">SC</ion-option>
             <ion-option value="ST">ST</ion-option>
             <ion-option value="BC">BC</ion-option>
@@ -70,29 +60,28 @@
           </ion-select>
         </ion-item>
       </ion-col>
-
-
       <ion-col col-1>
         <ion-item no-lines>
           <ion-label stacked>Age</ion-label>
-          <ion-select class="darkBg" [(ngModel)]="mandalSel" multiple="true">
-            <ion-option value="10" >10</ion-option>
-            <ion-option value="11" >11</ion-option>
-            <ion-option value="12" >12</ion-option>
-            <ion-option value="13" >13</ion-option>
-            <ion-option value="14" >14</ion-option>
-            <ion-option value="15" >15</ion-option>
-            <ion-option value="16" >16</ion-option>
-            <ion-option value="17" >17</ion-option>
-            <ion-option value="18" >18</ion-option>
+          <ion-select class="darkBg" [(ngModel)]="age" (ionChange)="filterExact('Age',age)">
+            <ion-option value="all">All</ion-option>
+            <ion-option value="10">10</ion-option>
+            <ion-option value="11">11</ion-option>
+            <ion-option value="12">12</ion-option>
+            <ion-option value="13">13</ion-option>
+            <ion-option value="14">14</ion-option>
+            <ion-option value="15">15</ion-option>
+            <ion-option value="16">16</ion-option>
+            <ion-option value="17">17</ion-option>
+            <ion-option value="18">18</ion-option>
           </ion-select>
         </ion-item>
       </ion-col>
-
       <ion-col col-2>
         <ion-item no-lines>
           <ion-label stacked>Severity</ion-label>
-          <ion-select [(ngModel)]="anL" class="darkBg" (ionChange)="filterExact('Severity',anL)">
+          <ion-select [(ngModel)]="anL" class="darkBg" (ionChange)="filterExact('Severity', this.anL)">
+            <ion-option value="all">All</ion-option>
             <ion-option value="Severely Anaemic">Severely Anaemic</ion-option>
             <ion-option value="Moderately Anaemic">Moderately Anaemic</ion-option>
             <ion-option value="Mildly  Anaemic">Mildly Anaemic</ion-option>
@@ -100,12 +89,25 @@
           </ion-select>
         </ion-item>
       </ion-col>
-
-
-
+      <ion-col col-1>
+        <ion-item no-lines>
+          <ion-label stacked>Class</ion-label>
+          <ion-select class="darkBg" (ionChange)="filterExact('Class',clSel)" [(ngModel)]="clSel">
+            <ion-option value="all">All</ion-option>
+            <ion-option value="6">6th</ion-option>
+            <ion-option value="7">7th</ion-option>
+            <ion-option value="8">8th</ion-option>
+            <ion-option value="9">9th</ion-option>
+            <ion-option value="10">10th</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
 
     </ion-row>
+
+
   </ion-grid>
+
 
   <ion-grid>
     <ion-row>
@@ -116,19 +118,19 @@
             <ion-row>
               <ion-col  class="br1 severe" col-6>
                 Severely<br />
-                <p class="nums">0</p>
+                <p class="nums">{{totSev}}</p>
               </ion-col>
               <ion-col class="moder" col-6>
                 Moderately
-                <p class="nums">0</p>
+                <p class="nums">{{totMod}}</p>
               </ion-col>
               <ion-col col-6 class="mild" >
                 Mildly
-                <p class="nums">0</p>
+                <p class="nums">{{totMild}}</p>
               </ion-col>
               <ion-col class="br4 heal" col-6>
                 Healthy
-                <p class="nums">0</p>
+                <p class="nums">{{totHeal}}</p>
               </ion-col>
             </ion-row>
           </ion-card-content>
@@ -142,23 +144,23 @@
             <ion-row>
               <ion-col class="br1 br4" col-6>
                 SC<br />
-                <p class="nums">0</p>
+                <p class="nums">{{totSC}}</p>
               </ion-col>
               <ion-col col-6 class="br1 br4" >
                 ST
-                <p class="nums">0</p>
+                <p class="nums">{{totST}}</p>
               </ion-col>
               <ion-col col-6 class="br1 br4" >
                 BC
-                <p class="nums">0</p>
+                <p class="nums">{{totBC}}</p>
               </ion-col>
               <ion-col class="br1 br4 " col-6>
                 OC
-                <p class="nums">0</p>
+                <p class="nums">{{totOC}}</p>
               </ion-col>
               <ion-col class="br1 br4" col-6>
                 Minority
-                <p class="nums">0</p>
+                <p class="nums">{{totMin}}</p>
               </ion-col>
             </ion-row>
           </ion-card-content>
@@ -166,22 +168,22 @@
       </ion-col>
 
       <ion-col col-3 margin-horizontal push-1>
-        <h1 padding-left>Overall</h1>
+        <h1 padding-left>Total Students</h1>
         <ion-card>
           <ion-card-content>
             <ion-row>
               <ion-col class="br1 br4" col-12>
-                No. of Students<br />
-                <p class="nums">0</p>
+                <!-- No. of Students<br /> -->
+                <p class="nums">{{filteredStudents.length}}</p>
               </ion-col>
-              <ion-col class="br4 br1" col-6>
+              <!-- <ion-col class="br4 br1" col-6>
                 No. of  Schools
                 <p class="nums">0</p>
               </ion-col>
               <ion-col class="br4 br1" col-6>
                 No. of  ANMs
                 <p class="nums">{{totAnms}}</p>
-              </ion-col>
+              </ion-col> -->
             </ion-row>
           </ion-card-content>
         </ion-card>
@@ -197,62 +199,103 @@
 
   </ion-grid>
 
-
   <ion-grid>
     <ion-navbar color="primary">
       <ion-row>
-        <ion-col col-1>
-        </ion-col>
-        <ion-col col-1>
-        </ion-col>
-        <ion-col col-2>
+        <ion-col col-1></ion-col>
+        <ion-col col-1 no-padding >
           <p class="headBar">Name</p>
         </ion-col>
-        <ion-col col-2>
-          <p class="headBar">Severity</p>
+        <ion-col col-1 no-padding >
+          <p class="headBar">Age</p>
         </ion-col>
-        <ion-col col-2>
+        <ion-col col-1 no-padding >
           <p class="headBar">Community</p>
         </ion-col>
-        <ion-col col-2>
+        <ion-col col-1 no-padding >
           <p class="headBar">Class</p>
         </ion-col>
-        <ion-col col-2>
-          <p class="headBar">Mobile</p>
+        <ion-col col-1 no-padding >
+          <p class="headBar">School</p>
         </ion-col>
-        <ion-col col-2>
-          <p class="headBar"></p>
+        <ion-col col-1 no-padding >
+          <p class="headBar">Village</p>
+        </ion-col>
+        <ion-col col-1 no-padding >
+          <p class="headBar">Mandal</p>
+        </ion-col>
+        <ion-col col-1 no-padding >
+          <p class="headBar">Severity</p>
+        </ion-col>
+        <ion-col col-1 no-padding>
+          <p class="headBar">HBl</p>
+        </ion-col>
+                <ion-col col-1 no-padding >
+          <p class="headBar">Phone</p>
+        </ion-col>
+
+        <ion-col col-1 no-padding>
+          <p class="headBar">ANM</p>
         </ion-col>
       </ion-row>
     </ion-navbar>
   </ion-grid>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <ion-searchbar item-end animated="true" placeholder="Search a Student .." [(ngModel)]="searchbar" ></ion-searchbar>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button float-right (click)="exporti()">
+          Export
+          <ion-icon padding-left name="share-alt"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
 
   <ion-grid>
-    <ion-card *ngFor="let a of filteredStudents;let i = index">
+    <ion-card *ngFor="let a of filteredStudents;let i = index" [color]="a.colori" >
       <ion-card-content>
         <ion-row>
           <ion-col col-1>
             <ion-checkbox [(ngModel)]="a.Checked" (ionChange)="addToArr(a)"></ion-checkbox>
-          </ion-col>
-          <ion-col col-1>
             <p ion-text><strong>{{i+1}}</strong></p>
           </ion-col>
-          <ion-col col-2 (click)="gtAnmDetails(a)" class="curs" >
+          <ion-col col-1  (click)="gtStudentDetails(a)" class="curs">
             {{a.StudentName}}
           </ion-col>
-          <ion-col col-2 text-center>
-            <h1 ion-text color="primary">{{a.Severity }}</h1><br />
+          <ion-col col-1 >
+            <h2  >{{a.Age }}</h2><br />
           </ion-col>
-          <ion-col col-2 text-center>
-            <h1 ion-text color="primary">{{a.Community}} </h1><br />
+          <ion-col col-1 >
+            <h2  >{{a.Community }}</h2><br />
           </ion-col>
-          <ion-col col-2 text-center>
-            <h1 ion-text color="primary">{{a.Class}} </h1><br />
+          <ion-col col-1 >
+            <h2  >{{a.Class}} </h2><br />
           </ion-col>
-          <ion-col col-2 text-center>
-            <h1 ion-text color="primary">{{a.Mobile}}</h1>
+          <ion-col col-1 (click)="gtSchoolDetails(a)" class="curs" >
+            <h2  >{{a.SchoolName}} </h2><br />
           </ion-col>
-
+          <ion-col col-1 (click)="gtVillageDetails(a)" class="curs" >
+            <h2  >{{a.VillageName}} </h2><br />
+          </ion-col>
+          <ion-col col-1 (click)="gtMandalDetails(a)" class="curs" >
+            <h2  >{{a.MandalName}} </h2><br />
+          </ion-col>
+          <ion-col col-1 >
+            <h2  >{{a.Severity}} </h2><br />
+          </ion-col>
+          <ion-col col-1 >
+            <h2  >{{a.HBL}} </h2><br />
+          </ion-col>
+          <ion-col col-1 >
+            <h2  >{{a.Mobile}} </h2><br />
+          </ion-col>
+          <ion-col col-1 (click)="gtANMDetails(a)" class="curs" >
+            <h2  >{{a.ANMName}} </h2><br />
+          </ion-col>
 
 
         </ion-row>

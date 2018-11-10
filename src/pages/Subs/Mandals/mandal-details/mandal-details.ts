@@ -26,9 +26,9 @@ export class MandalDetailsPage {
   public navCtrl: NavController, 
   public db : AngularFireDatabase,
   public navParams: NavParams
-  ) {
+  ) {    
+    this.totStudents = +this.mandal.Healthy+this.mandal.Mildly+this.mandal.Moderate+this.mandal.Severe;
     console.log(this.mandal);
-    this.getStudents();
     this.getVillages();
     this.getSchools();
   }
@@ -58,9 +58,6 @@ export class MandalDetailsPage {
     })
   }
 
-  getStudents(){
-    this.totStudents = this.mandal.Healthy+this.mandal.Mildly+this.mandal.Moderate+this.mandal.Severe;
-  }
   gtVillageDetails(v){
     this.navCtrl.push(VillageDetailsPage,{village : v});
   }
