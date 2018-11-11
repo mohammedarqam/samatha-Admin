@@ -136,13 +136,6 @@
     </ion-navbar>
   </ion-grid>
 
-
-
-
-
-
-
-
   <ion-grid>
     <ion-card *ngFor="let a of students;let i = index" [color]="a.colori" >
       <ion-card-content>
@@ -150,8 +143,8 @@
           <ion-col col-1>
             <p ion-text><strong>{{i+1}}</strong></p>
           </ion-col>
-          <ion-col col-1 ion-text color="primary" (click)="gtStudentDetails(a)" class="curs">
-            {{a.StudentName}}
+          <ion-col col-1 ion-text (click)="gtStudentDetails(a)" class="curs">
+            <h2>{{a.StudentName}}</h2>
           </ion-col>
           <ion-col col-1 >
             <h2  >{{a.Age }}</h2><br />

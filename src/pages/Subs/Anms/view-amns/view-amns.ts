@@ -44,9 +44,14 @@ export class ViewAmnsPage {
         firebase.database().ref("Organisms").child("Anm Assigns").child(temp.key).once("value", itemSnap => {
           var sklsArr: Array<any> = [];
           itemSnap.forEach(snip => {
-            sklsArr.push(snip.val());
+            var tempo : any = snip.val();
+            firebase.database().ref("SubsIndex/Schools").child(snip.val().School).child("Students").once("value",its=>{
+              tempo.Childs = its.numChildren();
+            })
+            sklsArr.push(tempo);
           })
           temp.Schools = sklsArr;
+          console.log(temp)
         })
         tempArray.push(temp);
       })
@@ -103,6 +108,12 @@ export class ViewAmnsPage {
     firebase.database().ref("Subs/Schools").child(s.School).once("value", itemSnap => {
       this.selSchool = itemSnap.val();
       this.selSchool.key = itemSnap.key;
+      var severeRef = firebase.database().ref("Counters/Schools").child(itemSnap.key).child("Severity");
+      severeRef.child("Severely Anaemic").once("value",svereSnap=>{this.selSchool.Severe = svereSnap.numChildren();})
+      severeRef.child("Moderately Anaemic").once("value",svereSnap=>{this.selSchool.Moderate = svereSnap.numChildren();})
+      severeRef.child("Mildly  Anaemic").once("value",svereSnap=>{this.selSchool.Mildly = svereSnap.numChildren();})
+      severeRef.child("Healthy").once("value",svereSnap=>{this.selSchool.Healthy = svereSnap.numChildren();})
+
     }).then(() => {
       this.navCtrl.push(SchoolDetailsPage, { school: this.selSchool })
     })

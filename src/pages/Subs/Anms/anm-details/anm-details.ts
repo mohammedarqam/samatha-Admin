@@ -52,7 +52,12 @@ export class AnmDetailsPage {
     firebase.database().ref("Subs").child("Schools").child(s.School).once("value",snap=>{
       var temp : any = snap.val();
       temp.key = snap.key;
-      this.detSchool = temp;
+      var severeRef = firebase.database().ref("Counters/Schools").child(snap.key).child("Severity");
+      severeRef.child("Severely Anaemic").once("value",svereSnap=>{temp.Severe = svereSnap.numChildren();})
+      severeRef.child("Moderately Anaemic").once("value",svereSnap=>{temp.Moderate = svereSnap.numChildren();})
+      severeRef.child("Mildly  Anaemic").once("value",svereSnap=>{temp.Mildly = svereSnap.numChildren();})
+      severeRef.child("Healthy").once("value",svereSnap=>{temp.Healthy = svereSnap.numChildren();})
+    this.detSchool = temp;
     }).then(()=>{
       this.navCtrl.push(SchoolDetailsPage,{school : this.detSchool});
     })

@@ -1,17 +1,16 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController, ModalController } from 'ionic-angular';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase';
 import * as _ from 'lodash';
 import * as XLSX from 'xlsx';
 import * as saveAs from 'file-saver';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 import { StudentDetailsPage } from '../../Students/student-details/student-details';
 import { SchoolDetailsPage } from '../../Subs/Schools/school-details/school-details';
 import { MandalDetailsPage } from '../../Subs/Mandals/mandal-details/mandal-details';
 import { VillageDetailsPage } from '../../Subs/Villages/village-details/village-details';
 import { AnmDetailsPage } from '../../Subs/Anms/anm-details/anm-details';
+import { DeleteStudentsPage } from '../../Students/delete-students/delete-students';
 
 @IonicPage()
 @Component({
@@ -40,6 +39,7 @@ export class DashboardPage {
 
   totAnms: number = 0;
   filters = {}
+  selArray: Array<any> = [];
 
   //nums
   totSev: number = 0;
@@ -60,6 +60,7 @@ export class DashboardPage {
     public navCtrl: NavController,
     private db: AngularFireDatabase,
     public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController,
     private menuCtrl: MenuController,
   ) {
     this.menuCtrl.enable(true);
@@ -69,6 +70,13 @@ export class DashboardPage {
     this.getSchools();
   }
   ngOnInit() {
+    this.getStudents();
+  }
+  getStudents(){
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    this.students = [];
     this.primaryStudents.snapshotChanges()
       .subscribe(itemSnap => {
         itemSnap.forEach(snip => {
@@ -82,8 +90,13 @@ export class DashboardPage {
     this.getMandals();
     this.getVillages();
     this.getSchools();
+    loading.dismiss()
   }
+
   private applyFilters() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
 
     this.filteredStudents = _.filter(this.students, _.conforms(this.filters))
     this.allNumsZero();
@@ -122,12 +135,34 @@ export class DashboardPage {
       })
       firebase.database().ref("Organisms/Anms").child(temp.ANM).once("value", s => {
         temp.ANMName = s.val().Name;
+      }).then(()=>{
+        loading.dismiss()
       })
 
     })
 
 
   }
+
+  addToArr(a) {
+    switch (a.Checked) {
+      case true: this.selArray.push(a.key);
+        break;
+      case false: this.rmFrmArray(a.key);
+        break;
+    }
+
+  }
+
+  rmFrmArray(key) {
+    var ind = this.selArray.indexOf(key);
+    this.selArray.splice(ind, 1)
+  }
+  delMulC() {
+    let partnerView = this.modalCtrl.create(DeleteStudentsPage, { delAnms: this.selArray }, { enableBackdropDismiss: false });
+    partnerView.present();
+  }
+
 
   /// filter property by equality to rule
   filterExact(property: string, rule: any) {
@@ -198,6 +233,7 @@ export class DashboardPage {
       this.getMandals();
       this.getVillages();
       this.getSchools();
+      this.getStudents();
       this.villageSel = "all";
       this.schoolSel = "all";
     } else {
@@ -250,6 +286,7 @@ export class DashboardPage {
     if (this.villageSel == "all") {
       this.getVillages();
       this.getSchools();
+      this.getStudents();
       this.schoolSel = "all";
     } else {
       this.schoolSel = "all";
@@ -356,6 +393,7 @@ export class DashboardPage {
   checkSchool(){
     if (this.schoolSel == "all") {
       this.getSchools();
+      this.getStudents();
     } else {
       this.getVillagewiseStudents(this.schoolSel);
     }

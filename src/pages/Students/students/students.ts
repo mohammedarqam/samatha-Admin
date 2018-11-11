@@ -6,6 +6,8 @@ import * as _ from 'lodash';
 import * as XLSX from 'xlsx';
 import * as saveAs from 'file-saver';
 import { StudentDetailsPage } from '../student-details/student-details';
+import { DelAnmPage } from '../../Subs/Anms/del-anm/del-anm';
+import { DeleteStudentsPage } from '../delete-students/delete-students';
 
 
 @IonicPage()
@@ -16,6 +18,7 @@ import { StudentDetailsPage } from '../student-details/student-details';
 export class StudentsPage {
   pgName = "Students";
   studentsRef = firebase.database().ref("Organisms/Students");
+  selArray: Array<any> = [];
 
 
   students: Array<any> = [];
@@ -46,11 +49,29 @@ export class StudentsPage {
   filters = {}
 
 
+  addToArr(a) {
+    switch (a.Checked) {
+      case true: this.selArray.push(a.key);
+        break;
+      case false: this.rmFrmArray(a.key);
+        break;
+    }
+
+  }
+
+  rmFrmArray(key) {
+    var ind = this.selArray.indexOf(key);
+    this.selArray.splice(ind, 1)
+  }
+  delMulC() {
+    let partnerView = this.modalCtrl.create(DeleteStudentsPage, { delAnms: this.selArray }, { enableBackdropDismiss: false });
+    partnerView.present();
+  }
 
 
 
   ngOnInit() {
-    this.db.list('Organisms/Students').snapshotChanges()
+    this.db.list('Organisms/Students', ref => ref.orderByChild("StudentName")).snapshotChanges()
       .subscribe(itemSnap => {
         itemSnap.forEach(snip => {
           let temp: any = snip.payload.val();

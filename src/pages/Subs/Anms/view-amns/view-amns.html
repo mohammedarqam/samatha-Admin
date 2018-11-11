@@ -64,7 +64,7 @@
             <h1 ion-text color="primary">{{a.Phone}} </h1><br />
           </ion-col>
           <ion-col col-4 text-center class="curs">
-            <h2 (click)="gtSchooolDetails(s)" *ngFor="let s of a.Schools" padding-bottom ion-text color="primary">{{s.SchoolName}}</h2>
+            <h2 (click)="gtSchooolDetails(s)" *ngFor="let s of a.Schools" padding-bottom ion-text color="primary">{{s.SchoolName}} {{s.Childs}}  </h2>
           </ion-col>
 
 

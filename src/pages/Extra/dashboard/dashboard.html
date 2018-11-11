@@ -9,10 +9,10 @@
     <ion-title>{{pageName}} </ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content class="darkBg">
 
   <ion-grid class="whiteBg">
+    {{filters | json}}
     <ion-row>
 
       <ion-col col-2>
@@ -302,6 +302,11 @@
       </ion-card-content>
     </ion-card>
   </ion-grid>
+  <ion-fab right bottom *ngIf="selArray.length">
+    <button ion-fab color="danger" (click)="delMulC()">
+      <ion-icon name="md-trash"></ion-icon>
+    </button>
+  </ion-fab>
 
 
 </ion-content>

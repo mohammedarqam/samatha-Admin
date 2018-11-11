@@ -20,14 +20,12 @@ export class DelAnmPage {
   public toastCtrl : ToastController,
   public navParams: NavParams
   ) {
-    console.log(this.anmKeys);
-    
     this.getSchools();
   }
 
   getSchools(){
     this.anmKeys.forEach(snp=>{
-      firebase.database().ref("Anms").child(snp).once("value",itemSnap=>{
+      firebase.database().ref("Organisms/Anms").child(snp).once("value",itemSnap=>{
         var temp : any = itemSnap.val();
         temp.key = itemSnap.key;
         this.anms.push(temp)

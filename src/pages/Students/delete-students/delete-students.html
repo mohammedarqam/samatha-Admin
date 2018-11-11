@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Delete Students</ion-title>
+    <ion-buttons end>
+      <button ion-button clear (click)="close()">Cancel</button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <ion-card >
+    <ion-card-content>
+      <h2>Are you sure you want to delete these Students ?</h2>
+      <ion-item *ngFor="let a of anms">
+          {{a.StudentName}}
+      </ion-item>
+
+    </ion-card-content>
+  </ion-card>
+  <button ion-button color="danger"  (click)="deleteStudents()">Delete</button>
+
+
+</ion-content>
