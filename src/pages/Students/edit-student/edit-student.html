@@ -9,7 +9,12 @@
 <ion-grid>
   <ion-row>
     <ion-col col-6>
-  <ion-card>
+        <ion-card [color]="sevC">
+            <ion-card-content text-center >
+              {{student.Severity}}
+            </ion-card-content>
+          </ion-card>
+      <ion-card>
     <ion-card-content>
       <ion-item>
         <ion-label floating>Student Name</ion-label>
@@ -19,6 +24,23 @@
         <ion-label floating>Parent Name</ion-label>
         <ion-input type="text" [(ngModel)]="student.ParentName"></ion-input>
       </ion-item>
+      <ion-row>
+        <ion-item>
+          <ion-label floating >Community</ion-label> 
+          <ion-select [(ngModel)]="student.Community" >
+            <ion-option value="SC">SC</ion-option>
+            <ion-option value="ST">ST</ion-option>
+            <ion-option value="BC">BC</ion-option>
+            <ion-option value="OC">OC</ion-option>
+            <ion-option value="Minority">Minority</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-row>
+        <ion-item>
+        <ion-label floating>HBL</ion-label>
+        <ion-input type="number" [(ngModel)]="student.HBL" (ionChange)="getSev()" ></ion-input>
+      </ion-item>
+
       <ion-item>
         <ion-label floating>Age</ion-label>
         <ion-input type="number" [(ngModel)]="student.Age"></ion-input>
@@ -52,12 +74,43 @@
 </ion-col>
 
 <ion-col col-6>
-  <ion-card>
+    <button float-right ion-button (click)="checkData()">Update</button>
+    <ion-card>
     <ion-card-content>
+
+
       <ion-item>
-        <p ion-text ion-start color="primary">Mandal</p>
-        <p ion-end>{{student.MandalName}}</p>
+        <p ion-text item-start color="primary">Mandal</p>
+        <p item-end>{{student.MandalName}}</p>
       </ion-item>
+
+
+      <ion-item>
+        <p ion-text item-start color="primary">Village</p>
+        <p item-end>{{student.VillageName}}</p>
+      </ion-item>
+      
+      <ion-item>
+        <p ion-text item-start color="primary">School</p>
+        <p item-end>{{student.SchoolName}}</p>
+      </ion-item>
+
+      <ion-item>
+        <p ion-text item-start color="primary">ANM</p>
+        <p item-end>{{student.ANMName}}</p>
+      </ion-item>
+
+      <ion-item>
+        <p ion-text item-start color="primary">Entry Date</p>
+        <p item-end>{{student.EntryDate | date : 'mediumDate'}}</p>
+      </ion-item>
+
+      <ion-item>
+        <p ion-text item-start color="primary">Follow Up Date</p>
+        <p item-end>{{student.FollowUpDate | date : 'mediumDate'}}</p>
+      </ion-item>
+
+      
     </ion-card-content>
   </ion-card>
 </ion-col>

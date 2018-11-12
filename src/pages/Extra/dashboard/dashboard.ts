@@ -12,6 +12,7 @@ import { VillageDetailsPage } from '../../Subs/Villages/village-details/village-
 import { AnmDetailsPage } from '../../Subs/Anms/anm-details/anm-details';
 import { DeleteStudentsPage } from '../../Students/delete-students/delete-students';
 import { EditStudentPage } from '../../Students/edit-student/edit-student';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @IonicPage()
 @Component({
@@ -28,6 +29,7 @@ export class DashboardPage {
   mandals: Array<any> = [];
   villages: Array<any> = [];
   schools: Array<any> = [];
+  schoolsLoaded: Array<any> = [];
 
   mandalSel = "all";
   villageSel = "all";
@@ -227,7 +229,7 @@ export class DashboardPage {
         itemSnap.forEach(item => {
           var temp: any = item.payload.val();
           temp.key = item.key;
-          this.schools.push(temp);
+          this.students.push(temp);
         })
       })
   }
@@ -271,7 +273,7 @@ export class DashboardPage {
                   firebase.database().ref("Subs/Schools/").child(item.key).orderByChild("Name").once("value", iSnap => {
                     var temp: any = iSnap.val();
                     temp.key = iSnap.val();
-                    this.schools.push(temp);
+                    this.students.push(temp);
                   }).then(() => {
                     loading.dismiss();
                   })
@@ -321,6 +323,8 @@ export class DashboardPage {
 
   }
 
+
+
   gtAnms() {
     this.db.list("Organisms/Anms").snapshotChanges().subscribe(snap => {
       this.totAnms = snap.length;
@@ -333,6 +337,7 @@ export class DashboardPage {
       delete snip.ANM;
       delete snip.Mandal;
       delete snip.Village;
+      delete snip.Schools;
     })
 
     let sheet = XLSX.utils.json_to_sheet(newArea);
