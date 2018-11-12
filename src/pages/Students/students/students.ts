@@ -8,6 +8,7 @@ import * as saveAs from 'file-saver';
 import { StudentDetailsPage } from '../student-details/student-details';
 import { DelAnmPage } from '../../Subs/Anms/del-anm/del-anm';
 import { DeleteStudentsPage } from '../delete-students/delete-students';
+import { EditStudentPage } from '../edit-student/edit-student';
 
 
 @IonicPage()
@@ -69,6 +70,10 @@ export class StudentsPage {
   }
 
 
+  editStudent(a){
+    // console.log(a);
+    this.navCtrl.push(EditStudentPage,{Student : a})
+  }
 
   ngOnInit() {
     this.db.list('Organisms/Students', ref => ref.orderByChild("StudentName")).snapshotChanges()

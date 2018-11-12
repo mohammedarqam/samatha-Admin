@@ -11,6 +11,7 @@ import { MandalDetailsPage } from '../../Subs/Mandals/mandal-details/mandal-deta
 import { VillageDetailsPage } from '../../Subs/Villages/village-details/village-details';
 import { AnmDetailsPage } from '../../Subs/Anms/anm-details/anm-details';
 import { DeleteStudentsPage } from '../../Students/delete-students/delete-students';
+import { EditStudentPage } from '../../Students/edit-student/edit-student';
 
 @IonicPage()
 @Component({
@@ -172,7 +173,10 @@ export class DashboardPage {
       this.applyFilters()
     }
   }
-
+  editStudent(a){
+    // console.log(a);
+    this.navCtrl.push(EditStudentPage,{Student : a})
+  }
   allNumsZero() {
     this.totSev = 0;
     this.totMod = 0;
